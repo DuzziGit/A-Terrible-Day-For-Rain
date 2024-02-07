@@ -318,7 +318,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerIsNearPortal)
         {
-            if (!facingRight)
+            rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
+            jumpCharacter();
+        }
+        jumpCharacter();
+    }
+    public void jumpCharacter()
+    {
+        if (isJumping)
+        {
+            if (isJumping && isGrounded)
             {
                 FlipCharacter();
             }
@@ -393,36 +402,53 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+        public void EnterPortal()
+        {
+            if (playerIsNearPortal)
+            {
+                if (!facingRight)
+                {
+                    FlipCharacter();
+                }
+                Input.ResetInputAxes();
+                SceneManager.LoadScene(destination);
+                Debug.Log("Should Enter Portal");
+            }
+        }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "World" || collision.gameObject.tag == "Platform")
         {
-            isGrounded = false;
+            if (collision.gameObject.tag == "World" || collision.gameObject.tag == "Platform")
+            {
+                isGrounded = false;
+                isAirborne = true;
+            }
         }
 
     }
 
-    private IEnumerator PlayAndResetAnimation()
-    {
-        isPlaying = true;
-
-        // Play the animation
-        LandingDust.Play("s500");
-        audioSource.PlayOneShot(fall, 1f);
-
-        // Wait for the next frame to ensure the animation starts playing
-        yield return null;
-
-        // Wait until the animation is finished
-        while (LandingDust.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || LandingDust.IsInTransition(0))
+        private IEnumerator PlayAndResetAnimation()
         {
+            isPlaying = true;
+
+            // Play the animation
+            LandingDust.Play("s500");
+            audioSource.PlayOneShot(fall, 1f);
+
+            // Wait for the next frame to ensure the animation starts playing
             yield return null;
+
+            // Wait until the animation is finished
+            while (LandingDust.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || LandingDust.IsInTransition(0))
+            {
+                yield return null;
+            }
+
+            // Trigger the transition to the idle state
+            LandingDust.SetTrigger("JustLanded");
+
+            isPlaying = false;
         }
-
-        // Trigger the transition to the idle state
-        LandingDust.SetTrigger("JustLanded");
-
-        isPlaying = false;
     }
-}

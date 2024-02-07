@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2055452788161668559}
   - component: {fileID: 8540516424446800742}
   - component: {fileID: 5355028040596675109}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: med8Plat 1
   m_TagString: Platform
   m_Icon: {fileID: 0}

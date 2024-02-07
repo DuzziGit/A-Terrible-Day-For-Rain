@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3805966650513916357}
   - component: {fileID: 7324321387099200512}
   - component: {fileID: 1072939857332581951}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: med4Plat
   m_TagString: Platform
   m_Icon: {fileID: 0}

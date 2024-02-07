@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7320095929163329839}
   - component: {fileID: 1951848081520662918}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: XplatStruc
   m_TagString: Untagged
   m_Icon: {fileID: 0}

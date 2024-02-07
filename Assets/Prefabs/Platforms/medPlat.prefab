@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2274958868394982870}
   - component: {fileID: 2274958868394982869}
   - component: {fileID: 2274958868394982868}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: medPlat
   m_TagString: Platform
   m_Icon: {fileID: 0}

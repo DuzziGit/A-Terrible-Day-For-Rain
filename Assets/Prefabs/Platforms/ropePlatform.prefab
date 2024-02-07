@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967822772912996494}
   - component: {fileID: 6414243213896007089}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 527595731711517651}
   - component: {fileID: 8481204097599112621}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5065326826433333720}
   - component: {fileID: 3587942311399097263}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 542262914744785268}
   - component: {fileID: 8334857067187828081}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1458492429006940448}
   - component: {fileID: 4996704203029846597}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3945672325230677328}
   - component: {fileID: 4623250222710872863}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3422062207088119896}
   - component: {fileID: 4720674084768604589}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5553116391309607866}
   - component: {fileID: 6239484333640246200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,7 +682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7671589237022496729}
   - component: {fileID: 965786190895727217}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4766528139968714486}
   - component: {fileID: 3199053739936292241}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +850,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6160610517213525841}
   - component: {fileID: 486373072718143171}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1094,7 +1094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3274733085277597590}
   - component: {fileID: 7866652995445911088}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1178,7 +1178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 51415074215217838}
   - component: {fileID: 1504492401662424883}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ropeMid (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1346,6 +1346,10 @@ PrefabInstance:
     - target: {fileID: 4060934012831316387, guid: 2278d8a1dbbb1ac4a95bfc15a46bc825, type: 3}
       propertyPath: m_Name
       value: Rope
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060934012831316387, guid: 2278d8a1dbbb1ac4a95bfc15a46bc825, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4060934012831316414, guid: 2278d8a1dbbb1ac4a95bfc15a46bc825, type: 3}
       propertyPath: m_Size.y

@@ -172,7 +172,7 @@ public class RogueSkillController : PlayerMovement
     // Movement Skill
     private void GetMovementSkillInput()
     {
-        if (Time.time > nextFireTimeMovement && Input.GetKeyDown(KeyCode.LeftControl) && isAirborne)
+        if (Time.time > nextFireTimeMovement && Input.GetKeyDown(KeyCode.Space) && isAirborne)
         {
             MovementSkill();
             nextFireTimeMovement = Time.time + cooldownTimeMovement;
