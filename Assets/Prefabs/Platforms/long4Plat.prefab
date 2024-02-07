@@ -83,7 +83,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,8 +101,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1020941357
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -170,6 +170,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: smallPlat
       objectReference: {fileID: 0}
+    - target: {fileID: 1666018121723319687, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666018121723319687, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
 --- !u!4 &1966776888930358643 stripped
@@ -231,6 +239,14 @@ PrefabInstance:
     - target: {fileID: 1666018121723319681, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
       propertyPath: m_Name
       value: smallPlat (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666018121723319687, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666018121723319687, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
@@ -294,6 +310,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: smallPlat (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1666018121723319687, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666018121723319687, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
 --- !u!4 &8313735787144038694 stripped
@@ -355,6 +379,14 @@ PrefabInstance:
     - target: {fileID: 1666018121723319681, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
       propertyPath: m_Name
       value: smallPlat (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666018121723319687, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666018121723319687, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93756c539ce1c354fa20d3e88713e663, type: 3}

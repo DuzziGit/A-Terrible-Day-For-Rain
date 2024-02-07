@@ -81,7 +81,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,8 +99,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1020941357
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -120,6 +120,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2055452788161668559}
     m_Modifications:
+    - target: {fileID: 1072939857332581951, guid: 52c41ea24ca8c064387fb3ebffa5c137, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072939857332581951, guid: 52c41ea24ca8c064387fb3ebffa5c137, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3805966650513916357, guid: 52c41ea24ca8c064387fb3ebffa5c137, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -182,6 +190,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2055452788161668559}
     m_Modifications:
+    - target: {fileID: 1072939857332581951, guid: 52c41ea24ca8c064387fb3ebffa5c137, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1072939857332581951, guid: 52c41ea24ca8c064387fb3ebffa5c137, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3805966650513916357, guid: 52c41ea24ca8c064387fb3ebffa5c137, type: 3}
       propertyPath: m_RootOrder
       value: 1

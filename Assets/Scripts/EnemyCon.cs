@@ -1,7 +1,6 @@
 using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class EnemyCon : Enemy
 {
@@ -53,7 +52,7 @@ public class EnemyCon : Enemy
         {
             healthBar.SetHealth(health);
         }
-AudioController.instance.PlayMonsterHurtSound(); 
+        AudioController.instance.PlayMonsterHurtSound();
         animator.SetBool("takingDamage", true);
         animFeedback.SetBool("takingDamage", true);
         animFeedback2.SetBool("takingDamage", true);

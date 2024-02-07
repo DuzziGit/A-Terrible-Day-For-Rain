@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class dontDestroy : MonoBehaviour
 {
-      public static dontDestroy instance; // Singleton instance
+    public static dontDestroy instance; // Singleton instance
 
     void Awake()
     {
         // Check for an existing instance of BackgroundManager
         if (instance == null)
         {
-            instance = this; 
+            instance = this;
             DontDestroyOnLoad(gameObject); // This object will not be destroyed when loading a new scene
         }
         else if (instance != this)

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -99,19 +97,20 @@ public class Projectile : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-       // Debug.Log("Projectile collided with: " + collision.gameObject.name);
+        // Debug.Log("Projectile collided with: " + collision.gameObject.name);
         if (!hasDamaged && collision.transform == closestEnemy)
         {
-      /*      Debug.Log("Projectile collided with: " + collision.gameObject.name);
-            Debug.Log("Enemy tag: " + collision.tag);
-            Debug.Log("Collided object layer: " + LayerMask.LayerToName(collision.gameObject.layer));
+            /*      Debug.Log("Projectile collided with: " + collision.gameObject.name);
+                  Debug.Log("Enemy tag: " + collision.tag);
+                  Debug.Log("Collided object layer: " + LayerMask.LayerToName(collision.gameObject.layer));
 
-           */ if (collision.CompareTag("Enemy"))
+                 */
+            if (collision.CompareTag("Enemy"))
             {
-             //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
+                //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
                 collision.GetComponent<EnemyCon>().TakeDamage(damage);
             }
-         
+
             hasDamaged = true;
             Invoke("DestroyProjectile", 0.1f); // Delay destruction slightly after collision
             return; // Exit the method after hitting the enemy
@@ -121,6 +120,6 @@ public class Projectile : MonoBehaviour
     public void DestroyProjectile()
     {
         Destroy(gameObject);
-     //   Debug.Log(skillLevel);
+        //   Debug.Log(skillLevel);
     }
 }

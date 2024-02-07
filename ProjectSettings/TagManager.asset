@@ -27,6 +27,10 @@ TagManager:
   - OptionsMenuUI
   - MageUI
   - FadeCanvas
+  - Music
+  - PreviousLevel
+  - W1-3-A
+  - Carnage
   layers:
   - Default
   - TransparentFX
@@ -63,4 +67,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 294652779
+    locked: 0
+  - name: World
+    uniqueID: 1476089383
+    locked: 0
+  - name: Platforms
+    uniqueID: 3274025939
+    locked: 0
+  - name: Monster
+    uniqueID: 3967974239
     locked: 0

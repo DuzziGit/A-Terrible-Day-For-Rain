@@ -105,7 +105,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -211,7 +211,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -339,7 +339,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -357,8 +357,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -326993057
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a25004ca83e711d4cbce106bf874ea9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -500,14 +500,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1424dcdb05bd8f746a76b9077b2de390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 750
+  health: 150
   damage: 20
-  level: 5
+  level: 1
   speed: 15
   distance: 0.6
   groundDetection: {fileID: 911691705}
   wallDetection: {fileID: 2741414467904669674}
-  expValue: 10
+  expValue: 2
   expObject: {fileID: 9142249779626228197, guid: 3c3aeb62efc64234090a7e4c39704732, type: 3}
   agroRange: 0.3
   startTimeBetweenDmg: 2

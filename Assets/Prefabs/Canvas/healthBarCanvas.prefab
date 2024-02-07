@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1997474524716373971}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 7.26}
   m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -58,8 +58,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -326993057
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &1997474524716373968
 MonoBehaviour:

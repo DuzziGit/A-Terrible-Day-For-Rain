@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,7 +24,7 @@ public class MultiHitProjectile : Projectile
 
     private void DealDamage(Collider2D collision)
     {
-         if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
             //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
             collision.GetComponent<EnemyCon>().TakeDamage(damage);

@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public Transform groundDetection;
     public Transform wallDetection;
 
-    public int expValue ;
+    public int expValue;
     public ExperienceController expObject;
 
     public static bool isAggroed = false;
@@ -154,7 +154,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-       
+
         Destroy(gameObject);
     }
 

@@ -1,14 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bat : Enemy
 {
-      public Transform attackPos;
-  public GameObject BatProjectile;
-   public float cooldownTime = 2;
+    public Transform attackPos;
+    public GameObject BatProjectile;
+    public float cooldownTime = 2;
     private float nextFireTime = 0;
-      public AudioSource audiosource;
+    public AudioSource audiosource;
     public AudioClip batHitSound;
 
     public TextMesh enemyLevel;
@@ -26,7 +25,7 @@ public class Bat : Enemy
         rb.velocity = new Vector3(speed, 0, 0);
         enemyLevel.text = "lvl . " + level;
         damage = level * 4;
-        
+
 
         if (level > 0 && level < 10)
         {
@@ -71,14 +70,16 @@ public class Bat : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextFireTime) {
-          if (Enemy.isAggroed == true) {
+        if (Time.time > nextFireTime)
+        {
+            if (Enemy.isAggroed == true)
+            {
 
                 Instantiate(BatProjectile, attackPos.position, attackPos.rotation);
                 nextFireTime = Time.time + cooldownTime;
 
-          }
-         }
+            }
+        }
 
     }
 

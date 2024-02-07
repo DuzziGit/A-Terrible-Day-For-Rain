@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioController : MonoBehaviour
@@ -11,7 +9,7 @@ public class AudioController : MonoBehaviour
     public AudioClip jumpSound;
     private void Awake()
     {
-      //  DontDestroyOnLoad(gameObject);
+        //  DontDestroyOnLoad(gameObject);
         if (instance == null)
         {
             instance = this;
@@ -27,15 +25,16 @@ public class AudioController : MonoBehaviour
 
     public void PlayMonsterHurtSound()
     {
-               audioSource.PlayOneShot(monsterHurtClip);
+        audioSource.PlayOneShot(monsterHurtClip);
 
     }
-       public void PlayLevelUpSound()
+    public void PlayLevelUpSound()
     {
-               audioSource.PlayOneShot(levelUp);
+        audioSource.PlayOneShot(levelUp);
 
     }
-    public void PlayJumpSound(){
+    public void PlayJumpSound()
+    {
         audioSource.PlayOneShot(jumpSound);
 
     }

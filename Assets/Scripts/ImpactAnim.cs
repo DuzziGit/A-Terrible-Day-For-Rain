@@ -12,7 +12,7 @@ public class ImpactAnim : MonoBehaviour
     {
         if (collision.CompareTag("Projectile"))
         {
-          //Debug.Log("hit");
+            //Debug.Log("hit");
 
             // Instantiate the hit effects at the impact point
             Vector2 collisionPoint = collision.transform.position;
@@ -28,12 +28,12 @@ public class ImpactAnim : MonoBehaviour
             if (animation1 != null)
             {
                 animation1.SetBool("PlayAnimation", true);
-              //Debug.Log("Animation 1 Played");
+                //Debug.Log("Animation 1 Played");
             }
             if (animation2 != null)
             {
                 animation2.SetBool("PlayAnimation", true);
-              //Debug.Log("Animation 2 Played");
+                //Debug.Log("Animation 2 Played");
             }
 
             Destroy(effect1, destroyDelay); // Destroy the first hit effect after the delay

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class VerticalPlatform : MonoBehaviour
@@ -21,7 +20,7 @@ public class VerticalPlatform : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp(KeyCode.DownArrow))
         {
             waitTime = 0f;
-		}
+        }
 
 
         if (Input.GetButtonDown("Jump"))
@@ -32,20 +31,21 @@ public class VerticalPlatform : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp(KeyCode.DownArrow))
         {
             if (waitTime <= 0)
-			{
+            {
                 effector.rotationalOffset = 180f;
                 StartCoroutine(SmallDelay());
                 waitTime = 0.05f;
-			} else
-			{
+            }
+            else
+            {
                 waitTime -= Time.deltaTime;
-			}
-		}
+            }
+        }
     }
 
     IEnumerator SmallDelay()
     {
-       
+
         yield return new WaitForSeconds(0.5f);
         effector.rotationalOffset = 0;
     }

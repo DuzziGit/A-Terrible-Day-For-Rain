@@ -1,26 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BatProjectile : MonoBehaviour
 {
 
     public Vector2 target;
-     int level;
-         public float speed;
-        public float lifeTime;
-        public float distance;
-        public LayerMask whatIsSolid;
-        public int projectileDamage;
-         public GameObject RogueLoot1;
-         public bool hasDmged = false;
+    int level;
+    public float speed;
+    public float lifeTime;
+    public float distance;
+    public LayerMask whatIsSolid;
+    public int projectileDamage;
+    public GameObject RogueLoot1;
+    public bool hasDmged = false;
 
 
-    private void Start(){
+    private void Start()
+    {
 
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
         level = GameObject.FindGameObjectWithTag("Bat").GetComponent<Enemy>().level;
-       projectileDamage = level * 6;
+        projectileDamage = level * 6;
 
         target = new Vector2(player.position.x, player.position.y);
         hasDmged = false;
@@ -29,7 +28,7 @@ public class BatProjectile : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
+    {
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
         if (transform.position.x == target.x && transform.position.y == target.y)
@@ -59,7 +58,8 @@ public class BatProjectile : MonoBehaviour
     }
 
 
-    void DestroyProjectile(){
+    void DestroyProjectile()
+    {
         Destroy(gameObject);
     }
 

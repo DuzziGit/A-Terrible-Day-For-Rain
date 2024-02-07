@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -8,34 +6,53 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] enemyPrefabs;
     public int maxEnemies;
     public static int currentEnemies;
-    private int enemyMinLevel;
-    private int enemyMaxLevel;
-
-    private void Start()
+    private PlayerMovement playerMovement;
+    GameObject player;
+    private void Awake()
     {
         currentEnemies = 0;
+        // Cache the PlayerMovement component at the start
+
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if (currentEnemies < maxEnemies)
+        if (player == null)
         {
-            int randEnemy = Random.Range(0, enemyPrefabs.Length);
-            int randSpawnPoint = Random.Range(0, spawnPoints.Length);
-            int playerLevel = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().level;
-            Debug.Log(playerLevel);
-            enemyMinLevel = playerLevel;
-            enemyMaxLevel = playerLevel + 5;
-            int randomLevel = Random.Range(enemyMinLevel, enemyMaxLevel);
-            Instantiate(enemyPrefabs[randEnemy], spawnPoints[randSpawnPoint].position, transform.rotation);
-            enemyPrefabs[randEnemy].GetComponent<Enemy>().level = randomLevel;
-            enemyPrefabs[randEnemy].GetComponent<Enemy>().health = randomLevel * 150;
-            enemyPrefabs[randEnemy].GetComponent<Enemy>().expValue = randomLevel * 2;
-            // enemyPrefabs[randEnemy].GetComponent<Enemy>().coinValue = randomLevel * 20;
-            // enemyPrefabs[randEnemy].GetComponent<Enemy>().damage = randomLevel * 20;
-            currentEnemies++;
-            Debug.Log("Current Enemies updated: " + currentEnemies);
+            player = GameObject.FindWithTag("Player");
         }
+        if (player != null)
+        {
+            playerMovement = player.GetComponent<PlayerMovement>();
+        }
+        if (currentEnemies < maxEnemies && playerMovement != null)
+        {
+            SpawnEnemy();
+        }
+    }
+
+    void SpawnEnemy()
+    {
+        int randEnemyIndex = Random.Range(0, enemyPrefabs.Length);
+        int randSpawnPointIndex = Random.Range(0, spawnPoints.Length);
+        int playerLevel = playerMovement.level;
+        Debug.Log(playerLevel);
+
+        int enemyLevel = Random.Range(playerLevel, playerLevel + 5);
+        GameObject enemyInstance = Instantiate(enemyPrefabs[randEnemyIndex], spawnPoints[randSpawnPointIndex].position, Quaternion.identity);
+
+        Enemy enemyComponent = enemyInstance.GetComponent<Enemy>();
+        if (enemyComponent != null)
+        {
+            enemyComponent.level = enemyLevel;
+            enemyComponent.health = enemyLevel * 150;
+            enemyComponent.expValue = enemyLevel * 2;
+            // Uncomment and adjust as necessary:
+            // enemyComponent.coinValue = enemyLevel * 20;
+            // enemyComponent.damage = enemyLevel * 20;
+        }
+
+        currentEnemies++;
+        Debug.Log("Current Enemies updated: " + currentEnemies);
     }
 }
