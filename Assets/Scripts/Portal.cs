@@ -23,11 +23,11 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Object entered the portal's trigger.");
+      //  Debug.Log("Object entered the portal's trigger.");
 
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player is inside the portal's trigger.");
+           //Debug.Log("Player is inside the portal's trigger.");
 
             if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.UpArrow))
             {

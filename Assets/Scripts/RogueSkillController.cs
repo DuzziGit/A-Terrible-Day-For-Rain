@@ -251,34 +251,42 @@ public class RogueSkillController : PlayerMovement
             SwipeTwo.SetBool("SwipeTwo", true);
         }
     }
+private IEnumerator FirstSkill()
+{
+    // Instantiate a fixed attack position GameObject
+    GameObject fixedAttackPos = new GameObject("FixedAttackPosition");
+    fixedAttackPos.transform.position = attackPos.position;
+    fixedAttackPos.transform.rotation = attackPos.rotation;
 
-    private IEnumerator FirstSkill()
-    {
-        // First kunai
-        Instantiate(projectile, attackPos.position, attackPos.rotation);
-        audioSource.pitch = 1.6f;  // Reduced pitch
-        yield return new WaitForSeconds(0.1f);
-        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+    // First shuriken
+    Vector3 topOffset = new Vector3(0, 0.2f, 0);
+    Instantiate(projectile, fixedAttackPos.transform.position + topOffset, fixedAttackPos.transform.rotation);
+    audioSource.pitch = 1.6f;  // Reduced pitch
+    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+    yield return new WaitForSeconds(0.05f);
 
-        // Second kunai
-        Instantiate(projectile, attackPos.position, attackPos.rotation);
-        audioSource.pitch = 1.0f;  // Normal pitch
-        yield return new WaitForSeconds(0.1f);
-        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+    // Second shuriken
+    Instantiate(projectile, fixedAttackPos.transform.position, fixedAttackPos.transform.rotation);
+    audioSource.pitch = 1.0f;  // Normal pitch
+    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+    yield return new WaitForSeconds(0.05f);
 
-        // Third kunai
-        Instantiate(projectile, attackPos.position, attackPos.rotation);
-        audioSource.pitch = 1.1f;  // Increased pitch
-        yield return new WaitForSeconds(0.1f);
-        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+    // Third shuriken
+    Vector3 botOffset = new Vector3(0, -0.2f, 0);
+    Instantiate(projectile, fixedAttackPos.transform.position + botOffset, fixedAttackPos.transform.rotation);
+    audioSource.pitch = 1.1f;  // Increased pitch
+    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+    yield return new WaitForSeconds(0.05f);
 
-        // Reset pitch to default for other sounds
-        audioSource.pitch = 1.0f;
+    // Reset pitch to default for other sounds
+    audioSource.pitch = 1.0f;
 
-        SwipeOne.SetBool("SwipeOne", false);
-        SwipeTwo.SetBool("SwipeTwo", false);
-    }
-    // Second Skill
+    SwipeOne.SetBool("SwipeOne", false);
+    SwipeTwo.SetBool("SwipeTwo", false);
+
+    // Optionally, destroy the fixed position GameObject if it's no longer needed
+    Destroy(fixedAttackPos, 0.5f); // Adjust the delay as needed
+}
     public void GetSecondSkillInput()
     {
         if (Time.time > nextFireTimeSkill2 && Input.GetKeyDown(KeyCode.S))

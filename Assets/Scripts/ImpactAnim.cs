@@ -8,38 +8,31 @@ public class ImpactAnim : MonoBehaviour
     public Animator animation2;
     private float destroyDelay = 0.5f; // Delay before destroying the projectile
 
-    private void OnTriggerEnter2D(Collider2D collision)
+  private void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Projectile"))
     {
-        if (collision.CompareTag("Projectile"))
+        Vector2 collisionPoint = collision.transform.position;
+        Quaternion enemyRotation = collision.transform.rotation;
+
+        GameObject effect1 = Instantiate(hitEffect, collisionPoint, enemyRotation);
+        GameObject effect2 = Instantiate(hitEffect2, collisionPoint, enemyRotation);
+
+        Animator effect1Animator = effect1.GetComponent<Animator>();
+        Animator effect2Animator = effect2.GetComponent<Animator>();
+
+        if (effect1Animator != null)
         {
-            //Debug.Log("hit");
-
-            // Instantiate the hit effects at the impact point
-            Vector2 collisionPoint = collision.transform.position;
-
-            // Get the enemy's rotation
-            Quaternion enemyRotation = collision.transform.rotation;
-
-            // Instantiate the hit effects with the enemy's position and the original scale
-            GameObject effect1 = Instantiate(hitEffect, collisionPoint, enemyRotation, this.transform);
-            GameObject effect2 = Instantiate(hitEffect2, collisionPoint, enemyRotation, this.transform);
-
-            // Play the animations for the hit effects
-            if (animation1 != null)
-            {
-                animation1.SetBool("PlayAnimation", true);
-                //Debug.Log("Animation 1 Played");
-            }
-            if (animation2 != null)
-            {
-                animation2.SetBool("PlayAnimation", true);
-                //Debug.Log("Animation 2 Played");
-            }
-
-            Destroy(effect1, destroyDelay); // Destroy the first hit effect after the delay
-            Destroy(effect2, destroyDelay); // Destroy the second hit effect after the delay
-
-
+            effect1Animator.SetBool("PlayAnimation", true);
         }
+        if (effect2Animator != null)
+        {
+            effect2Animator.SetBool("PlayAnimation", true);
+        }
+
+        Destroy(effect1, destroyDelay);
+        Destroy(effect2, destroyDelay);
     }
+}
+
 }
