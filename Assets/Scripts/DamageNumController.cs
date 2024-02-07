@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class DamageNumController : MonoBehaviour
 {
@@ -48,9 +46,9 @@ public class DamageNumController : MonoBehaviour
     public void SetDamageNum(int damage)
     {
         tmpComponent = GetComponent<TMP_Text>();
-      
-            tmpComponent.text = damage.ToString();
-         //   Debug.Log("The damage should be displayed as " + damage);
-        
+
+        tmpComponent.text = damage.ToString();
+        //   Debug.Log("The damage should be displayed as " + damage);
+
     }
 }

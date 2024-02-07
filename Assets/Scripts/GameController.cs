@@ -1,9 +1,9 @@
-using System.Collections;
-using UnityEngine;
-using TMPro;
 using Cinemachine;
-using UnityEngine.UI;
+using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -149,7 +149,7 @@ public class GameController : MonoBehaviour
             }
         }
     }
-private void OnDestroy()
+    private void OnDestroy()
     {
         // Make sure to unregister the OnSceneLoaded method when this object is destroyed.
         SceneManager.sceneLoaded -= OnSceneLoaded;

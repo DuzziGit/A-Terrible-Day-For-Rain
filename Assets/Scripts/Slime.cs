@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 public class Slime : Enemy
 {
-          public AudioSource audiosource;
+    public AudioSource audiosource;
     public AudioClip slimeHitSound;
 
     public int EnemyDamage;
@@ -18,7 +17,7 @@ public class Slime : Enemy
     public bool isTouchingPlayer = false;
 
     void Start()
-	{
+    {
         rb.velocity = new Vector3(speed, 0, 0);
         enemyLevel.text = "lvl . " + level;
         EnemyDamage = level * 2;
@@ -46,13 +45,14 @@ public class Slime : Enemy
     }
 
 
-	 public void TakeDamage(int damage) {
+    public void TakeDamage(int damage)
+    {
         health -= damage;
         Debug.Log("Damage Taken" + damage);
         StartCoroutine(DamageDisplay(damage));
         Debug.Log("Current Health" + health);
         audiosource.PlayOneShot(slimeHitSound, 0.7f);
-     }
+    }
 
 
     IEnumerator DamageDisplay(int damage)

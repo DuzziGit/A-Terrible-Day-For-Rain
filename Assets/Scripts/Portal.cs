@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Portal : MonoBehaviour
 {
@@ -39,24 +38,24 @@ public class Portal : MonoBehaviour
     }
 
     IEnumerator FadeAndLoadScene(Collider2D playerCollider)
-{
-    yield return StartCoroutine(FadeBlackOutSquare(true, 1));
-
-    // After fade-out is complete, wait for the specified time
-    yield return new WaitForSeconds(1f);
-
-    // Teleport the player
-    RogueSkillController rogue = playerCollider.GetComponent<RogueSkillController>();
-    if (rogue != null)
     {
-        rogue.transform.position = teleportPosition;
-    }
+        yield return StartCoroutine(FadeBlackOutSquare(true, 1));
 
-    // Then, load the new scene. Once the new scene is loaded, 
-    // the OnSceneLoaded event will automatically trigger the fade-in.
-    Debug.Log("Attempting to load scene.");
-    SceneManager.LoadScene(sceneIndex);
-}
+        // After fade-out is complete, wait for the specified time
+        yield return new WaitForSeconds(1f);
+
+        // Teleport the player
+        RogueSkillController rogue = playerCollider.GetComponent<RogueSkillController>();
+        if (rogue != null)
+        {
+            rogue.transform.position = teleportPosition;
+        }
+
+        // Then, load the new scene. Once the new scene is loaded, 
+        // the OnSceneLoaded event will automatically trigger the fade-in.
+        Debug.Log("Attempting to load scene.");
+        SceneManager.LoadScene(sceneIndex);
+    }
 
     public IEnumerator FadeBlackOutSquare(bool fadeToBlack = true, int fadeSpeed = 2)
     {

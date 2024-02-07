@@ -1,9 +1,7 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
 using System.Collections;
-using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,10 +29,10 @@ public class PlayerMovement : MonoBehaviour
     public int skillThreeLevel = 1;
     [HideInInspector]
     public int ultSkillLevel = 1;
-[Header("Movement Settings")]
-public float moveSpeed;
-public float jumpForce;
-public float flyForce = 5f;  // Add this new fly force variable
+    [Header("Movement Settings")]
+    public float moveSpeed;
+    public float jumpForce;
+    public float flyForce = 5f;
 
     [Header("Player State")]
     [HideInInspector]
@@ -96,10 +94,10 @@ public float flyForce = 5f;  // Add this new fly force variable
     public int currentHealth;
     public int maxHealth;
 
-/*    [Header("Shopkeeper and Options Menu Settings")]
-    private bool isNearShopKeeper = false;
-    private bool isNearOptionsMenu = true;
-*/
+    /*    [Header("Shopkeeper and Options Menu Settings")]
+        private bool isNearShopKeeper = false;
+        private bool isNearOptionsMenu = true;
+    */
     [Header("Coins")]
     public int coins;
 
@@ -158,12 +156,12 @@ public float flyForce = 5f;  // Add this new fly force variable
             healthPotions = maxHealthPotions;
         }
 
-    
-    getPlayerInput();
-    playerInteractInput();
-    animate();
 
-      
+        getPlayerInput();
+        playerInteractInput();
+        animate();
+
+
     }
 
     private void FixedUpdate()
@@ -184,32 +182,32 @@ public float flyForce = 5f;  // Add this new fly force variable
         transform.Rotate(0f, 180f, 0f);
     }
 
-  
-public void getPlayerInput()
-{
-    moveDirection = Input.GetAxis("Horizontal");
 
-    if (!isAirborne)
+    public void getPlayerInput()
     {
-        if (Input.GetButtonDown("Jump"))
+        moveDirection = Input.GetAxis("Horizontal");
+
+        if (!isAirborne)
         {
-            isJumping = true;
-            isAirborne = true;
-            isGrounded = true;
+            if (Input.GetButtonDown("Jump"))
+            {
+                isJumping = true;
+                isAirborne = true;
+                isGrounded = true;
+            }
+        }
+        if (isAirborne && Input.GetButton("Jump"))
+        {
+            rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y + flyForce * Time.deltaTime);
         }
     }
-    if (isAirborne && Input.GetButton("Jump"))
-    {
-        rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y + flyForce * Time.deltaTime);
-    }
-}
 
     public void playerInteractInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             EnterPortal();
-          //  OpenShopKeeperUI();
+            //  OpenShopKeeperUI();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -239,7 +237,7 @@ public void getPlayerInput()
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-         //   OpenOptionMenuUI();
+            //   OpenOptionMenuUI();
             isPressingDrop = true;
         }
 
@@ -290,26 +288,28 @@ public void getPlayerInput()
         }
     }
 
-public void moveCharacter()
-{
-    if (!isAirborne)
+    public void moveCharacter()
     {
-        rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
+        if (!isAirborne)
+        {
+            rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
+        }
+        jumpCharacter();
     }
-    jumpCharacter();
-}
-   public void jumpCharacter()
-{
-    if (isJumping)
+    public void jumpCharacter()
     {
-        rb.velocity = new Vector3(moveDirection * moveSpeed, jumpForce);
-        AudioController.instance.PlayJumpSound();
-        isJumping = false;
+        if (isJumping)
+        {
+            rb.velocity = new Vector3(moveDirection * moveSpeed, jumpForce);
+            AudioController.instance.PlayJumpSound();
+            isJumping = false;
+        }
     }
-}
-    public void jumpHoldCharacter(){
-        if(isJumping && Input.GetButtonDown("Jump")){
-                        rb.velocity = new Vector3(moveDirection * moveSpeed, jumpForce);
+    public void jumpHoldCharacter()
+    {
+        if (isJumping && Input.GetButtonDown("Jump"))
+        {
+            rb.velocity = new Vector3(moveDirection * moveSpeed, jumpForce);
 
         }
     }
@@ -353,29 +353,29 @@ public void moveCharacter()
         //GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position = GameObject.FindGameObjectWithTag(portalName).GetComponent<Transform>().position;
     }
 
-/*    public void OpenShopKeeperUI()
-    {
-        if (!shopKeeperCanvas.activeSelf && isNearShopKeeper)
+    /*    public void OpenShopKeeperUI()
         {
-            shopKeeperCanvas.SetActive(true);
-        }
-        else
-        {
-            shopKeeperCanvas.SetActive(false);
-        }
-    }*/
+            if (!shopKeeperCanvas.activeSelf && isNearShopKeeper)
+            {
+                shopKeeperCanvas.SetActive(true);
+            }
+            else
+            {
+                shopKeeperCanvas.SetActive(false);
+            }
+        }*/
 
-/*    public void OpenOptionMenuUI()
-    {
-        if (!optionsMenuCanvas.activeSelf && isNearOptionsMenu)
+    /*    public void OpenOptionMenuUI()
         {
-            optionsMenuCanvas.SetActive(true);
-        }
-        else
-        {
-            optionsMenuCanvas.SetActive(false);
-        }
-    }*/
+            if (!optionsMenuCanvas.activeSelf && isNearOptionsMenu)
+            {
+                optionsMenuCanvas.SetActive(true);
+            }
+            else
+            {
+                optionsMenuCanvas.SetActive(false);
+            }
+        }*/
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "deathBox")
@@ -394,13 +394,13 @@ public void moveCharacter()
         }
     }
 
-        private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "World" || collision.gameObject.tag == "Platform")
         {
             isGrounded = false;
         }
-      
+
     }
 
     private IEnumerator PlayAndResetAnimation()

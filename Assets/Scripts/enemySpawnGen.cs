@@ -21,7 +21,7 @@ public class enemySpawnGen : MonoBehaviour
             // Instantiate the enemy and set its level
             GameObject newEnemy = Instantiate(enemies[enemyIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
             int level = Random.Range(minLevel, maxLevel + 1);
-    //        newEnemy.GetComponent<enemycontroller>().SetLevel(level);
+            //        newEnemy.GetComponent<enemycontroller>().SetLevel(level);
 
             currentEnemies++;
         }

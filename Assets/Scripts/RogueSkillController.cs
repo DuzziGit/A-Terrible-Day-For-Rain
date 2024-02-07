@@ -1,7 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class RogueSkillController : PlayerMovement
 {
@@ -53,17 +53,17 @@ public class RogueSkillController : PlayerMovement
     public float horizontalMove = 0f;
     public float runSpeed = 40f;
 
-    [SerializeField] private Image imageCooldownS1;
-    [SerializeField] private TMP_Text textCooldownS1;
-    [SerializeField] private Image imageCooldownS2;
-    [SerializeField] private TMP_Text textCooldownS2;
-    [SerializeField] private Image imageCooldownS3;
-    [SerializeField] private TMP_Text textCooldownS3;
-    [SerializeField] private Image imageCooldownSM;
-    [SerializeField] private TMP_Text textCooldownSM;
-    [SerializeField] private Image imageCooldownSU;
-    [SerializeField] private TMP_Text textCooldownSU;
-    [SerializeField] private TMP_Text healthPotionText;
+     private Image imageCooldownS1;
+     private TMP_Text textCooldownS1;
+    private Image imageCooldownS2;
+     private TMP_Text textCooldownS2;
+    private Image imageCooldownS3;
+     private TMP_Text textCooldownS3;
+     private Image imageCooldownSM;
+    private TMP_Text textCooldownSM;
+     private Image imageCooldownSU;
+     private TMP_Text textCooldownSU;
+     private TMP_Text healthPotionText;
 
     public bool isInvincible;
 
@@ -108,16 +108,16 @@ public class RogueSkillController : PlayerMovement
             healthBar.SetMaxHealth(maxHealth);
         }
 
-     //   textCooldownS1.gameObject.SetActive(false);
-     //   imageCooldownS1.fillAmount = 0.0f;
-     //   textCooldownS2.gameObject.SetActive(false);
-      //  imageCooldownS2.fillAmount = 0.0f;
-       // textCooldownS3.gameObject.SetActive(false);
-      //  imageCooldownS3.fillAmount = 0.0f;
-      //  textCooldownSM.gameObject.SetActive(false);
-      //  imageCooldownSM.fillAmount = 0.0f;
-      //  textCooldownSU.gameObject.SetActive(false);
-      //  imageCooldownSU.fillAmount = 0.0f;
+        //   textCooldownS1.gameObject.SetActive(false);
+        //   imageCooldownS1.fillAmount = 0.0f;
+        //   textCooldownS2.gameObject.SetActive(false);
+        //  imageCooldownS2.fillAmount = 0.0f;
+        // textCooldownS3.gameObject.SetActive(false);
+        //  imageCooldownS3.fillAmount = 0.0f;
+        //  textCooldownSM.gameObject.SetActive(false);
+        //  imageCooldownSM.fillAmount = 0.0f;
+        //  textCooldownSU.gameObject.SetActive(false);
+        //  imageCooldownSU.fillAmount = 0.0f;
         currentExp = 0;
 
         rend = GetComponent<Renderer>();
@@ -137,12 +137,12 @@ public class RogueSkillController : PlayerMovement
 
         experienceBar.SetExperience(currentExp);
         cooldownTimeSkill3Upgraded = cooldownTimeSkill3 - GetComponent<PlayerMovement>().skillThreeLevel;
-       // skillLevel1Text.text = skillOneLevel.ToString();
-      //  skillLevel2Text.text = skillTwoLevel.ToString();
-      //  skillLevel3Text.text = skillThreeLevel.ToString();
-      //  skillUltText.text = ultSkillLevel.ToString();
-      //  HealthDisplayText.text = $"{currentHealth} / {maxHealth}";
-      //  coinCount.text = coins.ToString();
+        // skillLevel1Text.text = skillOneLevel.ToString();
+        //  skillLevel2Text.text = skillTwoLevel.ToString();
+        //  skillLevel3Text.text = skillThreeLevel.ToString();
+        //  skillUltText.text = ultSkillLevel.ToString();
+        //  HealthDisplayText.text = $"{currentHealth} / {maxHealth}";
+        //  coinCount.text = coins.ToString();
 
         //Get player inputs
         getPlayerInput();
@@ -176,7 +176,7 @@ public class RogueSkillController : PlayerMovement
         {
             MovementSkill();
             nextFireTimeMovement = Time.time + cooldownTimeMovement;
-        //    textCooldownSM.gameObject.SetActive(true);
+            //    textCooldownSM.gameObject.SetActive(true);
             cooldownTimerSM = cooldownTimeMovement;
         }
     }
@@ -228,13 +228,13 @@ public class RogueSkillController : PlayerMovement
     {
         if (cooldownTimer < 0.0f)
         {
-      //      textCooldown.gameObject.SetActive(false);
-    //        imageCooldown.fillAmount = 0.0f;
+            //      textCooldown.gameObject.SetActive(false);
+            //        imageCooldown.fillAmount = 0.0f;
         }
         else
         {
-      //      textCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
-      //      imageCooldown.fillAmount = cooldownTimer / cooldownTime;
+            //      textCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
+            //      imageCooldown.fillAmount = cooldownTimer / cooldownTime;
         }
     }
 
@@ -245,39 +245,39 @@ public class RogueSkillController : PlayerMovement
         {
             StartCoroutine(FirstSkill());
             nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
-        //    textCooldownS1.gameObject.SetActive(true);
+            //    textCooldownS1.gameObject.SetActive(true);
             cooldownTimerS1 = cooldownTimeSkill1;
             SwipeOne.SetBool("SwipeOne", true);
             SwipeTwo.SetBool("SwipeTwo", true);
         }
     }
 
-  private IEnumerator FirstSkill()
-{
-    // First kunai
-    Instantiate(projectile, attackPos.position, attackPos.rotation);
-    audioSource.pitch = 1.6f;  // Reduced pitch
-    yield return new WaitForSeconds(0.1f);
-    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+    private IEnumerator FirstSkill()
+    {
+        // First kunai
+        Instantiate(projectile, attackPos.position, attackPos.rotation);
+        audioSource.pitch = 1.6f;  // Reduced pitch
+        yield return new WaitForSeconds(0.1f);
+        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
 
-    // Second kunai
-    Instantiate(projectile, attackPos.position, attackPos.rotation);
-    audioSource.pitch = 1.0f;  // Normal pitch
-    yield return new WaitForSeconds(0.1f);
-    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+        // Second kunai
+        Instantiate(projectile, attackPos.position, attackPos.rotation);
+        audioSource.pitch = 1.0f;  // Normal pitch
+        yield return new WaitForSeconds(0.1f);
+        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
 
-    // Third kunai
-    Instantiate(projectile, attackPos.position, attackPos.rotation);
-    audioSource.pitch = 1.1f;  // Increased pitch
-    yield return new WaitForSeconds(0.1f);
-    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+        // Third kunai
+        Instantiate(projectile, attackPos.position, attackPos.rotation);
+        audioSource.pitch = 1.1f;  // Increased pitch
+        yield return new WaitForSeconds(0.1f);
+        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
 
-    // Reset pitch to default for other sounds
-    audioSource.pitch = 1.0f;
+        // Reset pitch to default for other sounds
+        audioSource.pitch = 1.0f;
 
-    SwipeOne.SetBool("SwipeOne", false);
-    SwipeTwo.SetBool("SwipeTwo", false);
-}
+        SwipeOne.SetBool("SwipeOne", false);
+        SwipeTwo.SetBool("SwipeTwo", false);
+    }
     // Second Skill
     public void GetSecondSkillInput()
     {
@@ -285,7 +285,7 @@ public class RogueSkillController : PlayerMovement
         {
             secondSkill();
             nextFireTimeSkill2 = Time.time + cooldownTimeSkill2;
-         //   textCooldownS2.gameObject.SetActive(true);
+            //   textCooldownS2.gameObject.SetActive(true);
             cooldownTimerS2 = cooldownTimeSkill2;
         }
     }
@@ -303,7 +303,7 @@ public class RogueSkillController : PlayerMovement
         {
             StartCoroutine(ThirdSkillEnum());
             nextFireTimeSkill3 = Time.time + cooldownTimeSkill3Upgraded;
-       //     textCooldownS3.gameObject.SetActive(true);
+            //     textCooldownS3.gameObject.SetActive(true);
             cooldownTimerS3 = cooldownTimeSkill3Upgraded;
         }
     }
@@ -322,7 +322,7 @@ public class RogueSkillController : PlayerMovement
         {
             StartCoroutine(UltimateSkillEnum());
             nextFireTimeSkillUlt = Time.time + cooldownTimeSkillUlt;
-         //   textCooldownSU.gameObject.SetActive(true);
+            //   textCooldownSU.gameObject.SetActive(true);
             cooldownTimerSU = cooldownTimeSkillUlt;
         }
     }
