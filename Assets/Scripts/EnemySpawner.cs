@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
         int randEnemyIndex = Random.Range(0, enemyPrefabs.Length);
         int randSpawnPointIndex = Random.Range(0, spawnPoints.Length);
         int playerLevel = playerMovement.level;
-        Debug.Log(playerLevel);
+//        Debug.Log(playerLevel);
 
         int enemyLevel = Random.Range(playerLevel, playerLevel + 5);
         GameObject enemyInstance = Instantiate(enemyPrefabs[randEnemyIndex], spawnPoints[randSpawnPointIndex].position, Quaternion.identity);
@@ -53,6 +53,6 @@ public class EnemySpawner : MonoBehaviour
         }
 
         currentEnemies++;
-        Debug.Log("Current Enemies updated: " + currentEnemies);
+//        Debug.Log("Current Enemies updated: " + currentEnemies);
     }
 }
