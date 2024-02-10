@@ -89,7 +89,6 @@ public class RogueSkillController : PlayerMovement
     public Animator MovementSkillOne;
     public Animator MovementSkillTwo;
 
-    public Animator animator;
     Renderer rend;
     Color c;
 
@@ -126,7 +125,6 @@ public class RogueSkillController : PlayerMovement
 
     private void Update()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale = 2f;
 
         experienceBar.setMaxExp(maxExp);
 
@@ -180,18 +178,6 @@ public class RogueSkillController : PlayerMovement
             cooldownTimerSM = cooldownTimeMovement;
             
         }
-    }
-
-    public void moveCharacter()
-    {
-        if (!isAirborne)
-        {
-            rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
-            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-            GetComponent<Animator>().SetBool("isAirborne",false);
-        }
-        jumpCharacter();
-        GetComponent<Animator>().SetBool("isAirborne",true);
     }
 
     public void MovementSkill()

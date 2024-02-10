@@ -34,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float flyForce = 5f;
 
+    [SerializeField] private float inertia;
+    private float jumpDirection = 0; // Store the direction of the jump
+
+
     [Header("Player State")]
     [HideInInspector]
     public bool playerIsNearPortal = false;
@@ -102,14 +106,18 @@ public class PlayerMovement : MonoBehaviour
     public int coins;
 
     public AudioSource audioSource;
-    public Animator LandingDust;
     private bool isPlaying;
+    [SerializeField] private Animator animator;
+
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+
     }
 
     void Start()
@@ -172,35 +180,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayerDeath()
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().gravityScale = 0.85f;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position = new Vector3(-2, -1, 0);
+        GetComponent<Rigidbody2D>().gravityScale = 0.85f;
+        GetComponent<Transform>().position = new Vector3(-2, -1, 0);
     }
 
     private void FlipCharacter()
     {
-        facingRight = !facingRight;
+        // Flip the character's facing direction without changing the momentum
+          facingRight = !facingRight;
         transform.Rotate(0f, 180f, 0f);
     }
-
 
     public void getPlayerInput()
     {
         moveDirection = Input.GetAxis("Horizontal");
-       var jumpDirection =rb.velocity.y;
-        GetComponent<Animator>().SetFloat("VerticalSpeed",rb.velocity.y);
-        Debug.Log(rb.velocity.y);
+        var jumpDirection = rb.velocity.y;
+        animator.SetFloat("VerticalSpeed", rb.velocity.y);
+
         if (!isAirborne)
         {
             if (Input.GetButtonDown("Jump"))
             {
                 isJumping = true;
                 isAirborne = true;
-                isGrounded = true;
             }
         }
-        if (isAirborne && Input.GetButton("Jump"))
+        // You can still flip the character without affecting the momentum.
+        if (moveDirection > 0 && !facingRight || moveDirection < 0 && facingRight)
         {
-            rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y + flyForce * Time.deltaTime);
+            FlipCharacter();
         }
     }
 
@@ -293,29 +301,41 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isAirborne)
         {
+            // Apply movement normally on the ground.
             rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
-            GetComponent<Animator>().SetBool("isAirborne", false);
+            animator.SetBool("isAirborne", false);
+            animator.SetFloat("Speed", Mathf.Abs(moveDirection));
+            if (isJumping)
+            {
+                // Store the direction at the start of the jump.
+                jumpDirection = moveDirection;
+                Jump();
+            }
         }
-        jumpCharacter();
-    }
-    public void jumpCharacter()
-    {
-        if (isJumping)
+        else
         {
-            rb.velocity = new Vector3(moveDirection * moveSpeed, jumpForce);
-            AudioController.instance.PlayJumpSound();
-            isJumping = false;
-            GetComponent<Animator>().SetBool("isAirborne",true);
+            // While airborne, maintain horizontal momentum but allow for facing direction changes.
+            if (isJumping)
+            {
+                Jump();
+            }
         }
     }
-    public void jumpHoldCharacter()
-    {
-        if (isJumping && Input.GetButtonDown("Jump"))
-        {
-            rb.velocity = new Vector3(moveDirection * moveSpeed, jumpForce);
 
-        }
-    }
+private void Jump()
+{
+    // Check if there's horizontal input to determine the jump direction
+    // This assumes moveDirection is being correctly set elsewhere in your code based on player input.
+    float horizontalVelocity = moveDirection * moveSpeed;
+
+    // Apply the jump force along with the horizontal velocity to maintain forward momentum.
+    // This uses the current horizontal velocity (if any) to ensure the character moves forward while jumping.
+    rb.velocity = new Vector3(horizontalVelocity, jumpForce);
+
+    AudioController.instance.PlayJumpSound();
+    isJumping = false;
+    animator.SetBool("isAirborne", true);
+}
 
     public void EnterPortal()
     {
@@ -388,13 +408,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
         {
-            GetComponent<Animator>().SetTrigger("isLanded");
             isAirborne = false;
             isGrounded = true;
-            if (!isPlaying)
-            {
-                StartCoroutine(PlayAndResetAnimation());
-            }
+            animator.SetTrigger("isLanded");
+           
         }
     }
 
@@ -407,26 +424,4 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private IEnumerator PlayAndResetAnimation()
-    {
-        isPlaying = true;
-
-        // Play the animation
-        LandingDust.Play("s500");
-        audioSource.PlayOneShot(fall, 1f);
-
-        // Wait for the next frame to ensure the animation starts playing
-        yield return null;
-
-        // Wait until the animation is finished
-        while (LandingDust.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 || LandingDust.IsInTransition(0))
-        {
-            yield return null;
-        }
-
-        // Trigger the transition to the idle state
-        LandingDust.SetTrigger("JustLanded");
-
-        isPlaying = false;
-    }
 }
