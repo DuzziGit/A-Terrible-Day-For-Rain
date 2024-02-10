@@ -186,7 +186,9 @@ public class PlayerMovement : MonoBehaviour
     public void getPlayerInput()
     {
         moveDirection = Input.GetAxis("Horizontal");
-
+       var jumpDirection =rb.velocity.y;
+        GetComponent<Animator>().SetFloat("VerticalSpeed",rb.velocity.y);
+        Debug.Log(rb.velocity.y);
         if (!isAirborne)
         {
             if (Input.GetButtonDown("Jump"))
@@ -251,7 +253,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (level < 60 && shouldLevelUp)
         {
-            leveledUpAnimator.SetBool("LeveledUp", true);
             IncreaseLevel();
             Debug.Log("Level Up! Player Level is now: " + level);
             shouldLevelUp = false;
@@ -293,6 +294,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isAirborne)
         {
             rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
+            GetComponent<Animator>().SetBool("isAirborne", false);
         }
         jumpCharacter();
     }
@@ -303,6 +305,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(moveDirection * moveSpeed, jumpForce);
             AudioController.instance.PlayJumpSound();
             isJumping = false;
+            GetComponent<Animator>().SetBool("isAirborne",true);
         }
     }
     public void jumpHoldCharacter()
@@ -385,6 +388,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
         {
+            GetComponent<Animator>().SetTrigger("isLanded");
             isAirborne = false;
             isGrounded = true;
             if (!isPlaying)

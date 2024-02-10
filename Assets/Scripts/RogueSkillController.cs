@@ -178,6 +178,7 @@ public class RogueSkillController : PlayerMovement
             nextFireTimeMovement = Time.time + cooldownTimeMovement;
             //    textCooldownSM.gameObject.SetActive(true);
             cooldownTimerSM = cooldownTimeMovement;
+            
         }
     }
 
@@ -187,8 +188,10 @@ public class RogueSkillController : PlayerMovement
         {
             rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
             animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+            GetComponent<Animator>().SetBool("isAirborne",false);
         }
         jumpCharacter();
+        GetComponent<Animator>().SetBool("isAirborne",true);
     }
 
     public void MovementSkill()

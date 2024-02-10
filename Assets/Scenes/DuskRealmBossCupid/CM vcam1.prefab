@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 957941649752926422}
   - component: {fileID: 957941649752926423}
   - component: {fileID: 957941649752926421}
+  - component: {fileID: 1490136677}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -56,7 +57,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 30
+    OrthographicSize: 8
     NearClipPlane: -30
     FarClipPlane: 1000
     Dutch: 0
@@ -85,8 +86,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoundingShape2D: {fileID: 0}
-  m_Damping: 2.02
+  m_Damping: 0
   m_MaxWindowSize: -1
+--- !u!114 &1490136677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957941649752926416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac515527c4e73b846b0812f86dc9f652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &957941650013049512
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,8 +19,8 @@ public class EnemyCon : Enemy
     private int maxHealth;
 
     // Magic numbers replaced with constants
-    private const float xOffset = 5f;
-    private const float yOffset = 2f;
+    private const float xOffset = 0f;
+    private const float yOffset = 0.0f;
     private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
 
