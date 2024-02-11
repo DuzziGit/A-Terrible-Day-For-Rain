@@ -325,10 +325,10 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         // Check if there's horizontal input to determine the jump direction
-        float horizontalVelocity = moveDirection * moveSpeed;
+        float horizontalVelocity = moveDirection * jumpSpeed;
 
         // Apply the jump force along with the horizontal velocity to maintain forward momentum.
-        rb.velocity = new Vector3(jumpDirection * jumpSpeed, jumpForce);
+        rb.velocity = new Vector3(horizontalVelocity, jumpForce);
 
         AudioController.instance.PlayJumpSound();
         isJumping = false;
