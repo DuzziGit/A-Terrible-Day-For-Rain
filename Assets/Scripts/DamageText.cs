@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageText : MonoBehaviour
 {
-    public float displayTime = 1.5f;
+    private float displayTime = 6f;
 
     private TMP_Text textComponent;
 
@@ -16,9 +16,18 @@ public class DamageText : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(ShowAndDestroy());
+        
+        NoChildren();
+        //StartCoroutine(ShowAndDestroy());
     }
-
+    private void NoChildren(){
+        if(transform.childCount <= 0 ){
+            Destroy(gameObject);
+        }
+        else{
+            StartCoroutine(ShowAndDestroy());
+        }
+    }
     IEnumerator ShowAndDestroy()
     {
         yield return new WaitForSeconds(displayTime);

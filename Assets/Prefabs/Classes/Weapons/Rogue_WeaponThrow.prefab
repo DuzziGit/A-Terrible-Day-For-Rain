@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58f7cc5070674c48839506f7e72d037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 20
   lifeTime: 0.6
   detectionRange: 10
   maxDistance: 15
@@ -113,7 +113,7 @@ MonoBehaviour:
   skillLevel: 0
   critChance: 0
   critMultiplier: 0
-  targetingToleranceAngle: 30
+  targetingToleranceAngle: 25
   direction: {x: 0, y: 0, z: 0}
   closestEnemy: {fileID: 0}
   damage: 0

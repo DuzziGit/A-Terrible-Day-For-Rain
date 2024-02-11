@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class DamageNumController : MonoBehaviour
 {
-    public float moveSpeed = 0.01f;
-    public float fadeSpeed = 2f;
-    public float startFadeHeight = -10f;
+    private float moveSpeed = 0.004f;
+    private float fadeSpeed = 1f;
+    private float startFadeHeight = -10f;
 
     private TMP_Text tmpComponent;
     private Color originalColor;

@@ -180,16 +180,27 @@ public class RogueSkillController : PlayerMovement
         }
     }
 
-    public void MovementSkill()
-    {
-        MovementSkillOne.SetBool("MovementSkillUsed", true);
-        MovementSkillTwo.SetBool("MovementSkillUsed", true);
+   public void MovementSkill()
+{
+    MovementSkillOne.SetBool("MovementSkillUsed", true);
+    MovementSkillTwo.SetBool("MovementSkillUsed", true);
 
-        float force = facingRight ? MovementSkillForce : MovementSkillForceLeft;
-        rb.velocity = new Vector3(moveDirection * moveSpeed + force, jumpForce);
+    // Determine the force direction based on facing direction
+    float forceDirection = facingRight ? 1.0f : -1.0f;
 
-        StartCoroutine(ResetMovementSkillAnimation());
-    }
+    // Reset vertical velocity to 0 or set to a specific value before applying the impulse
+    rb.velocity = new Vector2(0, 0); // This line neutralizes any existing vertical motion
+
+    // Apply horizontal force directly to control direction more precisely
+    Vector2 horizontalForce = new Vector2(forceDirection * MovementSkillForce, 0);
+    rb.AddForce(horizontalForce, ForceMode2D.Impulse);
+
+    // Apply vertical force separately to ensure it's consistent
+    Vector2 verticalForce = new Vector2(0, jumpForce);
+    rb.AddForce(verticalForce, ForceMode2D.Impulse);
+
+    StartCoroutine(ResetMovementSkillAnimation());
+}
 
     private IEnumerator ResetMovementSkillAnimation()
     {

@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1424dcdb05bd8f746a76b9077b2de390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
+  health: 3000
   damage: 20
   level: 1
   speed: 5
@@ -529,6 +529,7 @@ MonoBehaviour:
   isTouchingPlayer: 0
   animFeedback: {fileID: 2064251594}
   animFeedback2: {fileID: 1818229467}
+  DamageNumText: {fileID: 2100312243281989656, guid: feae4dca98525114ab3342e2dcba6d3c, type: 3}
 --- !u!50 &15266169
 Rigidbody2D:
   serializedVersion: 4
@@ -563,7 +564,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.002740398, y: -0.09973562}
+  m_Offset: {x: -0.0027403831, y: -0.1017555}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -574,7 +575,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5026516, y: 0.83231986}
+  m_Size: {x: 0.5026516, y: 0.8282801}
   m_EdgeRadius: 0
 --- !u!114 &4325626357328118357
 MonoBehaviour:

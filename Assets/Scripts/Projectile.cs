@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     public int skillLevel;
     public float critChance;
     public float critMultiplier;
-    public float targetingToleranceAngle = 30f;
+    public float targetingToleranceAngle = 5f;
 
     private Vector3 initialPosition;
     public Vector3 direction;
@@ -112,7 +112,7 @@ public class Projectile : MonoBehaviour
             }
 
             hasDamaged = true;
-            Invoke("DestroyProjectile", 0.1f); // Delay destruction slightly after collision
+            DestroyProjectile();
             return; // Exit the method after hitting the enemy
         }
     }

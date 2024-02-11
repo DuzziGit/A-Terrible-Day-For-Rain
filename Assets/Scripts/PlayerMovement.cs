@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float flyForce = 5f;
 
-    [SerializeField] private float inertia;
     private float jumpDirection = 0; // Store the direction of the jump
 
 

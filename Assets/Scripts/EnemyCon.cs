@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -17,12 +18,17 @@ public class EnemyCon : Enemy
     public Animator animFeedback;
     public Animator animFeedback2;
     private int maxHealth;
+    [SerializeField] private GameObject DamageNumText;
+  private GameObject damageCanvas;// Track the canvas instance
+    public bool isDisplayingDamage= false;// Flag to track if damage is currently being displayed
+
 
     // Magic numbers replaced with constants
     private const float xOffset = 0f;
-    private const float yOffset = 0.0f;
-    private const float damageDisplayDelay = 0.1f;
+    private const float yOffset = 0.4f;
+    private const float damageDisplayDelay = 0.2f;
     private const float resetTriggerDelay = 0.2f;
+    private List<int> DamageTaken = new List<int>();
 
     void Start()
     {
@@ -46,8 +52,17 @@ public class EnemyCon : Enemy
 
     public void TakeDamage(int damage)
     {
+        
         health = Mathf.Max(0, health - damage);
-        StartCoroutine(DamageDisplay(damage));
+
+        DamageTaken.Add(damage);
+
+  if (!isDisplayingDamage)
+        {
+            ProcessDamage();
+        }
+    
+
         if (healthBar != null)
         {
             healthBar.SetHealth(health);
@@ -60,16 +75,52 @@ public class EnemyCon : Enemy
         StartCoroutine(ResetTakeDamageTrigger());
     }
 
-    IEnumerator DamageDisplay(int damage)
+
+
+
+ void ProcessDamage()
     {
-        Vector3 positionOffset = new Vector3(transform.position.x + xOffset, transform.position.y + yOffset + Random.Range(1.0f, 3.0f), transform.position.z);
-        GameObject text = Instantiate(CanvasDamageNum, positionOffset, Quaternion.identity);
+        if (damageCanvas == null)
+        {
+            damageCanvas = Instantiate(CanvasDamageNum, transform.position, Quaternion.identity);
+        }
 
-        DamageNumController controller = text.GetComponentInChildren<DamageNumController>();
+        if (!isDisplayingDamage)
+        {
+            StartCoroutine(DamageDisplay(damageCanvas));
+        }
+    }
 
+
+
+
+  IEnumerator DamageDisplay(GameObject canvas)
+{
+    isDisplayingDamage = true;
+    float tempBounds = bc.bounds.max.y;
+    while (DamageTaken.Count > 0)
+    {
+        int damage = DamageTaken[0];
+        GameObject text = Instantiate(DamageNumText, new Vector3(transform.position.x, tempBounds + yOffset, transform.position.z), Quaternion.identity, canvas.transform);
+        DamageNumController controller = text.GetComponent<DamageNumController>();
         controller.SetDamageNum(damage);
+        DamageTaken.RemoveAt(0);
         yield return new WaitForSeconds(damageDisplayDelay);
     }
+
+    isDisplayingDamage = false;
+
+    // // Check if there are no more damage numbers to display
+     if (DamageTaken.Count == 0 && canvas.GetComponentInChildren<DamageNumController>() == null)
+     {
+        
+          Destroy(canvas);
+     }
+}
+
+      
+
+
 
     private IEnumerator ResetTakeDamageTrigger()
     {

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -37,13 +38,13 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        bc = GetComponent<BoxCollider2D>();
-        enemySprite = GetComponent<SpriteRenderer>();
-        timeBetweenDmg = startTimeBetweenDmg;
+      
     }
     private void Awake()
     {
+          rb = GetComponent<Rigidbody2D>();
+        bc = GetComponent<BoxCollider2D>();
+        enemySprite = GetComponent<SpriteRenderer>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -110,6 +111,11 @@ public class Enemy : MonoBehaviour
     {
         if (health <= 0)
         {
+            if(GetComponent<EnemyCon>().isDisplayingDamage){
+                rb.freezeRotation = true;
+                GetComponent<SpriteRenderer>().enabled = false;
+                bc.enabled = false;
+            }
             Die();
         }
 

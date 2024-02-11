@@ -453,7 +453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719710301691206730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.216, y: -0.132, z: 0}
+  m_LocalPosition: {x: -0.216, y: -0.34, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -523,7 +523,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.627451, g: 0.6156863, b: 0.77647066, a: 0.7294118}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7294118}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1113,7 +1113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6142443458313625170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.15, z: 0.25}
+  m_LocalPosition: {x: 0, y: -0.53, z: 0.25}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1218,8 +1218,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8361654210551252797}
   m_LocalRotation: {x: -0, y: -0, z: 0.0001833212, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -2}
-  m_LocalScale: {x: 0.04, y: 0.04, z: 1}
+  m_LocalPosition: {x: -0, y: 0.57, z: -2}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9011964926031391142}
@@ -1293,7 +1293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8873473971159726170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.216, y: -0.132, z: 0}
+  m_LocalPosition: {x: -0.216, y: -0.34, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1363,7 +1363,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.77647066, g: 0.7725491, b: 0.9176471, a: 0.84313726}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.84313726}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1585,7 +1585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9011964925702152523}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39, y: 0.13, z: 0}
+  m_LocalPosition: {x: 0.39, y: -0.14, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1892,7 +1892,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 8
+  m_GravityScale: 6
   m_Material: {fileID: 6200000, guid: 5bb17b82384d5b442b9aba0f8deaffb6, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1922,10 +1922,9 @@ MonoBehaviour:
   skillTwoLevel: 1
   skillThreeLevel: 1
   ultSkillLevel: 1
-  moveSpeed: 13
-  jumpForce: 22
+  moveSpeed: 10
+  jumpForce: 15
   flyForce: 1.5
-  inertia: 100
   playerIsNearPortal: 0
   isAirborne: 0
   isPressingUp: 0
@@ -1962,8 +1961,8 @@ MonoBehaviour:
   coins: 0
   audioSource: {fileID: 0}
   animator: {fileID: 9011964926031391143}
-  MovementSkillForce: 0.8
-  MovementSkillForceLeft: -0.8
+  MovementSkillForce: 15
+  MovementSkillForceLeft: -15
   projectile: {fileID: 2122635036824758511, guid: e7259c155907ef349b2792b420563bc6, type: 3}
   projectile2: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
   ProjectileUltimate: {fileID: 6638761271213070857, guid: df6803cdadbff91408b308986a5eab4e, type: 3}
