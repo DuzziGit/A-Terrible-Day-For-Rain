@@ -46,21 +46,23 @@ public class Enemy : MonoBehaviour
         bc = GetComponent<BoxCollider2D>();
         enemySprite = GetComponent<SpriteRenderer>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.GetComponent<Collider>().CompareTag("Player"));
         {
             isTouchingPlayer = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+      private void OnCollisionExit2D(Collision2D collision) {
+        
+        if (collision.collider.CompareTag("Player"));
         {
             isTouchingPlayer = false;
         }
+    
     }
+    
 
     void Update()
     {

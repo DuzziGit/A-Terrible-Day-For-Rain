@@ -112,7 +112,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Flash_04_color1_flash
+  m_Name: impact
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -126,7 +126,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: acd6b3baa05bcf540b74b35749288fd9, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6477d05c1bad5c349ada18e704cecb4c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

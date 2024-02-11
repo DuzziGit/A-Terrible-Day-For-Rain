@@ -96,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Health Settings")]
     public int currentHealth;
     public int maxHealth;
+    private const int jumpSpeed = 10;
 
     /*    [Header("Shopkeeper and Options Menu Settings")]
         private bool isNearShopKeeper = false;
@@ -106,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioSource audioSource;
     private bool isPlaying;
-    [SerializeField] private Animator animator;
+    [SerializeField] protected Animator animator;
 
 
 
@@ -186,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
     private void FlipCharacter()
     {
         // Flip the character's facing direction without changing the momentum
-          facingRight = !facingRight;
+        facingRight = !facingRight;
         transform.Rotate(0f, 180f, 0f);
     }
 
@@ -321,20 +322,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-private void Jump()
-{
-    // Check if there's horizontal input to determine the jump direction
-    // This assumes moveDirection is being correctly set elsewhere in your code based on player input.
-    float horizontalVelocity = moveDirection * moveSpeed;
+    private void Jump()
+    {
+        // Check if there's horizontal input to determine the jump direction
+        float horizontalVelocity = moveDirection * moveSpeed;
 
-    // Apply the jump force along with the horizontal velocity to maintain forward momentum.
-    // This uses the current horizontal velocity (if any) to ensure the character moves forward while jumping.
-    rb.velocity = new Vector3(horizontalVelocity, jumpForce);
+        // Apply the jump force along with the horizontal velocity to maintain forward momentum.
+        rb.velocity = new Vector3(jumpDirection * jumpSpeed, jumpForce);
 
-    AudioController.instance.PlayJumpSound();
-    isJumping = false;
-    animator.SetBool("isAirborne", true);
-}
+        AudioController.instance.PlayJumpSound();
+        isJumping = false;
+        animator.SetBool("isAirborne", true);
+    }
 
     public void EnterPortal()
     {
@@ -410,7 +409,7 @@ private void Jump()
             isAirborne = false;
             isGrounded = true;
             animator.SetTrigger("isLanded");
-           
+
         }
     }
 

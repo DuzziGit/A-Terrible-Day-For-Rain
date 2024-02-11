@@ -17,8 +17,7 @@ public class DamageText : MonoBehaviour
 
     private void Update() {
         if(gameObject.transform.childCount == 0){
-         StartCoroutine(ShowAndDestroy());
-        }
+     Destroy(gameObject);        }
     }
     
     private void Start()
@@ -35,7 +34,7 @@ public class DamageText : MonoBehaviour
     public IEnumerator ShowAndDestroy()
     {
         yield return new WaitForSeconds(displayTime);
-        Destroy(gameObject);
+   
     }
 
     // Set the damage number on the TMP_Text component

@@ -53,17 +53,17 @@ public class RogueSkillController : PlayerMovement
     public float horizontalMove = 0f;
     public float runSpeed = 40f;
 
-     private Image imageCooldownS1;
-     private TMP_Text textCooldownS1;
+    private Image imageCooldownS1;
+    private TMP_Text textCooldownS1;
     private Image imageCooldownS2;
-     private TMP_Text textCooldownS2;
+    private TMP_Text textCooldownS2;
     private Image imageCooldownS3;
-     private TMP_Text textCooldownS3;
-     private Image imageCooldownSM;
+    private TMP_Text textCooldownS3;
+    private Image imageCooldownSM;
     private TMP_Text textCooldownSM;
-     private Image imageCooldownSU;
-     private TMP_Text textCooldownSU;
-     private TMP_Text healthPotionText;
+    private Image imageCooldownSU;
+    private TMP_Text textCooldownSU;
+    private TMP_Text healthPotionText;
 
     public bool isInvincible;
 
@@ -89,6 +89,7 @@ public class RogueSkillController : PlayerMovement
     public Animator MovementSkillOne;
     public Animator MovementSkillTwo;
 
+
     Renderer rend;
     Color c;
 
@@ -98,7 +99,6 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimerSM = 0.0f;
     private float cooldownTimerSU = 0.0f;
     private float cooldownTimer = 0.0f;
-
     private void Start()
     {
         HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -176,31 +176,31 @@ public class RogueSkillController : PlayerMovement
             nextFireTimeMovement = Time.time + cooldownTimeMovement;
             //    textCooldownSM.gameObject.SetActive(true);
             cooldownTimerSM = cooldownTimeMovement;
-            
+
         }
     }
 
-   public void MovementSkill()
-{
-    MovementSkillOne.SetBool("MovementSkillUsed", true);
-    MovementSkillTwo.SetBool("MovementSkillUsed", true);
+    public void MovementSkill()
+    {
+        MovementSkillOne.SetBool("MovementSkillUsed", true);
+        MovementSkillTwo.SetBool("MovementSkillUsed", true);
 
-    // Determine the force direction based on facing direction
-    float forceDirection = facingRight ? 1.0f : -1.0f;
+        // Determine the force direction based on facing direction
+        float forceDirection = facingRight ? 1.0f : -1.0f;
 
-    // Reset vertical velocity to 0 or set to a specific value before applying the impulse
-    rb.velocity = new Vector2(0, 0); // This line neutralizes any existing vertical motion
+        // Reset vertical velocity to 0 or set to a specific value before applying the impulse
+        rb.velocity = new Vector2(0, 0); // This line neutralizes any existing vertical motion
 
-    // Apply horizontal force directly to control direction more precisely
-    Vector2 horizontalForce = new Vector2(forceDirection * MovementSkillForce, 0);
-    rb.AddForce(horizontalForce, ForceMode2D.Impulse);
+        // Apply horizontal force directly to control direction more precisely
+        Vector2 horizontalForce = new Vector2(forceDirection * MovementSkillForce, 0);
+        rb.AddForce(horizontalForce, ForceMode2D.Impulse);
 
-    // Apply vertical force separately to ensure it's consistent
-    Vector2 verticalForce = new Vector2(0, jumpForce);
-    rb.AddForce(verticalForce, ForceMode2D.Impulse);
+        // Apply vertical force separately to ensure it's consistent
+        Vector2 verticalForce = new Vector2(0, jumpForce);
+        rb.AddForce(verticalForce, ForceMode2D.Impulse);
 
-    StartCoroutine(ResetMovementSkillAnimation());
-}
+        StartCoroutine(ResetMovementSkillAnimation());
+    }
 
     private IEnumerator ResetMovementSkillAnimation()
     {
@@ -243,54 +243,57 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkill1 && Input.GetKeyDown(KeyCode.A))
         {
+
             StartCoroutine(FirstSkill());
             nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
             //    textCooldownS1.gameObject.SetActive(true);
             cooldownTimerS1 = cooldownTimeSkill1;
             SwipeOne.SetBool("SwipeOne", true);
             SwipeTwo.SetBool("SwipeTwo", true);
+
         }
     }
-private IEnumerator FirstSkill()
-{
-    // Instantiate a fixed attack position GameObject
-    GameObject fixedAttackPos = new GameObject("FixedAttackPosition");
-    fixedAttackPos.transform.position = attackPos.position;
-    fixedAttackPos.transform.rotation = attackPos.rotation;
+    private IEnumerator FirstSkill()
+    {
+        // Instantiate a fixed attack position GameObject
+        GameObject fixedAttackPos = new GameObject("FixedAttackPosition");
+        fixedAttackPos.transform.position = attackPos.position;
+        fixedAttackPos.transform.rotation = attackPos.rotation;
 
-    // First shuriken
-    Vector3 topOffset = new Vector3(0, 0.2f, 0);
-    Instantiate(projectile, fixedAttackPos.transform.position + topOffset, fixedAttackPos.transform.rotation);
-    audioSource.pitch = 1.6f;  // Reduced pitch
-    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
-    yield return new WaitForSeconds(0.05f);
+        // First shuriken
+        Vector3 topOffset = new Vector3(0, 0.2f, 0);
+        Instantiate(projectile, fixedAttackPos.transform.position + topOffset, fixedAttackPos.transform.rotation);
+        audioSource.pitch = 1.6f;  // Reduced pitch
+        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+        yield return new WaitForSeconds(0.05f);
 
-    // Second shuriken
-    Instantiate(projectile, fixedAttackPos.transform.position, fixedAttackPos.transform.rotation);
-    audioSource.pitch = 1.0f;  // Normal pitch
-    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
-    yield return new WaitForSeconds(0.05f);
+        // Second shuriken
+        Instantiate(projectile, fixedAttackPos.transform.position, fixedAttackPos.transform.rotation);
+        audioSource.pitch = 1.0f;  // Normal pitch
+        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+        yield return new WaitForSeconds(0.05f);
 
-    // Third shuriken
-    Vector3 botOffset = new Vector3(0, -0.2f, 0);
-    Instantiate(projectile, fixedAttackPos.transform.position + botOffset, fixedAttackPos.transform.rotation);
-    audioSource.pitch = 1.1f;  // Increased pitch
-    audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
-    yield return new WaitForSeconds(0.05f);
+        // Third shuriken
+        Vector3 botOffset = new Vector3(0, -0.2f, 0);
+        Instantiate(projectile, fixedAttackPos.transform.position + botOffset, fixedAttackPos.transform.rotation);
+        audioSource.pitch = 1.1f;  // Increased pitch
+        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+        yield return new WaitForSeconds(0.05f);
 
-    // Reset pitch to default for other sounds
-    audioSource.pitch = 1.0f;
+        // Reset pitch to default for other sounds
+        audioSource.pitch = 1.0f;
 
-    SwipeOne.SetBool("SwipeOne", false);
-    SwipeTwo.SetBool("SwipeTwo", false);
+        SwipeOne.SetBool("SwipeOne", false);
+        SwipeTwo.SetBool("SwipeTwo", false);
 
-    // Optionally, destroy the fixed position GameObject if it's no longer needed
-    Destroy(fixedAttackPos, 0.5f); // Adjust the delay as needed
-}
+        // Optionally, destroy the fixed position GameObject if it's no longer needed
+        Destroy(fixedAttackPos, 0.5f); // Adjust the delay as needed
+    }
     public void GetSecondSkillInput()
     {
         if (Time.time > nextFireTimeSkill2 && Input.GetKeyDown(KeyCode.S))
         {
+            animator.SetTrigger("isAttacking");
             secondSkill();
             nextFireTimeSkill2 = Time.time + cooldownTimeSkill2;
             //   textCooldownS2.gameObject.SetActive(true);
