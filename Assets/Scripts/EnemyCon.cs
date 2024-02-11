@@ -94,10 +94,11 @@ public class EnemyCon : Enemy
 
 
 
-  IEnumerator DamageDisplay(GameObject canvas)
+IEnumerator DamageDisplay(GameObject canvas)
 {
     isDisplayingDamage = true;
     float tempBounds = bc.bounds.max.y;
+    
     while (DamageTaken.Count > 0)
     {
         int damage = DamageTaken[0];
@@ -107,15 +108,17 @@ public class EnemyCon : Enemy
         DamageTaken.RemoveAt(0);
         yield return new WaitForSeconds(damageDisplayDelay);
     }
-
     isDisplayingDamage = false;
 
-    // // Check if there are no more damage numbers to display
-     if (DamageTaken.Count == 0 && canvas.GetComponentInChildren<DamageNumController>() == null)
-     {
-        
-          Destroy(canvas);
-     }
+    // Check if there are no more damage numbers to display and if canvas and its DamageText component still exist
+    if (DamageTaken.Count == 0 && canvas != null)
+    {
+        DamageText damageTextScript = canvas.GetComponent<DamageText>();
+        if(damageTextScript != null) // Check if the DamageText component is not null
+        {
+           // StartCoroutine(damageTextScript.ShowAndDestroy());
+        }
+    }
 }
 
       

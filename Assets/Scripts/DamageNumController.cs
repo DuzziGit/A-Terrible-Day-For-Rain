@@ -26,7 +26,7 @@ public class DamageNumController : MonoBehaviour
         if (tmpComponent != null)
         {
 
-            Debug.Log(transform.position.y);
+           // Debug.Log(transform.position.y);
             // Start fading out after moving some distance
             if (transform.position.y >= startFadeHeight)
             {

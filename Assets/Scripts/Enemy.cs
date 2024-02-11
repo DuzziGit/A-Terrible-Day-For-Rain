@@ -129,6 +129,7 @@ foreach (var animator in animators)
             }
             else if (GetComponent<EnemyCon>().isDisplayingDamage == false)
             {
+                
                 Die();
             }
         }

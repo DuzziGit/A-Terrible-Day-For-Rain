@@ -14,21 +14,25 @@ public class DamageText : MonoBehaviour
         //  Debug.Log("Text Component: " + textComponent);
     }
 
+
+    private void Update() {
+        if(gameObject.transform.childCount == 0){
+         StartCoroutine(ShowAndDestroy());
+        }
+    }
+    
     private void Start()
     {
         
-        NoChildren();
+       // NoChildren();
         //StartCoroutine(ShowAndDestroy());
     }
     private void NoChildren(){
         if(transform.childCount <= 0 ){
             Destroy(gameObject);
         }
-        else{
-            StartCoroutine(ShowAndDestroy());
-        }
     }
-    IEnumerator ShowAndDestroy()
+    public IEnumerator ShowAndDestroy()
     {
         yield return new WaitForSeconds(displayTime);
         Destroy(gameObject);
