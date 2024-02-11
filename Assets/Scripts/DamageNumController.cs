@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class DamageNumController : MonoBehaviour
 {
-    private float moveSpeed = 0.004f;
-    private float fadeSpeed = 1f;
-    private float startFadeHeight = -10f;
+    private float moveSpeed = 0.008f;
+    private float fadeSpeed = 2f;
+    private float startFadeHeight = 0.005f;
 
     private TMP_Text tmpComponent;
     private Color originalColor;
@@ -25,6 +25,8 @@ public class DamageNumController : MonoBehaviour
 
         if (tmpComponent != null)
         {
+
+            Debug.Log(transform.position.y);
             // Start fading out after moving some distance
             if (transform.position.y >= startFadeHeight)
             {

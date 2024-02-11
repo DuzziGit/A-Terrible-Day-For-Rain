@@ -38,11 +38,11 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-      
+
     }
     private void Awake()
     {
-          rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<BoxCollider2D>();
         enemySprite = GetComponent<SpriteRenderer>();
     }
@@ -111,12 +111,26 @@ public class Enemy : MonoBehaviour
     {
         if (health <= 0)
         {
-            if(GetComponent<EnemyCon>().isDisplayingDamage){
+            if (GetComponent<EnemyCon>().isDisplayingDamage)
+            {
                 rb.freezeRotation = true;
                 GetComponent<SpriteRenderer>().enabled = false;
+                Animator[] animators = GetComponentsInChildren<Animator>();
+                // Loop through each Animator and stop its animations, then disable it
+foreach (var animator in animators)
+{
+    // Stop the current animation by setting its speed to 0
+    animator.Rebind();
+
+    // Now, disable the Animator component
+    animator.enabled = false;
+}
                 bc.enabled = false;
             }
-            Die();
+            else if (GetComponent<EnemyCon>().isDisplayingDamage == false)
+            {
+                Die();
+            }
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position);

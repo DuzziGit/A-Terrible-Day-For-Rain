@@ -26,7 +26,7 @@ public class EnemyCon : Enemy
     // Magic numbers replaced with constants
     private const float xOffset = 0f;
     private const float yOffset = 0.4f;
-    private const float damageDisplayDelay = 0.2f;
+    private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
     private List<int> DamageTaken = new List<int>();
 
