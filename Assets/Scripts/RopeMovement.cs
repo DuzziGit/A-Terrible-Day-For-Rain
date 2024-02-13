@@ -33,16 +33,9 @@ public class RopeMovement : MonoBehaviour
             jumpRequested = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.I) || (Input.GetKey(KeyCode.UpArrow)))
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetKey(KeyCode.UpArrow))
         {
-            if (isOnLadder)
-            {
-                climbInput = 1f;
-            }
-            else
-            {
-                climbInput = 0f;
-            }
+            climbInput = isOnLadder ? 1f : 0f;
         }
     }
 

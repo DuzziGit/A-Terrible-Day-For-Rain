@@ -7,7 +7,7 @@ public class Portal : MonoBehaviour
 {
     public int sceneIndex = 0;
     public Image blackSquare;
-    private Vector3 teleportPosition = new Vector3(-103f, 103f, 2f);
+    private Vector3 teleportPosition = new(-103f, 103f, 2f);
 
     private void Start()
     {
@@ -18,26 +18,26 @@ public class Portal : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Fade back in when a new scene is loaded
-        StartCoroutine(FadeBlackOutSquare(false, 1));
+        _ = StartCoroutine(FadeBlackOutSquare(false, 1));
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-      //  Debug.Log("Object entered the portal's trigger.");
+        //  Debug.Log("Object entered the portal's trigger.");
 
         if (collision.CompareTag("Player"))
         {
-           //Debug.Log("Player is inside the portal's trigger.");
+            //Debug.Log("Player is inside the portal's trigger.");
 
             if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 Debug.Log("Attempting to fade out.");
-                StartCoroutine(FadeAndLoadScene(collision));
+                _ = StartCoroutine(FadeAndLoadScene(collision));
             }
         }
     }
 
-    IEnumerator FadeAndLoadScene(Collider2D playerCollider)
+    private IEnumerator FadeAndLoadScene(Collider2D playerCollider)
     {
         yield return StartCoroutine(FadeBlackOutSquare(true, 1));
 

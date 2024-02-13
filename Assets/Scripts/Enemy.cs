@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -24,19 +23,18 @@ public class Enemy : MonoBehaviour
     private float timeBetweenDmg;
     public float startTimeBetweenDmg;
     public SpriteRenderer enemySprite;
-
-    float moveSpeed;
+    private readonly float moveSpeed;
     public BoxCollider2D bc;
     public Rigidbody2D rb;
 
     public Color bigEnemy = Color.red;
     public Color medEnemy = Color.yellow;
     public Color smallEnemy = Color.green;
-    public Color tutEnemy = new Color(0, 1f, 1f, 1f);
+    public Color tutEnemy = new(0, 1f, 1f, 1f);
 
     public Animator animator;
 
-    void Start()
+    private void Start()
     {
 
     }
@@ -47,7 +45,7 @@ public class Enemy : MonoBehaviour
         enemySprite = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
         if (isTouchingPlayer)
         {
@@ -70,8 +68,8 @@ public class Enemy : MonoBehaviour
 
     public void HoverPlayerX()
     {
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, LayerMask.GetMask("World"));
-        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, Vector2.right, distance, LayerMask.GetMask("World"));
+        _ = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, LayerMask.GetMask("World"));
+        _ = Physics2D.Raycast(wallDetection.position, Vector2.right, distance, LayerMask.GetMask("World"));
         RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, Vector2.right, distance, LayerMask.GetMask("EnemyOnlyWall"));
 
         if (transform.position.x - GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position.x < 0.2f)
@@ -102,7 +100,7 @@ public class Enemy : MonoBehaviour
                 GetComponent<SpriteRenderer>().enabled = false;
                 Animator[] animators = GetComponentsInChildren<Animator>();
                 // Loop through each Animator and stop its animations, then disable it
-                foreach (var animator in animators)
+                foreach (Animator animator in animators)
                 {
                     // Stop the current animation by setting its speed to 0
                     animator.Rebind();
@@ -163,44 +161,45 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
-private void Patrol()
-{
-    // Check the direction to cast the ray for walls
-    Vector2 direction = movingRight ? Vector2.right : Vector2.left;
-
-    RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, LayerMask.GetMask("World"));
-    RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("World"));
-    RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("EnemyOnlyWall"));
-
-    if (!groundInfo.collider || wallInfo.collider || enemyWall.collider)
+    private void Patrol()
     {
-        FlipDirection();
+        // Check the direction to cast the ray for walls
+        Vector2 direction = movingRight ? Vector2.right : Vector2.left;
+
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, LayerMask.GetMask("World"));
+        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("World"));
+        RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("EnemyOnlyWall"));
+
+        if (!groundInfo.collider || wallInfo.collider || enemyWall.collider)
+        {
+            FlipDirection();
+        }
     }
-}
 
-void FlipDirection()
-{
-    movingRight = !movingRight;
-    rb.velocity = new Vector3(movingRight ? speed : -speed, rb.velocity.y, 0);
-    enemySprite.flipX = !movingRight;
-}
-
-private void OnCollisionEnter2D(Collision2D collision) // Corrected argument type
-{
-    if (collision.collider.CompareTag("Player"))
+    private void FlipDirection()
     {
-        isTouchingPlayer = true;
+        movingRight = !movingRight;
+        rb.velocity = new Vector3(movingRight ? speed : -speed, rb.velocity.y, 0);
+        enemySprite.flipX = !movingRight;
     }
-}
 
-private void OnCollisionExit2D(Collision2D collision)
-{
-    if (collision.collider.CompareTag("Player"))
+    private void OnCollisionEnter2D(Collision2D collision) // Corrected argument type
     {
-        isTouchingPlayer = false;
+        if (collision.collider.CompareTag("Player"))
+        {
+            isTouchingPlayer = true;
+        }
     }
-}
-    void chasePlayer()
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            isTouchingPlayer = false;
+        }
+    }
+
+    private void chasePlayer()
     {
         HoverPlayerX();
     }

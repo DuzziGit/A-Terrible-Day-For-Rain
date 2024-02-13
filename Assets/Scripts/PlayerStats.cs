@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public int playerLevel;
     public int playerHealth;
     public int money;
-    private bool didLoad = false;
+    private readonly bool didLoad = false;
     /// public ExperienceBar experienceBar;
 
     public string textValue = "LEVEL UP";
@@ -17,18 +17,18 @@ public class PlayerStats : MonoBehaviour
     // used to set the players position when loading the game
     private Vector3 position;
 
-    void Awake()
+    private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
 
         money = 1111;
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
         /*
                 if (!didLoad)
                 {
@@ -69,7 +69,7 @@ public class PlayerStats : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         playerXp = ExperienceController.experience;
         //Debug.Log("current xp" + ExperienceController.experience);

@@ -5,12 +5,12 @@ public class LootBag : MonoBehaviour
 {
 
     public GameObject droppedItemPrefab;
-    public List<Loot> lootList = new List<Loot>();
+    public List<Loot> lootList = new();
 
-    Loot GetDroppedItem()
+    private Loot GetDroppedItem()
     {
         int randomNumber = Random.Range(1, 101);
-        List<Loot> possibleItems = new List<Loot>();
+        List<Loot> possibleItems = new();
         foreach (Loot item in lootList)
         {
             if (randomNumber <= item.dropChance)

@@ -16,7 +16,11 @@ public class musicClass : MonoBehaviour
 
     public void PlayMusic()
     {
-        if (backgroundMusic.isPlaying) return;
+        if (backgroundMusic.isPlaying)
+        {
+            return;
+        }
+
         backgroundMusic.Play();
     }
 

@@ -53,17 +53,17 @@ public class RogueSkillController : PlayerMovement
     public float horizontalMove = 0f;
     public float runSpeed = 40f;
 
-    private Image imageCooldownS1;
-    private TMP_Text textCooldownS1;
-    private Image imageCooldownS2;
-    private TMP_Text textCooldownS2;
-    private Image imageCooldownS3;
-    private TMP_Text textCooldownS3;
-    private Image imageCooldownSM;
-    private TMP_Text textCooldownSM;
-    private Image imageCooldownSU;
-    private TMP_Text textCooldownSU;
-    private TMP_Text healthPotionText;
+    private readonly Image imageCooldownS1;
+    private readonly TMP_Text textCooldownS1;
+    private readonly Image imageCooldownS2;
+    private readonly TMP_Text textCooldownS2;
+    private readonly Image imageCooldownS3;
+    private readonly TMP_Text textCooldownS3;
+    private readonly Image imageCooldownSM;
+    private readonly TMP_Text textCooldownSM;
+    private readonly Image imageCooldownSU;
+    private readonly TMP_Text textCooldownSU;
+    private readonly TMP_Text healthPotionText;
 
     public bool isInvincible;
 
@@ -88,17 +88,15 @@ public class RogueSkillController : PlayerMovement
     public Animator SwipeTwo;
     public Animator MovementSkillOne;
     public Animator MovementSkillTwo;
-
-
-    Renderer rend;
-    Color c;
+    private Renderer rend;
+    private Color c;
 
     private float cooldownTimerS1 = 0.0f;
     private float cooldownTimerS2 = 0.0f;
     private float cooldownTimerS3 = 0.0f;
     private float cooldownTimerSM = 0.0f;
     private float cooldownTimerSU = 0.0f;
-    private float cooldownTimer = 0.0f;
+    private readonly float cooldownTimer = 0.0f;
     private void Start()
     {
         HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -190,14 +188,14 @@ public class RogueSkillController : PlayerMovement
         rb.velocity = new Vector2(0, 0); // This line neutralizes any existing vertical motion
 
         // Apply horizontal force directly to control direction more precisely
-        Vector2 horizontalForce = new Vector2(forceDirection * MovementSkillForce, 0);
+        Vector2 horizontalForce = new(forceDirection * MovementSkillForce, 0);
         rb.AddForce(horizontalForce, ForceMode2D.Impulse);
 
         // Apply vertical force separately to ensure it's consistent
-        Vector2 verticalForce = new Vector2(0, jumpForce);
+        Vector2 verticalForce = new(0, jumpForce);
         rb.AddForce(verticalForce, ForceMode2D.Impulse);
 
-        StartCoroutine(ResetMovementSkillAnimation());
+        _ = StartCoroutine(ResetMovementSkillAnimation());
     }
 
     private IEnumerator ResetMovementSkillAnimation()
@@ -242,7 +240,7 @@ public class RogueSkillController : PlayerMovement
         if (Time.time > nextFireTimeSkill1 && Input.GetKeyDown(KeyCode.A))
         {
 
-            StartCoroutine(FirstSkill());
+            _ = StartCoroutine(FirstSkill());
             nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
             //    textCooldownS1.gameObject.SetActive(true);
             cooldownTimerS1 = cooldownTimeSkill1;
@@ -254,26 +252,26 @@ public class RogueSkillController : PlayerMovement
     private IEnumerator FirstSkill()
     {
         // Instantiate a fixed attack position GameObject
-        GameObject fixedAttackPos = new GameObject("FixedAttackPosition");
+        GameObject fixedAttackPos = new("FixedAttackPosition");
         fixedAttackPos.transform.position = attackPos.position;
         fixedAttackPos.transform.rotation = attackPos.rotation;
 
         // First shuriken
-        Vector3 topOffset = new Vector3(0, 0.2f, 0);
-        Instantiate(projectile, fixedAttackPos.transform.position + topOffset, fixedAttackPos.transform.rotation);
+        Vector3 topOffset = new(0, 0.2f, 0);
+        _ = Instantiate(projectile, fixedAttackPos.transform.position + topOffset, fixedAttackPos.transform.rotation);
         audioSource.pitch = 1.6f;  // Reduced pitch
         audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
         yield return new WaitForSeconds(0.05f);
 
         // Second shuriken
-        Instantiate(projectile, fixedAttackPos.transform.position, fixedAttackPos.transform.rotation);
+        _ = Instantiate(projectile, fixedAttackPos.transform.position, fixedAttackPos.transform.rotation);
         audioSource.pitch = 1.0f;  // Normal pitch
         audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
         yield return new WaitForSeconds(0.05f);
 
         // Third shuriken
-        Vector3 botOffset = new Vector3(0, -0.2f, 0);
-        Instantiate(projectile, fixedAttackPos.transform.position + botOffset, fixedAttackPos.transform.rotation);
+        Vector3 botOffset = new(0, -0.2f, 0);
+        _ = Instantiate(projectile, fixedAttackPos.transform.position + botOffset, fixedAttackPos.transform.rotation);
         audioSource.pitch = 1.1f;  // Increased pitch
         audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
         yield return new WaitForSeconds(0.05f);
@@ -301,7 +299,7 @@ public class RogueSkillController : PlayerMovement
 
     public void secondSkill()
     {
-        Instantiate(projectile2, attackPos.position, attackPos.rotation);
+        _ = Instantiate(projectile2, attackPos.position, attackPos.rotation);
         audioSource.PlayOneShot(BigShurikenSoundEffect, 0.7f);
     }
 
@@ -310,7 +308,7 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkill3 && Input.GetKeyDown(KeyCode.D))
         {
-            StartCoroutine(ThirdSkillEnum());
+            _ = StartCoroutine(ThirdSkillEnum());
             nextFireTimeSkill3 = Time.time + cooldownTimeSkill3Upgraded;
             //     textCooldownS3.gameObject.SetActive(true);
             cooldownTimerS3 = cooldownTimeSkill3Upgraded;
@@ -329,7 +327,7 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkillUlt && Input.GetKeyDown(KeyCode.F))
         {
-            StartCoroutine(UltimateSkillEnum());
+            _ = StartCoroutine(UltimateSkillEnum());
             nextFireTimeSkillUlt = Time.time + cooldownTimeSkillUlt;
             //   textCooldownSU.gameObject.SetActive(true);
             cooldownTimerSU = cooldownTimeSkillUlt;
@@ -340,21 +338,21 @@ public class RogueSkillController : PlayerMovement
     {
         for (int i = 0; i < 3; i++)
         {
-            Instantiate(ProjectileUltimate, RogueUltPos.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos1.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos2.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos3.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos4.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos5.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos6.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos7.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos8.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos9.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos10.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos11.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos12.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos13.position, RogueUltPos.rotation);
-            Instantiate(ProjectileUltimate, RogueUltPos14.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos1.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos2.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos3.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos4.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos5.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos6.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos7.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos8.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos9.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos10.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos11.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos12.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos13.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos14.position, RogueUltPos.rotation);
             yield return new WaitForSeconds(0.15f);
         }
     }

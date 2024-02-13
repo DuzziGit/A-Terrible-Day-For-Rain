@@ -13,7 +13,7 @@ public class EnemyCon : Enemy
     public TMP_Text damageDisplay;
     public TMP_Text enemyLevel;
     public GameObject CanvasDamageNum;
-    public bool isTouchingPlayer = false;
+    public new bool isTouchingPlayer = false;
     private HealthBar healthBar;
     private int maxHealth;
     [SerializeField] private GameObject DamageNumText;
@@ -26,9 +26,9 @@ public class EnemyCon : Enemy
     private const float yOffset = 0.4f;
     private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
-    private List<int> DamageTaken = new List<int>();
+    private readonly List<int> DamageTaken = new();
 
-    void Start()
+    private void Start()
     {
         rb.velocity = new Vector3(speed, 0, 0);
         enemyLevel.text = level.ToString();
@@ -44,7 +44,7 @@ public class EnemyCon : Enemy
         }
     }
 
-    void Update()
+    private void Update()
     {
     }
 
@@ -68,13 +68,10 @@ public class EnemyCon : Enemy
         AudioController.instance.PlayMonsterHurtSound();
         animator.SetBool("takingDamage", true);
 
-        StartCoroutine(ResetTakeDamageTrigger());
+        _ = StartCoroutine(ResetTakeDamageTrigger());
     }
 
-
-
-
-    void ProcessDamage()
+    private void ProcessDamage()
     {
         if (damageCanvas == null)
         {
@@ -83,14 +80,11 @@ public class EnemyCon : Enemy
 
         if (!isDisplayingDamage)
         {
-            StartCoroutine(DamageDisplay(damageCanvas));
+            _ = StartCoroutine(DamageDisplay(damageCanvas));
         }
     }
 
-
-
-
-    IEnumerator DamageDisplay(GameObject canvas)
+    private IEnumerator DamageDisplay(GameObject canvas)
     {
         isDisplayingDamage = true;
         float tempBounds = bc.bounds.max.y;

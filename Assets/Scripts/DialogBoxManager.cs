@@ -18,14 +18,14 @@ public class DialogBoxManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
 
         player = FindObjectOfType<PlayerMovement>();
 
         if (textFile != null)
         {
-            dialog = (textFile.text.Split('\n'));
+            dialog = textFile.text.Split('\n');
         }
 
         if (endLine == 0)
@@ -36,7 +36,7 @@ public class DialogBoxManager : MonoBehaviour
 
     }
 
-    void Update()
+    private void Update()
     {
 
         dialogText.text = dialog[currentLine];

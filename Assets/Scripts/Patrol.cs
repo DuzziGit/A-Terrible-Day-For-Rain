@@ -12,27 +12,20 @@ public class Patrol : MonoBehaviour
     private SpriteRenderer spriteRenderer;  // Reference to the sprite renderer component
     private Rigidbody2D rb;
 
-    void Awake()
+    private void Awake()
     {
         // Get the required component references
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    private void Start()
     {
         // Set the initial facing direction of the enemy sprite based on the movingRight variable
-        if (movingRight)
-        {
-            spriteRenderer.flipX = false;
-        }
-        else
-        {
-            spriteRenderer.flipX = true;
-        }
+        spriteRenderer.flipX = !movingRight;
     }
 
-    void Update()
+    private void Update()
     {
         // Move the enemy horizontally at the specified speed
         rb.velocity = new Vector2(speed * (movingRight ? 1 : -1), rb.velocity.y);

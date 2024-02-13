@@ -7,12 +7,12 @@ public class scrio : MonoBehaviour
     public GameObject[] platformPrefabs;
     public float xPadding = 15;
     public float yPadding = 20;
-    public Vector2 minSpawnPosition = new Vector2(-100, 0);
-    public Vector2 maxSpawnPosition = new Vector2(100, 120);
+    public Vector2 minSpawnPosition = new(-100, 0);
+    public Vector2 maxSpawnPosition = new(100, 120);
     public float circleRadius = 50f;
     public LayerMask platformLayer;
 
-    private List<GameObject> platforms = new List<GameObject>();
+    private readonly List<GameObject> platforms = new();
 
     private void OnDrawGizmosSelected()
     {
@@ -38,8 +38,8 @@ public class scrio : MonoBehaviour
 
             Vector2 position = new Vector2(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad)) * circleRadius;
 
-            position.x = Mathf.Clamp(position.x, minSpawnPosition.x + size.x / 2, maxSpawnPosition.x - size.x / 2);
-            position.y = Mathf.Clamp(position.y, minSpawnPosition.y + size.y / 2, maxSpawnPosition.y - size.y / 2);
+            position.x = Mathf.Clamp(position.x, minSpawnPosition.x + (size.x / 2), maxSpawnPosition.x - (size.x / 2));
+            position.y = Mathf.Clamp(position.y, minSpawnPosition.y + (size.y / 2), maxSpawnPosition.y - (size.y / 2));
 
             if (Physics2D.OverlapBox(position, size, 0, platformLayer) == null)
             {

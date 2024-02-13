@@ -10,7 +10,7 @@ public class enemySpawnGen : MonoBehaviour
 
     private int currentEnemies = 0;     // Current number of enemies
 
-    void Update()
+    private void Update()
     {
         // If we haven't reached the max number of enemies, spawn a new one
         if (currentEnemies < maxEnemies)
@@ -19,8 +19,8 @@ public class enemySpawnGen : MonoBehaviour
             int enemyIndex = Random.Range(0, enemies.Length);
 
             // Instantiate the enemy and set its level
-            GameObject newEnemy = Instantiate(enemies[enemyIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
-            int level = Random.Range(minLevel, maxLevel + 1);
+            _ = Instantiate(enemies[enemyIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
+            _ = Random.Range(minLevel, maxLevel + 1);
             //        newEnemy.GetComponent<enemycontroller>().SetLevel(level);
 
             currentEnemies++;

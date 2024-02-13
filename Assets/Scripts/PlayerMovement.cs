@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -90,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
     public int expToBeGained;
     public string destination = "";
     private Vector3 portalDestinationPosition;
-    private string portalToTeleportTo;
+    private readonly string portalToTeleportTo;
 
     [Header("Health Settings")]
     public int currentHealth;
@@ -119,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void Start()
+    private void Start()
     {
         playerLevel = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<TMP_Text>();
         experienceBar.setMaxExp(maxExp);
@@ -156,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (healthPotions > maxHealthPotions)
         {
@@ -201,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         // You can still flip the character without affecting the momentum.
-        if (moveDirection > 0 && !facingRight || moveDirection < 0 && facingRight)
+        if ((moveDirection > 0 && !facingRight) || (moveDirection < 0 && facingRight))
         {
             FlipCharacter();
         }
@@ -240,13 +239,13 @@ public class PlayerMovement : MonoBehaviour
     public void IncreaseLevel()
     {
         level++;
-        StartCoroutine(LevelUpDelay());
+        _ = StartCoroutine(LevelUpDelay());
         Debug.Log("Level Up! Player Level is now: " + level);
         maxExp = level * 23;
         currentHealth = maxHealth + 100;
     }
 
-    IEnumerator LevelUpDelay()
+    private IEnumerator LevelUpDelay()
     {
         playerLevel.text = "Level Up!";
         yield return new WaitForSeconds(2);
@@ -327,12 +326,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (playerHasDied)
         {
@@ -361,7 +360,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "World" || collision.gameObject.tag == "Platform")
+        if (collision.gameObject.tag is "World" or "Platform")
         {
             isGrounded = false;
         }

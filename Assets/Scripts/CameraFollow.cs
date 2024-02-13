@@ -7,18 +7,19 @@ public class CameraFollow : MonoBehaviour
     public float minY;
     public float maxX;
     public float maxY;
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
 
 
-        var newPosition = Vector2.Lerp(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position, Time.deltaTime * camSpeed);
-        var camPosition = new Vector3(newPosition.x, newPosition.y, -10f);
-        var v3 = camPosition;
+        Vector2 newPosition = Vector2.Lerp(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position, Time.deltaTime * camSpeed);
+        Vector3 camPosition = new(newPosition.x, newPosition.y, -10f);
+        Vector3 v3 = camPosition;
 
 
 
-        var clampX = Mathf.Clamp(v3.x, minX, maxX);
-        var clampY = Mathf.Clamp(v3.y, minY, maxY);
+        float clampX = Mathf.Clamp(v3.x, minX, maxX);
+        float clampY = Mathf.Clamp(v3.y, minY, maxY);
 
 
 

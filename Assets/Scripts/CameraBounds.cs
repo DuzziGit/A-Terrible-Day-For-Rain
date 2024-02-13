@@ -27,8 +27,9 @@ public class CameraBounds : MonoBehaviour
 
     public Transform leftBounds;
     public Transform rightBounds;
+
     //5
-    void Start()
+    private void Start()
     {
 
         activeCamera = Camera.main;
@@ -60,11 +61,11 @@ public class CameraBounds : MonoBehaviour
         cameraRoot.position = trans;
 
 
-        var newPosition = Vector2.Lerp(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position, Time.deltaTime * 1);
-        var camPosition = new Vector3(newPosition.x, newPosition.y, -10f);
-        var v3 = camPosition;
-        var clampX = Mathf.Clamp(v3.x, minValueX, minValueX);
-        var clampY = Mathf.Clamp(v3.y, minValueY, maxValueY);
+        Vector2 newPosition = Vector2.Lerp(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position, Time.deltaTime * 1);
+        Vector3 camPosition = new(newPosition.x, newPosition.y, -10f);
+        Vector3 v3 = camPosition;
+        float clampX = Mathf.Clamp(v3.x, minValueX, minValueX);
+        float clampY = Mathf.Clamp(v3.y, minValueY, maxValueY);
         transform.position = new Vector3(clampX, clampY, -10f);
     }
 }

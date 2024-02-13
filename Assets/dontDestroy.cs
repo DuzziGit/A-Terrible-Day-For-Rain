@@ -4,7 +4,7 @@ public class dontDestroy : MonoBehaviour
 {
     public static dontDestroy instance; // Singleton instance
 
-    void Awake()
+    private void Awake()
     {
         // Check for an existing instance of BackgroundManager
         if (instance == null)

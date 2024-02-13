@@ -4,7 +4,7 @@ public class BatProjectile : MonoBehaviour
 {
 
     public Vector2 target;
-    int level;
+    private int level;
     public float speed;
     public float lifeTime;
     public float distance;
@@ -27,7 +27,7 @@ public class BatProjectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
@@ -57,8 +57,7 @@ public class BatProjectile : MonoBehaviour
         }
     }
 
-
-    void DestroyProjectile()
+    private void DestroyProjectile()
     {
         Destroy(gameObject);
     }

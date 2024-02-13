@@ -5,7 +5,7 @@ public class backgroundRand : MonoBehaviour
     public Image myImage; // The Image component on the current GameObject
     public Sprite[] imageArray; // The array of images to choose from
 
-    void Start()
+    private void Start()
     {
         // Choose a random image from the array
         int randomIndex = Random.Range(0, imageArray.Length);

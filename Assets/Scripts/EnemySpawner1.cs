@@ -15,7 +15,7 @@ public class EnemySpawner1 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (currentEnemies < maxEnemies)
         {
@@ -26,7 +26,7 @@ public class EnemySpawner1 : MonoBehaviour
             enemyMinLevel = playerLevel;
             enemyMaxLevel = playerLevel + 5;
             int randomLevel = Random.Range(enemyMinLevel, enemyMaxLevel);
-            Instantiate(enemyPrefabs[randEnemy], spawnPoints[randSpawnPoint].position, transform.rotation);
+            _ = Instantiate(enemyPrefabs[randEnemy], spawnPoints[randSpawnPoint].position, transform.rotation);
             enemyPrefabs[randEnemy].GetComponent<Enemy>().level = randomLevel;
             enemyPrefabs[randEnemy].GetComponent<Enemy>().health = randomLevel * 150;
             enemyPrefabs[randEnemy].GetComponent<Enemy>().expValue = randomLevel * 2;

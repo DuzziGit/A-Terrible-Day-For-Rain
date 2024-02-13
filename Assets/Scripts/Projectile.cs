@@ -46,7 +46,9 @@ public class Projectile : MonoBehaviour
         bool isCrit = Random.value < critChance;
         damage = Random.Range(minDamage, maxDamage + 1);
         if (isCrit)
+        {
             damage = Mathf.FloorToInt(damage * critMultiplier);
+        }
 
         // Check if an enemy is within detection range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRange, enemyLayer);
@@ -60,7 +62,9 @@ public class Projectile : MonoBehaviour
             {
                 float directionToEnemy = Vector2.Dot(transform.right, (collider.transform.position - transform.position).normalized);
                 if (directionToEnemy < 0)
+                {
                     continue;
+                }
 
                 float distance = Vector2.Distance(transform.position, collider.transform.position);
                 float angleToEnemy = Vector2.Angle(transform.right, collider.transform.position - transform.position);

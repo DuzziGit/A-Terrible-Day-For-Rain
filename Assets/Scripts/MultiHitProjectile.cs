@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MultiHitProjectile : Projectile
 {
     public int totalHits = 2;
-    private int currentHits = 0;
-    private HashSet<Collider2D> hitEnemies = new HashSet<Collider2D>();
+    private readonly int currentHits = 0;
+    private readonly HashSet<Collider2D> hitEnemies = new();
 
-    private void Update()
+    private new void Update()
     {
         base.Update();
         direction = transform.right;
@@ -19,7 +18,7 @@ public class MultiHitProjectile : Projectile
         if (collision.CompareTag("Enemy") && !hitEnemies.Contains(collision))
         {
             DealDamage(collision);
-            hitEnemies.Add(collision);
+            _ = hitEnemies.Add(collision);
         }
     }
     protected override void OnTriggerExit2D(Collider2D other)

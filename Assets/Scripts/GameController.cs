@@ -19,9 +19,9 @@ public class GameController : MonoBehaviour
     public GameObject RoguePrefab;
     public CinemachineVirtualCamera cinemachineCam;
 
-    private static bool rogueInstantiated = false;
+    private static readonly bool rogueInstantiated = false;
 
-    void Awake()
+    private void Awake()
     {
         // Singleton check
         if (instance == null)
@@ -40,16 +40,16 @@ public class GameController : MonoBehaviour
         }
 
         gameControlsUi.SetActive(true);
-        StartCoroutine(UpdateTimer());
+        _ = StartCoroutine(UpdateTimer());
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         blackSquare.color = new Color(blackSquare.color.r, blackSquare.color.g, blackSquare.color.b, 1f);
-        StartCoroutine(HandleSceneSetup());
+        _ = StartCoroutine(HandleSceneSetup());
     }
 
-    IEnumerator HandleSceneSetup()
+    private IEnumerator HandleSceneSetup()
     {
         yield return new WaitForSeconds(0.1f); // Wait a bit to ensure the scene is hidden
 
@@ -60,13 +60,13 @@ public class GameController : MonoBehaviour
             cinemachineCam.m_Lens.FieldOfView = 60f;
         }
 
-        StartCoroutine(DelayedFade());
+        _ = StartCoroutine(DelayedFade());
     }
 
-    IEnumerator DelayedFade()
+    private IEnumerator DelayedFade()
     {
         yield return new WaitForSeconds(0.9f); // Wait to make it a total of 1 second with the HandleSceneSetup delay
-        StartCoroutine(FadeBlackInSquare());
+        _ = StartCoroutine(FadeBlackInSquare());
     }
 
 
@@ -84,12 +84,12 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Start()
     {
-        StartCoroutine(UpdateTimer());
+        _ = StartCoroutine(UpdateTimer());
     }
 
-    void Update()
+    private void Update()
     {
         if (currentEnemies < maxEnemies)
         {
@@ -97,25 +97,25 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void SpawnEnemy()
+    private void SpawnEnemy()
     {
         currentEnemies++;
     }
 
-    IEnumerator UpdateTimer()
+    private IEnumerator UpdateTimer()
     {
         while (timeLeft > 0)
         {
             yield return new WaitForSeconds(1.0f);
             timeLeft--;
-            int minutes = Mathf.FloorToInt(timeLeft / 60);
-            int seconds = Mathf.FloorToInt(timeLeft % 60);
+            _ = Mathf.FloorToInt(timeLeft / 60);
+            _ = Mathf.FloorToInt(timeLeft % 60);
             //timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
         }
         EndGame();
     }
 
-    void EndGame()
+    private void EndGame()
     {
         // Game over logic here.
     }
