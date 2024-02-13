@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MultiHitProjectile : Projectile
@@ -13,7 +14,7 @@ public class MultiHitProjectile : Projectile
         direction = transform.right;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy") && !hitEnemies.Contains(collision))
         {
@@ -21,7 +22,15 @@ public class MultiHitProjectile : Projectile
             hitEnemies.Add(collision);
         }
     }
+    protected override void OnTriggerExit2D(Collider2D other)
+    {
+        return;
 
+    }
+    protected override void OnTriggerStay2D(Collider2D other)
+    {
+        return;
+    }
     private void DealDamage(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))

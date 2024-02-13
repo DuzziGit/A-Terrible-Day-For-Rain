@@ -20,8 +20,6 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public int maxExp;
     [HideInInspector]
-    public float moveDirection;
-    [HideInInspector]
     public int skillOneLevel = 1;
     [HideInInspector]
     public int skillTwoLevel = 1;
@@ -33,9 +31,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
     public float flyForce = 5f;
-
-    private float jumpDirection = 0; // Store the direction of the jump
-
+    public float moveDirection;
 
     [Header("Player State")]
     [HideInInspector]
@@ -194,7 +190,6 @@ public class PlayerMovement : MonoBehaviour
     public void getPlayerInput()
     {
         moveDirection = Input.GetAxis("Horizontal");
-        var jumpDirection = rb.velocity.y;
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
 
         if (!isAirborne)
@@ -307,8 +302,9 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", Mathf.Abs(moveDirection));
             if (isJumping)
             {
+
+
                 // Store the direction at the start of the jump.
-                jumpDirection = moveDirection;
                 Jump();
             }
         }
@@ -324,8 +320,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        int jumpDirection = 0;
+        if (Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.RightArrow))
+        {
+            jumpDirection = 1;
+        }
+        if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            jumpDirection = -1;
+        }
         // Check if there's horizontal input to determine the jump direction
-        float horizontalVelocity = moveDirection * jumpSpeed;
+        float horizontalVelocity = jumpDirection * jumpSpeed;
 
         // Apply the jump force along with the horizontal velocity to maintain forward momentum.
         rb.velocity = new Vector3(horizontalVelocity, jumpForce);

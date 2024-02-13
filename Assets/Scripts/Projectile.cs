@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
 
     public void Update()
     {
-        skillLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().skillOneLevel;
+        skillLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().level;
 
         // Scaling damage with skill level
         minDamage = Mathf.FloorToInt(100 * Mathf.Pow(2, (skillLevel - 1) / 4));
@@ -93,9 +93,31 @@ public class Projectile : MonoBehaviour
             DestroyProjectile();
         }
     }
+    protected virtual void OnTriggerExit2D(Collider2D collision)
+    {
+        // Debug.Log("Projectile collided with: " + collision.gameObject.name);
+        // if (!hasDamaged && collision.transform == closestEnemy)
+        if (!hasDamaged && collision.gameObject.CompareTag("Enemy"))
+        {
+            /*      Debug.Log("Projectile collided with: " + collision.gameObject.name);
+                  Debug.Log("Enemy tag: " + collision.tag);
+                  Debug.Log("Collided object layer: " + LayerMask.LayerToName(collision.gameObject.layer));
 
+                 */
+            if (collision.CompareTag("Enemy"))
+            {
+                //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
+                collision.GetComponent<EnemyCon>().TakeDamage(damage);
+            }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+            hasDamaged = true;
+            DestroyProjectile();
+            return; // Exit the method after hitting the enemy
+
+        }
+    }
+
+    protected virtual void OnTriggerStay2D(Collider2D collision)
     {
         // Debug.Log("Projectile collided with: " + collision.gameObject.name);
         if (!hasDamaged && collision.transform == closestEnemy)
@@ -114,12 +136,11 @@ public class Projectile : MonoBehaviour
             hasDamaged = true;
             DestroyProjectile();
             return; // Exit the method after hitting the enemy
+
         }
     }
-
-    public void DestroyProjectile()
+    protected void DestroyProjectile()
     {
         Destroy(gameObject);
-        //   Debug.Log(skillLevel);
     }
 }

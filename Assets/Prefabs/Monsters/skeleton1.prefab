@@ -147,7 +147,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a25004ca83e711d4cbce106bf874ea9f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9215687, g: 0.89019614, b: 0.9960785, a: 0.98039216}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -313,8 +313,6 @@ MonoBehaviour:
   enemyLevel: {fileID: 2277362914970969833}
   CanvasDamageNum: {fileID: 6962523565112630718, guid: b2afdfba80b192f4ca0280bb2237ae21, type: 3}
   isTouchingPlayer: 0
-  animFeedback: {fileID: 0}
-  animFeedback2: {fileID: 0}
   DamageNumText: {fileID: 2100312243281989656, guid: feae4dca98525114ab3342e2dcba6d3c, type: 3}
   isDisplayingDamage: 0
 --- !u!50 &15266169
