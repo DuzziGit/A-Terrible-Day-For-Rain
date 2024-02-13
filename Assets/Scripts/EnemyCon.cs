@@ -15,12 +15,10 @@ public class EnemyCon : Enemy
     public GameObject CanvasDamageNum;
     public bool isTouchingPlayer = false;
     private HealthBar healthBar;
-    public Animator animFeedback;
-    public Animator animFeedback2;
     private int maxHealth;
     [SerializeField] private GameObject DamageNumText;
-  private GameObject damageCanvas;// Track the canvas instance
-    public bool isDisplayingDamage= false;// Flag to track if damage is currently being displayed
+    private GameObject damageCanvas;// Track the canvas instance
+    public bool isDisplayingDamage = false;// Flag to track if damage is currently being displayed
 
 
     // Magic numbers replaced with constants
@@ -52,16 +50,16 @@ public class EnemyCon : Enemy
 
     public void TakeDamage(int damage)
     {
-        
+
         health = Mathf.Max(0, health - damage);
 
         DamageTaken.Add(damage);
 
-  if (!isDisplayingDamage)
+        if (!isDisplayingDamage)
         {
             ProcessDamage();
         }
-    
+
 
         if (healthBar != null)
         {
@@ -69,8 +67,6 @@ public class EnemyCon : Enemy
         }
         AudioController.instance.PlayMonsterHurtSound();
         animator.SetBool("takingDamage", true);
-        animFeedback.SetBool("takingDamage", true);
-        animFeedback2.SetBool("takingDamage", true);
 
         StartCoroutine(ResetTakeDamageTrigger());
     }
@@ -78,7 +74,7 @@ public class EnemyCon : Enemy
 
 
 
- void ProcessDamage()
+    void ProcessDamage()
     {
         if (damageCanvas == null)
         {
@@ -94,34 +90,34 @@ public class EnemyCon : Enemy
 
 
 
-IEnumerator DamageDisplay(GameObject canvas)
-{
-    isDisplayingDamage = true;
-    float tempBounds = bc.bounds.max.y;
-    
-    while (DamageTaken.Count > 0)
+    IEnumerator DamageDisplay(GameObject canvas)
     {
-        int damage = DamageTaken[0];
-        GameObject text = Instantiate(DamageNumText, new Vector3(transform.position.x, tempBounds + yOffset, transform.position.z), Quaternion.identity, canvas.transform);
-        DamageNumController controller = text.GetComponent<DamageNumController>();
-        controller.SetDamageNum(damage);
-        DamageTaken.RemoveAt(0);
-        yield return new WaitForSeconds(damageDisplayDelay);
-    }
-    isDisplayingDamage = false;
+        isDisplayingDamage = true;
+        float tempBounds = bc.bounds.max.y;
 
-    // Check if there are no more damage numbers to display and if canvas and its DamageText component still exist
-    if (DamageTaken.Count == 0 && canvas != null)
-    {
-        DamageText damageTextScript = canvas.GetComponent<DamageText>();
-        if(damageTextScript != null) // Check if the DamageText component is not null
+        while (DamageTaken.Count > 0)
         {
-           // StartCoroutine(damageTextScript.ShowAndDestroy());
+            int damage = DamageTaken[0];
+            GameObject text = Instantiate(DamageNumText, new Vector3(transform.position.x, tempBounds + yOffset, transform.position.z), Quaternion.identity, canvas.transform);
+            DamageNumController controller = text.GetComponent<DamageNumController>();
+            controller.SetDamageNum(damage);
+            DamageTaken.RemoveAt(0);
+            yield return new WaitForSeconds(damageDisplayDelay);
+        }
+        isDisplayingDamage = false;
+
+        // Check if there are no more damage numbers to display and if canvas and its DamageText component still exist
+        if (DamageTaken.Count == 0 && canvas != null)
+        {
+            DamageText damageTextScript = canvas.GetComponent<DamageText>();
+            if (damageTextScript != null) // Check if the DamageText component is not null
+            {
+                // StartCoroutine(damageTextScript.ShowAndDestroy());
+            }
         }
     }
-}
 
-      
+
 
 
 
@@ -129,7 +125,6 @@ IEnumerator DamageDisplay(GameObject canvas)
     {
         yield return new WaitForSeconds(resetTriggerDelay);
         animator.SetBool("takingDamage", false);
-        animFeedback.SetBool("takingDamage", false);
-        animFeedback2.SetBool("takingDamage", false);
+
     }
 }

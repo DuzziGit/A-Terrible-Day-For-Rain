@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8881666218281256747}
   - component: {fileID: 7562556280584138820}
   - component: {fileID: 1161770086}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: Rogue_WeaponThrowLarge 1
   m_TagString: Projectile
   m_Icon: {fileID: 0}
