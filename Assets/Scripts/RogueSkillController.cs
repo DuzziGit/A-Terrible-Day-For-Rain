@@ -162,8 +162,6 @@ public class RogueSkillController : PlayerMovement
 
     private void FixedUpdate()
     {
-        OnTriggerEnter2D(bc);
-        //Move Player
         moveCharacter();
     }
 

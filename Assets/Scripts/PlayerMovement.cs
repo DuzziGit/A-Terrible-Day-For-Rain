@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float flyForce = 5f;
     public float moveDirection;
+    private int jumpDirection = 0;
+
 
     [Header("Player State")]
     [HideInInspector]
@@ -159,21 +162,18 @@ public class PlayerMovement : MonoBehaviour
         {
             healthPotions = maxHealthPotions;
         }
-
-
         getPlayerInput();
         playerInteractInput();
         animate();
 
 
     }
-
     private void FixedUpdate()
     {
-        OnTriggerEnter2D(bc);
         moveCharacter();
-    }
 
+
+    }
     private void PlayerDeath()
     {
         GetComponent<Rigidbody2D>().gravityScale = 0.85f;
@@ -223,32 +223,6 @@ public class PlayerMovement : MonoBehaviour
                 healthPotions--;
             }
             isPressingInteract = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            isPressingInteract = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            isPressingDrop = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.Q))
-        {
-            isPressingDrop = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //   OpenOptionMenuUI();
-            isPressingDrop = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            isPressingDrop = false;
         }
     }
 
@@ -300,9 +274,16 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
             animator.SetBool("isAirborne", false);
             animator.SetFloat("Speed", Mathf.Abs(moveDirection));
+            if (Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.RightArrow))
+            {
+                jumpDirection = 1;
+            }
+            if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                jumpDirection = -1;
+            }
             if (isJumping)
             {
-
 
                 // Store the direction at the start of the jump.
                 Jump();
@@ -320,15 +301,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        int jumpDirection = 0;
-        if (Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.RightArrow))
-        {
-            jumpDirection = 1;
-        }
-        if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            jumpDirection = -1;
-        }
+
         // Check if there's horizontal input to determine the jump direction
         float horizontalVelocity = jumpDirection * jumpSpeed;
 
@@ -363,45 +336,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerHasDied)
         {
-            PositionPlayer("HW-B");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
             currentHealth = maxHealth / 4;
             healthBar.SetMaxHealth(maxHealth);
             playerHasDied = false;
         }
-        else
-        {
-            PositionPlayer(portalToTeleportTo);
-        }
     }
 
-    private void PositionPlayer(string portalName)
-    {
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position = GameObject.FindGameObjectWithTag(portalName).GetComponent<Transform>().position;
-    }
-
-    /*    public void OpenShopKeeperUI()
-        {
-            if (!shopKeeperCanvas.activeSelf && isNearShopKeeper)
-            {
-                shopKeeperCanvas.SetActive(true);
-            }
-            else
-            {
-                shopKeeperCanvas.SetActive(false);
-            }
-        }*/
-
-    /*    public void OpenOptionMenuUI()
-        {
-            if (!optionsMenuCanvas.activeSelf && isNearOptionsMenu)
-            {
-                optionsMenuCanvas.SetActive(true);
-            }
-            else
-            {
-                optionsMenuCanvas.SetActive(false);
-            }
-        }*/
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "deathBox")
@@ -426,5 +367,4 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
 }
