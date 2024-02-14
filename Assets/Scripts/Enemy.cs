@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [HideInInspector]
     public int health;
     public int damage;
     public int level;

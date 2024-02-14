@@ -39,8 +39,8 @@ public class Projectile : MonoBehaviour
         skillLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().level;
 
         // Scaling damage with skill level
-        minDamage = Mathf.FloorToInt(100 * Mathf.Pow(2, (skillLevel - 1) / 4));
-        maxDamage = Mathf.FloorToInt(125 * Mathf.Pow(2, (skillLevel - 1) / 4));
+        minDamage = Mathf.FloorToInt(1000 * Mathf.Pow(2, (skillLevel - 1) / 4));
+        maxDamage = Mathf.FloorToInt(1250 * Mathf.Pow(2, (skillLevel - 1) / 4));
 
         // Implementing critical hits
         bool isCrit = Random.value < critChance;
