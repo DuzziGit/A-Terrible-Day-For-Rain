@@ -147,7 +147,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a25004ca83e711d4cbce106bf874ea9f, type: 3}
-  m_Color: {r: 0.9215687, g: 0.89019614, b: 0.9960785, a: 0.98039216}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
   health: 3000
   damage: 20
   level: 1
-  speed: 5
+  speed: 2
   distance: 0.6
   groundDetection: {fileID: 911691705}
   wallDetection: {fileID: 2741414467904669674}
