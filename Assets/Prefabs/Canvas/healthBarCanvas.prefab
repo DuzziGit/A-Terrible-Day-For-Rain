@@ -83,7 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1997474524716373969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,45 +108,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1997474524716373970}
     m_Modifications:
-    - target: {fileID: 2277362914893362478, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_fontStyle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2277362914893362478, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_TextStyleHashCode
-      value: -1183493901
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182556361005513453, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4182556361005513453, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4225438197187578838, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_Name
       value: HealthBar 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7053072325376806081, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_Pivot.x
@@ -178,11 +142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7053072325376806081, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 367.0496
+      value: 292.951
       objectReference: {fileID: 0}
     - target: {fileID: 7053072325376806081, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 24.9632
+      value: 21.163
       objectReference: {fileID: 0}
     - target: {fileID: 7053072325376806081, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_LocalPosition.x
@@ -214,11 +178,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7053072325376806081, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -69.5
+      value: -68.389
       objectReference: {fileID: 0}
     - target: {fileID: 7053072325376806081, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -71.21202
+      value: -71.269
       objectReference: {fileID: 0}
     - target: {fileID: 7053072325376806081, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
