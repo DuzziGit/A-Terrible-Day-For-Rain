@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 139839
+  controlID: 144769
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -44,8 +44,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1
-    y: 19
+    x: 230
+    y: 73
     width: 1120
     height: 617
   m_ViewDataDictionary: {fileID: 0}
@@ -88,7 +88,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 139840
+  controlID: 144770
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 139733
+  controlID: 144771
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -711,7 +711,7 @@ MonoBehaviour:
   - {fileID: 13}
   - {fileID: 14}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 3
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -754,22 +754,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Prefabs/Monsters
     m_Globs: []
     m_OriginalText: tmp
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Prefabs/Monsters
   m_LastFoldersGridSize: 60
   m_LastProjectPath: C:\Users\dante\OneDrive\Documents\GitHub\3DMovementShooter\FZ4
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 292}
-    m_SelectedIDs: e4940000
-    m_LastClickedID: 38116
-    m_ExpandedIDs: 000000004a9400004c9400004e94000050940000529400005494000056940000589400005a9400005c9400005e94000060940000629400006494000066940000689400006c9400006e940000e894000000ca9a3b
+    m_SelectedIDs: 7eb90000
+    m_LastClickedID: 47486
+    m_ExpandedIDs: 000000004a9400004c9400004e94000050940000529400005494000056940000589400005a9400005c9400005e94000060940000629400006494000066940000689400006c9400006e940000de940000e894000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -822,8 +822,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: a6750000
+    m_LastClickedInstanceID: 30118
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 9caa0000fc700000f6700000d8d20200c49afdff8268000024360200b86c0000a26c0000ec620000c2cd0000d46d0000786e0000c4910000186101004ea30000b883000080fd0000f8a9000026fc00005c750000baa20300ecb4000024b30000f8b3000042af0900c091000074750000a0940000504a01006a4a010010cd00003ed300006e6d0200967600005c6d02006a750000aca80000b68f00000000000030760000
     m_RenameOverlay:
@@ -943,7 +943,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -1322
+  m_LastSelectedObjectID: 264700
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -968,7 +968,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 139841
+  controlID: 144681
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1102,11 +1102,11 @@ MonoBehaviour:
     - e00: 0.3631579
       e01: 0
       e02: 0
-      e03: -3.157837
+      e03: -3.157898
       e10: 0
       e11: 0.3631579
       e12: 0
-      e13: 189.84209
+      e13: 189.8421
       e20: 0
       e21: 0
       e22: 1
@@ -1660,9 +1660,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 564a42ec1ac1baa4eaa6e287680fc3ce, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 84617e5d71d6c1b4697dc9c5b253ff87, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 5819166924426301230, guid: 564a42ec1ac1baa4eaa6e287680fc3ce, type: 2}
+  - m_Target: {fileID: 6037310543824476619, guid: 84617e5d71d6c1b4697dc9c5b253ff87, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1736,8 +1736,8 @@ MonoBehaviour:
     m_CachedPref: -151
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastInspectedObjectInstanceID: 30118
+  m_LastVerticalScrollValue: 801
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
