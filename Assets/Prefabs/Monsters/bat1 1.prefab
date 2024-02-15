@@ -392,6 +392,7 @@ MonoBehaviour:
   CanvasDamageNum: {fileID: 6962523565112630718, guid: b2afdfba80b192f4ca0280bb2237ae21, type: 3}
   isTouchingPlayer: 0
   DamageNumText: {fileID: 2100312243281989656, guid: feae4dca98525114ab3342e2dcba6d3c, type: 3}
+  DamageNumTextCrit: {fileID: 2100312243281989656, guid: 235d7025c55e65c40b38e7a204f29ef6, type: 3}
   isDisplayingDamage: 0
 --- !u!114 &1826110122
 MonoBehaviour:

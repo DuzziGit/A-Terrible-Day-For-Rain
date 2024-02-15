@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bangers SDF Glow 3
+  m_Name: Bangers SDF Glow 4
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_ValidKeywords:
   - BEVEL_ON
@@ -50,7 +50,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Ambient: 0
-    - _Bevel: 0.5
+    - _Bevel: 0.864
     - _BevelClamp: 0
     - _BevelOffset: 0
     - _BevelRoundness: 0
@@ -108,12 +108,12 @@ Material:
     - _ClipRect: {r: -10000, g: -10000, b: 10000, a: 10000}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
     - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 1, g: 1, b: 1, a: 0.92156863}
+    - _GlowColor: {r: 1, g: 0, b: 0, a: 0.92156863}
     - _MaskCoord: {r: 0, g: 0, b: 100000, a: 100000}
     - _OutlineColor: {r: 1, g: 0, b: 0.007843018, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
-    - _UnderlayColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+    - _UnderlayColor: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

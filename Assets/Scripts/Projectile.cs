@@ -19,8 +19,8 @@ public class Projectile : MonoBehaviour
     public Vector3 direction;
     public Transform closestEnemy;
     private Rigidbody2D rb;
-    public int damage; // Actual damage inflicted
-
+    protected int damage; // Actual damage inflicted
+    protected bool isCrit = false;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,10 +43,11 @@ public class Projectile : MonoBehaviour
         maxDamage = Mathf.FloorToInt(1250 * Mathf.Pow(2, (skillLevel - 1) / 4));
 
         // Implementing critical hits
-        bool isCrit = Random.value < critChance;
+        bool Crit = Random.value < critChance;
         damage = Random.Range(minDamage, maxDamage + 1);
-        if (isCrit)
+        if (Crit)
         {
+            isCrit = true;
             damage = Mathf.FloorToInt(damage * critMultiplier);
         }
 
@@ -111,7 +112,7 @@ public class Projectile : MonoBehaviour
             if (collision.CompareTag("Enemy"))
             {
                 //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
-                collision.GetComponent<EnemyCon>().TakeDamage(damage);
+                collision.GetComponent<EnemyCon>().TakeDamage(damage, isCrit);
             }
 
             hasDamaged = true;
@@ -134,7 +135,7 @@ public class Projectile : MonoBehaviour
             if (collision.CompareTag("Enemy"))
             {
                 //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
-                collision.GetComponent<EnemyCon>().TakeDamage(damage);
+                collision.GetComponent<EnemyCon>().TakeDamage(damage, isCrit);
             }
 
             hasDamaged = true;

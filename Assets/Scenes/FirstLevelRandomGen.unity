@@ -5249,28 +5249,8 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 15266168, guid: e9d5ddc74027c4c4aada1c2f92d9cfef, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 15266168, guid: e9d5ddc74027c4c4aada1c2f92d9cfef, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1164876066432453182, guid: e9d5ddc74027c4c4aada1c2f92d9cfef, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1164876066432453182, guid: e9d5ddc74027c4c4aada1c2f92d9cfef, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1164876066432453182, guid: e9d5ddc74027c4c4aada1c2f92d9cfef, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1405599397, guid: 605d3f3a55dda184a80740f397025d48, type: 3}
-    - target: {fileID: 1164876066432453182, guid: e9d5ddc74027c4c4aada1c2f92d9cfef, type: 3}
-      propertyPath: m_WasSpriteAssigned
+    - target: {fileID: 63006631, guid: e9d5ddc74027c4c4aada1c2f92d9cfef, type: 3}
+      propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4095092697495284382, guid: e9d5ddc74027c4c4aada1c2f92d9cfef, type: 3}
@@ -34556,6 +34536,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4234210634196443020, guid: e7259c155907ef349b2792b420563bc6, type: 3}
+      propertyPath: critChance
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4234210634196443020, guid: e7259c155907ef349b2792b420563bc6, type: 3}
+      propertyPath: critMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1367567050518222791, guid: e7259c155907ef349b2792b420563bc6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -34603,22 +34591,6 @@ PrefabInstance:
     - target: {fileID: 2122635036824758511, guid: e7259c155907ef349b2792b420563bc6, type: 3}
       propertyPath: m_Name
       value: Rogue_WeaponThrow
-      objectReference: {fileID: 0}
-    - target: {fileID: 4378017385441992185, guid: e7259c155907ef349b2792b420563bc6, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4378017385441992185, guid: e7259c155907ef349b2792b420563bc6, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4378017385441992185, guid: e7259c155907ef349b2792b420563bc6, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4378017385441992185, guid: e7259c155907ef349b2792b420563bc6, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7259c155907ef349b2792b420563bc6, type: 3}
@@ -38070,18 +38042,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 698103068, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 698103068, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 698103068, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_Name
       value: Rogue_WeaponThrowLarge 1

@@ -17,6 +17,8 @@ public class EnemyCon : Enemy
     private HealthBar healthBar;
     private int maxHealth;
     [SerializeField] private GameObject DamageNumText;
+    [SerializeField] private GameObject DamageNumTextCrit;
+
     private GameObject damageCanvas;// Track the canvas instance
     public bool isDisplayingDamage = false;// Flag to track if damage is currently being displayed
 
@@ -26,14 +28,14 @@ public class EnemyCon : Enemy
     private const float yOffset = 0.4f;
     private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
-    private readonly List<int> DamageTaken = new();
+    private List<(int Damage, bool IsCrit)> DamageTaken = new List<(int Damage, bool IsCrit)>();
 
     private void Start()
     {
         rb.velocity = new Vector3(speed, 0, 0);
         enemyLevel.text = level.ToString();
         enemyDamage = level * 5;
-
+        health =
         animator = GetComponent<Animator>();
         healthBar = GetComponentInChildren<HealthBar>();
         maxHealth = health;
@@ -48,12 +50,12 @@ public class EnemyCon : Enemy
     {
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isCrit)
     {
 
         health = Mathf.Max(0, health - damage);
 
-        DamageTaken.Add(damage);
+        DamageTaken.Add((damage, isCrit));
 
         if (!isDisplayingDamage)
         {
@@ -89,15 +91,21 @@ public class EnemyCon : Enemy
         isDisplayingDamage = true;
         float tempBounds = bc.bounds.max.y;
 
-        while (DamageTaken.Count > 0)
+        // Loop backwards through the list so you can remove items without affecting the loop index
+        for (int i = DamageTaken.Count - 1; i >= 0; i--)
         {
-            int damage = DamageTaken[0];
-            GameObject text = Instantiate(DamageNumText, new Vector3(transform.position.x, tempBounds + yOffset, transform.position.z), Quaternion.identity, canvas.transform);
+            int damage = DamageTaken[i].Damage;
+            bool isCrit = DamageTaken[i].IsCrit;
+
+            GameObject textPrefab = isCrit ? DamageNumTextCrit : DamageNumText;
+            GameObject text = Instantiate(textPrefab, new Vector3(transform.position.x, tempBounds + yOffset, transform.position.z), Quaternion.identity, canvas.transform);
             DamageNumController controller = text.GetComponent<DamageNumController>();
             controller.SetDamageNum(damage);
-            DamageTaken.RemoveAt(0);
+
+            DamageTaken.RemoveAt(i); // Safe to remove since we are not using foreach
             yield return new WaitForSeconds(damageDisplayDelay);
         }
+
         isDisplayingDamage = false;
 
         // Check if there are no more damage numbers to display and if canvas and its DamageText component still exist

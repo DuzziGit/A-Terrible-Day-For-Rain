@@ -35,8 +35,8 @@ public class MultiHitProjectile : Projectile
         if (collision.CompareTag("Enemy"))
         {
             //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
-            collision.GetComponent<EnemyCon>().TakeDamage(damage);
-            collision.GetComponent<EnemyCon>().TakeDamage(damage);
+            collision.GetComponent<EnemyCon>().TakeDamage(damage, isCrit);
+            collision.GetComponent<EnemyCon>().TakeDamage(damage, isCrit);
 
         }
 
