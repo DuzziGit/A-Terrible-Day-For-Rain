@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2100312243281989663}
   - component: {fileID: 2100312243281989662}
   - component: {fileID: 9176737523813130354}
+  - component: {fileID: 1068279983861495705}
   m_Layer: 5
   m_Name: TMP_Damage_Crit
   m_TagString: Untagged
@@ -148,3 +149,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd84432b757e2744bd96d8bc7d568db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &1068279983861495705
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100312243281989656}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b4e266df698cd8a48b4883d0549de359, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: b4e266df698cd8a48b4883d0549de359, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
