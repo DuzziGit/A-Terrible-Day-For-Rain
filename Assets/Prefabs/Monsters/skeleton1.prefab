@@ -316,7 +316,7 @@ MonoBehaviour:
   DamageNumText: {fileID: 2100312243281989656, guid: feae4dca98525114ab3342e2dcba6d3c, type: 3}
   DamageNumTextCrit: {fileID: 2100312243281989656, guid: 235d7025c55e65c40b38e7a204f29ef6, type: 3}
   isDisplayingDamage: 0
-  yOffset: 0.4
+  yOffset: 1
 --- !u!50 &15266169
 Rigidbody2D:
   serializedVersion: 4
@@ -522,6 +522,10 @@ PrefabInstance:
       propertyPath: m_HorizontalAlignment
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1997474524716373968, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1997474524716373970, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -629,6 +633,10 @@ PrefabInstance:
     - target: {fileID: 2428311729574680925, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428311729574680925, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.019989014
       objectReference: {fileID: 0}
     - target: {fileID: 5484640901153305522, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: healthBarCanvas

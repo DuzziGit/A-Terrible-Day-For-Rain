@@ -92,7 +92,8 @@ public class EnemyCon : Enemy
     {
         isDisplayingDamage = true;
         float tempBounds = bc.bounds.max.y;
-        float localYOffset = 0f; // Initialize localYOffset before the loop
+        float localYOffset = 0f; // Initialize localYOffset for vertical stacking
+        float zPosition = 0f; // Initialize zPosition to control the rendering order of damage numbers
 
         // Loop backwards through the list so you can remove items without affecting the loop index
         for (int i = DamageTaken.Count - 1; i >= 0; i--)
@@ -103,7 +104,7 @@ public class EnemyCon : Enemy
             GameObject textPrefab = isCrit ? DamageNumTextCrit : DamageNumText;
             GameObject text = Instantiate(
                 textPrefab,
-                new Vector3(transform.position.x, tempBounds + yOffset + localYOffset, transform.position.z),
+                new Vector3(transform.position.x + xOffset, tempBounds + yOffset + localYOffset, transform.position.z - zPosition),
                 Quaternion.identity,
                 canvas.transform
             );
@@ -111,16 +112,14 @@ public class EnemyCon : Enemy
             DamageNumController controller = text.GetComponent<DamageNumController>();
             controller.SetDamageNum(damage);
 
-            localYOffset += 1.2f; // Increment the offset after each damage number
+            localYOffset += yOffset; // Increment the yOffset for vertical stacking
+            zPosition += 0.01f; // Increment zPosition to ensure this text appears above the previous
 
             DamageTaken.RemoveAt(i); // Safe to remove since we are not using foreach
             yield return new WaitForSeconds(damageDisplayDelay);
         }
 
         isDisplayingDamage = false;
-
-        // After exiting the loop, reset the localYOffset for the next time damage is taken
-        localYOffset = 0f;
     }
 
 
