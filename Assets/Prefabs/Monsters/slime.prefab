@@ -65,7 +65,7 @@ Transform:
   m_GameObject: {fileID: 4597381505260269731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.73, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 830513544}
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_SortingLayerID: -326993057
   m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 0cfc6b3fe9be5494bb275b44214f3140, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b46a82b9671f1549b7974afc18d9183, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -277,7 +277,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.035491407, y: 0.018256664}
+  m_Offset: {x: -0.00058305264, y: 0.034684062}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -288,7 +288,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8349465, y: 1.0944681}
+  m_Size: {x: 0.6254971, y: 1.0616133}
   m_EdgeRadius: 0
 --- !u!114 &440425466
 MonoBehaviour:
@@ -305,7 +305,7 @@ MonoBehaviour:
   health: 750
   damage: 20
   level: 5
-  speed: 5
+  speed: 3
   distance: 0.6
   groundDetection: {fileID: 830513544}
   wallDetection: {fileID: 6614486318673616303}

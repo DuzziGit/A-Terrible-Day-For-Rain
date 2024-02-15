@@ -333,6 +333,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 726908759, guid: 58f3b3168aeff9349bc05873083e5880, type: 3}
+    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575690351883654773, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7053072325376806081, guid: c04d9f7240c0beb4cbd1e423dba63952, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

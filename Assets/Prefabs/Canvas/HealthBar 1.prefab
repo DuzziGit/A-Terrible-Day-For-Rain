@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 4203772286519025069}
+  healthBarCanvas: {fileID: 0}
 --- !u!1 &5078153097624848674
 GameObject:
   m_ObjectHideFlags: 0
