@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     public int minDamage; // Minimum damage
     public int maxDamage; // Maximum damage
     public bool hasDamaged;
-    public int skillLevel;
+    public int playeLevel;
     public float critChance;
     public float critMultiplier;
     public float targetingToleranceAngle = 5f;
@@ -19,8 +19,12 @@ public class Projectile : MonoBehaviour
     public Vector3 direction;
     public Transform closestEnemy;
     private Rigidbody2D rb;
-    protected int damage; // Actual damage inflicted
+    protected int damage;
     protected bool isCrit = false;
+    private const int baseMinDamage = 950;
+    private const int baseMaxDamage = 1050;
+    private const float damageGrowthRate = 1.1f;
+    int playerLevel;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,23 +37,27 @@ public class Projectile : MonoBehaviour
         hasDamaged = false;
         direction = transform.right;
     }
+    public int CalculateDamageForLevel(int playerLevel)
+    {
+        int minDamageAtLevel = Mathf.FloorToInt(baseMinDamage * Mathf.Pow(damageGrowthRate, (playerLevel - 1)));
+        int maxDamageAtLevel = Mathf.FloorToInt(baseMaxDamage * Mathf.Pow(damageGrowthRate, (playerLevel - 1)));
 
+        return Random.Range(minDamageAtLevel, maxDamageAtLevel + 1);
+    }
     public void Update()
     {
-        skillLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().level;
+        playerLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().level;
 
-        // Scaling damage with skill level
-        minDamage = Mathf.FloorToInt(1000 * Mathf.Pow(2, (skillLevel - 1) / 4));
-        maxDamage = Mathf.FloorToInt(1250 * Mathf.Pow(2, (skillLevel - 1) / 4));
+
+        damage = CalculateDamageForLevel(playerLevel);
 
         // Implementing critical hits
-        bool Crit = Random.value < critChance;
-        damage = Random.Range(minDamage, maxDamage + 1);
-        if (Crit)
+        isCrit = Random.value < (critChance / 100f);
+        if (isCrit)
         {
-            isCrit = true;
-            damage = Mathf.FloorToInt(damage * critMultiplier);
+            damage = Mathf.FloorToInt(damage * critMultiplier); // Apply crit multiplier to the base damage
         }
+
 
         // Check if an enemy is within detection range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRange, enemyLayer);

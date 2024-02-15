@@ -217,9 +217,9 @@ MonoBehaviour:
   minDamage: 0
   maxDamage: 0
   hasDamaged: 0
-  skillLevel: 0
-  critChance: 0
-  critMultiplier: 65
+  playeLevel: 0
+  critChance: 40
+  critMultiplier: 2
   targetingToleranceAngle: 10
   direction: {x: 0, y: 0, z: 0}
   closestEnemy: {fileID: 0}

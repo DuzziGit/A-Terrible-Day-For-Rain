@@ -34536,14 +34536,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4234210634196443020, guid: e7259c155907ef349b2792b420563bc6, type: 3}
-      propertyPath: critChance
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4234210634196443020, guid: e7259c155907ef349b2792b420563bc6, type: 3}
-      propertyPath: critMultiplier
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1367567050518222791, guid: e7259c155907ef349b2792b420563bc6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -35031,6 +35023,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1997474523849870445, guid: 5ab3661e1170df84881f42202bd5b83b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2428311728167895776, guid: 5ab3661e1170df84881f42202bd5b83b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

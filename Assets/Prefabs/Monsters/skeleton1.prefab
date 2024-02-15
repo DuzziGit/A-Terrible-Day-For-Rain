@@ -316,6 +316,7 @@ MonoBehaviour:
   DamageNumText: {fileID: 2100312243281989656, guid: feae4dca98525114ab3342e2dcba6d3c, type: 3}
   DamageNumTextCrit: {fileID: 2100312243281989656, guid: 235d7025c55e65c40b38e7a204f29ef6, type: 3}
   isDisplayingDamage: 0
+  yOffset: 0.4
 --- !u!50 &15266169
 Rigidbody2D:
   serializedVersion: 4
