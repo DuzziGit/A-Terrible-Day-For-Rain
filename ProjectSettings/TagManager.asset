@@ -31,6 +31,7 @@ TagManager:
   - PreviousLevel
   - W1-3-A
   - Carnage
+  - FallThroughPlatform
   layers:
   - Default
   - TransparentFX
@@ -42,8 +43,8 @@ TagManager:
   - Item
   - Player
   - Projectile
-  - 
-  - 
+  - PlayerFallThrough
+  - Platform
   - 
   - 
   - 

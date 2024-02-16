@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     public Color tutEnemy = new(0, 1f, 1f, 1f);
 
     public Animator animator;
+    public EnemySpawner MySpawner { get; set; }
 
     private void Start()
     {
@@ -73,6 +74,8 @@ public class Enemy : MonoBehaviour
         _ = Physics2D.Raycast(wallDetection.position, Vector2.right, distance, LayerMask.GetMask("World"));
         RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, Vector2.right, distance, LayerMask.GetMask("EnemyOnlyWall"));
 
+
+
         if (transform.position.x - GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position.x < 0.2f)
         {
             rb.velocity = new Vector3(0, 0, 0);
@@ -89,6 +92,7 @@ public class Enemy : MonoBehaviour
             enemySprite.flipX = false;
             movingRight = true;
         }
+
     }
 
     private void FixedUpdate()
@@ -147,19 +151,11 @@ public class Enemy : MonoBehaviour
     }
     private void Die()
     {
-        EnemySpawner.currentEnemies--;
-
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
+        MySpawner.OnEnemyDestroyed();
+        if (GameController.instance.playerMovement != null)
         {
-            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-            if (playerMovement != null)
-            {
-                playerMovement.GainExperience(expValue);
-            }
+            GameController.instance.playerMovement.GainExperience(expValue);
         }
-
-
         Destroy(gameObject);
     }
     private void Patrol()
@@ -167,8 +163,8 @@ public class Enemy : MonoBehaviour
         // Check the direction to cast the ray for walls
         Vector2 direction = movingRight ? Vector2.right : Vector2.left;
 
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, LayerMask.GetMask("World"));
-        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("World"));
+        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, LayerMask.GetMask("World", "Platform"));
+        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("World", "Platform"));
         RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("EnemyOnlyWall"));
 
         if (!groundInfo.collider || wallInfo.collider || enemyWall.collider)

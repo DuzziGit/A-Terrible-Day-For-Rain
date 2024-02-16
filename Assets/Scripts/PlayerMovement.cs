@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("References")]
     protected Rigidbody2D rb;
-    protected BoxCollider2D bc;
+    [SerializeField] protected CapsuleCollider2D cc;
     protected TMP_Text playerLevel;
     [SerializeField] protected TMP_Text levelUI;
     public Animator leveledUpAnimator;
@@ -82,12 +82,16 @@ public class PlayerMovement : MonoBehaviour
     private bool isPlaying;
     [SerializeField] protected Animator animator;
 
+    public Collider2D playerCollider;
+    private float disableCollisionTime = 0.1f; // Time to disable collision
+    private bool isFallingThrough = false;
+
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        bc = GetComponent<BoxCollider2D>();
+        cc = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
 
@@ -162,8 +166,12 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = Input.GetAxis("Horizontal");
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
-
-        if (!isAirborne)
+        if (Input.GetKey(KeyCode.K) && Input.GetButtonDown("Jump"))
+        {
+            StartCoroutine(FallThrough());
+            Debug.Log("Fell Through Platform");
+        }
+        if (!isAirborne && !Input.GetKey(KeyCode.K))
         {
             if (Input.GetButtonDown("Jump"))
             {
@@ -176,8 +184,27 @@ public class PlayerMovement : MonoBehaviour
         {
             FlipCharacter();
         }
-    }
 
+
+    }
+    private IEnumerator FallThrough()
+    {
+        if (isFallingThrough) yield break;
+        isFallingThrough = true;
+
+        int originalLayer = gameObject.layer;
+
+        // Change the player's layer to NoPlatformCollision to start ignoring collisions
+        gameObject.layer = LayerMask.NameToLayer("PlayerFallThrough");
+
+        // Wait a bit to ensure the player starts falling through
+        yield return new WaitForSeconds(0.27f);
+
+        // Change back to the original layer
+        gameObject.layer = originalLayer;
+
+        isFallingThrough = false;
+    }
     public void playerInteractInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -314,7 +341,7 @@ public class PlayerMovement : MonoBehaviour
             playerHasDied = true;
             PlayerDeath();
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
+        if (collision.gameObject.tag is "World" or "Platform")
         {
             isAirborne = false;
             isGrounded = true;

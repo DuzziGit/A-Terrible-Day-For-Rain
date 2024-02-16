@@ -27,25 +27,6 @@ public class Bat : Enemy
         damage = level * 4;
 
 
-        if (level is > 0 and < 10)
-        {
-            enemyLevel.color = tutEnemy;
-        }
-        else
-        if (level is > 10 and < 20)
-        {
-            enemyLevel.color = smallEnemy;
-        }
-        else
-        if (level is > 20 and < 30)
-        {
-            enemyLevel.color = medEnemy;
-        }
-        else
-        if (level is > 30 and < 40)
-        {
-            enemyLevel.color = bigEnemy;
-        }
     }
 
     public void TakeDamage(int damage)

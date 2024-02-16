@@ -297,7 +297,7 @@ MonoBehaviour:
   agroRange: 0.3
   startTimeBetweenDmg: 2
   enemySprite: {fileID: 1164876066432453182}
-  bc: {fileID: 0}
+  bc: {fileID: 1992400999}
   rb: {fileID: 15266169}
   bigEnemy: {r: 1, g: 0, b: 0, a: 1}
   medEnemy: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -382,8 +382,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: -0.010495603, y: -0.06717187}
+  m_Size: {x: 0.6599425, y: 0.9496211}
   m_Direction: 0
 --- !u!1001 &354433158333571128
 PrefabInstance:

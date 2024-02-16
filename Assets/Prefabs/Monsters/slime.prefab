@@ -288,7 +288,7 @@ MonoBehaviour:
   agroRange: 0.3
   startTimeBetweenDmg: 2
   enemySprite: {fileID: 4597381505260269735}
-  bc: {fileID: 0}
+  bc: {fileID: 694875898}
   rb: {fileID: 2007566158}
   bigEnemy: {r: 1, g: 0, b: 0, a: 1}
   medEnemy: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
