@@ -290,15 +290,16 @@ public class RogueSkillController : PlayerMovement
         if (Time.time > nextFireTimeSkill2 && Input.GetKeyDown(KeyCode.S))
         {
             animator.SetTrigger("isAttacking");
-            secondSkill();
+            _ = StartCoroutine(secondSkill());
             nextFireTimeSkill2 = Time.time + cooldownTimeSkill2;
             //   textCooldownS2.gameObject.SetActive(true);
             cooldownTimerS2 = cooldownTimeSkill2;
         }
     }
 
-    public void secondSkill()
+    private IEnumerator secondSkill()
     {
+        yield return new WaitForSeconds(0.20f);
         _ = Instantiate(projectile2, attackPos.position, attackPos.rotation);
         audioSource.PlayOneShot(BigShurikenSoundEffect, 0.7f);
     }

@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     public float startTimeBetweenDmg;
     public SpriteRenderer enemySprite;
     private readonly float moveSpeed;
-    public BoxCollider2D bc;
+    public CapsuleCollider2D bc;
     public Rigidbody2D rb;
 
     public Color bigEnemy = Color.red;
@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        bc = GetComponent<BoxCollider2D>();
+        bc = GetComponent<CapsuleCollider2D>();
         enemySprite = GetComponent<SpriteRenderer>();
     }
 

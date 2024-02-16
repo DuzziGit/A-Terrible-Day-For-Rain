@@ -76,9 +76,9 @@ GameObject:
   - component: {fileID: 1601004350}
   - component: {fileID: 1601004351}
   - component: {fileID: 15266169}
-  - component: {fileID: 15266168}
   - component: {fileID: 4325626357328118357}
   - component: {fileID: 8772405608554743276}
+  - component: {fileID: 1992400999}
   m_Layer: 6
   m_Name: skeleton1
   m_TagString: Enemy
@@ -297,7 +297,7 @@ MonoBehaviour:
   agroRange: 0.3
   startTimeBetweenDmg: 2
   enemySprite: {fileID: 1164876066432453182}
-  bc: {fileID: 15266168}
+  bc: {fileID: 0}
   rb: {fileID: 15266169}
   bigEnemy: {r: 1, g: 0, b: 0, a: 1}
   medEnemy: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -337,32 +337,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &15266168
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5249384055196290721}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0027403831, y: -0.0940558}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5026516, y: 0.8128807}
-  m_EdgeRadius: 0
 --- !u!114 &4325626357328118357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,6 +369,22 @@ MonoBehaviour:
   lootList:
   - {fileID: 11400000, guid: 392792806eddffe4e810d813b3c75eba, type: 2}
   - {fileID: 11400000, guid: 4e8a328d1b451824bad1d796004618f5, type: 2}
+--- !u!70 &1992400999
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5249384055196290721}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
 --- !u!1001 &354433158333571128
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -44,11 +44,11 @@ GameObject:
   - component: {fileID: 4597381505260269730}
   - component: {fileID: 1942610098}
   - component: {fileID: 2007566158}
-  - component: {fileID: -424270421703396957}
   - component: {fileID: 440425466}
   - component: {fileID: 1216610146}
   - component: {fileID: 4628917298890330334}
   - component: {fileID: 1995216451}
+  - component: {fileID: 694875898}
   m_Layer: 6
   m_Name: slime
   m_TagString: Enemy
@@ -264,32 +264,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &-424270421703396957
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4597381505260269731}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.00058305264, y: 0.048304975}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6254971, y: 1.0888551}
-  m_EdgeRadius: 0
 --- !u!114 &440425466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +288,7 @@ MonoBehaviour:
   agroRange: 0.3
   startTimeBetweenDmg: 2
   enemySprite: {fileID: 4597381505260269735}
-  bc: {fileID: -424270421703396957}
+  bc: {fileID: 0}
   rb: {fileID: 2007566158}
   bigEnemy: {r: 1, g: 0, b: 0, a: 1}
   medEnemy: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -378,6 +352,22 @@ MonoBehaviour:
   droppedItemPrefab: {fileID: 279078521537463199, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
   lootList:
   - {fileID: 11400000, guid: 392792806eddffe4e810d813b3c75eba, type: 2}
+--- !u!70 &694875898
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597381505260269731}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.022924505, y: 0}
+  m_Size: {x: 0.7749246, y: 1.2000644}
+  m_Direction: 0
 --- !u!1 &5510990405137156906
 GameObject:
   m_ObjectHideFlags: 0
