@@ -75,6 +75,7 @@ public class EnemyCon : Enemy
         _ = StartCoroutine(ResetTakeDamageTrigger());
     }
 
+    // ProcessDamage is called whenever damage is taken, even if a display is ongoing.
     private void ProcessDamage()
     {
         if (damageCanvas == null)
@@ -82,47 +83,39 @@ public class EnemyCon : Enemy
             damageCanvas = Instantiate(CanvasDamageNum, transform.position, Quaternion.identity);
         }
 
-        if (!isDisplayingDamage)
-        {
-            _ = StartCoroutine(DamageDisplay(damageCanvas));
-        }
+        // Always attempt to start the DamageDisplay coroutine, but ensure it's designed to handle being called multiple times.
+        DamageDisplay(damageCanvas);
     }
 
-    private IEnumerator DamageDisplay(GameObject canvas)
+    // Updated DamageDisplay coroutine to continuously monitor and display damage.
+    private void DamageDisplay(GameObject canvas)
     {
         isDisplayingDamage = true;
-        float tempBounds = bc.bounds.max.y;
-        float localYOffset = 0f; // Initialize localYOffset for vertical stacking
-        float zPosition = 0f; // Initialize zPosition to control the rendering order of damage numbers
 
-        // Loop backwards through the list so you can remove items without affecting the loop index
-        for (int i = DamageTaken.Count - 1; i >= 0; i--)
+        while (DamageTaken.Count > 0)
         {
-            int damage = DamageTaken[i].Damage;
-            bool isCrit = DamageTaken[i].IsCrit;
+            // Calculate yOffset based on the number of currently active damage numbers.
+            // This assumes each damage number needs a certain vertical space (e.g., yOffset).
+            float dynamicYOffset = yOffset * canvas.transform.childCount;
+            var damageInfo = DamageTaken[0];
+            DamageTaken.RemoveAt(0); // Remove the processed damage info immediately
 
-            GameObject textPrefab = isCrit ? DamageNumTextCrit : DamageNumText;
+            GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
             GameObject text = Instantiate(
                 textPrefab,
-                new Vector3(transform.position.x + xOffset, tempBounds + yOffset + localYOffset, transform.position.z - zPosition),
+                new Vector3(transform.position.x + xOffset, transform.position.y + dynamicYOffset, transform.position.z),
                 Quaternion.identity,
                 canvas.transform
             );
 
             DamageNumController controller = text.GetComponent<DamageNumController>();
-            controller.SetDamageNum(damage);
+            controller.SetDamageNum(damageInfo.Damage);
 
-            localYOffset += yOffset; // Increment the yOffset for vertical stacking
-            zPosition += 0.01f; // Increment zPosition to ensure this text appears above the previous
-
-            DamageTaken.RemoveAt(i); // Safe to remove since we are not using foreach
-            yield return new WaitForSeconds(damageDisplayDelay);
+            // Here, no delay is needed between instantiations, as the yOffset handles spacing.
         }
 
         isDisplayingDamage = false;
     }
-
-
 
 
     private IEnumerator ResetTakeDamageTrigger()

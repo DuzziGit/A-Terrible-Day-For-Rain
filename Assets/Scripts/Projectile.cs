@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
     private const int baseMinDamage = 950;
     private const int baseMaxDamage = 1050;
     private const float damageGrowthRate = 1.1f;
-    int playerLevel;
+    protected int playerLevel;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

@@ -233,6 +233,8 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Level Up! Player Level is now: " + level);
             shouldLevelUp = false;
             AudioController.instance.PlayLevelUpSound();
+            leveledUpAnimator.SetTrigger("LeveledUp");
+
         }
     }
 
@@ -250,7 +252,6 @@ public class PlayerMovement : MonoBehaviour
         playerLevel.text = "Level Up!";
         yield return new WaitForSeconds(2);
         playerLevel.text = "";
-        leveledUpAnimator.SetBool("LeveledUp", false);
     }
 
     public void animate()
