@@ -8,12 +8,10 @@ public class HitManager : MonoBehaviour
     private static HitManager _instance;
     public static HitManager Instance { get { return _instance; } }
     [SerializeField] private PlayerMovement PlayerLevel;
-    [SerializeField] private int baseMinDamage;
-    [SerializeField] private int baseMaxDamage;
     [SerializeField] private float damageGrowthRate;
     [SerializeField] private int critMultiplier;
     [SerializeField] private int critChance;
-
+    [SerializeField] private float hitCooldown;
 
 
     private void Awake()
@@ -29,11 +27,11 @@ public class HitManager : MonoBehaviour
     }
 
 
-    public void ApplyDelayedHits(Collider2D enemy, int totalHits, float hitCooldown)
+    public void ApplyDelayedHits(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage)
     {
-        StartCoroutine(DelayedHitsCoroutine(enemy, totalHits, hitCooldown));
+        StartCoroutine(DelayedHitsCoroutine(enemy, totalHits, baseMinDamage, baseMaxDamage));
     }
-    private int CalculateDamageForLevel()
+    private int CalculateDamageForLevel(int baseMinDamage, int baseMaxDamage)
     {
         int plevel = PlayerLevel.level;
         int minDamageAtLevel = Mathf.FloorToInt(baseMinDamage * Mathf.Pow(damageGrowthRate, (plevel - 1)));
@@ -41,7 +39,7 @@ public class HitManager : MonoBehaviour
 
         return Random.Range(minDamageAtLevel, maxDamageAtLevel + 1);
     }
-    private IEnumerator DelayedHitsCoroutine(Collider2D enemy, int totalHits, float hitCooldown)
+    private IEnumerator DelayedHitsCoroutine(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage)
     {
         int hitsApplied = 0;
         while (hitsApplied < totalHits)
@@ -49,7 +47,7 @@ public class HitManager : MonoBehaviour
             if (enemy != null)
             {
                 // Calculate damage and critical hit status here
-                int damage = CalculateDamageForLevel(); // Assuming this method is now accessible here
+                int damage = CalculateDamageForLevel(baseMinDamage, baseMaxDamage); // Assuming this method is now accessible here
                 bool isCrit = Random.value < (critChance / 100f);
                 if (isCrit)
                 {

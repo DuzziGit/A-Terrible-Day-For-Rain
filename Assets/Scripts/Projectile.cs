@@ -2,63 +2,48 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed;
-    public float lifeTime;
-    public float detectionRange;
-    public float maxDistance;
-    public LayerMask enemyLayer;
-    public int minDamage; // Minimum damage
-    public int maxDamage; // Maximum damage
-    public bool hasDamaged;
-    public int playeLevel;
-    public float critChance;
-    public float critMultiplier;
-    public float targetingToleranceAngle = 5f;
-
-    private Vector3 initialPosition;
-    public Vector3 direction;
-    public Transform closestEnemy;
-    private Rigidbody2D rb;
-    protected int damage;
-    protected bool isCrit = false;
-    private const int baseMinDamage = 950;
-    private const int baseMaxDamage = 1050;
-    private const float damageGrowthRate = 1.1f;
-    protected int playerLevel;
-    private void Awake()
+    [SerializeField] protected float speed = 20;
+    [SerializeField] protected float lifeTime = 0.6f;
+    [SerializeField] protected float detectionRange = 3;
+    [SerializeField] protected float maxDistance = 13;
+    protected LayerMask enemyLayer = 1 << 6;
+    protected bool hasDamaged = false;
+    protected float targetingToleranceAngle = 5f;
+    protected Vector3 initialPosition;
+    protected Vector3 direction;
+    protected Transform closestEnemy;
+    protected Rigidbody2D rb;
+    [SerializeField] private int totalHits;
+    protected int TotalHits
+    {
+        get { return totalHits; }
+    }
+    [SerializeField] private int minDamage;
+    protected int MinDamage
+    {
+        get { return minDamage; }
+        set { minDamage = value; }
+    }
+    [SerializeField] private int maxDamage;
+    protected int MaxDamage
+    {
+        get { return maxDamage; }
+        set { maxDamage = value; }
+    }
+    protected void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Start()
+    protected void Start()
     {
         initialPosition = transform.position;
         Invoke("DestroyProjectile", lifeTime);
         hasDamaged = false;
         direction = transform.right;
     }
-    public int CalculateDamageForLevel(int playerLevel)
+    protected void Update()
     {
-        int minDamageAtLevel = Mathf.FloorToInt(baseMinDamage * Mathf.Pow(damageGrowthRate, (playerLevel - 1)));
-        int maxDamageAtLevel = Mathf.FloorToInt(baseMaxDamage * Mathf.Pow(damageGrowthRate, (playerLevel - 1)));
-
-        return Random.Range(minDamageAtLevel, maxDamageAtLevel + 1);
-    }
-    public void Update()
-    {
-        playerLevel = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().level;
-
-
-        damage = CalculateDamageForLevel(playerLevel);
-
-        // Implementing critical hits
-        isCrit = Random.value < (critChance / 100f);
-        if (isCrit)
-        {
-            damage = Mathf.FloorToInt(damage * critMultiplier); // Apply crit multiplier to the base damage
-        }
-
-
         // Check if an enemy is within detection range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRange, enemyLayer);
 
@@ -106,52 +91,37 @@ public class Projectile : MonoBehaviour
             DestroyProjectile();
         }
     }
-    protected virtual void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        // Debug.Log("Projectile collided with: " + collision.gameObject.name);
-        // if (!hasDamaged && collision.transform == closestEnemy)
         if (!hasDamaged && collision.gameObject.CompareTag("Enemy"))
         {
-            /*      Debug.Log("Projectile collided with: " + collision.gameObject.name);
-                  Debug.Log("Enemy tag: " + collision.tag);
-                  Debug.Log("Collided object layer: " + LayerMask.LayerToName(collision.gameObject.layer));
-
-                 */
             if (collision.CompareTag("Enemy"))
             {
-                //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
-                collision.GetComponent<EnemyCon>().TakeDamage(damage, isCrit);
+                HitManager.Instance.ApplyDelayedHits(collision, totalHits, MinDamage, MaxDamage);
+                DestroyProjectile();
             }
-
             hasDamaged = true;
-            DestroyProjectile();
+
             return; // Exit the method after hitting the enemy
 
         }
     }
 
-    protected virtual void OnTriggerStay2D(Collider2D collision)
-    {
-        // Debug.Log("Projectile collided with: " + collision.gameObject.name);
-        if (!hasDamaged && collision.transform == closestEnemy)
-        {
-            /*      Debug.Log("Projectile collided with: " + collision.gameObject.name);
-                  Debug.Log("Enemy tag: " + collision.tag);
-                  Debug.Log("Collided object layer: " + LayerMask.LayerToName(collision.gameObject.layer));
+    // protected virtual void OnTriggerStay2D(Collider2D collision)
+    // {
+    //     if (!hasDamaged && collision.transform == closestEnemy)
+    //     {
+    //         if (collision.CompareTag("Enemy"))
+    //         {
+    //             HitManager.Instance.ApplyDelayedHits(collision, totalHits - 1, hitCooldown, baseMinDamage, baseMaxDamage);
+    //         }
 
-                 */
-            if (collision.CompareTag("Enemy"))
-            {
-                //   Debug.Log("ENEMY MUST TAKE DAMAGE !" + damage);
-                collision.GetComponent<EnemyCon>().TakeDamage(damage, isCrit);
-            }
+    //         hasDamaged = true;
+    //         DestroyProjectile();
+    //         return; // Exit the method after hitting the enemy
 
-            hasDamaged = true;
-            DestroyProjectile();
-            return; // Exit the method after hitting the enemy
-
-        }
-    }
+    //     }
+    // }
     protected void DestroyProjectile()
     {
         Destroy(gameObject);
