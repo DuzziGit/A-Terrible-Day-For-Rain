@@ -6,13 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Stats")]
+    [HideInInspector]
     public int level;
-    [HideInInspector]
-    public int healthPotions;
-    [HideInInspector]
-    public int maxHealthPotions;
-    [HideInInspector]
-    public int healthPotionValue;
     [HideInInspector]
     public int expValue;
     [HideInInspector]
@@ -30,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed;
     public float jumpForce;
-    public float flyForce = 5f;
+    [HideInInspector]
     public float moveDirection;
     private int jumpDirection = 0;
 
@@ -41,13 +36,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public bool isAirborne = false;
     [HideInInspector]
-    public bool isPressingUp = false;
-    [HideInInspector]
     public bool isPressingInteract = false;
-    [HideInInspector]
-    public bool isPressingDrop = false;
-    [HideInInspector]
-    public bool isHoldingObject = false;
     [HideInInspector]
     public bool isWalking = false;
     [HideInInspector]
@@ -60,23 +49,14 @@ public class PlayerMovement : MonoBehaviour
     public bool startup = true;
 
     [Header("References")]
-    public Rigidbody2D rb;
-    public BoxCollider2D bc;
-    public TMP_Text playerLevel;
-    public TMP_Text levelUI;
-    public TMP_Text skillLevel1Text;
-    public TMP_Text skillLevel2Text;
-    public TMP_Text skillLevel3Text;
-    public TMP_Text skillUltText;
-    public TMP_Text HealthDisplayText;
-    public GameObject upgradeButtons;
+    protected Rigidbody2D rb;
+    protected BoxCollider2D bc;
+    protected TMP_Text playerLevel;
+    [SerializeField] protected TMP_Text levelUI;
     public Animator leveledUpAnimator;
     public HealthBar healthBar;
     public ExperienceBar experienceBar;
-    public GameObject shopKeeperCanvas;
-    public AudioClip fall;
     public GameObject optionsMenuCanvas;
-    public TMP_Text coinCount;
 
     [Header("Player State")]
     [HideInInspector]
@@ -86,7 +66,9 @@ public class PlayerMovement : MonoBehaviour
     private bool shouldLevelUp = false;
 
     [Header("Portal Settings")]
+    [HideInInspector]
     public int expToBeGained;
+    [HideInInspector]
     public string destination = "";
     private Vector3 portalDestinationPosition;
     private readonly string portalToTeleportTo;
@@ -95,13 +77,6 @@ public class PlayerMovement : MonoBehaviour
     public int currentHealth;
     public int maxHealth;
     private const int jumpSpeed = 10;
-
-    /*    [Header("Shopkeeper and Options Menu Settings")]
-        private bool isNearShopKeeper = false;
-        private bool isNearOptionsMenu = true;
-    */
-    [Header("Coins")]
-    public int coins;
 
     public AudioSource audioSource;
     private bool isPlaying;
@@ -157,10 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (healthPotions > maxHealthPotions)
-        {
-            healthPotions = maxHealthPotions;
-        }
+
         getPlayerInput();
         playerInteractInput();
         animate();
@@ -213,17 +185,9 @@ public class PlayerMovement : MonoBehaviour
             EnterPortal();
             //  OpenShopKeeperUI();
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (healthPotions > 0)
-            {
-                UpdateHealth(+healthPotionValue);
-                healthPotions--;
-            }
-            isPressingInteract = true;
-        }
+        isPressingInteract = true;
     }
+
 
     public void LevelUp()
     {

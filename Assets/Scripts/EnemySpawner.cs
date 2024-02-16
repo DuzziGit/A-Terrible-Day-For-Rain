@@ -6,8 +6,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] enemyPrefabs;
     public int maxEnemies;
     public static int currentEnemies;
-    private PlayerMovement playerMovement;
-    private GameObject player;
+    [SerializeField] private PlayerMovement playerMovement;
     private void Awake()
     {
         currentEnemies = 0;
@@ -17,14 +16,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (player == null)
-        {
-            player = GameObject.FindWithTag("Player");
-        }
-        if (player != null)
-        {
-            playerMovement = player.GetComponent<PlayerMovement>();
-        }
         if (currentEnemies < maxEnemies && playerMovement != null)
         {
             SpawnEnemy();

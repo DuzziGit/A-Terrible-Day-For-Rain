@@ -63,10 +63,8 @@ public class RogueSkillController : PlayerMovement
     private readonly TMP_Text textCooldownSM;
     private readonly Image imageCooldownSU;
     private readonly TMP_Text textCooldownSU;
-    private readonly TMP_Text healthPotionText;
 
     public bool isInvincible;
-
     public float cooldownTimeMovement = 2;
     private float nextFireTimeMovement = 0;
 
@@ -128,7 +126,6 @@ public class RogueSkillController : PlayerMovement
 
         levelUI.text = level.ToString();
         maxHealth = level * 100;
-        healthPotionValue = level * 10;
         maxExp = level * 60;
 
         experienceBar.SetExperience(currentExp);
