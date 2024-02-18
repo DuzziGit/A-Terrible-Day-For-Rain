@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
     public Color tutEnemy = new(0, 1f, 1f, 1f);
 
     public Animator animator;
-    public EnemySpawner MySpawner { get; set; }
+    public EnemySpawner MySpawner;
 
     private void Start()
     {

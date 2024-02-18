@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (enemyComponent != null)
         {
-            enemyComponent.MySpawner = this;
+            enemyInstance.GetComponent<Enemy>().MySpawner = this;
             enemyComponent.level = enemyLevel;
             enemyComponent.health = enemyLevel * 150;
             enemyComponent.expValue = enemyLevel * 2;

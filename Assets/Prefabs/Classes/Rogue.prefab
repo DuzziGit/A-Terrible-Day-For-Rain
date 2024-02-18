@@ -1518,6 +1518,7 @@ MonoBehaviour:
   DamageRecieved: 0
   CanMove: 0
   startup: 1
+  cc: {fileID: 1789296900}
   levelUI: {fileID: 4281220201831810521}
   leveledUpAnimator: {fileID: 5236749615006874936}
   healthBar: {fileID: 0}
@@ -1530,6 +1531,7 @@ MonoBehaviour:
   maxHealth: 1000
   audioSource: {fileID: 9011964926031391141}
   animator: {fileID: 9011964926031391143}
+  playerCollider: {fileID: 9011964926031391148}
   MovementSkillForce: 15
   MovementSkillForceLeft: -15
   projectile: {fileID: 2122635036824758511, guid: e7259c155907ef349b2792b420563bc6, type: 3}
@@ -1964,8 +1966,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.018969536, y: 0}
-  m_Size: {x: 0.5648159, y: 1}
+  m_Offset: {x: -0.018969536, y: -0.06369889}
+  m_Size: {x: 0.5648159, y: 0.8726022}
   m_Direction: 0
 --- !u!1001 &6801154960135622474
 PrefabInstance:
