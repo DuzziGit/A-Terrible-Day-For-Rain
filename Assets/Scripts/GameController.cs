@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
     public bool canSpawn = true;
     private float spawnTimer = 8f; // Timer for spawning enemies every 8 seconds
     private float timeSinceLastSpawn = 0f; // Time since last spawn
-
+    public bool playerCanMove = true;
 
 
     /// <summary>
@@ -39,6 +39,9 @@ public class GameController : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+
         }
         else if (instance != this)
         {
@@ -141,8 +144,12 @@ public class GameController : MonoBehaviour
     }
 
 
-    public IEnumerator FadeBlackInSquare(float fadeSpeed = 0.2f)
+    public IEnumerator FadeBlackInSquare(float fadeSpeed = 0.5f)
     {
+        playerCanMove = false; // Initially, the player cannot move.
+        float pSpeed;
+        pSpeed = playerMovement.moveSpeed;
+        playerMovement.moveSpeed = 0;
         Color objectColor = blackSquare.color;
         float fadeAmount;
 
@@ -151,8 +158,18 @@ public class GameController : MonoBehaviour
             fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
             objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
             blackSquare.color = objectColor;
+
+            // Enable player movement when alpha is approximately 0.39 or lower, but only do this once
+            if (blackSquare.color.a <= 0.39 && !playerCanMove)
+            {
+                playerMovement.moveSpeed = pSpeed;
+                playerCanMove = true; // Player can now move.
+            }
+
             yield return null;
         }
+        playerMovement.moveSpeed = pSpeed;
+        playerCanMove = true;
     }
 
     public IEnumerator FadeBlackOutSquare(bool fadeToBlack = true, float fadeSpeed = .2f)

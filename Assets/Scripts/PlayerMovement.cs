@@ -136,17 +136,23 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (GameController.instance.playerCanMove)
+        {
 
-        getPlayerInput();
-        playerInteractInput();
-        animate();
+            getPlayerInput();
+            playerInteractInput();
+            animate();
+        }
+
 
 
     }
     private void FixedUpdate()
     {
-        moveCharacter();
-
+        if (GameController.instance.playerCanMove)
+        {
+            moveCharacter();
+        }
 
     }
     private void PlayerDeath()

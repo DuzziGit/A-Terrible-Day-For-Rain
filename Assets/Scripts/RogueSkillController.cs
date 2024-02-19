@@ -127,7 +127,7 @@ public class RogueSkillController : PlayerMovement
 
         levelUI.text = level.ToString();
         maxHealth = level * 100;
-        maxExp = level * 60;
+        maxExp = level * 200;
 
         experienceBar.SetExperience(currentExp);
         cooldownTimeSkill3Upgraded = cooldownTimeSkill3 - GetComponent<PlayerMovement>().skillThreeLevel;
@@ -137,23 +137,30 @@ public class RogueSkillController : PlayerMovement
         //  skillUltText.text = ultSkillLevel.ToString();
         //  HealthDisplayText.text = $"{currentHealth} / {maxHealth}";
         //  coinCount.text = coins.ToString();
+        if (GameController.instance.playerCanMove)
+        {
+            //Get player inputs
+            getPlayerInput();
+            playerInteractInput();
 
-        //Get player inputs
-        getPlayerInput();
-        playerInteractInput();
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            GetMovementSkillInput();
+            GetFirstSkillInput();
+            GetSecondSkillInput();
+            GetThirdSkillInput();
+            GetUltimateSkillInput();
+            LevelUp();
 
-        GetMovementSkillInput();
-        GetFirstSkillInput();
-        GetSecondSkillInput();
-        GetThirdSkillInput();
-        GetUltimateSkillInput();
-        LevelUp();
+            //Animate
+            animate();
+            ApplyCooldownTracker();
 
-        //Animate
-        animate();
-        ApplyCooldownTracker();
+            if (!isAirborne)
+            {
+                nextFireTimeMovement = 0;
+            }
+        }
     }
 
     private void FixedUpdate()
