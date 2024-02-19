@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -18,8 +19,17 @@ public class GameController : MonoBehaviour
     private List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
     public PlayerMovement playerMovement;
     public GameObject Player;
+    public bool canSpawn = true;
 
 
+
+    /// <summary>
+    /// This function is called when the object becomes enabled and active.
+    /// </summary>
+    void OnEnable()
+    {
+        EnemySpawner.currentEnemiesSpawned += SpawnWave;
+    }
 
     private void Awake()
     {
@@ -60,11 +70,42 @@ public class GameController : MonoBehaviour
             foreach (EnemySpawner spawner in enemySpawners)
             {
                 spawner.SetMaxEnemies(maxPerSpawner);
+
             }
         }
     }
 
 
+    void Update()
+    {
+        SpawnEnemies();
+
+    }
+    private void SpawnWave()
+    {
+        canSpawn = true;
+    }
+
+    private IEnumerator SpawnTimer()
+    {
+
+        yield return new WaitForSeconds(8f);
+        canSpawn = true;
+    }
+
+    private void SpawnEnemies()
+    {
+        if (canSpawn)
+        {
+            foreach (EnemySpawner spawner in enemySpawners)
+            {
+                spawner.SpawnEnemy();
+            }
+            Debug.Log("Enemies spawned");
+            canSpawn = false; // Prevent spawning again until it's reset
+            StartCoroutine(SpawnTimer()); // Optionally, start a timer to reset canSpawn
+        }
+    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -121,6 +162,10 @@ public class GameController : MonoBehaviour
                 yield return null;
             }
         }
+    }
+    private void OnDisable()
+    {
+        EnemySpawner.currentEnemiesSpawned += SpawnWave;
     }
     private void OnDestroy()
     {

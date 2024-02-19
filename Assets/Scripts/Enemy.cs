@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class Enemy : MonoBehaviour
 {
     [HideInInspector]
@@ -35,7 +35,8 @@ public class Enemy : MonoBehaviour
 
     public Animator animator;
     public EnemySpawner MySpawner;
-
+    protected bool canFlip = true;
+    protected float flipCooldown = 0.2f;
     private void Start()
     {
 
@@ -70,10 +71,10 @@ public class Enemy : MonoBehaviour
 
     public void HoverPlayerX()
     {
-        _ = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, LayerMask.GetMask("World"));
-        _ = Physics2D.Raycast(wallDetection.position, Vector2.right, distance, LayerMask.GetMask("World"));
-        RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, Vector2.right, distance, LayerMask.GetMask("EnemyOnlyWall"));
-
+        //    _ = Physics2D.Raycast(transform.position, Vector2.down, distance, LayerMask.GetMask("World"));
+        _ = Physics2D.Raycast(transform.position, Vector2.right, distance, LayerMask.GetMask("World"));
+        Vector2 castDirection = movingRight ? Vector2.right : Vector2.left;
+        RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, castDirection, distance, LayerMask.GetMask("EnemyOnlyWall"));
 
 
         if (transform.position.x - GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position.x < 0.2f)
@@ -160,26 +161,33 @@ public class Enemy : MonoBehaviour
     }
     private void Patrol()
     {
-        // Check the direction to cast the ray for walls
+        if (!canFlip) return;
+
         Vector2 direction = movingRight ? Vector2.right : Vector2.left;
-
-        RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance, LayerMask.GetMask("World", "Platform"));
-        RaycastHit2D wallInfo = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("World", "Platform"));
-        RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, direction, distance, LayerMask.GetMask("EnemyOnlyWall"));
-
-        if (!groundInfo.collider || wallInfo.collider || enemyWall.collider)
+        RaycastHit2D wallHit = Physics2D.Raycast(transform.localPosition, direction, 2, LayerMask.GetMask("EnemyOnlyWall", "Platform", "World"));
+        if (wallHit.collider != null)
         {
             FlipDirection();
         }
     }
 
+
     private void FlipDirection()
     {
+        if (!canFlip) return;
+        //   Debug.Log("Flipping direction. Was moving right: " + movingRight);
+
         movingRight = !movingRight;
         rb.velocity = new Vector3(movingRight ? speed : -speed, rb.velocity.y, 0);
         enemySprite.flipX = !movingRight;
+        StartCoroutine(FlipCooldownRoutine());
     }
-
+    private IEnumerator FlipCooldownRoutine()
+    {
+        canFlip = false;
+        yield return new WaitForSeconds(flipCooldown);
+        canFlip = true;
+    }
     private void OnCollisionEnter2D(Collision2D collision) // Corrected argument type
     {
         if (collision.collider.CompareTag("Player"))

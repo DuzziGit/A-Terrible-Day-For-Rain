@@ -8,15 +8,9 @@ public class EnemySpawner : MonoBehaviour
     private int currentEnemies; // Not static, so it's specific to this instance
     [SerializeField] private float padding = 1.0f; // Adjustable padding distance
     private int lastSpawnIndex = -1; // Track the last spawn point used
+    public delegate void CurrentEnemiesSpawned();
+    public static CurrentEnemiesSpawned currentEnemiesSpawned;
 
-    private void Update()
-    {
-        // Example logic to trigger spawning
-        if (currentEnemies < maxEnemies)
-        {
-            SpawnEnemy();
-        }
-    }
 
     private IEnumerator Start()
     {
@@ -35,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
         maxEnemies = max;
     }
 
-    private void SpawnEnemy()
+    public void SpawnEnemy()
     {
         int playerLevel = GameController.instance.playerMovement.level;
         int enemyLevel = Random.Range(playerLevel, playerLevel + 5);

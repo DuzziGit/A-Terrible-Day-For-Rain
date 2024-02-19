@@ -32,6 +32,7 @@ TagManager:
   - W1-3-A
   - Carnage
   - FallThroughPlatform
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -45,7 +46,7 @@ TagManager:
   - Projectile
   - PlayerFallThrough
   - Platform
-  - 
+  - EnemyOnlyWall
   - 
   - 
   - 
