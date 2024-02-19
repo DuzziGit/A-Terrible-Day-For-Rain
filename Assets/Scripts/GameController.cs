@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     public PlayerMovement playerMovement;
     public GameObject Player;
     public bool canSpawn = true;
+    private float spawnTimer = 8f; // Timer for spawning enemies every 8 seconds
+    private float timeSinceLastSpawn = 0f; // Time since last spawn
 
 
 
@@ -76,10 +78,17 @@ public class GameController : MonoBehaviour
     }
 
 
+
     void Update()
     {
-        SpawnEnemies();
+        timeSinceLastSpawn += Time.deltaTime;
 
+        // Check if it's time to spawn due to timer or all enemies are dead
+        if (timeSinceLastSpawn >= spawnTimer || AllEnemiesDead())
+        {
+            SpawnEnemies();
+            timeSinceLastSpawn = 0f; // Reset the timer
+        }
     }
     private void SpawnWave()
     {
@@ -93,6 +102,18 @@ public class GameController : MonoBehaviour
         canSpawn = true;
     }
 
+    private bool AllEnemiesDead()
+    {
+        foreach (EnemySpawner spawner in enemySpawners)
+        {
+            if (spawner.currentEnemies > 0)
+            {
+                return false; // If any spawner has enemies, return false
+            }
+        }
+        return true; // All spawners have 0 enemies
+    }
+
     private void SpawnEnemies()
     {
         if (canSpawn)
@@ -102,8 +123,8 @@ public class GameController : MonoBehaviour
                 spawner.SpawnEnemy();
             }
             Debug.Log("Enemies spawned");
-            canSpawn = false; // Prevent spawning again until it's reset
-            StartCoroutine(SpawnTimer()); // Optionally, start a timer to reset canSpawn
+            canSpawn = false;
+            StartCoroutine(SpawnTimer());
         }
     }
 
