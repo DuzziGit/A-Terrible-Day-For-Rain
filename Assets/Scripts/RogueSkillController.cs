@@ -10,13 +10,45 @@ public class RogueSkillController : PlayerMovement
 
     public GameObject projectile;
     public GameObject projectile2;
-    public GameObject LevelUpShuriken;
+    public GameObject ProjectileUltimate;
     public Transform attackPos;
 
 
     public AudioClip ThrowingStarSoundEffect;
     public AudioClip BigShurikenSoundEffect;
+    public AudioClip RogueUltimateSoundEffect;
     public AudioClip FlashJumpSoundEffect;
+
+    [HideInInspector]
+    public Transform RogueUltPos;
+    [HideInInspector]
+    public Transform RogueUltPos1;
+    [HideInInspector]
+    public Transform RogueUltPos2;
+    [HideInInspector]
+    public Transform RogueUltPos3;
+    [HideInInspector]
+    public Transform RogueUltPos4;
+    [HideInInspector]
+    public Transform RogueUltPos5;
+    [HideInInspector]
+    public Transform RogueUltPos6;
+    [HideInInspector]
+    public Transform RogueUltPos7;
+    [HideInInspector]
+    public Transform RogueUltPos8;
+    [HideInInspector]
+    public Transform RogueUltPos9;
+    [HideInInspector]
+    public Transform RogueUltPos10;
+    [HideInInspector]
+    public Transform RogueUltPos11;
+    [HideInInspector]
+    public Transform RogueUltPos12;
+    [HideInInspector]
+    public Transform RogueUltPos13;
+    [HideInInspector]
+    public Transform RogueUltPos14;
 
     public float horizontalMove = 0f;
     public float runSpeed = 40f;
@@ -46,6 +78,9 @@ public class RogueSkillController : PlayerMovement
     private float nextFireTimeSkill3 = 0;
 
     public float cooldownTimeSkill3Upgraded;
+
+    public float cooldownTimeSkillUlt = 2;
+    private float nextFireTimeSkillUlt = 0;
 
     public Animator SwipeOne;
     public Animator SwipeTwo;
@@ -112,10 +147,12 @@ public class RogueSkillController : PlayerMovement
         GetFirstSkillInput();
         GetSecondSkillInput();
         GetThirdSkillInput();
+        GetUltimateSkillInput();
         LevelUp();
 
         //Animate
         animate();
+        ApplyCooldownTracker();
     }
 
     private void FixedUpdate()
@@ -163,6 +200,35 @@ public class RogueSkillController : PlayerMovement
         yield return new WaitForSeconds(0.1f);
         MovementSkillOne.SetBool("MovementSkillUsed", false);
         MovementSkillTwo.SetBool("MovementSkillUsed", false);
+    }
+
+    public void ApplyCooldownTracker()
+    {
+        cooldownTimerS1 -= Time.deltaTime;
+        cooldownTimerS2 -= Time.deltaTime;
+        cooldownTimerS3 -= Time.deltaTime;
+        cooldownTimerSM -= Time.deltaTime;
+        cooldownTimerSU -= Time.deltaTime;
+
+        UpdateCooldownTimer(textCooldownS1, imageCooldownS1, cooldownTimerS1, cooldownTimeSkill1);
+        UpdateCooldownTimer(textCooldownS2, imageCooldownS2, cooldownTimerS2, cooldownTimeSkill2);
+        UpdateCooldownTimer(textCooldownS3, imageCooldownS3, cooldownTimerS3, cooldownTimeSkill3Upgraded);
+        UpdateCooldownTimer(textCooldownSU, imageCooldownSU, cooldownTimerSU, cooldownTimeSkillUlt);
+        UpdateCooldownTimer(textCooldownSM, imageCooldownSM, cooldownTimerSM, cooldownTimeMovement);
+    }
+
+    private void UpdateCooldownTimer(TMP_Text textCooldown, Image imageCooldown, float cooldownTimer, float cooldownTime)
+    {
+        if (cooldownTimer < 0.0f)
+        {
+            //      textCooldown.gameObject.SetActive(false);
+            //        imageCooldown.fillAmount = 0.0f;
+        }
+        else
+        {
+            //      textCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
+            //      imageCooldown.fillAmount = cooldownTimer / cooldownTime;
+        }
     }
 
     // First Skill
@@ -254,20 +320,38 @@ public class RogueSkillController : PlayerMovement
         Physics2D.IgnoreLayerCollision(7, 11, false);
     }
 
-
-    public override void LevelUp()
+    // Ultimate Skill
+    public void GetUltimateSkillInput()
     {
-        if (level < 60 && shouldLevelUp)
+        if (Time.time > nextFireTimeSkillUlt && Input.GetKeyDown(KeyCode.F))
         {
-            IncreaseLevel();
-            _ = Instantiate(LevelUpShuriken, transform);
-            shouldLevelUp = false;
-            AudioController.instance.PlayLevelUpSound();
-            leveledUpAnimator.SetTrigger("LeveledUp");
-
-
+            _ = StartCoroutine(UltimateSkillEnum());
+            nextFireTimeSkillUlt = Time.time + cooldownTimeSkillUlt;
+            //   textCooldownSU.gameObject.SetActive(true);
+            cooldownTimerSU = cooldownTimeSkillUlt;
         }
     }
 
+    private IEnumerator UltimateSkillEnum()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            _ = Instantiate(ProjectileUltimate, RogueUltPos.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos1.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos2.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos3.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos4.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos5.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos6.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos7.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos8.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos9.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos10.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos11.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos12.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos13.position, RogueUltPos.rotation);
+            _ = Instantiate(ProjectileUltimate, RogueUltPos14.position, RogueUltPos.rotation);
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
 }
-

@@ -60,10 +60,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player State")]
     [HideInInspector]
-    protected bool facingRight = true;
-    protected bool isJumping = false;
-    protected bool isGrounded = false;
-    protected bool shouldLevelUp = false;
+    public bool facingRight = true;
+    private bool isJumping = false;
+    private bool isGrounded = false;
+    private bool shouldLevelUp = false;
 
     [Header("Portal Settings")]
     [HideInInspector]
@@ -216,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public virtual void LevelUp()
+    public void LevelUp()
     {
         if (level < 60 && shouldLevelUp)
         {
