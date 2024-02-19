@@ -60,10 +60,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Player State")]
     [HideInInspector]
-    public bool facingRight = true;
-    private bool isJumping = false;
-    private bool isGrounded = false;
-    private bool shouldLevelUp = false;
+    protected bool facingRight = true;
+    protected bool isJumping = false;
+    protected bool isGrounded = false;
+    protected bool shouldLevelUp = false;
 
     [Header("Portal Settings")]
     [HideInInspector]
