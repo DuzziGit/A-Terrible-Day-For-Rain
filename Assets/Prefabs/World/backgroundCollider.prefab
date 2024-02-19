@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2935069493957425543}
-  - component: {fileID: 2935069493957425562}
   - component: {fileID: 2935069493957425542}
   - component: {fileID: 2935069493957425537}
+  - component: {fileID: 1373052660}
   m_Layer: 0
   m_Name: backgroundCollider
   m_TagString: Untagged
@@ -34,32 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &2935069493957425562
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2935069493957425563}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.63045424, y: 0.5188157}
-  - {x: -0.6261851, y: 0.99169725}
-  - {x: 0.5752517, y: 1.0155132}
-  - {x: 0.57924306, y: -0.6178829}
-  - {x: -0.62376475, y: -0.64817125}
-  - {x: -0.626227, y: 1.0043905}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!60 &2935069493957425542
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -85,14 +59,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5628038, y: 0.9891075}
-      - {x: -0.6232056, y: 0.99090147}
-      - {x: -0.621144, y: -0.6059401}
-      - {x: 0.57268566, y: -0.64113724}
-      - {x: 0.57621264, y: 1.0252106}
-      - {x: 0.57061875, y: -0.6003099}
-      - {x: -0.61926097, y: -0.6438202}
-      - {x: -0.62188864, y: 0.97459775}
+    - - {x: 0.08879757, y: 8.927469}
+      - {x: 0.0802145, y: 8.892021}
+      - {x: 0.0753808, y: 1.1778603}
+      - {x: 5.0786877, y: 1.1842452}
+      - {x: 5.055084, y: 8.957939}
+      - {x: 0.09799886, y: 8.942686}
 --- !u!212 &2935069493957425537
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -145,3 +117,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1373052660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935069493957425563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70135b0adcd6b84886dff3c61186fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

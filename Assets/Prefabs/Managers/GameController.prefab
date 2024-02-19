@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1226662651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226662652}
+  - component: {fileID: 1226662653}
+  m_Layer: 0
+  m_Name: CameraShakeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226662652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226662651}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 22.412107, y: -35.97336, z: -15.689171}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3452426485557688719}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1226662653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226662651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771c0ff5aee211941a6da0597afd1fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalShakeFource: 1
 --- !u!1 &3452426485557688752
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +76,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3452426484602399572}
+  - {fileID: 1226662652}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,13 +93,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackSquare: {fileID: 0}
-  timeLeft: 300
-  timerText: {fileID: 0}
-  maxEnemies: 200
-  playerLevel: 1
   gameControlsUi: {fileID: 3452426485557688752}
-  RoguePrefab: {fileID: 9011964926031391150, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
   cinemachineCam: {fileID: 0}
+  totalMaxEnemies: 30
+  playerMovement: {fileID: 0}
+  Player: {fileID: 0}
+  canSpawn: 1
+  playerCanMove: 1
 --- !u!82 &3452426485557688717
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64,15 +110,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 79cced4d61b799240bfdaac47e726e0f, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: be8191fad15e0864a86b406987a3a7e4, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.248
+  m_Volume: 0.148
   m_Pitch: 2
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 126
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -160,6 +206,10 @@ PrefabInstance:
     - target: {fileID: 7816535360848987378, guid: 7949efa4d24f0e848a051c408afce0b1, type: 3}
       propertyPath: PlayerLevel
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7816535360848987378, guid: 7949efa4d24f0e848a051c408afce0b1, type: 3}
+      propertyPath: hitCooldown
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7816535360848987380, guid: 7949efa4d24f0e848a051c408afce0b1, type: 3}
       propertyPath: m_Name
