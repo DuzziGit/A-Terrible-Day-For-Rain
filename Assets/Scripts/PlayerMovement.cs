@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     protected Rigidbody2D rb;
     [SerializeField] protected CapsuleCollider2D cc;
-    protected TMP_Text playerLevel;
+    [SerializeField] protected TMP_Text playerLevelTextText;
     [SerializeField] protected TMP_Text levelUI;
     public Animator leveledUpAnimator;
     public HealthBar healthBar;
@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        playerLevel = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<TMP_Text>();
+        //    playerLevelTextText = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<TMP_Text>();
         experienceBar.setMaxExp(maxExp);
         GainExperience(0);
         isPlaying = false;
@@ -232,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
     public void IncreaseLevel()
     {
         level++;
-        _ = StartCoroutine(LevelUpDelay());
+        //   _ = StartCoroutine(LevelUpDelay());
         Debug.Log("Level Up! Player Level is now: " + level);
         maxExp = level * 23;
         currentHealth = maxHealth + 100;
@@ -240,9 +240,9 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator LevelUpDelay()
     {
-        playerLevel.text = "Level Up!";
+        // playerLevelText.text = "Level Up!";
         yield return new WaitForSeconds(2);
-        playerLevel.text = "";
+        //  playerLevelText.text = "";
     }
 
     public void animate()

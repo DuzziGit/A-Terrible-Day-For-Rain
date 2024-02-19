@@ -5,11 +5,18 @@ using System.Collections;
 public class MultiHitProjectile : Projectile
 {
     private Dictionary<Collider2D, int> hitEnemies = new Dictionary<Collider2D, int>();
-
+    [SerializeField] private bool isStuck = false;
     void Update()
     {
         base.Update();
-        direction = transform.right;
+        if (!isStuck)
+        {
+            direction = transform.right;
+        }
+        else
+        {
+            transform.localPosition = Vector3.zero;
+        }
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
