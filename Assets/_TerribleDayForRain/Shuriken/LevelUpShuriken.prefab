@@ -7,9 +7,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 698103068, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: m_Color.a
+      value: 0.16862746
+      objectReference: {fileID: 0}
     - target: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_Name
-      value: AoeShurikenPrefab
+      value: LevelUpShuriken
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_RootOrder
@@ -68,12 +76,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: isStuck
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: lifeTime
-      value: 20
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: maxDamage
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: minDamage
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: totalHits
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: maxDistance
