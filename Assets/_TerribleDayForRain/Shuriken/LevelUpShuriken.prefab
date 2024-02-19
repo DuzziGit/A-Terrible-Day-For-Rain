@@ -47,6 +47,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelUpShuriken
       objectReference: {fileID: 0}
+    - target: {fileID: 3513933241247362504, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: m_Size.x
+      value: 2.4815288
+      objectReference: {fileID: 0}
+    - target: {fileID: 3513933241247362504, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: m_Size.y
+      value: 2.5822997
+      objectReference: {fileID: 0}
+    - target: {fileID: 3513933241247362504, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.027037144
+      objectReference: {fileID: 0}
+    - target: {fileID: 3513933241247362504, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.047379434
+      objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -109,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: lifeTime
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: maxDamage

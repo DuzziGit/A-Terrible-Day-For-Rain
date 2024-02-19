@@ -25,9 +25,6 @@ public class GameController : MonoBehaviour
     public bool playerCanMove = true;
 
 
-    /// <summary>
-    /// This function is called when the object becomes enabled and active.
-    /// </summary>
     void OnEnable()
     {
         EnemySpawner.currentEnemiesSpawned += SpawnWave;

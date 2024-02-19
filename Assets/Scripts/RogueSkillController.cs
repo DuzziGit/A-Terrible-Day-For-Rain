@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Cinemachine;
 public class RogueSkillController : PlayerMovement
 {
     public float MovementSkillForce;
@@ -96,6 +96,7 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimerSM = 0.0f;
     private float cooldownTimerSU = 0.0f;
     private readonly float cooldownTimer = 0.0f;
+    private CinemachineImpulseSource impulseSource;
     private void Start()
     {
         HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -103,6 +104,7 @@ public class RogueSkillController : PlayerMovement
         {
             healthBar.SetMaxHealth(maxHealth);
         }
+        impulseSource = GetComponent<CinemachineImpulseSource>();
 
         //   textCooldownS1.gameObject.SetActive(false);
         //   imageCooldownS1.fillAmount = 0.0f;
@@ -173,6 +175,7 @@ public class RogueSkillController : PlayerMovement
         {
             IncreaseLevel();
             _ = Instantiate(LevelUpShuriken, transform);
+            CameraShakeManager.instance.CameraShake(impulseSource);
             shouldLevelUp = false;
             AudioController.instance.PlayLevelUpSound();
             leveledUpAnimator.SetTrigger("LeveledUp");
