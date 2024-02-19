@@ -202,8 +202,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   lifeTime: 1
-  detectionRange: 3
+  detectionRange: 0
   maxDistance: 13
   totalHits: 4
   minDamage: 700
   maxDamage: 470
+  isStuck: 0

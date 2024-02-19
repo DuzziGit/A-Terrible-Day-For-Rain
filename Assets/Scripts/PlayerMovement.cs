@@ -216,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void LevelUp()
+    public virtual void LevelUp()
     {
         if (level < 60 && shouldLevelUp)
         {

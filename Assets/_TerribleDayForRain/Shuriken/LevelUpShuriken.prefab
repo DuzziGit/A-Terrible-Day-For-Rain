@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_Name
-      value: AoeShurikenPrefab
+      value: LevelUpShuriken
       objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_RootOrder
@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.94
       objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -41,15 +41,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -68,16 +68,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: isStuck
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: lifeTime
-      value: 20
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: maxDamage
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: minDamage
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: totalHits
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: maxDistance
-      value: 10000000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: detectionRange

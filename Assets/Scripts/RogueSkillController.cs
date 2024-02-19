@@ -7,6 +7,7 @@ public class RogueSkillController : PlayerMovement
 {
     public float MovementSkillForce;
     public float MovementSkillForceLeft;
+    public GameObject LevelUpShuriken;
 
     public GameObject projectile;
     public GameObject projectile2;
@@ -159,7 +160,17 @@ public class RogueSkillController : PlayerMovement
     {
         moveCharacter();
     }
-
+    public override void LevelUp()
+    {
+        if (level < 60 && shouldLevelUp)
+        {
+            IncreaseLevel();
+            _ = Instantiate(LevelUpShuriken, transform);
+            shouldLevelUp = false;
+            AudioController.instance.PlayLevelUpSound();
+            leveledUpAnimator.SetTrigger("LeveledUp");
+        }
+    }
     // Movement Skill
     private void GetMovementSkillInput()
     {

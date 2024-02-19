@@ -14995,6 +14995,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2076571038}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: LevelUpShuriken
+      value: 
+      objectReference: {fileID: 3972795832953981774, guid: 52f50aa3600c72d40af373c1cb06a460, type: 3}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: optionsMenuCanvas
       value: 
       objectReference: {fileID: 1206142985}
@@ -15581,6 +15585,10 @@ PrefabInstance:
     - target: {fileID: 3972795832953981774, guid: 52f50aa3600c72d40af373c1cb06a460, type: 3}
       propertyPath: m_Name
       value: AoeShurikenPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972795832953981774, guid: 52f50aa3600c72d40af373c1cb06a460, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4930675988862505841, guid: 52f50aa3600c72d40af373c1cb06a460, type: 3}
       propertyPath: isStuck
