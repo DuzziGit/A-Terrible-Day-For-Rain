@@ -8,7 +8,13 @@ public class MultiHitProjectile : Projectile
     [SerializeField] private bool isStuck = false;
     void Update()
     {
-        base.Update();
+        rb.velocity = direction * speed;
+
+        float distanceTraveled = Vector3.Distance(transform.position, initialPosition);
+        if (distanceTraveled >= maxDistance)
+        {
+            DestroyProjectile();
+        }
         if (!isStuck)
         {
             direction = transform.right;
