@@ -221,6 +221,6 @@ MonoBehaviour:
   detectionRange: 0
   maxDistance: 25
   totalHits: 6
-  minDamage: 1200
-  maxDamage: 2000
+  minDamage: 400
+  maxDamage: 1000
   isStuck: 0

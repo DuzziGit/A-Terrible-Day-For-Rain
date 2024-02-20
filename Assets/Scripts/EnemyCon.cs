@@ -139,7 +139,7 @@ public class EnemyCon : Enemy
     private IEnumerator ResetToMoveAnimation()
     {
         // Define the duration in seconds for how long you want the hit animation to stay
-        float timeToWait = 0.5f; // Adjust this to match the desired hit animation time
+        float timeToWait = 0.8f; // Adjust this to match the desired hit animation time
 
         // Wait for the defined duration
         yield return new WaitForSeconds(timeToWait);
