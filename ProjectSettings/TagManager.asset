@@ -70,8 +70,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 294652779
+  - name: background
+    uniqueID: 4283532813
     locked: 0
   - name: World
     uniqueID: 1476089383
@@ -81,4 +81,7 @@ TagManager:
     locked: 0
   - name: Monster
     uniqueID: 3967974239
+    locked: 0
+  - name: Player
+    uniqueID: 294652779
     locked: 0
