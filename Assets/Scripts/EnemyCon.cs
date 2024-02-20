@@ -18,7 +18,7 @@ public class EnemyCon : Enemy
     private int maxHealth;
     [SerializeField] private GameObject DamageNumText;
     [SerializeField] private GameObject DamageNumTextCrit;
-
+    private float lastNormalizedTime;
     private GameObject damageCanvas;// Track the canvas instance
     public bool isDisplayingDamage = false;// Flag to track if damage is currently being displayed
     private const int baseEnemyHealth = 10000;
@@ -30,6 +30,7 @@ public class EnemyCon : Enemy
     private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
     private List<(int Damage, bool IsCrit)> DamageTaken = new List<(int Damage, bool IsCrit)>();
+    private bool isInHitAnimation = false; // Flag to indicate if the hit animation is currently playing
 
     private void Start()
     {
@@ -70,9 +71,8 @@ public class EnemyCon : Enemy
             healthBar.SetHealth(health);
         }
         AudioController.instance.PlayMonsterHurtSound();
-        animator.SetBool("takingDamage", true);
+        PlayHitAnimation();
 
-        _ = StartCoroutine(ResetTakeDamageTrigger());
     }
 
     // ProcessDamage is called whenever damage is taken, even if a display is ongoing.
@@ -118,10 +118,44 @@ public class EnemyCon : Enemy
     }
 
 
-    private IEnumerator ResetTakeDamageTrigger()
+    private void PlayHitAnimation()
     {
-        yield return new WaitForSeconds(resetTriggerDelay);
-        animator.SetBool("takingDamage", false);
+        if (isInHitAnimation)
+            return; // Exit if we're already in the hit animation
 
+        isInHitAnimation = true; // Set the flag to true since we're going to play the hit animation
+
+        // Get the current frame of the Move animation
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        lastNormalizedTime = stateInfo.normalizedTime % 1; // Use modulus to loop between 0 and 1
+
+        // Play the Hit animation at the exact same frame as the Move animation
+        animator.Play("Hit", 0, lastNormalizedTime);
+
+        // Schedule to return to the Move animation at the same frame in the next frame
+        StartCoroutine(ResetToMoveAnimation());
     }
+
+    private IEnumerator ResetToMoveAnimation()
+    {
+        // Define the duration in seconds for how long you want the hit animation to stay
+        float timeToWait = 0.5f; // Adjust this to match the desired hit animation time
+
+        // Wait for the defined duration
+        yield return new WaitForSeconds(timeToWait);
+
+        // Reset the takingDamage flag and return to Move animation
+        animator.SetBool("takingDamage", false);
+        isInHitAnimation = false; // Reset the flag
+
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        // Make sure we're still in the Hit animation before switching back
+        if (stateInfo.IsName("Hit"))
+        {
+            lastNormalizedTime = stateInfo.normalizedTime % 1; // Use modulus to loop between 0 and 1
+            animator.Play("Move", 0, lastNormalizedTime);
+        }
+    }
+
 }
+
