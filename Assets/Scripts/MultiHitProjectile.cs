@@ -4,10 +4,19 @@ using System.Collections;
 
 public class MultiHitProjectile : Projectile
 {
+    [SerializeField] private bool Stationary = false;
+    [SerializeField] private int HitCap = 3;
+    [SerializeField] private bool DestroyAfterHitCap = false;
+    private int hitCount;
     private Dictionary<Collider2D, int> hitEnemies = new Dictionary<Collider2D, int>();
-    [SerializeField] private bool isStuck = false;
+
     void Update()
     {
+        if (hitCount >= HitCap && DestroyAfterHitCap)
+        {
+            DestroyProjectile();
+
+        }
         rb.velocity = direction * speed;
 
         float distanceTraveled = Vector3.Distance(transform.position, initialPosition);
@@ -15,7 +24,7 @@ public class MultiHitProjectile : Projectile
         {
             DestroyProjectile();
         }
-        if (!isStuck)
+        if (!Stationary)
         {
             direction = transform.right;
         }
@@ -26,21 +35,13 @@ public class MultiHitProjectile : Projectile
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && !hitEnemies.ContainsKey(collision))
+        if (collision.CompareTag("Enemy") && !hitEnemies.ContainsKey(collision) && hitCount < HitCap)
         {
             // Call the HitManager to handle the remaining hits
             HitManager.Instance.ApplyDelayedHits(collision, TotalHits, MinDamage, MaxDamage);
+            hitCount++;
         }
     }
 
-    // protected override void OnTriggerStay2D(Collider2D other)
-    // {
-    //     return;
-    // }
-
-    // protected override void OnTriggerExit2D(Collider2D other)
-    // {
-    //     return;
-    // }
 
 }

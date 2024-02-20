@@ -132,6 +132,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: HitCap
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: IsStuck
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: isStuck
       value: 1
       objectReference: {fileID: 0}
@@ -150,6 +158,10 @@ PrefabInstance:
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: totalHits
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: Stationary
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: maxDistance

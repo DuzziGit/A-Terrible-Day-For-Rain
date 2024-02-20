@@ -115,9 +115,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1367567050518222791}
-  - component: {fileID: -4234210634196443020}
   - component: {fileID: -6372197727346592635}
   - component: {fileID: 4219806041684247730}
+  - component: {fileID: 8810253024730516289}
   m_Layer: 13
   m_Name: BasicShurikenPrefab
   m_TagString: Projectile
@@ -141,21 +141,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4234210634196443020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2122635036824758511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c58f7cc5070674c48839506f7e72d037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalHits: 1
-  minDamage: 800
-  maxDamage: 500
 --- !u!61 &-6372197727346592635
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -203,3 +188,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8810253024730516289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122635036824758511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b3a1cd6d44544489a0828f57a84d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  lifeTime: 0.6
+  detectionRange: 6
+  maxDistance: 13
+  totalHits: 1
+  minDamage: 800
+  maxDamage: 1200
+  IsStuck: 0
+  HitCap: 3
+  DestroyAfterHitCap: 1

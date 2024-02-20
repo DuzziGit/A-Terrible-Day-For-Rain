@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 4a2c5c94db4603d41bf0aa54a8935d5e, type: 3}
+  m_Sprite: {fileID: -1970768937, guid: 4c082605dd5133142ac0e8a25dd9f0bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -220,7 +220,9 @@ MonoBehaviour:
   lifeTime: 1
   detectionRange: 0
   maxDistance: 25
-  totalHits: 6
+  totalHits: 2
   minDamage: 400
   maxDamage: 1000
-  isStuck: 0
+  Stationary: 0
+  HitCap: 6
+  DestroyAfterHitCap: 0

@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 166921
+  controlID: 9373
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 166922
+  controlID: 9374
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,8 +164,8 @@ MonoBehaviour:
     y: 0
     width: 238
     height: 947
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -205,7 +205,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c436cdffee0ccfff9c0dcfff121ddcff1eb0dcff706deaff8236ecffb68ff0ff8435f3ffeaf8ffff18f9ffff9af9ffffa4f9ffff42faffff8afaffffd2faffffdafafffff4fffffff26f000068700000b2700000147100004a710000
+      m_ExpandedIDs: dafafffff4ffffff4e710000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 166839
+  controlID: 9375
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -661,8 +661,8 @@ MonoBehaviour:
     y: 644
     width: 1252
     height: 303
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 232, y: 271}
+  m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 10}
   m_Panes:
   - {fileID: 10}
@@ -712,22 +712,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_TerribleDayForRain/Texture/Rain
+    - Assets/_TerribleDayForRain/Shuriken/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 61
   m_LastFolders:
-  - Assets/_TerribleDayForRain/Texture/Rain
+  - Assets/_TerribleDayForRain/Shuriken/Prefabs
   m_LastFoldersGridSize: 61
   m_LastProjectPath: C:\Users\dante\OneDrive\Documents\GitHub\3DMovementShooter\FZ4
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 26}
-    m_SelectedIDs: 8e8f0200
-    m_LastClickedID: 167822
-    m_ExpandedIDs: 000000007691000054ac00008c8f020000ca9a3b
+    scrollPos: {x: 0, y: 10}
+    m_SelectedIDs: 5cf10000
+    m_LastClickedID: 61788
+    m_ExpandedIDs: 0000000018920000289200005c92000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -755,7 +755,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007691000000ca9a3b
+    m_ExpandedIDs: 000000001892000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -780,10 +780,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: eaf4c6ff
-    m_LastClickedInstanceID: -3738390
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: 9caa0000fc700000d8d20200c49afdff8268000024360200b86c0000a26c0000ec620000c2cd0000d46d0000786e0000c4910000186101004ea30000b883000080fd0000f8a9000026fc00005c750000baa20300ecb4000024b30000f8b3000042af0900c091000074750000a0940000504a01006a4a010010cd00003ed300006e6d0200967600005c6d02006a750000aca80000b68f0000307600008a750000000000008c75000088750000de950000c6950000da950000acbd0000bcaa0000863d0100ea6501004c990000289e0000f6700000f0cc0000fed30000246f0000e89400008c6e000046a80000aeac000018b00000a2a900007e720000
+    m_SelectedInstanceIDs: 4e710000
+    m_LastClickedInstanceID: 29006
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: 9caa0000fc700000d8d20200c49afdff8268000024360200b86c0000a26c0000ec620000c2cd0000d46d0000786e0000c4910000186101004ea30000b883000080fd0000f8a9000026fc00005c750000baa20300ecb4000024b30000f8b3000042af0900c091000074750000a0940000504a01006a4a010010cd00003ed300006e6d0200967600005c6d02006a750000aca80000b68f0000307600008a750000000000008c75000088750000de950000c6950000da950000acbd0000bcaa0000863d0100ea6501004c990000289e0000f6700000f0cc0000fed30000246f0000e89400008c6e000046a80000aeac000018b00000a2a900007e7200006cc00000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -871,7 +871,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -3965292
+  m_LastSelectedObjectID: 61902
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 166923
+  controlID: 9368
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -916,8 +916,8 @@ MonoBehaviour:
     y: 0
     width: 430
     height: 515
-  m_MinSize: {x: 240, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 241, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 15}
@@ -1749,8 +1749,8 @@ MonoBehaviour:
     m_CachedPref: 151
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -3738390
-  m_LastVerticalScrollValue: 864
+  m_LastInspectedObjectInstanceID: 29006
+  m_LastVerticalScrollValue: 3723
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
