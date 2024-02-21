@@ -12,18 +12,13 @@ public class MultiHitProjectile : Projectile
 
     void Update()
     {
+        base.Update();
         if (hitCount >= HitCap && DestroyAfterHitCap)
         {
             DestroyProjectile();
 
         }
         rb.velocity = direction * speed;
-
-        float distanceTraveled = Vector3.Distance(transform.position, initialPosition);
-        if (distanceTraveled >= maxDistance)
-        {
-            DestroyProjectile();
-        }
         if (!Stationary)
         {
             direction = transform.right;

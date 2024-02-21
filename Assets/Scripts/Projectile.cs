@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float lifeTime = 0.6f;
     [SerializeField] protected float detectionRange = 3;
     [SerializeField] protected float maxDistance = 13;
+    [SerializeField] private bool AutolockOn = false;
+    [SerializeField] private int totalHits;
     protected LayerMask enemyLayer = 1 << 6;
     protected bool hasDamaged = false;
     protected float targetingToleranceAngle = 5f;
@@ -13,7 +15,6 @@ public class Projectile : MonoBehaviour
     protected Vector3 direction;
     protected Transform closestEnemy;
     protected Rigidbody2D rb;
-    [SerializeField] private int totalHits;
     protected int TotalHits
     {
         get { return totalHits; }
@@ -44,38 +45,41 @@ public class Projectile : MonoBehaviour
     }
     protected void Update()
     {
-        // Check if an enemy is within detection range
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRange, enemyLayer);
-
-        if (colliders.Length > 0)
+        if (AutolockOn)
         {
-            float closestDistance = Mathf.Infinity;
-            closestEnemy = null;
+            // Check if an enemy is within detection range
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRange, enemyLayer);
 
-            foreach (Collider2D collider in colliders)
+            if (colliders.Length > 0)
             {
-                float directionToEnemy = Vector2.Dot(transform.right, (collider.transform.position - transform.position).normalized);
-                if (directionToEnemy < 0)
+                float closestDistance = Mathf.Infinity;
+                closestEnemy = null;
+
+                foreach (Collider2D collider in colliders)
                 {
-                    continue;
+                    float directionToEnemy = Vector2.Dot(transform.right, (collider.transform.position - transform.position).normalized);
+                    if (directionToEnemy < 0)
+                    {
+                        continue;
+                    }
+
+                    float distance = Vector2.Distance(transform.position, collider.transform.position);
+                    float angleToEnemy = Vector2.Angle(transform.right, collider.transform.position - transform.position);
+
+                    if (distance < closestDistance && angleToEnemy <= targetingToleranceAngle)
+                    {
+                        closestDistance = distance;
+                        closestEnemy = collider.transform;
+                    }
                 }
 
-                float distance = Vector2.Distance(transform.position, collider.transform.position);
-                float angleToEnemy = Vector2.Angle(transform.right, collider.transform.position - transform.position);
-
-                if (distance < closestDistance && angleToEnemy <= targetingToleranceAngle)
+                if (closestEnemy != null)
                 {
-                    closestDistance = distance;
-                    closestEnemy = collider.transform;
+                    direction = (closestEnemy.position - transform.position).normalized;
+
+                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0, 0, angle);
                 }
-            }
-
-            if (closestEnemy != null)
-            {
-                direction = (closestEnemy.position - transform.position).normalized;
-
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, angle);
             }
         }
         else
