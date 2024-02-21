@@ -99,6 +99,8 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimerSU = 0.0f;
     private readonly float cooldownTimer = 0.0f;
     private CinemachineImpulseSource impulseSource;
+
+    [SerializeField] private float yOffsetSummon;
     private void Start()
     {
         HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -350,7 +352,7 @@ public class RogueSkillController : PlayerMovement
     private IEnumerator ThirdSkillEnum()
     {
         GameObject SummonSkillParent = new("SummonSkill");
-        SummonSkillParent.transform.position = gameObject.transform.position;
+        SummonSkillParent.transform.position = gameObject.transform.position + new Vector3(0, yOffsetSummon, 0);
         _ = Instantiate(SummonShuriken, SummonSkillParent.transform.position, SummonSkillParent.transform.rotation, SummonSkillParent.transform);
         Physics2D.IgnoreLayerCollision(7, 11, true);
         yield return new WaitForSeconds(2.5f);

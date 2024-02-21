@@ -21209,6 +21209,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: yOffsetSummon
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: optionsMenuCanvas
       value: 
       objectReference: {fileID: 1206142985}
