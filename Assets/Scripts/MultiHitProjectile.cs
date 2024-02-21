@@ -18,7 +18,6 @@ public class MultiHitProjectile : Projectile
             DestroyProjectile();
 
         }
-        rb.velocity = direction * speed;
         if (!Stationary)
         {
             direction = transform.right;

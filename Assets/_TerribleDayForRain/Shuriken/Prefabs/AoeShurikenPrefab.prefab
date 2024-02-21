@@ -216,11 +216,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b3a1cd6d44544489a0828f57a84d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 600
   lifeTime: 1
   detectionRange: 0
   maxDistance: 25
+  AutolockOn: 0
   totalHits: 2
+  targetingToleranceAngle: 5
   minDamage: 400
   maxDamage: 1000
   Stationary: 0

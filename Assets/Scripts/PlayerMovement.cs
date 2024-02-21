@@ -64,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
     protected bool isJumping = false;
     protected bool isGrounded = false;
     protected bool shouldLevelUp = false;
+    protected bool shouldJump = false; // Flag to indicate jump input
+
 
     [Header("Portal Settings")]
     [HideInInspector]
@@ -152,6 +154,10 @@ public class PlayerMovement : MonoBehaviour
         if (GameController.instance.playerCanMove)
         {
             moveCharacter();
+            if (shouldJump)
+            {
+                Jump();
+            }
         }
 
     }
@@ -181,8 +187,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump"))
             {
-                isJumping = true;
-                isAirborne = true;
+                shouldJump = true; // Set flag to true to handle in FixedUpdate
             }
         }
         // You can still flip the character without affecting the momentum.
@@ -304,8 +309,9 @@ public class PlayerMovement : MonoBehaviour
 
         // Apply the jump force along with the horizontal velocity to maintain forward momentum.
         rb.velocity = new Vector3(horizontalVelocity, jumpForce);
-
+        shouldJump = false;
         AudioController.instance.PlayJumpSound();
+        isAirborne = true;
         isJumping = false;
         animator.SetBool("isAirborne", true);
     }

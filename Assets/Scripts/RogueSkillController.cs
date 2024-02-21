@@ -140,10 +140,6 @@ public class RogueSkillController : PlayerMovement
         }
     }
 
-    private void FixedUpdate()
-    {
-        moveCharacter();
-    }
     public override void LevelUp()
     {
         if (level < 60 && shouldLevelUp)
@@ -265,20 +261,20 @@ public class RogueSkillController : PlayerMovement
         Vector3 topOffset = new(0, 0.2f, 0);
         _ = Instantiate(projectile, fixedAttackPos.transform.position + topOffset, fixedAttackPos.transform.rotation);
         audioSource.pitch = 1.6f;  // Reduced pitch
-        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+        audioSource.PlayOneShot(ThrowingStarSoundEffect);
         yield return new WaitForSeconds(0.05f);
 
         // Second shuriken
         _ = Instantiate(projectile, fixedAttackPos.transform.position, fixedAttackPos.transform.rotation);
         audioSource.pitch = 1.0f;  // Normal pitch
-        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+        audioSource.PlayOneShot(ThrowingStarSoundEffect);
         yield return new WaitForSeconds(0.05f);
 
-        // Third shuriken
+        // Third shuriken 
         Vector3 botOffset = new(0, -0.2f, 0);
         _ = Instantiate(projectile, fixedAttackPos.transform.position + botOffset, fixedAttackPos.transform.rotation);
         audioSource.pitch = 1.1f;  // Increased pitch
-        audioSource.PlayOneShot(ThrowingStarSoundEffect, 2f);
+        audioSource.PlayOneShot(ThrowingStarSoundEffect);
         yield return new WaitForSeconds(0.05f);
 
         // Reset pitch to default for other sounds

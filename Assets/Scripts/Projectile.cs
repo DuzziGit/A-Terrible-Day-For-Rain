@@ -87,7 +87,6 @@ public class Projectile : MonoBehaviour
             direction = transform.right;
         }
 
-        rb.velocity = direction * speed;
 
         float distanceTraveled = Vector3.Distance(transform.position, initialPosition);
         if (distanceTraveled >= maxDistance)
@@ -111,6 +110,10 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        rb.velocity = direction * speed * Time.fixedDeltaTime;
+    }
     // protected virtual void OnTriggerStay2D(Collider2D collision)
     // {
     //     if (!hasDamaged && collision.transform == closestEnemy)
