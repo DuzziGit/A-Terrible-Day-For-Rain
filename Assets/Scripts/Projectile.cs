@@ -8,9 +8,9 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float maxDistance = 13;
     [SerializeField] private bool AutolockOn = false;
     [SerializeField] private int totalHits;
+    [SerializeField] protected float targetingToleranceAngle = 5f;
     protected LayerMask enemyLayer = 1 << 6;
     protected bool hasDamaged = false;
-    protected float targetingToleranceAngle = 5f;
     protected Vector3 initialPosition;
     protected Vector3 direction;
     protected Transform closestEnemy;

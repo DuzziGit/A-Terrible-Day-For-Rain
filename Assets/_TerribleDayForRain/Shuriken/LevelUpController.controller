@@ -56,7 +56,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Spin
-  m_Speed: 1
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -68,7 +68,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: f75bbb7446daca74d8c6400e39ea0bb5, type: 2}
+  m_Motion: {fileID: 7400000, guid: c5313a2390802c04abef15d54d1b8244, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

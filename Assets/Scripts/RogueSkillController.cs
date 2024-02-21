@@ -12,7 +12,9 @@ public class RogueSkillController : PlayerMovement
     public GameObject projectile;
     public GameObject projectile2;
     public GameObject ProjectileUltimate;
+    [SerializeField] private GameObject SummonShuriken;
     public Transform attackPos;
+    public Transform attackPosAirborne;
 
 
     public AudioClip ThrowingStarSoundEffect;
@@ -271,8 +273,19 @@ public class RogueSkillController : PlayerMovement
     {
         // Instantiate a fixed attack position GameObject
         GameObject fixedAttackPos = new("FixedAttackPosition");
-        fixedAttackPos.transform.position = attackPos.position;
-        fixedAttackPos.transform.rotation = attackPos.rotation;
+        if (!isAirborne)
+        {
+            fixedAttackPos.transform.position = attackPos.position;
+            fixedAttackPos.transform.rotation = attackPos.rotation;
+        }
+        else
+        {
+            fixedAttackPos.transform.position = attackPosAirborne.position;
+            fixedAttackPos.transform.rotation = attackPosAirborne.rotation;
+        }
+
+
+
 
         // First shuriken
         Vector3 topOffset = new(0, 0.2f, 0);
@@ -336,6 +349,9 @@ public class RogueSkillController : PlayerMovement
 
     private IEnumerator ThirdSkillEnum()
     {
+        GameObject SummonSkillParent = new("SummonSkill");
+        SummonSkillParent.transform.position = gameObject.transform.position;
+        _ = Instantiate(SummonShuriken, SummonSkillParent.transform.position, SummonSkillParent.transform.rotation, SummonSkillParent.transform);
         Physics2D.IgnoreLayerCollision(7, 11, true);
         yield return new WaitForSeconds(2.5f);
         Physics2D.IgnoreLayerCollision(7, 11, false);

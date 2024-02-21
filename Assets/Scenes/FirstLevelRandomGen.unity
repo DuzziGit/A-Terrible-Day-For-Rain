@@ -21184,10 +21184,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2076571041, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: m_ImpulseDefinition.m_ImpulseDuration
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1158781939804607502, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -21201,6 +21197,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2231619720320911898, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257251102467311472, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257251104347005835, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -21255,6 +21259,10 @@ PrefabInstance:
     - target: {fileID: 9011964926031391150, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_Name
       value: Rogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391150, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}

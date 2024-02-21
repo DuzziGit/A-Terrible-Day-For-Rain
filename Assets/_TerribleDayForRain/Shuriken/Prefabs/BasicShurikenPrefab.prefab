@@ -202,10 +202,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   lifeTime: 0.6
-  detectionRange: 40
+  detectionRange: 30
   maxDistance: 13
   AutolockOn: 1
   totalHits: 1
+  targetingToleranceAngle: 7
   minDamage: 800
   maxDamage: 1200
   Stationary: 0
