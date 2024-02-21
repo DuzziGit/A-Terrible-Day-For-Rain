@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 1509660145}
   - component: {fileID: 1509660147}
   - component: {fileID: 1509660146}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPos (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,12 +163,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509660144}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9011964925702152520}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1509660147
 SpriteRenderer:
@@ -212,7 +212,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 5
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6666667}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -385,7 +385,7 @@ Transform:
   m_GameObject: {fileID: 1719710301691206730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.216, y: -0.34, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9011964926031391142}
@@ -454,7 +454,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7294118}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 5515096621285819317}
   - component: {fileID: 2883532336580205856}
   - component: {fileID: 7802274431595443735}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPos (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +495,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9011964925702152520}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2883532336580205856
 SpriteRenderer:
@@ -557,112 +557,6 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2375008627382827619}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 13fb55e7f6359ff4c8e7b56ac56c27c5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!1 &3597039533377432849
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1596060372550528378}
-  - component: {fileID: 3634464588643668531}
-  - component: {fileID: 2744565581478516255}
-  m_Layer: 7
-  m_Name: AttackPos (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1596060372550528378
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3597039533377432849}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9011964925702152520}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &3634464588643668531
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3597039533377432849}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 294652779
-  m_SortingLayer: 5
-  m_SortingOrder: 5
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1.96875, y: 2.65625}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 1
---- !u!95 &2744565581478516255
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3597039533377432849}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 13fb55e7f6359ff4c8e7b56ac56c27c5, type: 2}
@@ -944,7 +838,7 @@ Transform:
   m_GameObject: {fileID: 8873473971159726170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.216, y: -0.34, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9011964926031391142}
@@ -1013,7 +907,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.84313726}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1034,7 +928,7 @@ GameObject:
   - component: {fileID: 9011964925702152520}
   - component: {fileID: 127688075}
   - component: {fileID: 127688076}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1049,11 +943,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9011964925702152523}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalPosition: {x: 0.17, y: 0, z: 0}
+  m_LocalScale: {x: 0.34, y: 0.34, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1596060372550528378}
   - {fileID: 1509660145}
   - {fileID: 5515096621285819317}
   m_Father: {fileID: 9011964926031391142}
@@ -1101,7 +994,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 5
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0.9803922, g: 1, b: 1, a: 0.7372549}
+  m_Color: {r: 0.9803922, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -1288,27 +1181,12 @@ MonoBehaviour:
   projectile2: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
   ProjectileUltimate: {fileID: 6638761271213070857, guid: df6803cdadbff91408b308986a5eab4e, type: 3}
   SummonShuriken: {fileID: 3972795832953981774, guid: c08d0543dd046424cb04ef8761df4e27, type: 3}
-  attackPos: {fileID: 9011964925702152520}
+  attackPos: {fileID: 1509660145}
   attackPosAirborne: {fileID: 5515096621285819317}
   ThrowingStarSoundEffect: {fileID: 8300000, guid: d89096f92a014d549857d02cfabce88c, type: 3}
   BigShurikenSoundEffect: {fileID: 8300000, guid: 80f0a1f17897a3b45b24e100832cb344, type: 3}
   RogueUltimateSoundEffect: {fileID: 8300000, guid: 62303cc667f513046a48a3c61cd42b27, type: 3}
   FlashJumpSoundEffect: {fileID: 8300000, guid: ad765194a479a494781ef2872fd9c58d, type: 3}
-  RogueUltPos: {fileID: 0}
-  RogueUltPos1: {fileID: 0}
-  RogueUltPos2: {fileID: 0}
-  RogueUltPos3: {fileID: 0}
-  RogueUltPos4: {fileID: 0}
-  RogueUltPos5: {fileID: 0}
-  RogueUltPos6: {fileID: 0}
-  RogueUltPos7: {fileID: 0}
-  RogueUltPos8: {fileID: 0}
-  RogueUltPos9: {fileID: 0}
-  RogueUltPos10: {fileID: 0}
-  RogueUltPos11: {fileID: 0}
-  RogueUltPos12: {fileID: 0}
-  RogueUltPos13: {fileID: 0}
-  RogueUltPos14: {fileID: 0}
   horizontalMove: 0
   runSpeed: 40
   isInvincible: 0
@@ -1318,9 +1196,11 @@ MonoBehaviour:
   cooldownTimeSkill3Upgraded: 25
   cooldownTimeSkillUlt: 40
   SwipeOne: {fileID: 127688076}
-  SwipeTwo: {fileID: 2744565581478516255}
+  SwipeTwo: {fileID: 1509660146}
   MovementSkillOne: {fileID: 6679330434211538372}
   MovementSkillTwo: {fileID: 2626708564543138125}
+  xOffset: 0.4
+  yOffsetSummon: -2
 --- !u!50 &9011964926031391147
 Rigidbody2D:
   serializedVersion: 4

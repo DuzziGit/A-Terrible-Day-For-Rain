@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: 223ae3b37bf7b47428a5df075e1a41ce
+guid: aee1289b580271744876f409199aeb34
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -7869611559982732729
-    second: Flash_03_color2 0
-  - first:
-      213: -1712950428237370213
-    second: Flash_03_color2 1
-  - first:
-      213: -9056100863711679098
-    second: Flash_03_color2 2
-  - first:
-      213: -7626794527207445910
-    second: Flash_03_color2 3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -45,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,14 +63,14 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -91,10 +79,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 170
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,10 +91,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
-    maxTextureSize: 170
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,10 +103,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 170
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,10 +115,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 170
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -141,123 +129,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flash_03_color2_0
+      name: Flash_03_color2Redblack_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
-        width: 128
-        height: 128
+        y: 85
+        width: 63
+        height: 85
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -128, y: 128}
-        - {x: -128, y: -128}
-        - {x: 128, y: -128}
-        - {x: 128, y: 128}
-      - - {x: 18, y: -108}
-        - {x: -2, y: -103}
-        - {x: -27, y: -110}
-        - {x: -27, y: -33}
-        - {x: -30, y: -30}
-        - {x: -47, y: -24}
-        - {x: -89, y: -24}
-        - {x: -89, y: -12}
-        - {x: -18, y: -12}
-        - {x: -15, y: -9}
-        - {x: -15, y: 87}
-        - {x: 5, y: 83}
-        - {x: 9, y: 108}
-        - {x: 20, y: 111}
-        - {x: 20, y: 94}
-        - {x: 23, y: 91}
-        - {x: 36, y: 91}
-        - {x: 36, y: 15}
-        - {x: 39, y: 12}
-        - {x: 107, y: 12}
-        - {x: 108, y: 11}
-        - {x: 114, y: 12}
-        - {x: 88, y: 13}
-        - {x: 85, y: 10}
-        - {x: 85, y: -12}
-        - {x: -1, y: -12}
-        - {x: -4, y: -15}
-        - {x: -4, y: -46}
-        - {x: -1, y: -49}
-        - {x: 90, y: -49}
-        - {x: 90, y: -53}
-        - {x: 24, y: -53}
-        - {x: 21, y: -56}
-        - {x: 21, y: -117}
-      physicsShape: []
-      tessellationDetail: 0.26
-      bones: []
-      spriteID: 745c9d076b7d61d4c977ee14df2537bb
-      internalID: 1146688428
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Flash_03_color2_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c1c686122996a849ba1b576154d4f18
-      internalID: 1172128777
+      spriteID: edb8277313e9dee4eb6a78f6b1537659
+      internalID: -1782930390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Flash_03_color2_2
+      name: Flash_03_color2Redblack_1
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 85
+        width: 63
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3b10983064e8db4c97516a6c9c68f49
+      internalID: 969517942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flash_03_color2Redblack_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 63
+        height: 85
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4aaa77dc13d57a47a4170d892255910
-      internalID: -317733436
+      spriteID: 74173edc33f297f45a1532c4f4c0b627
+      internalID: -1483546874
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Flash_03_color2_3
+      name: Flash_03_color2Redblack_3
       rect:
         serializedVersion: 2
-        x: 128
+        x: 63
         y: 0
-        width: 128
-        height: 128
+        width: 63
+        height: 85
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf679757ec187074e9db6c3ec7db8514
-      internalID: 190303432
+      spriteID: d6b8fce9920915140a17a081c8be97a0
+      internalID: -1498692724
       vertices: []
       indices: 
       edges: []
@@ -273,10 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Flash_03_color2_0: 1146688428
-      Flash_03_color2_1: 1172128777
-      Flash_03_color2_2: -317733436
-      Flash_03_color2_3: 190303432
+      Flash_03_color2Redblack_0: -1782930390
+      Flash_03_color2Redblack_1: 969517942
+      Flash_03_color2Redblack_2: -1483546874
+      Flash_03_color2Redblack_3: -1498692724
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

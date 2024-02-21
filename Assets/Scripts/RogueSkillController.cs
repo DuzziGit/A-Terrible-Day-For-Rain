@@ -22,36 +22,7 @@ public class RogueSkillController : PlayerMovement
     public AudioClip RogueUltimateSoundEffect;
     public AudioClip FlashJumpSoundEffect;
 
-    [HideInInspector]
-    public Transform RogueUltPos;
-    [HideInInspector]
-    public Transform RogueUltPos1;
-    [HideInInspector]
-    public Transform RogueUltPos2;
-    [HideInInspector]
-    public Transform RogueUltPos3;
-    [HideInInspector]
-    public Transform RogueUltPos4;
-    [HideInInspector]
-    public Transform RogueUltPos5;
-    [HideInInspector]
-    public Transform RogueUltPos6;
-    [HideInInspector]
-    public Transform RogueUltPos7;
-    [HideInInspector]
-    public Transform RogueUltPos8;
-    [HideInInspector]
-    public Transform RogueUltPos9;
-    [HideInInspector]
-    public Transform RogueUltPos10;
-    [HideInInspector]
-    public Transform RogueUltPos11;
-    [HideInInspector]
-    public Transform RogueUltPos12;
-    [HideInInspector]
-    public Transform RogueUltPos13;
-    [HideInInspector]
-    public Transform RogueUltPos14;
+
 
     public float horizontalMove = 0f;
     public float runSpeed = 40f;
@@ -99,7 +70,7 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimerSU = 0.0f;
     private readonly float cooldownTimer = 0.0f;
     private CinemachineImpulseSource impulseSource;
-
+    [SerializeField] private float xOffset = 0.6f;
     [SerializeField] private float yOffsetSummon;
     private void Start()
     {
@@ -133,7 +104,7 @@ public class RogueSkillController : PlayerMovement
 
         levelUI.text = level.ToString();
         maxHealth = level * 100;
-        maxExp = level * 200;
+        maxExp = level * 500;
 
         experienceBar.SetExperience(currentExp);
         cooldownTimeSkill3Upgraded = cooldownTimeSkill3 - GetComponent<PlayerMovement>().skillThreeLevel;
@@ -277,6 +248,7 @@ public class RogueSkillController : PlayerMovement
         GameObject fixedAttackPos = new("FixedAttackPosition");
         if (!isAirborne)
         {
+            Debug.Log(horizontalMove + "Horizontal movement standing");
             fixedAttackPos.transform.position = attackPos.position;
             fixedAttackPos.transform.rotation = attackPos.rotation;
         }
@@ -373,24 +345,7 @@ public class RogueSkillController : PlayerMovement
 
     private IEnumerator UltimateSkillEnum()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            _ = Instantiate(ProjectileUltimate, RogueUltPos.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos1.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos2.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos3.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos4.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos5.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos6.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos7.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos8.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos9.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos10.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos11.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos12.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos13.position, RogueUltPos.rotation);
-            _ = Instantiate(ProjectileUltimate, RogueUltPos14.position, RogueUltPos.rotation);
-            yield return new WaitForSeconds(0.15f);
-        }
+
+        yield return new WaitForSeconds(0.15f);
     }
 }
