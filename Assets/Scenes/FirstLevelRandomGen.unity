@@ -21256,6 +21256,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391147, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391150, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_Name
       value: Rogue

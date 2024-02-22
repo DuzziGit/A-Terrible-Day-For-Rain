@@ -221,10 +221,12 @@ MonoBehaviour:
   detectionRange: 0
   maxDistance: 25
   AutolockOn: 0
-  totalHits: 2
+  totalHits: 3
   targetingToleranceAngle: 5
+  UniqueAttackId: 
   minDamage: 400
   maxDamage: 1000
   Stationary: 0
   HitCap: 6
   DestroyAfterHitCap: 0
+  Cosmetic: 0

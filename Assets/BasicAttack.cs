@@ -32,7 +32,7 @@ public class BasicAttack : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(TripleThrow());
-        Invoke("DestroyPrefab", lifetime);
+        //Invoke("DestroyPrefab", lifetime);
 
     }
 

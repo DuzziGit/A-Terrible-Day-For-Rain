@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     protected Vector3 direction;
     protected Transform closestEnemy;
     protected Rigidbody2D rb;
+    public string UniqueAttackId;
     protected int TotalHits
     {
         get { return totalHits; }
@@ -42,6 +43,7 @@ public class Projectile : MonoBehaviour
         Invoke("DestroyProjectile", lifeTime);
         hasDamaged = false;
         direction = transform.right;
+        UniqueAttackId = HitManager.GenerateSkillActivationGuid();
     }
     protected void Update()
     {
@@ -94,41 +96,12 @@ public class Projectile : MonoBehaviour
             DestroyProjectile();
         }
     }
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!hasDamaged && collision.gameObject.CompareTag("Enemy"))
-        {
-            if (collision.CompareTag("Enemy"))
-            {
-                HitManager.Instance.ApplyDelayedHits(collision, totalHits, MinDamage, MaxDamage);
-                DestroyProjectile();
-            }
-            hasDamaged = true;
-
-            return; // Exit the method after hitting the enemy
-
-        }
-    }
 
     private void FixedUpdate()
     {
         rb.velocity = direction * speed * Time.fixedDeltaTime;
     }
-    // protected virtual void OnTriggerStay2D(Collider2D collision)
-    // {
-    //     if (!hasDamaged && collision.transform == closestEnemy)
-    //     {
-    //         if (collision.CompareTag("Enemy"))
-    //         {
-    //             HitManager.Instance.ApplyDelayedHits(collision, totalHits - 1, hitCooldown, baseMinDamage, baseMaxDamage);
-    //         }
 
-    //         hasDamaged = true;
-    //         DestroyProjectile();
-    //         return; // Exit the method after hitting the enemy
-
-    //     }
-    // }
     protected void DestroyProjectile()
     {
         Destroy(gameObject);

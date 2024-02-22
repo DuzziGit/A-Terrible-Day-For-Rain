@@ -13,6 +13,7 @@ public class PulsingSummon : MonoBehaviour
     [SerializeField] private int totalHits;
     [SerializeField] private int minDamage;
     [SerializeField] private float lifetime;
+    public string UniqueAttackID;
     protected int TotalHits
     {
         get { return totalHits; }
@@ -31,10 +32,15 @@ public class PulsingSummon : MonoBehaviour
     private int hitCount = 0;
     private Dictionary<Collider2D, int> hitEnemies = new Dictionary<Collider2D, int>();
 
+    private void Awake()
+    {
+        UniqueAttackID = HitManager.GenerateSkillActivationGuid();
+    }
     void Start()
     {
         StartCoroutine(PulseDamage());
         Invoke("Destroy", lifetime);
+
     }
 
     private void Update()
@@ -42,6 +48,7 @@ public class PulsingSummon : MonoBehaviour
         transform.localPosition = Vector3.zero;
 
     }
+
     public IEnumerator PulseDamage()
     {
         while (hitCount < hitCap || !destroyAfterHitCap)
@@ -51,7 +58,7 @@ public class PulsingSummon : MonoBehaviour
             {
                 if (!hitEnemies.ContainsKey(result))
                 {
-                    HitManager.Instance.ApplyDelayedHits(result, TotalHits, MinDamage, MaxDamage);
+                    HitManager.Instance.ApplyDelayedHits(result, TotalHits, MinDamage, MaxDamage, UniqueAttackID);
                     hitCount++;
                     hitEnemies[result] = 1; // Track this enemy as hit
 

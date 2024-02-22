@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
+using System;
 
 public class HitManager : MonoBehaviour
 {
@@ -25,11 +25,14 @@ public class HitManager : MonoBehaviour
             _instance = this;
         }
     }
-
-
-    public void ApplyDelayedHits(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage)
+    public static string GenerateSkillActivationGuid()
     {
-        StartCoroutine(DelayedHitsCoroutine(enemy, totalHits, baseMinDamage, baseMaxDamage));
+        return Guid.NewGuid().ToString();
+    }
+
+    public void ApplyDelayedHits(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId)
+    {
+        StartCoroutine(DelayedHitsCoroutine(enemy, totalHits, baseMinDamage, baseMaxDamage, attackId));
     }
     private int CalculateDamageForLevel(int baseMinDamage, int baseMaxDamage)
     {
@@ -37,9 +40,9 @@ public class HitManager : MonoBehaviour
         int minDamageAtLevel = Mathf.FloorToInt(baseMinDamage * Mathf.Pow(damageGrowthRate, (plevel - 1)));
         int maxDamageAtLevel = Mathf.FloorToInt(baseMaxDamage * Mathf.Pow(damageGrowthRate, (plevel - 1)));
 
-        return Random.Range(minDamageAtLevel, maxDamageAtLevel + 1);
+        return UnityEngine.Random.Range(minDamageAtLevel, maxDamageAtLevel + 1);
     }
-    private IEnumerator DelayedHitsCoroutine(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage)
+    private IEnumerator DelayedHitsCoroutine(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId)
     {
         int hitsApplied = 0;
         while (hitsApplied < totalHits)
@@ -48,13 +51,13 @@ public class HitManager : MonoBehaviour
             {
                 // Calculate damage and critical hit status here
                 int damage = CalculateDamageForLevel(baseMinDamage, baseMaxDamage); // Assuming this method is now accessible here
-                bool isCrit = Random.value < (critChance / 100f);
+                bool isCrit = UnityEngine.Random.value < (critChance / 100f);
                 if (isCrit)
                 {
                     damage = Mathf.FloorToInt(damage * critMultiplier);
                 }
 
-                enemy.GetComponent<EnemyCon>().TakeDamage(damage, isCrit);
+                enemy.GetComponent<EnemyCon>().TakeDamage(damage, isCrit, attackId);
                 hitsApplied++;
                 yield return new WaitForSeconds(hitCooldown);
             }

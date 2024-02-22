@@ -26,10 +26,12 @@ public class EnemyCon : Enemy
 
     // Magic numbers replaced with constants
     private const float xOffset = 0f;
-    [SerializeField] private float yOffset = 0.2f;
+    [SerializeField] private float yOffsetText = 0.2f;
     private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
-    private List<(int Damage, bool IsCrit)> DamageTaken = new List<(int Damage, bool IsCrit)>();
+    private List<(int Damage, bool IsCrit, string AttackId)> DamageTaken = new List<(int Damage, bool IsCrit, string AttackId)>();
+    private Dictionary<string, GameObject> attackCanvases = new Dictionary<string, GameObject>();
+
     private bool isInHitAnimation = false; // Flag to indicate if the hit animation is currently playing
 
     private void Start()
@@ -53,16 +55,14 @@ public class EnemyCon : Enemy
     {
     }
 
-    public void TakeDamage(int damage, bool isCrit)
+    public void TakeDamage(int damage, bool isCrit, string attackId)
     {
 
         health = Mathf.Max(0, health - damage);
 
-        DamageTaken.Add((damage, isCrit));
-
         if (!isDisplayingDamage)
         {
-            ProcessDamage();
+            ProcessDamage(attackId);
         }
 
 
@@ -72,49 +72,59 @@ public class EnemyCon : Enemy
         }
         AudioController.instance.PlayMonsterHurtSound();
         PlayHitAnimation();
+        if (!attackCanvases.ContainsKey(attackId))
+        {
+            GameObject newCanvas = Instantiate(CanvasDamageNum, transform.position, Quaternion.identity);
+            attackCanvases[attackId] = newCanvas;
+        }
 
+        // Add damage to the list with attackId
+        DamageTaken.Add((damage, isCrit, attackId)); // Note: You need to update DamageTaken to include attackId
+
+        if (!isDisplayingDamage)
+        {
+            StartCoroutine(ProcessDamage(attackId)); // Use StartCoroutine to call Coroutines
+        }
     }
 
     // ProcessDamage is called whenever damage is taken, even if a display is ongoing.
-    private void ProcessDamage()
-    {
-        if (damageCanvas == null)
-        {
-            damageCanvas = Instantiate(CanvasDamageNum, transform.position, Quaternion.identity);
-        }
-
-        // Always attempt to start the DamageDisplay coroutine, but ensure it's designed to handle being called multiple times.
-        DamageDisplay(damageCanvas);
-    }
-
-    // Updated DamageDisplay coroutine to continuously monitor and display damage.
-    private void DamageDisplay(GameObject canvas)
+    private IEnumerator ProcessDamage(string attackId)
     {
         isDisplayingDamage = true;
+        GameObject canvas = attackCanvases.ContainsKey(attackId) ? attackCanvases[attackId] : null;
 
-        while (DamageTaken.Count > 0)
+        if (canvas == null)
         {
-            // Calculate yOffset based on the number of currently active damage numbers.
-            // This assumes each damage number needs a certain vertical space (e.g., yOffset).
-            float dynamicYOffset = yOffset * canvas.transform.childCount;
-            var damageInfo = DamageTaken[0];
-            DamageTaken.RemoveAt(0); // Remove the processed damage info immediately
+            canvas = Instantiate(CanvasDamageNum, transform.position, Quaternion.identity);
+            attackCanvases[attackId] = canvas;
+        }
 
-            GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
-            GameObject text = Instantiate(
-                textPrefab,
-                new Vector3(transform.position.x + xOffset, transform.position.y + dynamicYOffset, transform.position.z),
-                Quaternion.identity,
-                canvas.transform
-            );
-
-            DamageNumController controller = text.GetComponent<DamageNumController>();
-            controller.SetDamageNum(damageInfo.Damage);
-
-            // Here, no delay is needed between instantiations, as the yOffset handles spacing.
+        // Filter for current attackId damages
+        var damagesForAttack = DamageTaken.FindAll(d => d.AttackId == attackId);
+        foreach (var damageInfo in damagesForAttack)
+        {
+            DamageDisplay(canvas, damageInfo);
+            DamageTaken.Remove(damageInfo); // Remove after displaying
+            yield return new WaitForSeconds(damageDisplayDelay); // Wait for delay between damage numbers
         }
 
         isDisplayingDamage = false;
+    }
+
+    // Updated DamageDisplay coroutine to continuously monitor and display damage.
+    private void DamageDisplay(GameObject canvas, (int Damage, bool IsCrit, string AttackId) damageInfo)
+    {
+        float dynamicYOffset = yOffsetText * canvas.transform.childCount;
+        GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
+        GameObject text = Instantiate(
+            textPrefab,
+            new Vector3(transform.position.x + xOffset, transform.position.y + dynamicYOffset, transform.position.z),
+            Quaternion.identity,
+            canvas.transform
+        );
+
+        DamageNumController controller = text.GetComponent<DamageNumController>();
+        controller.SetDamageNum(damageInfo.Damage);
     }
 
 
