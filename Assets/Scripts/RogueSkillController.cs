@@ -9,7 +9,7 @@ public class RogueSkillController : PlayerMovement
     public float MovementSkillForceLeft;
     public GameObject LevelUpShuriken;
 
-    public GameObject projectile;
+    public GameObject basicAttackPrefab;
     public GameObject projectile2;
     public GameObject ProjectileUltimate;
     [SerializeField] private GameObject SummonShuriken;
@@ -228,63 +228,20 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkill1 && Input.GetKeyDown(KeyCode.A))
         {
-
-            _ = StartCoroutine(FirstSkill());
+            FirstSkill();
             nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
             //    textCooldownS1.gameObject.SetActive(true);
             cooldownTimerS1 = cooldownTimeSkill1;
-            SwipeOne.SetBool("SwipeOne", true);
-            SwipeTwo.SetBool("SwipeTwo", true);
-
+            SwipeOne.SetTrigger("Attack");
         }
     }
-    private IEnumerator FirstSkill()
+    private void FirstSkill()
     {
-        // Instantiate a fixed attack position GameObject
-        GameObject fixedAttackPos = new("FixedAttackPosition");
-        if (!isAirborne)
-        {
-            Debug.Log(horizontalMove + "Horizontal movement standing");
-            fixedAttackPos.transform.position = attackPos.position;
-            fixedAttackPos.transform.rotation = attackPos.rotation;
-        }
-        else
-        {
-            fixedAttackPos.transform.position = attackPosAirborne.position;
-            fixedAttackPos.transform.rotation = attackPosAirborne.rotation;
-        }
 
+        Vector3 fixedAttackPosition = !isAirborne ? attackPos.position : attackPosAirborne.position;
+        Quaternion fixedAttackRotation = !isAirborne ? attackPos.rotation : attackPosAirborne.rotation;
+        Instantiate(basicAttackPrefab, fixedAttackPosition, fixedAttackRotation);
 
-
-
-        // First shuriken
-        Vector3 topOffset = new(0, 0.2f, 0);
-        _ = Instantiate(projectile, fixedAttackPos.transform.position + topOffset, fixedAttackPos.transform.rotation);
-        audioSource.pitch = 1.6f;  // Reduced pitch
-        audioSource.PlayOneShot(ThrowingStarSoundEffect);
-        yield return new WaitForSeconds(0.05f);
-
-        // Second shuriken
-        _ = Instantiate(projectile, fixedAttackPos.transform.position, fixedAttackPos.transform.rotation);
-        audioSource.pitch = 1.0f;  // Normal pitch
-        audioSource.PlayOneShot(ThrowingStarSoundEffect);
-        yield return new WaitForSeconds(0.05f);
-
-        // Third shuriken 
-        Vector3 botOffset = new(0, -0.2f, 0);
-        _ = Instantiate(projectile, fixedAttackPos.transform.position + botOffset, fixedAttackPos.transform.rotation);
-        audioSource.pitch = 1.1f;  // Increased pitch
-        audioSource.PlayOneShot(ThrowingStarSoundEffect);
-        yield return new WaitForSeconds(0.05f);
-
-        // Reset pitch to default for other sounds
-        audioSource.pitch = 1.0f;
-
-        SwipeOne.SetBool("SwipeOne", false);
-        SwipeTwo.SetBool("SwipeTwo", false);
-
-        // Optionally, destroy the fixed position GameObject if it's no longer needed
-        Destroy(fixedAttackPos, 0.5f); // Adjust the delay as needed
     }
     public void GetSecondSkillInput()
     {
