@@ -21188,6 +21188,38 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 849153431202281180, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 849153431202281180, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 849153431202281180, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 849153431202281180, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 849153431202281180, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 849153431202281180, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 849153431202281180, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 294652779
+      objectReference: {fileID: 0}
+    - target: {fileID: 849153431202281180, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1158781939804607502, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -21203,6 +21235,26 @@ PrefabInstance:
     - target: {fileID: 2231619720320911898, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068467120292916748, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606832513204080599, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606832513204080599, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606832513204080599, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606832513204080599, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: basicAttackPrefab

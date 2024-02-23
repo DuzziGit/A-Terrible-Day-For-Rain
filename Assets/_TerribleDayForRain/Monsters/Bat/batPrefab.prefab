@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 1995679183}
   - component: {fileID: 1826110122}
   - component: {fileID: 6994407341023997054}
+  - component: {fileID: 513057138709047720}
   m_Layer: 6
   m_Name: batPrefab
   m_TagString: Enemy
@@ -400,6 +401,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0035829544, y: -0.23644185}
   m_Size: {x: 1.7428341, y: 2.2228837}
   m_Direction: 0
+--- !u!114 &513057138709047720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392495728788100712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9474929a77dc2a849821dd0f1a7b020f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  droppedItemPrefab: {fileID: 8090084773123651020, guid: caa1ca8f17ceb3944aba17dc648594fa, type: 3}
+  lootList:
+  - {fileID: 11400000, guid: 392792806eddffe4e810d813b3c75eba, type: 2}
 --- !u!1 &7039804153228895607
 GameObject:
   m_ObjectHideFlags: 0

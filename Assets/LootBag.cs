@@ -4,7 +4,6 @@ using UnityEngine;
 public class LootBag : MonoBehaviour
 {
 
-    public GameObject droppedItemPrefab;
     public List<Loot> lootList = new();
 
     private Loot GetDroppedItem()
