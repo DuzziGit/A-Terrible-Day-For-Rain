@@ -16,14 +16,6 @@ public class RogueSkillController : PlayerMovement
     public Transform attackPos;
     public Transform attackPosAirborne;
 
-
-    public AudioClip ThrowingStarSoundEffect;
-    public AudioClip BigShurikenSoundEffect;
-    public AudioClip RogueUltimateSoundEffect;
-    public AudioClip FlashJumpSoundEffect;
-
-
-
     public float horizontalMove = 0f;
     public float runSpeed = 40f;
 
@@ -146,7 +138,6 @@ public class RogueSkillController : PlayerMovement
             _ = Instantiate(LevelUpShuriken, transform);
             CameraShakeManager.instance.CameraShake(impulseSource);
             shouldLevelUp = false;
-            AudioController.instance.PlayLevelUpSound();
         }
     }
     // Movement Skill
@@ -258,7 +249,6 @@ public class RogueSkillController : PlayerMovement
     {
         yield return new WaitForSeconds(0.20f);
         _ = Instantiate(projectile2, attackPos.position, attackPos.rotation);
-        audioSource.PlayOneShot(BigShurikenSoundEffect, 0.7f);
     }
 
     // Third Skill

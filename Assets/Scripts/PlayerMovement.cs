@@ -231,7 +231,6 @@ public class PlayerMovement : MonoBehaviour
             IncreaseLevel();
             Debug.Log("Level Up! Player Level is now: " + level);
             shouldLevelUp = false;
-            AudioController.instance.PlayLevelUpSound();
             leveledUpAnimator.SetTrigger("LeveledUp");
 
         }
@@ -307,7 +306,6 @@ public class PlayerMovement : MonoBehaviour
         // Apply the jump force along with the horizontal velocity to maintain forward momentum.
         rb.velocity = new Vector3(horizontalVelocity, jumpForce);
         shouldJump = false;
-        AudioController.instance.PlayJumpSound();
         isAirborne = true;
         isJumping = false;
         animator.SetBool("isAirborne", true);

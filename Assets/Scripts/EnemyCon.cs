@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class EnemyCon : Enemy
 {
-    public AudioSource audioSource;
-    public AudioClip skeletonHitSound;
-    public AudioClip deathSound;
 
     public int enemyDamage;
     public TMP_Text damageDisplay;
@@ -70,7 +67,6 @@ public class EnemyCon : Enemy
         {
             healthBar.SetHealth(health);
         }
-        AudioController.instance.PlayMonsterHurtSound();
         PlayHitAnimation();
         if (!attackCanvases.ContainsKey(attackId))
         {
