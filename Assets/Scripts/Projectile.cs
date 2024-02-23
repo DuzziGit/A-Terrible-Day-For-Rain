@@ -1,12 +1,20 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField] private int HitCap = 3;
+    [SerializeField] private bool DestroyAfterHitCap = false;
+    private int hitCount;
+    private Dictionary<Collider2D, int> hitEnemies = new Dictionary<Collider2D, int>();
     [SerializeField] protected float speed = 20;
     [SerializeField] protected float lifeTime = 0.6f;
     [SerializeField] protected float detectionRange = 3;
     [SerializeField] protected float maxDistance = 13;
     [SerializeField] private bool AutolockOn = false;
+    [SerializeField] private bool ShouldMove = false;
+    [SerializeField] private bool GenerateAttackId = true;
     [SerializeField] private int totalHits;
     [SerializeField] protected float targetingToleranceAngle = 5f;
     protected LayerMask enemyLayer = 1 << 6;
@@ -16,6 +24,9 @@ public class Projectile : MonoBehaviour
     protected Transform closestEnemy;
     protected Rigidbody2D rb;
     public string UniqueAttackId;
+
+
+
     protected int TotalHits
     {
         get { return totalHits; }
@@ -43,7 +54,10 @@ public class Projectile : MonoBehaviour
         Invoke("DestroyProjectile", lifeTime);
         hasDamaged = false;
         direction = transform.right;
-        UniqueAttackId = HitManager.GenerateSkillActivationGuid();
+        if (GenerateAttackId)
+        {
+            UniqueAttackId = HitManager.GenerateSkillActivationGuid();
+        }
     }
     protected void Update()
     {
@@ -84,24 +98,32 @@ public class Projectile : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            direction = transform.right;
-        }
-
-
         float distanceTraveled = Vector3.Distance(transform.position, initialPosition);
-        if (distanceTraveled >= maxDistance)
+        if (distanceTraveled >= maxDistance || hitCount >= HitCap && DestroyAfterHitCap)
         {
             DestroyProjectile();
         }
+
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = direction * speed * Time.fixedDeltaTime;
+        if (ShouldMove)
+        {
+            rb.velocity = direction * speed * Time.fixedDeltaTime;
+
+        }
     }
 
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy") && !hitEnemies.ContainsKey(collision) && hitCount < HitCap)
+        {
+            HitManager.Instance.ApplyDelayedHits(collision, TotalHits, MinDamage, MaxDamage, UniqueAttackId);
+            // Call the HitManager to handle the remaining hits
+            hitCount++;
+        }
+    }
     protected void DestroyProjectile()
     {
         Destroy(gameObject);

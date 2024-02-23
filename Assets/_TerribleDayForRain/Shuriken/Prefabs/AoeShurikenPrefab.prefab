@@ -216,17 +216,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b3a1cd6d44544489a0828f57a84d7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HitCap: 6
+  DestroyAfterHitCap: 0
   speed: 600
   lifeTime: 1
   detectionRange: 0
   maxDistance: 25
   AutolockOn: 0
+  ShouldMove: 1
   totalHits: 3
   targetingToleranceAngle: 5
   UniqueAttackId: 
   minDamage: 400
   maxDamage: 1000
-  Stationary: 0
-  HitCap: 6
-  DestroyAfterHitCap: 0
-  Cosmetic: 0

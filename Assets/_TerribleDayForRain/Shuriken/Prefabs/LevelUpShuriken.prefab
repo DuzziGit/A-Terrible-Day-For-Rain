@@ -160,6 +160,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: ShouldMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: Stationary
       value: 1
       objectReference: {fileID: 0}
@@ -169,6 +173,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7562556280584138820, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: detectionRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881666218281256747, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
+      propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -117,7 +117,8 @@ GameObject:
   - component: {fileID: 1367567050518222791}
   - component: {fileID: -6372197727346592635}
   - component: {fileID: 4219806041684247730}
-  - component: {fileID: 8810253024730516289}
+  - component: {fileID: -6461382993690234534}
+  - component: {fileID: -3024766888721337086}
   m_Layer: 13
   m_Name: BasicShurikenPrefab
   m_TagString: Projectile
@@ -182,13 +183,13 @@ Rigidbody2D:
   m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8810253024730516289
+--- !u!114 &-6461382993690234534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,19 +198,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 2122635036824758511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b3a1cd6d44544489a0828f57a84d7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d2c01649d72900478d14a0d4273e529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
-  lifeTime: 0.6
-  detectionRange: 4
-  maxDistance: 13
-  AutolockOn: 0
-  totalHits: 1
-  targetingToleranceAngle: 5
-  minDamage: 800
-  maxDamage: 1200
-  Stationary: 0
+  maxDistance: 10
+--- !u!114 &-3024766888721337086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122635036824758511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58f7cc5070674c48839506f7e72d037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   HitCap: 3
   DestroyAfterHitCap: 1
-  Cosmetic: 1
+  speed: 20
+  lifeTime: 100
+  detectionRange: 3
+  maxDistance: 13
+  AutolockOn: 0
+  ShouldMove: 0
+  GenerateAttackId: 1
+  totalHits: 3
+  targetingToleranceAngle: 5
+  UniqueAttackId: 
+  minDamage: 100
+  maxDamage: 1000
