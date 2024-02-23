@@ -81,11 +81,9 @@ public class PlayerMovement : MonoBehaviour
     private const int jumpSpeed = 10;
 
     public AudioSource audioSource;
-    private bool isPlaying;
     [SerializeField] protected Animator animator;
 
     public Collider2D playerCollider;
-    private float disableCollisionTime = 0.1f; // Time to disable collision
     private bool isFallingThrough = false;
 
 
@@ -104,7 +102,6 @@ public class PlayerMovement : MonoBehaviour
         //    playerLevelTextText = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<TMP_Text>();
         experienceBar.setMaxExp(maxExp);
         GainExperience(0);
-        isPlaying = false;
 
     }
 

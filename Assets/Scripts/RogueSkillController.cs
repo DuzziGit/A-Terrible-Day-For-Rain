@@ -58,7 +58,6 @@ public class RogueSkillController : PlayerMovement
 
     public Animator SwipeOne;
     public Animator SwipeTwo;
-    public Animator MovementSkillOne;
     public Animator MovementSkillTwo;
     private Renderer rend;
     private Color c;
@@ -68,9 +67,8 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimerS3 = 0.0f;
     private float cooldownTimerSM = 0.0f;
     private float cooldownTimerSU = 0.0f;
-    private readonly float cooldownTimer = 0.0f;
+    // private readonly float cooldownTimer = 0.0f;
     private CinemachineImpulseSource impulseSource;
-    [SerializeField] private float xOffset = 0.6f;
     [SerializeField] private float yOffsetSummon;
     private void Start()
     {
@@ -149,7 +147,6 @@ public class RogueSkillController : PlayerMovement
             CameraShakeManager.instance.CameraShake(impulseSource);
             shouldLevelUp = false;
             AudioController.instance.PlayLevelUpSound();
-            leveledUpAnimator.SetTrigger("LeveledUp");
         }
     }
     // Movement Skill
@@ -167,7 +164,6 @@ public class RogueSkillController : PlayerMovement
 
     public void MovementSkill()
     {
-        MovementSkillOne.SetBool("MovementSkillUsed", true);
         MovementSkillTwo.SetBool("MovementSkillUsed", true);
 
         // Determine the force direction based on facing direction
@@ -190,7 +186,6 @@ public class RogueSkillController : PlayerMovement
     private IEnumerator ResetMovementSkillAnimation()
     {
         yield return new WaitForSeconds(0.1f);
-        MovementSkillOne.SetBool("MovementSkillUsed", false);
         MovementSkillTwo.SetBool("MovementSkillUsed", false);
     }
 
@@ -228,11 +223,13 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkill1 && Input.GetKeyDown(KeyCode.A))
         {
+            horizontalMove = 0;
             FirstSkill();
             nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
             //    textCooldownS1.gameObject.SetActive(true);
             cooldownTimerS1 = cooldownTimeSkill1;
             SwipeOne.SetTrigger("Attack");
+            runSpeed = 40;
         }
     }
     private void FirstSkill()
@@ -247,11 +244,13 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkill2 && Input.GetKeyDown(KeyCode.S))
         {
+            rb.isKinematic = true;
             animator.SetTrigger("isAttacking");
             _ = StartCoroutine(secondSkill());
             nextFireTimeSkill2 = Time.time + cooldownTimeSkill2;
             //   textCooldownS2.gameObject.SetActive(true);
             cooldownTimerS2 = cooldownTimeSkill2;
+            rb.isKinematic = false;
         }
     }
 

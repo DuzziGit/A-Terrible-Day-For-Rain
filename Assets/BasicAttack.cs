@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BasicAttack : MonoBehaviour
@@ -14,6 +13,7 @@ public class BasicAttack : MonoBehaviour
         new Vector3(0, 0, 0),    // Middle shuriken
         new Vector3(0, -0.2f, 0) // Bottom shuriken
            };
+    [SerializeField] private float lifetime = 2f;
     [SerializeField] private float throwForce = 1f;
     [SerializeField]
     private float[] throwAngles; // Angles for each shuriken
@@ -23,11 +23,11 @@ public class BasicAttack : MonoBehaviour
         get { return uniqueAttackId; }
     }
 
-
     private void Awake()
     {
         uniqueAttackId = HitManager.GenerateSkillActivationGuid();
         StartCoroutine(TripleThrow());
+        Invoke("DestroyPrefab", lifetime);
     }
     private IEnumerator TripleThrow()
     {
@@ -61,5 +61,8 @@ public class BasicAttack : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
     }
-
+    private void DestroyPrefab()
+    {
+        Destroy(gameObject);
+    }
 }

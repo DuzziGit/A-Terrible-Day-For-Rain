@@ -8,7 +8,6 @@ public class PlayerStats : MonoBehaviour
     public int playerLevel;
     public int playerHealth;
     public int money;
-    private readonly bool didLoad = false;
     /// public ExperienceBar experienceBar;
 
     public string textValue = "LEVEL UP";
