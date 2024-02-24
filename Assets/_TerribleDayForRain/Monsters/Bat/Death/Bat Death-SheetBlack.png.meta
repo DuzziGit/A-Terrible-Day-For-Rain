@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: afe6c204a0e244445b736eccfae7d703
+guid: 62b8ab9128268b8459305f4320370c99
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,7 +129,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat Death-Sheet_0
+      name: Bat Death-SheetBlack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,14 +143,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a7af5b8887d398489c1058ca4b1f10f
-      internalID: 1539207753
+      spriteID: 0106130e68b4bf44b97a2121546d7c74
+      internalID: -549263676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death-Sheet_1
+      name: Bat Death-SheetBlack_1
       rect:
         serializedVersion: 2
         x: 80
@@ -164,14 +164,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c4ad459e97efe048852eb3d1b08af0a
-      internalID: 305623850
+      spriteID: c65033ea97069d147880c40a15dfc789
+      internalID: 1484970719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death-Sheet_2
+      name: Bat Death-SheetBlack_2
       rect:
         serializedVersion: 2
         x: 160
@@ -185,14 +185,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b83bd2bbd64fede4981a482baf74b904
-      internalID: -2141084703
+      spriteID: 5c0d9a45c50c1004db51d55fb090f71f
+      internalID: -126841537
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death-Sheet_3
+      name: Bat Death-SheetBlack_3
       rect:
         serializedVersion: 2
         x: 240
@@ -206,14 +206,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6da039296fbdc2479644b8d3b0a0964
-      internalID: -1397174531
+      spriteID: d6f6d4571627e204e91c092f0d0ca2e6
+      internalID: 363190542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death-Sheet_4
+      name: Bat Death-SheetBlack_4
       rect:
         serializedVersion: 2
         x: 320
@@ -227,14 +227,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08888e42dd64aa643bb3a788b0b04803
-      internalID: -726681727
+      spriteID: 87e49571ef006cb45a9e3a253dd9a4db
+      internalID: -1416579108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death-Sheet_5
+      name: Bat Death-SheetBlack_5
       rect:
         serializedVersion: 2
         x: 400
@@ -248,14 +248,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f9e327ac05f68d418117e240b18b2e6
-      internalID: -1079807950
+      spriteID: ca78d00d661bbc8439532d2dfb3a82f4
+      internalID: -44585806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bat Death-Sheet_6
+      name: Bat Death-SheetBlack_6
       rect:
         serializedVersion: 2
         x: 480
@@ -269,8 +269,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0da4f2b4a0a1dd479ae82260b295e3e
-      internalID: 1439167089
+      spriteID: 78a78d3747d932342bcc632cc3c0c054
+      internalID: 1597381537
       vertices: []
       indices: 
       edges: []
@@ -286,13 +286,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bat Death-Sheet_0: 1539207753
-      Bat Death-Sheet_1: 305623850
-      Bat Death-Sheet_2: -2141084703
-      Bat Death-Sheet_3: -1397174531
-      Bat Death-Sheet_4: -726681727
-      Bat Death-Sheet_5: -1079807950
-      Bat Death-Sheet_6: 1439167089
+      Bat Death-SheetBlack_0: -549263676
+      Bat Death-SheetBlack_1: 1484970719
+      Bat Death-SheetBlack_2: -126841537
+      Bat Death-SheetBlack_3: 363190542
+      Bat Death-SheetBlack_4: -1416579108
+      Bat Death-SheetBlack_5: -44585806
+      Bat Death-SheetBlack_6: 1597381537
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

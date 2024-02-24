@@ -224,7 +224,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 5bb17b82384d5b442b9aba0f8deaffb6, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -526,7 +526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1997474524716373970, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1.2
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 1997474524716373970, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

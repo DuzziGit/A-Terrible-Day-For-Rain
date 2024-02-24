@@ -54,7 +54,10 @@ public class EnemyCon : Enemy
     {
 
         health = Mathf.Max(0, health - damage);
-
+        if (health <= 0)
+        {
+            StartCoroutine(Die());
+        }
         if (!isDisplayingDamage)
         {
             ProcessDamage(attackId);
@@ -80,6 +83,16 @@ public class EnemyCon : Enemy
         {
             StartCoroutine(ProcessDamage(attackId)); // Use StartCoroutine to call Coroutines
         }
+    }
+
+    private void HandleDeath()
+    {
+        // Ensure that any ongoing processes are stopped or completed
+        if (isDisplayingDamage)
+        {
+            StopAllCoroutines(); // Consider targeting specific coroutines if you have multiple
+        }
+
     }
 
     // ProcessDamage is called whenever damage is taken, even if a display is ongoing.
@@ -159,7 +172,10 @@ public class EnemyCon : Enemy
 
     private void PlayHitAnimation()
     {
-
+        if (health <= 0)
+        {
+            StartCoroutine(Die());
+        }
         // Update the timestamp of the last hit
         lastHitTime = Time.time;
 

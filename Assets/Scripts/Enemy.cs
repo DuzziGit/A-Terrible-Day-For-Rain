@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<CapsuleCollider2D>();
         enemySprite = GetComponent<SpriteRenderer>();
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
     }
 
     private void Update()
@@ -60,6 +61,24 @@ public class Enemy : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().currentHealth <= 0)
         {
             isTouchingPlayer = false;
+        }
+        if (health <= 0)
+        {
+            if (GetComponent<EnemyCon>().isDisplayingDamage)
+            {
+                speed = 0;
+                rb.velocity = Vector2.zero;
+                rb.gravityScale = 0;
+                GetComponentInChildren<Canvas>().enabled = false;
+                gameObject.layer = LayerMask.NameToLayer("Invincible");
+
+            }
+            else if (GetComponent<EnemyCon>().isDisplayingDamage == false)
+            {
+
+                StartCoroutine(Die());
+
+            }
         }
     }
 
@@ -92,67 +111,41 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (health <= 0)
+        if (health > 0)
         {
-            if (GetComponent<EnemyCon>().isDisplayingDamage)
+            float distanceToPlayer = Vector2.Distance(transform.position, GameController.instance.Player.transform.position);
+
+            if (distanceToPlayer < agroRange)
             {
-                rb.freezeRotation = true;
-                GetComponent<SpriteRenderer>().enabled = false;
-                Animator[] animators = GetComponentsInChildren<Animator>();
-                // Loop through each Animator and stop its animations, then disable it
-                foreach (Animator animator in animators)
+                isAggroed = true;
+                isPatroling = false;
+                if (isAggroed)
                 {
-                    // Stop the current animation by setting its speed to 0
-                    animator.Rebind();
-
-                    // Now, disable the Animator component
-                    animator.enabled = false;
+                    HoverPlayerX();
                 }
-                bc.enabled = false;
             }
-            else if (GetComponent<EnemyCon>().isDisplayingDamage == false)
+            else
             {
-
-                Die();
-            }
-        }
-
-        float distanceToPlayer = Vector2.Distance(transform.position, GameController.instance.Player.transform.position);
-
-        if (distanceToPlayer < agroRange)
-        {
-            isAggroed = true;
-            isPatroling = false;
-            if (isAggroed)
-            {
-                chasePlayer();
+                if (distanceToPlayer > agroRange)
+                {
+                    isAggroed = false;
+                    isPatroling = true;
+                    if (isAggroed)
+                    {
+                        HoverPlayerX();
+                    }
+                }
+                Patrol();
+                isAggroed = false;
+                isPatroling = true;
             }
         }
         else
         {
-            if (distanceToPlayer > agroRange)
-            {
-                isAggroed = false;
-                isPatroling = true;
-                if (isAggroed)
-                {
-                    chasePlayer();
-                }
-            }
-            Patrol();
-            isAggroed = false;
-            isPatroling = true;
+            rb.velocity = Vector2.zero;
         }
     }
-    private void Die()
-    {
-        MySpawner.OnEnemyDestroyed();
-        if (GameController.instance.playerMovement != null)
-        {
-            GameController.instance.playerMovement.GainExperience(expValue);
-        }
-        Destroy(gameObject);
-    }
+
     private void Patrol()
     {
         if (!canFlip) return;
@@ -169,8 +162,6 @@ public class Enemy : MonoBehaviour
     private void FlipDirection()
     {
         if (!canFlip) return;
-        //   Debug.Log("Flipping direction. Was moving right: " + movingRight);
-
         movingRight = !movingRight;
         rb.velocity = new Vector3(movingRight ? speed : -speed, rb.velocity.y, 0);
         enemySprite.flipX = !movingRight;
@@ -198,8 +189,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void chasePlayer()
+    protected IEnumerator Die()
     {
-        HoverPlayerX();
+        GetComponentInChildren<Canvas>().enabled = false;
+        animator.SetTrigger("Dead");
+        yield return new WaitForSeconds(0.8f);
+        Destroy(gameObject);
+        MySpawner.OnEnemyDestroyed();
+        if (GameController.instance.playerMovement != null)
+        {
+            GameController.instance.playerMovement.GainExperience(expValue);
+        }
     }
 }
