@@ -119,8 +119,10 @@ public class Projectile : MonoBehaviour
     {
         if (collision.CompareTag("Enemy") && !hitEnemies.ContainsKey(collision) && hitCount < HitCap)
         {
-            HitManager.Instance.ApplyDelayedHits(collision, TotalHits, MinDamage, MaxDamage, UniqueAttackId);
-            // Call the HitManager to handle the remaining hits
+            Vector2 hitPosition = transform.position; // Position of the projectile at the time of collision
+            Transform enemyTransform = collision.transform;
+
+            HitManager.Instance.ApplyDelayedHits(collision, TotalHits, MinDamage, MaxDamage, UniqueAttackId, hitPosition, enemyTransform);
             hitCount++;
         }
     }

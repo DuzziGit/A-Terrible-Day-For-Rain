@@ -27,12 +27,6 @@ public class Enemy : MonoBehaviour
     private readonly float moveSpeed;
     public CapsuleCollider2D bc;
     public Rigidbody2D rb;
-
-    public Color bigEnemy = Color.red;
-    public Color medEnemy = Color.yellow;
-    public Color smallEnemy = Color.green;
-    public Color tutEnemy = new(0, 1f, 1f, 1f);
-
     public Animator animator;
     public EnemySpawner MySpawner;
     protected bool canFlip = true;
@@ -123,7 +117,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        float distanceToPlayer = Vector2.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position);
+        float distanceToPlayer = Vector2.Distance(transform.position, GameController.instance.Player.transform.position);
 
         if (distanceToPlayer < agroRange)
         {

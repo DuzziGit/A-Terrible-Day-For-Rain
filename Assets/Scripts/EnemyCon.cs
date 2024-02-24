@@ -31,7 +31,8 @@ public class EnemyCon : Enemy
     private Dictionary<string, GameObject> attackCanvases = new Dictionary<string, GameObject>();
 
     private bool isInHitAnimation = false; // Flag to indicate if the hit animation is currently playing
-
+    private float lastHitTime = -1f; // Timestamp of the last hit
+    private float hitAnimationCooldown = 0.5f; // Cooldown duration in seconds
     private void Start()
     {
         rb.velocity = new Vector3(speed, 0, 0);
@@ -53,7 +54,7 @@ public class EnemyCon : Enemy
     {
     }
 
-    public void TakeDamage(int damage, bool isCrit, string attackId)
+    public void TakeDamage(int damage, bool isCrit, string attackId, Vector2 hitDirection)
     {
 
         health = Mathf.Max(0, health - damage);
@@ -69,6 +70,8 @@ public class EnemyCon : Enemy
             healthBar.SetHealth(health);
         }
         PlayHitAnimation();
+        Knockback(hitDirection); // Apply the knockback effect
+
         if (!attackCanvases.ContainsKey(attackId))
         {
             GameObject newCanvas = Instantiate(CanvasDamageNum, transform.position, Quaternion.identity);
@@ -127,10 +130,23 @@ public class EnemyCon : Enemy
 
     private void PlayHitAnimation()
     {
+        if (Time.time - lastHitTime < hitAnimationCooldown)
+        {
+            // If we're within the cooldown period, exit the method without replaying the animation
+            return;
+        }
+
+        // Update the timestamp of the last hit
+        lastHitTime = Time.time;
+
+        // Now we proceed with playing the hit animation as before
         if (isInHitAnimation)
-            return; // Exit if we're already in the hit animation
+            return; // Still exit if we're already in the hit animation to avoid other issues
 
         isInHitAnimation = true; // Set the flag to true since we're going to play the hit animation
+
+        // Pause the animator by setting its speed to 0
+        animator.speed = 0;
 
         // Get the current frame of the Move animation
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
@@ -138,28 +154,28 @@ public class EnemyCon : Enemy
 
         // Play the Hit animation at the exact same frame as the Move animation
         animator.Play("Hit", 0, lastNormalizedTime);
-        Knockback();
+
+
         // Schedule to return to the Move animation at the same frame in the next frame
         StartCoroutine(ResetToMoveAnimation());
     }
 
-    private void Knockback()
+    private void Knockback(Vector2 hitDirection)
     {
-        Vector2 knockbackDirection = rb.velocity.x >= 0 ? Vector2.left : Vector2.right;
-        // Consider storing the original moving direction before applying knockback
+        // Determine knockback direction based on hitDirection rather than the enemy's current velocity
+        Vector2 knockbackDirection = hitDirection.x < 0 ? Vector2.right : Vector2.left;
         bool originallyMovingRight = movingRight;
 
         // Apply knockback
         rb.velocity = Vector2.zero;
         rb.AddForce(knockbackDirection * KnockbackStr, ForceMode2D.Impulse);
-
-        // Pass the original direction to the reset coroutine
         StartCoroutine(ResetEnemyMovementAfterKnockback(originallyMovingRight));
+
     }
 
     private IEnumerator ResetEnemyMovementAfterKnockback(bool originallyMovingRight)
     {
-        yield return new WaitForSeconds(0.2f); // Adjust as needed
+        yield return new WaitForSeconds(0.1f); // Adjust as needed
 
         // Restore the original moving direction
         movingRight = originallyMovingRight;
@@ -174,10 +190,11 @@ public class EnemyCon : Enemy
     private IEnumerator ResetToMoveAnimation()
     {
         // Define the duration in seconds for how long you want the hit animation to stay
-        float timeToWait = 0.8f; // Adjust this to match the desired hit animation time
+        float timeToWait = 0.1f;
 
         // Wait for the defined duration
         yield return new WaitForSeconds(timeToWait);
+        animator.speed = 1;
 
         // Reset the takingDamage flag and return to Move animation
         animator.SetBool("takingDamage", false);

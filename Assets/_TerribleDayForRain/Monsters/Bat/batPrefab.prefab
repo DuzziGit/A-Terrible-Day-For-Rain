@@ -245,7 +245,7 @@ MonoBehaviour:
   health: 150
   damage: 20
   level: 1
-  speed: 4
+  speed: 2
   distance: 0.6
   groundDetection: {fileID: 25913745}
   wallDetection: {fileID: 4181335816790591474}
@@ -256,10 +256,6 @@ MonoBehaviour:
   enemySprite: {fileID: 6392495728788100714}
   bc: {fileID: 6994407341023997054}
   rb: {fileID: 7718911885572065984}
-  bigEnemy: {r: 1, g: 0, b: 0, a: 1}
-  medEnemy: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  smallEnemy: {r: 0, g: 1, b: 0, a: 1}
-  tutEnemy: {r: 0, g: 1, b: 1, a: 1}
   animator: {fileID: 6392495728788100713}
   MySpawner: {fileID: 0}
   enemyDamage: 0

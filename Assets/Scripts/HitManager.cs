@@ -30,10 +30,11 @@ public class HitManager : MonoBehaviour
         return Guid.NewGuid().ToString();
     }
 
-    public void ApplyDelayedHits(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId)
+    public void ApplyDelayedHits(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId, Vector2 hitPosition, Transform enemyTransform)
     {
-        StartCoroutine(DelayedHitsCoroutine(enemy, totalHits, baseMinDamage, baseMaxDamage, attackId));
+        StartCoroutine(DelayedHitsCoroutine(enemy, totalHits, baseMinDamage, baseMaxDamage, attackId, hitPosition, enemyTransform));
     }
+
     private int CalculateDamageForLevel(int baseMinDamage, int baseMaxDamage)
     {
         int plevel = PlayerLevel.level;
@@ -42,7 +43,7 @@ public class HitManager : MonoBehaviour
 
         return UnityEngine.Random.Range(minDamageAtLevel, maxDamageAtLevel + 1);
     }
-    private IEnumerator DelayedHitsCoroutine(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId)
+    private IEnumerator DelayedHitsCoroutine(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId, Vector2 hitPosition, Transform enemyTransform)
     {
         int hitsApplied = 0;
         while (hitsApplied < totalHits)
@@ -50,14 +51,17 @@ public class HitManager : MonoBehaviour
             if (enemy != null)
             {
                 // Calculate damage and critical hit status here
-                int damage = CalculateDamageForLevel(baseMinDamage, baseMaxDamage); // Assuming this method is now accessible here
+                int damage = CalculateDamageForLevel(baseMinDamage, baseMaxDamage);
                 bool isCrit = UnityEngine.Random.value < (critChance / 100f);
                 if (isCrit)
                 {
-                    damage = Mathf.FloorToInt(damage * critMultiplier);
+                    damage *= critMultiplier;
                 }
 
-                enemy.GetComponent<EnemyCon>().TakeDamage(damage, isCrit, attackId);
+                // Calculate hit direction
+                Vector2 hitDirection = (hitPosition - (Vector2)enemyTransform.position).normalized;
+
+                enemy.GetComponent<EnemyCon>().TakeDamage(damage, isCrit, attackId, hitDirection);
                 hitsApplied++;
                 yield return new WaitForSeconds(hitCooldown);
             }

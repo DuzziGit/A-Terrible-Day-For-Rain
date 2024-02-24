@@ -58,7 +58,10 @@ public class PulsingSummon : MonoBehaviour
             {
                 if (!hitEnemies.ContainsKey(result))
                 {
-                    HitManager.Instance.ApplyDelayedHits(result, TotalHits, MinDamage, MaxDamage, UniqueAttackID);
+                    Vector2 hitPosition = transform.position; // Position of the projectile at the time of collision
+                    Transform enemyTransform = result.transform;
+
+                    HitManager.Instance.ApplyDelayedHits(result, TotalHits, MinDamage, MaxDamage, UniqueAttackID, hitPosition, enemyTransform);
                     hitCount++;
                     hitEnemies[result] = 1; // Track this enemy as hit
 
