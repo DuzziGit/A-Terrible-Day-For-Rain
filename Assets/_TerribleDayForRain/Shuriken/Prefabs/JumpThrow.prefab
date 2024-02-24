@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3391489503298212652}
   - component: {fileID: -4512458841534131709}
   m_Layer: 0
-  m_Name: TripleThrow
+  m_Name: JumpThrow
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,13 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bd4fded6314e741bda8b8792f9fd77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shuriken: {fileID: 2122635036824758511, guid: e7259c155907ef349b2792b420563bc6, type: 3}
+  shuriken: {fileID: 2122635036824758511, guid: 8b29b1a9a54031d4ca524dd23c254fda, type: 3}
   offsets:
   - {x: 0, y: 0, z: 0}
-  - {x: -0.5, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   lifetime: 2
-  throwForce: 16
+  throwForce: -5
   throwAngles:
   - 2.4
   - 0

@@ -8,6 +8,7 @@ public class EnemyCon : Enemy
 
     public int enemyDamage;
     public TMP_Text damageDisplay;
+    [SerializeField] private float KnockbackStr;
     public TMP_Text enemyLevel;
     public GameObject CanvasDamageNum;
     public new bool isTouchingPlayer = false;
@@ -137,11 +138,39 @@ public class EnemyCon : Enemy
 
         // Play the Hit animation at the exact same frame as the Move animation
         animator.Play("Hit", 0, lastNormalizedTime);
-
+        Knockback();
         // Schedule to return to the Move animation at the same frame in the next frame
         StartCoroutine(ResetToMoveAnimation());
     }
 
+    private void Knockback()
+    {
+        Vector2 knockbackDirection = rb.velocity.x >= 0 ? Vector2.left : Vector2.right;
+        // Consider storing the original moving direction before applying knockback
+        bool originallyMovingRight = movingRight;
+
+        // Apply knockback
+        rb.velocity = Vector2.zero;
+        rb.AddForce(knockbackDirection * KnockbackStr, ForceMode2D.Impulse);
+
+        // Pass the original direction to the reset coroutine
+        StartCoroutine(ResetEnemyMovementAfterKnockback(originallyMovingRight));
+    }
+
+    private IEnumerator ResetEnemyMovementAfterKnockback(bool originallyMovingRight)
+    {
+        yield return new WaitForSeconds(0.2f); // Adjust as needed
+
+        // Restore the original moving direction
+        movingRight = originallyMovingRight;
+
+        // Reset velocity according to the original direction
+        Vector3 correctedVelocityDirection = movingRight ? Vector3.right : Vector3.left;
+        rb.velocity = correctedVelocityDirection * speed;
+
+        // Correctly flip the sprite according to the restored direction
+        enemySprite.flipX = !movingRight;
+    }
     private IEnumerator ResetToMoveAnimation()
     {
         // Define the duration in seconds for how long you want the hit animation to stay

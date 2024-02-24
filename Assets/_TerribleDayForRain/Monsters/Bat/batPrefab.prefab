@@ -262,11 +262,9 @@ MonoBehaviour:
   tutEnemy: {r: 0, g: 1, b: 1, a: 1}
   animator: {fileID: 6392495728788100713}
   MySpawner: {fileID: 0}
-  audioSource: {fileID: 0}
-  skeletonHitSound: {fileID: 8300000, guid: 144a7f7a75a0ce0499270539f50674fd, type: 3}
-  deathSound: {fileID: 8300000, guid: 32903aef4afec624aa5e2efad6f66147, type: 3}
   enemyDamage: 0
   damageDisplay: {fileID: 2509596546504336050, guid: e87ea331d8b01ba4483fe23883f5ed55, type: 3}
+  KnockbackStr: 5
   enemyLevel: {fileID: 297983036868777606}
   CanvasDamageNum: {fileID: 6962523565112630718, guid: b2afdfba80b192f4ca0280bb2237ae21, type: 3}
   isTouchingPlayer: 0

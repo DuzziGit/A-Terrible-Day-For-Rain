@@ -3,12 +3,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using Unity.Mathematics;
 public class RogueSkillController : PlayerMovement
 {
     public float MovementSkillForce;
     public float MovementSkillForceLeft;
     public GameObject LevelUpShuriken;
-
+    [SerializeField] private GameObject JumpShuriken;
+    [SerializeField] private GameObject FixedJumpAttackPos;
     public GameObject basicAttackPrefab;
     public GameObject projectile2;
     public GameObject ProjectileUltimate;
@@ -174,6 +176,27 @@ public class RogueSkillController : PlayerMovement
         _ = StartCoroutine(ResetMovementSkillAnimation());
     }
 
+    private void GetMovementSkillUpInput()
+    {
+        if (Time.time > nextFireTimeMovement && Input.GetKeyDown(KeyCode.LeftShift) && isAirborne)
+        {
+            MovementSkillUpwards();
+            nextFireTimeMovement = Time.time + cooldownTimeMovement;
+            //    textCooldownSM.gameObject.SetActive(true);
+            cooldownTimerSM = cooldownTimeMovement;
+
+        }
+    }
+    public void MovementSkillUpwards()
+    {
+        rb.velocity = new Vector2(0, 0);
+        // Apply vertical force separately to ensure it's consistent
+        Vector2 verticalForce = new(0, jumpForce);
+        rb.AddForce(verticalForce, ForceMode2D.Impulse);
+        Instantiate(JumpShuriken, FixedJumpAttackPos.transform.position, FixedJumpAttackPos.transform.rotation);
+        _ = StartCoroutine(ResetMovementSkillAnimation());
+    }
+
     private IEnumerator ResetMovementSkillAnimation()
     {
         yield return new WaitForSeconds(0.1f);
@@ -287,7 +310,7 @@ public class RogueSkillController : PlayerMovement
 
     private IEnumerator UltimateSkillEnum()
     {
-
+        _ = Instantiate(LevelUpShuriken, transform);
         yield return new WaitForSeconds(0.15f);
     }
 }

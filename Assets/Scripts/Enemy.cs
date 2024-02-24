@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     public static bool isAggroed = false;
     public static bool isPatroling = true;
     public static bool isTouchingPlayer = false;
-    private bool movingRight = true;
+    protected bool movingRight = true;
 
     public float agroRange;
 
