@@ -163,19 +163,33 @@ public class PlayerMovement : MonoBehaviour
 
     public void getPlayerInput()
     {
+        // Existing code to handle flipping character...
         moveDirection = Input.GetAxis("Horizontal");
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
+
+        // Force the player to stop when 'K' is pressed and only if the player is grounded
+        if (Input.GetKey(KeyCode.K) && isGrounded && !isFallingThrough && rb.velocity.y == 0)
+        {
+            // Stop the player by setting velocity to zero
+            rb.velocity = Vector2.zero;
+            moveDirection = 0; // Ensure moveDirection is set to 0 to stop movement logic
+        }
+        else
+        {
+            // Resume movement by allowing moveDirection to dictate player velocity in FixedUpdate
+            if (!isAirborne)
+            {
+                if (Input.GetButtonDown("Jump") && !isFallingThrough)
+                {
+                    shouldJump = true; // Set flag to true to handle in FixedUpdate
+                }
+            }
+        }
+
+        // Check for jump through platform
         if (Input.GetKey(KeyCode.K) && Input.GetButtonDown("Jump"))
         {
             StartCoroutine(FallThrough());
-            //            Debug.Log("Fell Through Platform");
-        }
-        if (!isAirborne && !Input.GetKey(KeyCode.K))
-        {
-            if (Input.GetButtonDown("Jump") && !isFallingThrough)
-            {
-                shouldJump = true; // Set flag to true to handle in FixedUpdate
-            }
         }
         // You can still flip the character without affecting the momentum.
         if ((moveDirection > 0 && !facingRight) || (moveDirection < 0 && facingRight))
@@ -189,9 +203,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFallingThrough) yield break;
         isFallingThrough = true;
-        int originalLayer = gameObject.layer;
+
+        // Lock the player's X velocity to 0
+        Vector2 currentVelocity = rb.velocity;
+        rb.velocity = new Vector2(0, currentVelocity.y);
 
         // Change the player's layer to NoPlatformCollision to start ignoring collisions
+        int originalLayer = gameObject.layer;
         gameObject.layer = LayerMask.NameToLayer("PlayerFallThrough");
 
         // Wait a bit to ensure the player starts falling through
@@ -200,6 +218,7 @@ public class PlayerMovement : MonoBehaviour
         // Change back to the original layer
         gameObject.layer = originalLayer;
 
+        isFallingThrough = false;
     }
     public void playerInteractInput()
     {
@@ -256,35 +275,38 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isAirborne)
         {
-            // Apply movement normally on the ground.
-            rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
+            // Only apply horizontal movement if not falling through a platform
+            if (!isFallingThrough)
+            {
+                rb.velocity = new Vector3(moveDirection * moveSpeed, rb.velocity.y);
+            }
+
             animator.SetBool("isAirborne", false);
             animator.SetFloat("Speed", Mathf.Abs(moveDirection));
-            if (Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.RightArrow))
+
+            if ((Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.RightArrow)) && !isFallingThrough)
             {
                 jumpDirection = 1;
             }
-            if (Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.LeftArrow))
+            else if ((Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.LeftArrow)) && !isFallingThrough)
             {
                 jumpDirection = -1;
             }
+
             if (isJumping)
             {
-
-                // Store the direction at the start of the jump.
                 Jump();
             }
         }
         else
         {
-            // While airborne, maintain horizontal momentum but allow for facing direction changes.
+            // While airborne, maintain horizontal momentum but allow for facing direction changes if not falling through
             if (isJumping)
             {
                 Jump();
             }
         }
     }
-
     private void Jump()
     {
 

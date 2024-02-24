@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 300}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 1
-  controlID: 51043
+  controlID: 65006
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 300}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 51044
+  controlID: 65007
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 300}
   m_MaxSize: {x: 8096, y: 24288}
   vertical: 1
-  controlID: 51027
+  controlID: 65008
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -312,7 +312,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -1914256
+  m_LastSelectedObjectID: -1680
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -614,16 +614,16 @@ MonoBehaviour:
   m_WindowGUID: bc7c8b96597d4f6429976fdd56cc88d7
   m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
-  m_SceneIsLit: 1
+  m_SceneIsLit: 0
   m_SceneLighting: 1
   m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 45.69724, y: 5.616716, z: 2.000234}
+    m_Target: {x: 39.793873, y: 8.454079, z: 0.42266515}
     speed: 2
-    m_Value: {x: 45.69724, y: 5.616716, z: 2.000234}
+    m_Value: {x: 39.793873, y: 8.454079, z: 0.42266515}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -674,9 +674,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 3.7293954
+    m_Target: 6.454265
     speed: 2
-    m_Value: 3.7293954
+    m_Value: 6.454265
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -720,15 +720,15 @@ MonoBehaviour:
     y: 629
     width: 1102
     height: 302
-  m_MinSize: {x: 102, y: 121}
-  m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
   - {fileID: 13}
   - {fileID: 14}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -759,7 +759,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: slime
+    m_NameFilter: batpre
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -773,7 +773,7 @@ MonoBehaviour:
     m_Folders:
     - Assets/_TerribleDayForRain/Monsters/Bat
     m_Globs: []
-    m_OriginalText: slime
+    m_OriginalText: batpre
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
@@ -839,8 +839,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 02730000
-    m_LastClickedInstanceID: 29442
+    m_SelectedInstanceIDs: 70f9ffff
+    m_LastClickedInstanceID: -1680
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 9caa0000fc700000f6700000d8d20200c49afdff8268000024360200b86c0000a26c0000ec620000c2cd0000d46d0000786e0000c4910000186101004ea30000b883000080fd0000f8a9000026fc00005c750000baa20300ecb4000024b30000f8b3000042af0900c091000074750000a0940000504a01006a4a010010cd00003ed300006e6d0200967600005c6d02006a750000aca80000b68f0000307600008a7500000000000088750000de950000c6950000da950000acbd0000bcaa0000863d0100ea650100da3a0100647101007e710100a8750100da790100be100100da760000d2760000bac60000e6760000a8990000707300007e9c0000b0e300008c7500001c740000
     m_RenameOverlay:
@@ -866,7 +866,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 58}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 60
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 210
@@ -953,7 +953,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 51045
+  controlID: 65240
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: AnimatorControllerTool
+  m_Name: GridPaintPaletteWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -973,14 +973,14 @@ MonoBehaviour:
     y: 0
     width: 566
     height: 377
-  m_MinSize: {x: 101, y: 121}
+  m_MinSize: {x: 241, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1157,14 +1157,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.21674249
+    - e00: 0.36105263
       e01: 0
       e02: 0
-      e03: 66.90639
+      e03: -3.0526276
       e10: 0
-      e11: 0.21674249
+      e11: 0.36105263
       e12: 0
-      e13: 176.8593
+      e13: 113.36842
       e20: 0
       e21: 0
       e22: 1
@@ -1874,7 +1874,7 @@ MonoBehaviour:
     m_CachedPref: 151
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: -1680
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0

@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravScale: 0
-  InvicibilityTimer: 2
+  InvicibilityTimer: 1
 --- !u!1 &7039804153228895607
 GameObject:
   m_ObjectHideFlags: 0
