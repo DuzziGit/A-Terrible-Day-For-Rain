@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 884045900152053401}
   - component: {fileID: 3655252425593123719}
   - component: {fileID: 6749218848072369970}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 2924554658556308714}
   - component: {fileID: 7751834776083193882}
   - component: {fileID: 8155049644716703106}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 1689555281317450779}
   - component: {fileID: 8660785159019383639}
   - component: {fileID: 2066641193380143029}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 2596427165692564071}
   - component: {fileID: 5610280290987940670}
   - component: {fileID: 6646942464397990846}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 55677136084152187}
   - component: {fileID: 387611994282807845}
   - component: {fileID: 3707397220418433219}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,7 +619,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 698103065, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 698103066, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_LocalScale.x
@@ -671,7 +671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
       propertyPath: m_TagString
@@ -824,6 +824,7 @@ MonoBehaviour:
   totalHits: 5
   minDamage: 500
   lifetime: 60
+  UniqueAttackID: 
   maxDamage: 1000
 --- !u!4 &7654510597099904627 stripped
 Transform:

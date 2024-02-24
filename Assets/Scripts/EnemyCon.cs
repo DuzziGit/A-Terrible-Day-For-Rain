@@ -175,6 +175,7 @@ public class EnemyCon : Enemy
         if (health <= 0)
         {
             StartCoroutine(Die());
+            return;
         }
         // Update the timestamp of the last hit
         lastHitTime = Time.time;

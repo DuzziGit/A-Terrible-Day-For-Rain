@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 4628917298890330334}
   - component: {fileID: 1995216451}
   - component: {fileID: 694875898}
+  - component: {fileID: 5223553207923353184}
   m_Layer: 6
   m_Name: slime
   m_TagString: Enemy
@@ -262,6 +263,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0008137085, y: 0.033166267}
   m_Size: {x: 0.81914616, y: 1.1337318}
   m_Direction: 0
+--- !u!114 &5223553207923353184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597381505260269731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f770077cc4791e141a6ae71697dbb14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravScale: 4
+  InvicibilityTimer: 1
 --- !u!1 &5510990405137156906
 GameObject:
   m_ObjectHideFlags: 0

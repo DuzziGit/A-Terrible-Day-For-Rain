@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 1826110122}
   - component: {fileID: 6994407341023997054}
   - component: {fileID: 513057138709047720}
+  - component: {fileID: 3064877574233100646}
   m_Layer: 6
   m_Name: batPrefab
   m_TagString: Enemy
@@ -312,6 +313,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootList:
   - {fileID: 11400000, guid: 392792806eddffe4e810d813b3c75eba, type: 2}
+--- !u!114 &3064877574233100646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392495728788100712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f770077cc4791e141a6ae71697dbb14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravScale: 0
+  InvicibilityTimer: 2
 --- !u!1 &7039804153228895607
 GameObject:
   m_ObjectHideFlags: 0

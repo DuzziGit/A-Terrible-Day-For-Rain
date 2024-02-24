@@ -94,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
         cc = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
-
     }
 
     private void Start()
@@ -104,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
         GainExperience(0);
 
     }
-
     public void GainExperience(int gainedExp)
     {
         currentExp += gainedExp;
@@ -114,13 +112,10 @@ public class PlayerMovement : MonoBehaviour
             shouldLevelUp = true;
             currentExp -= maxExp;
         }
-
     }
-
     public void UpdateHealth(int mod)
     {
         currentHealth += mod;
-
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -132,19 +127,14 @@ public class PlayerMovement : MonoBehaviour
             PlayerDeath();
         }
     }
-
     private void Update()
     {
         if (GameController.instance.playerCanMove)
         {
-
             getPlayerInput();
             playerInteractInput();
             animate();
         }
-
-
-
     }
     private void FixedUpdate()
     {
@@ -178,11 +168,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.K) && Input.GetButtonDown("Jump"))
         {
             StartCoroutine(FallThrough());
-            Debug.Log("Fell Through Platform");
+            //            Debug.Log("Fell Through Platform");
         }
         if (!isAirborne && !Input.GetKey(KeyCode.K))
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && !isFallingThrough)
             {
                 shouldJump = true; // Set flag to true to handle in FixedUpdate
             }
@@ -199,7 +189,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFallingThrough) yield break;
         isFallingThrough = true;
-
         int originalLayer = gameObject.layer;
 
         // Change the player's layer to NoPlatformCollision to start ignoring collisions
@@ -211,7 +200,6 @@ public class PlayerMovement : MonoBehaviour
         // Change back to the original layer
         gameObject.layer = originalLayer;
 
-        isFallingThrough = false;
     }
     public void playerInteractInput()
     {
@@ -353,6 +341,8 @@ public class PlayerMovement : MonoBehaviour
             isAirborne = false;
             isGrounded = true;
             animator.SetTrigger("isLanded");
+            if (isFallingThrough) isFallingThrough = false;
+
 
         }
     }
