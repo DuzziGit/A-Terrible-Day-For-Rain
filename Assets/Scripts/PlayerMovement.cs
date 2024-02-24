@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Collider2D playerCollider;
     private bool isFallingThrough = false;
-
+    protected bool isExecutingSkill = false;
 
 
     private void Awake()
@@ -163,7 +163,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void getPlayerInput()
     {
-        // Existing code to handle flipping character...
+        if (!GameController.instance.playerCanMove && !isExecutingSkill)
+        {
+            moveDirection = 0; // Reset movement direction to ensure no movement occurs
+            rb.velocity = Vector2.zero;
+            return; // Skip processing input if movement is disabled
+        }
         moveDirection = Input.GetAxis("Horizontal");
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
 
@@ -364,7 +369,10 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             animator.SetTrigger("isLanded");
             if (isFallingThrough) isFallingThrough = false;
-
+            if (isExecutingSkill)
+            {
+                rb.velocity = Vector2.zero;
+            }
 
         }
     }

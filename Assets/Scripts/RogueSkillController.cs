@@ -64,6 +64,7 @@ public class RogueSkillController : PlayerMovement
     // private readonly float cooldownTimer = 0.0f;
     private CinemachineImpulseSource impulseSource;
     [SerializeField] private float yOffsetSummon;
+
     private void Start()
     {
         HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -235,25 +236,50 @@ public class RogueSkillController : PlayerMovement
     // First Skill
     public void GetFirstSkillInput()
     {
-        if (Time.time > nextFireTimeSkill1 && Input.GetKeyDown(KeyCode.A))
+        if (Time.time > nextFireTimeSkill1 && Input.GetKey(KeyCode.A))
         {
-            horizontalMove = 0;
-            FirstSkill();
+            isExecutingSkill = true;
+            if (!isAirborne)
+            {
+                rb.velocity = Vector2.zero; // Stop any current movement
+                moveDirection = 0;
+                GameController.instance.playerCanMove = false; // Disable movement input
+            }
+            else
+            {
+                GameController.instance.playerCanMove = false; // Disable movement input
+
+            }
+
+            StartCoroutine(FirstSkill());
             nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
             //    textCooldownS1.gameObject.SetActive(true);
             cooldownTimerS1 = cooldownTimeSkill1;
             SwipeOne.SetTrigger("Attack");
-            runSpeed = 40;
         }
     }
-    private void FirstSkill()
+    private IEnumerator FirstSkill()
     {
 
+
+        // If the player is airborne, don't modify their horizontal velocity,
+        // allowing them to continue moving with their current momentum.
+
+        // Determine the fixed position for the attack based on whether the player is airborne or not
         Vector3 fixedAttackPosition = !isAirborne ? attackPos.position : attackPosAirborne.position;
         Quaternion fixedAttackRotation = !isAirborne ? attackPos.rotation : attackPosAirborne.rotation;
+
+        // Instantiate the attack prefab at the calculated position and rotation
         Instantiate(basicAttackPrefab, fixedAttackPosition, fixedAttackRotation);
 
+        // Wait for a short duration before continuing
+        yield return new WaitForSeconds(0.4f); // Adjust based on skill animation length
+
+        isExecutingSkill = false;
+        GameController.instance.playerCanMove = true;
     }
+
+
     public void GetSecondSkillInput()
     {
         if (Time.time > nextFireTimeSkill2 && Input.GetKeyDown(KeyCode.S))
