@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 28937
+  controlID: 33852
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 28938
+  controlID: 33853
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,8 +164,8 @@ MonoBehaviour:
     y: 0
     width: 232
     height: 931
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 28939
+  controlID: 33803
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -701,7 +701,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: batp
+    m_NameFilter: tmp
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -713,22 +713,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/_TerribleDayForRain/Shuriken/Prefabs
+    - Assets/Scripts
     m_Globs: []
-    m_OriginalText: batp
+    m_OriginalText: tmp
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/_TerribleDayForRain/Shuriken/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: 60
   m_LastProjectPath: C:\Users\dante\OneDrive\Documents\GitHub\3DMovementShooter\FZ4
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 75}
-    m_SelectedIDs: 50bd0000
-    m_LastClickedID: 48464
-    m_ExpandedIDs: 0000000026940000289400002a9400002c9400002e940000e2cb000000ca9a3b
+    scrollPos: {x: 0, y: 203}
+    m_SelectedIDs: c0c90000
+    m_LastClickedID: 51648
+    m_ExpandedIDs: 0000000026940000289400002a9400002c9400002e94000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -781,8 +781,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: e4730000
+    m_LastClickedInstanceID: 29668
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 9caa0000fc700000f6700000d8d20200c49afdff8268000024360200b86c0000a26c0000ec620000c2cd0000d46d0000786e0000c4910000186101004ea30000b883000080fd0000f8a9000026fc00005c750000baa20300ecb4000024b30000f8b3000042af0900c091000074750000a0940000504a01006a4a010010cd00003ed300006e6d0200967600005c6d02006a750000aca80000b68f0000307600008a750000000000008c75000088750000de950000c6950000da950000acbd0000bcaa0000863d0100ea650100da3a0100647101007e710100a8750100da790100be100100da760000d2760000bac60000e6760000a899000070730000
     m_RenameOverlay:
@@ -902,7 +902,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 29422
+  m_LastSelectedObjectID: 95572
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -927,7 +927,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 28933
+  controlID: 33854
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1711,7 +1711,7 @@ MonoBehaviour:
       e10: 0
       e11: 0.3568421
       e12: 0
-      e13: 128.16843
+      e13: 124.600006
       e20: 0
       e21: 0
       e22: 1
@@ -1721,9 +1721,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 18ae9219539298240b84212eb03b029d, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 435316d1d5654c14bb8a58bcb56c744b, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 8819907056940536489, guid: 18ae9219539298240b84212eb03b029d, type: 2}
+  - m_Target: {fileID: 9199998791701405298, guid: 435316d1d5654c14bb8a58bcb56c744b, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1797,8 +1797,8 @@ MonoBehaviour:
     m_CachedPref: 151
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastInspectedObjectInstanceID: 29668
+  m_LastVerticalScrollValue: 864
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
