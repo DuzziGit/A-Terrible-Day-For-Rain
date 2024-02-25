@@ -62,10 +62,11 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public bool facingRight = true;
     protected bool isJumping = false;
-    protected bool isGrounded = false;
+    public bool isGrounded = false;
     protected bool shouldLevelUp = false;
     protected bool shouldJump = false; // Flag to indicate jump input
 
+    public float gizmoRayLength = 0.1f;
 
     [Header("Portal Settings")]
     [HideInInspector]
@@ -82,11 +83,14 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioSource audioSource;
     [SerializeField] protected Animator animator;
-
     public Collider2D playerCollider;
     private bool isFallingThrough = false;
     protected bool isExecutingSkill = false;
-
+    private bool justExitedPlatform = false;
+    public int gizmoNumberOfRays = 5;
+    public Color gizmoRayColor = Color.blue;
+    [SerializeField] private Transform feetPos;
+    public LayerMask platformLayerMask;
 
     private void Awake()
     {
@@ -129,25 +133,34 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
+        isGrounded = IsGrounded();
         if (GameController.instance.playerCanMove)
         {
             getPlayerInput();
             playerInteractInput();
             animate();
         }
-    }
-    private void FixedUpdate()
-    {
-        if (GameController.instance.playerCanMove)
+
+        if (isJumping || isFallingThrough)
         {
-            moveCharacter();
-            if (shouldJump)
-            {
-                Jump();
-            }
+            justExitedPlatform = false;
         }
 
     }
+    private void FixedUpdate()
+    {
+        if (GameController.instance.playerCanMove && !isExecutingSkill)
+        {
+
+            moveCharacter();
+        }
+
+        if (shouldJump && !isExecutingSkill)
+        {
+            Jump();
+        }
+    }
+
     private void PlayerDeath()
     {
         GetComponent<Rigidbody2D>().gravityScale = 0.85f;
@@ -204,6 +217,28 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
+    bool IsGrounded()
+    {
+        if (isFallingThrough)
+        {
+            return false;
+        }
+
+        // Cast a ray straight down from the feet position
+        RaycastHit2D hit = Physics2D.Raycast(feetPos.position, Vector2.down, gizmoRayLength, platformLayerMask);
+
+        // Visualize the raycast in the editor
+        Debug.DrawRay(feetPos.position, Vector2.down * gizmoRayLength, Color.green);
+
+        // If it hits something, you're grounded
+        if (hit.collider != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
     private IEnumerator FallThrough()
     {
         if (isFallingThrough) yield break;
@@ -218,12 +253,11 @@ public class PlayerMovement : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("PlayerFallThrough");
 
         // Wait a bit to ensure the player starts falling through
-        yield return new WaitForSeconds(0.27f);
+        yield return new WaitForSeconds(0.4f);
 
         // Change back to the original layer
         gameObject.layer = originalLayer;
 
-        isFallingThrough = false;
     }
     public void playerInteractInput()
     {
@@ -369,13 +403,13 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             animator.SetTrigger("isLanded");
             if (isFallingThrough) isFallingThrough = false;
-            if (isExecutingSkill)
-            {
-                rb.velocity = Vector2.zero;
-            }
+
 
         }
+
+
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -383,6 +417,22 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
         }
-
     }
+
+    // void OnDrawGizmos()
+    // {
+    //     float characterWidth = cc.bounds.size.x;
+    //     float characterHeight = cc.bounds.size.y;
+    //     Vector2 rayStartPoint = new Vector2(transform.position.x - characterWidth / 2, transform.position.y - characterHeight / 2);
+    //     float distanceBetweenRays = characterWidth / (gizmoNumberOfRays - 1);
+
+    //     Gizmos.color = gizmoRayColor;
+
+    //     for (int i = 0; i < gizmoNumberOfRays; i++)
+    //     {
+    //         Vector2 rayStart = rayStartPoint + Vector2.right * distanceBetweenRays * i;
+    //         Gizmos.DrawLine(rayStart, rayStart + Vector2.down * gizmoRayLength);
+    //     }
+    // }
+
 }

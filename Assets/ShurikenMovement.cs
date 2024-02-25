@@ -20,7 +20,7 @@ public class ShurikenMovement : MonoBehaviour
         float distanceTraveled = Vector3.Distance(transform.position, initialPosition);
         if (distanceTraveled >= maxDistance)
         {
-            Debug.Log("exceeded max distance per shuriken");
+            //Debug.Log("exceeded max distance per shuriken");
             DestroyProjectile();
         }
     }

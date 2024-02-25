@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 public class RogueSkillController : PlayerMovement
 {
     public float MovementSkillForce;
@@ -32,22 +33,22 @@ public class RogueSkillController : PlayerMovement
     private readonly Image imageCooldownSU;
     private readonly TMP_Text textCooldownSU;
 
-    public bool isInvincible;
-    public float cooldownTimeMovement = 2;
+    private bool isInvincible;
+    private float cooldownTimeMovement = 1;
     private float nextFireTimeMovement = 0;
 
-    public float cooldownTimeSkill1 = 2;
+    private float cooldownTimeSkill1 = 0.3f;
     private float nextFireTimeSkill1 = 0;
 
-    public float cooldownTimeSkill2 = 2;
+    private float cooldownTimeSkill2 = 2;
     private float nextFireTimeSkill2 = 0;
 
-    public static float cooldownTimeSkill3 = 23;
+    private static float cooldownTimeSkill3 = 23;
     private float nextFireTimeSkill3 = 0;
 
-    public float cooldownTimeSkill3Upgraded;
+    private float cooldownTimeSkill3Upgraded;
 
-    public float cooldownTimeSkillUlt = 2;
+    private float cooldownTimeSkillUlt = 2;
     private float nextFireTimeSkillUlt = 0;
 
     public Animator SwipeOne;
@@ -64,6 +65,7 @@ public class RogueSkillController : PlayerMovement
     // private readonly float cooldownTimer = 0.0f;
     private CinemachineImpulseSource impulseSource;
     [SerializeField] private float yOffsetSummon;
+    [SerializeField] private float skillDuration;
 
     private void Start()
     {
@@ -239,7 +241,7 @@ public class RogueSkillController : PlayerMovement
         if (Time.time > nextFireTimeSkill1 && Input.GetKey(KeyCode.A))
         {
             isExecutingSkill = true;
-            if (!isAirborne)
+            if (!isAirborne && rb.velocity.y == 0)
             {
                 rb.velocity = Vector2.zero; // Stop any current movement
                 moveDirection = 0;
@@ -261,7 +263,14 @@ public class RogueSkillController : PlayerMovement
     private IEnumerator FirstSkill()
     {
 
+        isExecutingSkill = true;
+        bool wasMoving = moveDirection != 0;
 
+        if (!isAirborne && !wasMoving && rb.velocity.y == 0)
+        {
+            GameController.instance.playerCanMove = false; // Lock movement if starting skill stationary
+            rb.velocity = Vector2.zero; // Ensure character is stationary
+        }
         // If the player is airborne, don't modify their horizontal velocity,
         // allowing them to continue moving with their current momentum.
 
@@ -273,24 +282,27 @@ public class RogueSkillController : PlayerMovement
         Instantiate(basicAttackPrefab, fixedAttackPosition, fixedAttackRotation);
 
         // Wait for a short duration before continuing
-        yield return new WaitForSeconds(0.4f); // Adjust based on skill animation length
+        yield return new WaitForSeconds(skillDuration); // Wait for skill to complete
 
         isExecutingSkill = false;
         GameController.instance.playerCanMove = true;
+
+        // If character was moving before skill, start deceleration
+
     }
+
+
 
 
     public void GetSecondSkillInput()
     {
-        if (Time.time > nextFireTimeSkill2 && Input.GetKeyDown(KeyCode.S))
+        if (Time.time > nextFireTimeSkill2 && Input.GetKey(KeyCode.S))
         {
-            rb.isKinematic = true;
             animator.SetTrigger("isAttacking");
             _ = StartCoroutine(secondSkill());
             nextFireTimeSkill2 = Time.time + cooldownTimeSkill2;
             //   textCooldownS2.gameObject.SetActive(true);
             cooldownTimerS2 = cooldownTimeSkill2;
-            rb.isKinematic = false;
         }
     }
 
