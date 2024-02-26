@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Health Settings")]
     public int currentHealth;
     public int maxHealth;
-    private const int jumpSpeed = 10;
+    private const int jumpSpeed = 5;
 
     public AudioSource audioSource;
     [SerializeField] protected Animator animator;
@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
     public Color gizmoRayColor = Color.blue;
     [SerializeField] private Transform feetPos;
     public LayerMask platformLayerMask;
+    private bool isTouchingPlatform = false;
 
     private void Awake()
     {
@@ -188,12 +189,15 @@ public class PlayerMovement : MonoBehaviour
         // Force the player to stop when 'K' is pressed and only if the player is grounded
         if (Input.GetKey(KeyCode.K) && isGrounded && !isFallingThrough && rb.velocity.y == 0)
         {
+            animator.SetBool("isHoldingDown", true);
             // Stop the player by setting velocity to zero
             rb.velocity = Vector2.zero;
             moveDirection = 0; // Ensure moveDirection is set to 0 to stop movement logic
         }
         else
         {
+            animator.SetBool("isHoldingDown", false);
+
             // Resume movement by allowing moveDirection to dictate player velocity in FixedUpdate
             if (!isAirborne)
             {
@@ -205,7 +209,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check for jump through platform
-        if (Input.GetKey(KeyCode.K) && Input.GetButtonDown("Jump"))
+        if (Input.GetKey(KeyCode.K) && Input.GetButtonDown("Jump") && isTouchingPlatform)
         {
             StartCoroutine(FallThrough());
         }
@@ -243,7 +247,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isFallingThrough) yield break;
         isFallingThrough = true;
-
+        animator.SetTrigger("isFallingDown");
         // Lock the player's X velocity to 0
         Vector2 currentVelocity = rb.velocity;
         rb.velocity = new Vector2(0, currentVelocity.y);
@@ -409,8 +413,20 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
-
-
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        {
+            isTouchingPlatform = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        {
+            isTouchingPlatform = false;
+        }
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag is "World" or "Platform")

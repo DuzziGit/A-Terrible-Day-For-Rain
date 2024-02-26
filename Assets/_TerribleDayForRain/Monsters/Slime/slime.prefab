@@ -205,7 +205,7 @@ MonoBehaviour:
   DamageNumText: {fileID: 2100312243281989656, guid: feae4dca98525114ab3342e2dcba6d3c, type: 3}
   DamageNumTextCrit: {fileID: 2100312243281989656, guid: 235d7025c55e65c40b38e7a204f29ef6, type: 3}
   isDisplayingDamage: 0
-  yOffsetText: 0.7
+  yOffsetText: 0.35
 --- !u!114 &1216610146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,8 +260,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0008137085, y: 0.033166267}
-  m_Size: {x: 0.81914616, y: 1.1337318}
+  m_Offset: {x: 0.008224529, y: -0.13530464}
+  m_Size: {x: 0.42293343, y: 0.42293343}
   m_Direction: 0
 --- !u!114 &5223553207923353184
 MonoBehaviour:
@@ -385,11 +385,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1997474524716373970, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1997474524716373970, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1997474524716373970, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -425,7 +425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1997474524716373970, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.5
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 1997474524716373970, guid: 258b7c7b1127e9345a235faa9224bcc4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

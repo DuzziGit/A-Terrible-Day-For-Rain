@@ -49,10 +49,10 @@ MonoBehaviour:
   shuriken: {fileID: 2122635036824758511, guid: e7259c155907ef349b2792b420563bc6, type: 3}
   offsets:
   - {x: 0, y: 0, z: 0}
+  - {x: -0.25, y: 0, z: 0}
   - {x: -0.5, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
   lifetime: 2
-  throwForce: 16
+  throwForce: 8
   throwAngles:
   - 2.4
   - 0

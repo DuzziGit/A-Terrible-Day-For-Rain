@@ -66,7 +66,7 @@ public class RogueSkillController : PlayerMovement
     private CinemachineImpulseSource impulseSource;
     [SerializeField] private float yOffsetSummon;
     [SerializeField] private float skillDuration;
-
+    [SerializeField] private Transform LevelUpAttackTransform;
     private void Start()
     {
         HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -115,7 +115,7 @@ public class RogueSkillController : PlayerMovement
             getPlayerInput();
             playerInteractInput();
 
-            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            //  horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
             GetMovementSkillInput();
             GetFirstSkillInput();
@@ -348,7 +348,7 @@ public class RogueSkillController : PlayerMovement
 
     private IEnumerator UltimateSkillEnum()
     {
-        _ = Instantiate(LevelUpShuriken, transform);
+        _ = Instantiate(LevelUpShuriken, LevelUpAttackTransform.position, Quaternion.identity, gameObject.transform);
         yield return new WaitForSeconds(0.15f);
     }
 }
