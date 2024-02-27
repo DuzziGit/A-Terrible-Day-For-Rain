@@ -83,12 +83,8 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioSource audioSource;
     [SerializeField] protected Animator animator;
-    public Collider2D playerCollider;
     private bool isFallingThrough = false;
     protected bool isExecutingSkill = false;
-    private bool justExitedPlatform = false;
-    public int gizmoNumberOfRays = 5;
-    public Color gizmoRayColor = Color.blue;
     [SerializeField] private Transform feetPos;
     public LayerMask platformLayerMask;
     private bool isTouchingPlatform = false;
@@ -142,10 +138,6 @@ public class PlayerMovement : MonoBehaviour
             animate();
         }
 
-        if (isJumping || isFallingThrough)
-        {
-            justExitedPlatform = false;
-        }
 
     }
     private void FixedUpdate()
