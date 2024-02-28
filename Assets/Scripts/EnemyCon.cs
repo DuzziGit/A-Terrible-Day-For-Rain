@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyCon : Enemy
 {
@@ -22,17 +23,18 @@ public class EnemyCon : Enemy
     private const int baseEnemyHealth = 10000;
     private const float healthGrowthRate = 1.1f; // This can be adjusted
 
-    // Magic numbers replaced with constants
-    private const float xOffset = 0f;
     [SerializeField] private float yOffsetText = 0.2f;
     private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
-    private List<(int Damage, bool IsCrit, string AttackId)> DamageTaken = new List<(int Damage, bool IsCrit, string AttackId)>();
-    private Dictionary<string, GameObject> attackCanvases = new Dictionary<string, GameObject>();
+    private List<(int Damage, bool IsCrit, string AttackId)> damageTaken = new List<(int Damage, bool IsCrit, string AttackId)>();
+    private Dictionary<string, GameObject> damageTextCanvases = new Dictionary<string, GameObject>();
 
     private bool isInHitAnimation = false; // Flag to indicate if the hit animation is currently playing
     private float lastHitTime = -1f; // Timestamp of the last hit
     private float hitAnimationCooldown = 0.5f; // Cooldown duration in seconds
+    private Vector3 initialPosition;
+    private Dictionary<string, int> damageNumberCounts = new Dictionary<string, int>();
+
     private void Start()
     {
         rb.velocity = new Vector3(speed, 0, 0);
@@ -41,9 +43,7 @@ public class EnemyCon : Enemy
         animator = GetComponent<Animator>();
         healthBar = GetComponentInChildren<HealthBar>();
         maxHealth = Mathf.FloorToInt(baseEnemyHealth * Mathf.Pow(healthGrowthRate, (level - 1)));
-
         health = maxHealth;
-
         if (healthBar != null)
         {
             healthBar.SetMaxHealth(maxHealth);
@@ -52,39 +52,28 @@ public class EnemyCon : Enemy
 
     public void TakeDamage(int damage, bool isCrit, string attackId, Vector2 hitDirection)
     {
-
+        Knockback(hitDirection);
         health = Mathf.Max(0, health - damage);
         if (health <= 0)
         {
             StartCoroutine(Die());
         }
-        if (!isDisplayingDamage)
-        {
-            ProcessDamage(attackId);
-        }
-
-
         if (healthBar != null)
         {
             healthBar.SetHealth(health);
         }
-        Knockback(hitDirection); // Apply the knockback effect
 
-        if (!attackCanvases.ContainsKey(attackId))
+        // Instantiate canvas for damage numbers if not already done for this attack
+        if (!damageTextCanvases.ContainsKey(attackId))
         {
-            GameObject newCanvas = Instantiate(CanvasDamageNum, transform.position, Quaternion.identity);
-            attackCanvases[attackId] = newCanvas;
+            GameObject canvas = Instantiate(CanvasDamageNum, transform.position + new Vector3(0, yOffsetText, 0), Quaternion.identity);
+            damageTextCanvases[attackId] = canvas;
         }
 
-        // Add damage to the list with attackId
-        DamageTaken.Add((damage, isCrit, attackId)); // Note: You need to update DamageTaken to include attackId
-
-        if (!isDisplayingDamage)
-        {
-            StartCoroutine(ProcessDamage(attackId)); // Use StartCoroutine to call Coroutines
-        }
+        // Add damage to be processed
+        damageTaken.Add((damage, isCrit, attackId));
+        StartCoroutine(ProcessDamage(attackId));
     }
-
     private void HandleDeath()
     {
         // Ensure that any ongoing processes are stopped or completed
@@ -99,42 +88,51 @@ public class EnemyCon : Enemy
     private IEnumerator ProcessDamage(string attackId)
     {
         isDisplayingDamage = true;
-        GameObject canvas = attackCanvases.ContainsKey(attackId) ? attackCanvases[attackId] : null;
-
-        if (canvas == null)
-        {
-            canvas = Instantiate(CanvasDamageNum, transform.position, Quaternion.identity);
-            attackCanvases[attackId] = canvas;
-        }
+        GameObject canvas = damageTextCanvases[attackId];
 
         // Filter for current attackId damages
-        var damagesForAttack = DamageTaken.FindAll(d => d.AttackId == attackId);
+        var damagesForAttack = damageTaken.FindAll(d => d.AttackId == attackId);
         foreach (var damageInfo in damagesForAttack)
         {
-            DamageDisplay(canvas, damageInfo);
-            DamageTaken.Remove(damageInfo); // Remove after displaying
-            yield return new WaitForSeconds(damageDisplayDelay); // Wait for delay between damage numbers
+            // Instantiate and position the damage text
+            GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
+            GameObject textObject = Instantiate(textPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+            TMP_Text textComponent = textObject.GetComponent<TMP_Text>();
+            textComponent.text = damageInfo.Damage.ToString();
+
+            // Adjust position for multiple damage texts
+            textObject.transform.localPosition += new Vector3(0, damagesForAttack.IndexOf(damageInfo) * yOffsetText, 0);
+
+            damageTaken.Remove(damageInfo); // Remove after displaying
+            yield return new WaitForSeconds(0.1f); // Delay before showing next damage number
         }
 
         isDisplayingDamage = false;
     }
-
-    private void DamageDisplay(GameObject canvas, (int Damage, bool IsCrit, string AttackId) damageInfo)
+    private void DamageDisplay(GameObject canvas, (int Damage, bool IsCrit, string AttackId) damageInfo, Vector3 initialPosition)
     {
-        float dynamicYOffset = yOffsetText * canvas.transform.childCount;
+        // Check if the attack ID already has a count, if not initialize to 0
+        if (!damageNumberCounts.ContainsKey(damageInfo.AttackId))
+        {
+            damageNumberCounts[damageInfo.AttackId] = 0;
+        }
+
+        // Calculate dynamicYOffset based on the count of damage numbers already displayed
+        float dynamicYOffset = yOffsetText * damageNumberCounts[damageInfo.AttackId];
         GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
         GameObject text = Instantiate(
             textPrefab,
-            new Vector3(transform.position.x + xOffset, transform.position.y + dynamicYOffset, transform.position.z),
+            new Vector3(initialPosition.x, initialPosition.y + dynamicYOffset, initialPosition.z),
             Quaternion.identity,
             canvas.transform
         );
 
         DamageNumController controller = text.GetComponent<DamageNumController>();
         controller.SetDamageNum(damageInfo.Damage);
+
+        // Increment the count for this attack ID
+        damageNumberCounts[damageInfo.AttackId]++;
     }
-
-
     private void Knockback(Vector2 hitDirection)
     {
         if (Time.time - lastHitTime < hitAnimationCooldown)
@@ -152,6 +150,7 @@ public class EnemyCon : Enemy
         rb.velocity = Vector2.zero;
         rb.AddForce(knockbackDirection * KnockbackStr, ForceMode2D.Impulse);
         StartCoroutine(ResetEnemyMovementAfterKnockback(originallyMovingRight));
+        initialPosition = transform.position + new Vector3(0, 0.25f, 0);
 
     }
 

@@ -63,7 +63,9 @@ public class HitManager : MonoBehaviour
 
                 enemy.GetComponent<EnemyCon>().TakeDamage(damage, isCrit, attackId, hitDirection);
                 hitsApplied++;
+                Debug.Log(attackId + " Hit enemy for " + damage);
                 yield return new WaitForSeconds(hitCooldown);
+
             }
             else
             {
