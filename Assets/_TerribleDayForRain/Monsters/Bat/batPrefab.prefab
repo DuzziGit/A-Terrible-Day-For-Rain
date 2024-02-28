@@ -268,8 +268,8 @@ MonoBehaviour:
   DamageNumText: {fileID: 2100312243281989656, guid: feae4dca98525114ab3342e2dcba6d3c, type: 3}
   DamageNumTextCrit: {fileID: 2100312243281989656, guid: 235d7025c55e65c40b38e7a204f29ef6, type: 3}
   isDisplayingDamage: 0
-  yOffsetText: 0.35
-  DamagePosition: {fileID: 3425891132578846625}
+  baseOffsetY: 0.2
+  incrementalOffsetY: 0.3
 --- !u!114 &1826110122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +283,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 777742916294569351, guid: f5e06a62650582d4e88ff76c0e1d54e2, type: 3}
-  animation1: {fileID: 8828319825448257598, guid: f5e06a62650582d4e88ff76c0e1d54e2, type: 3}
 --- !u!70 &6994407341023997054
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

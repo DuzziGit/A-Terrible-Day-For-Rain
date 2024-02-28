@@ -23,7 +23,9 @@ public class EnemyCon : Enemy
     private const int baseEnemyHealth = 10000;
     private const float healthGrowthRate = 1.1f; // This can be adjusted
 
-    [SerializeField] private float yOffsetText = 0.2f;
+    private float baseOffsetY = 0.2f;
+    private float incrementalOffsetY = 0.3f;
+
     private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
     private List<(int Damage, bool IsCrit, string AttackId)> damageTaken = new List<(int Damage, bool IsCrit, string AttackId)>();
@@ -66,7 +68,7 @@ public class EnemyCon : Enemy
         // Instantiate canvas for damage numbers if not already done for this attack
         if (!damageTextCanvases.ContainsKey(attackId))
         {
-            GameObject canvas = Instantiate(CanvasDamageNum, transform.position + new Vector3(0, yOffsetText, 0), Quaternion.identity);
+            GameObject canvas = Instantiate(CanvasDamageNum, transform.position + new Vector3(0, baseOffsetY, 0), Quaternion.identity);
             damageTextCanvases[attackId] = canvas;
         }
 
@@ -79,7 +81,7 @@ public class EnemyCon : Enemy
         // Ensure that any ongoing processes are stopped or completed
         if (isDisplayingDamage)
         {
-            StopAllCoroutines(); // Consider targeting specific coroutines if you have multiple
+            StopAllCoroutines();
         }
 
     }
@@ -90,23 +92,31 @@ public class EnemyCon : Enemy
         isDisplayingDamage = true;
         GameObject canvas = damageTextCanvases[attackId];
 
-        // Filter for current attackId damages
+        // Ensure there's an entry for this attackId in the damageNumberCounts dictionary
+        if (!damageNumberCounts.ContainsKey(attackId))
+        {
+            damageNumberCounts[attackId] = 0;
+        }
+
         var damagesForAttack = damageTaken.FindAll(d => d.AttackId == attackId);
         foreach (var damageInfo in damagesForAttack)
         {
-            // Instantiate and position the damage text
+            // Calculate dynamicYOffset based on the count of damage numbers already displayed
+            // Use baseOffsetY for the first damage number, and add incrementalOffsetY for subsequent numbers
+            float dynamicYOffset = damageNumberCounts[attackId] == 0 ? baseOffsetY : baseOffsetY + incrementalOffsetY * damageNumberCounts[attackId];
+
             GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
-            GameObject textObject = Instantiate(textPrefab, canvas.transform.position, Quaternion.identity, canvas.transform);
+            GameObject textObject = Instantiate(textPrefab, canvas.transform.position + new Vector3(0, dynamicYOffset, 0), Quaternion.identity, canvas.transform);
             TMP_Text textComponent = textObject.GetComponent<TMP_Text>();
             textComponent.text = damageInfo.Damage.ToString();
 
-            // Adjust position for multiple damage texts
-            textObject.transform.localPosition += new Vector3(0, damagesForAttack.IndexOf(damageInfo) * yOffsetText, 0);
+            // Increment the count for this attack ID
+            damageNumberCounts[attackId]++;
 
-            damageTaken.Remove(damageInfo); // Remove after displaying
-            yield return new WaitForSeconds(0.1f); // Delay before showing next damage number
+            // Remove damageInfo from the list after displaying
+            damageTaken.Remove(damageInfo);
+            yield return new WaitForSeconds(damageDisplayDelay); // Delay before showing next damage number
         }
-
         isDisplayingDamage = false;
     }
     private void DamageDisplay(GameObject canvas, (int Damage, bool IsCrit, string AttackId) damageInfo, Vector3 initialPosition)
@@ -118,7 +128,7 @@ public class EnemyCon : Enemy
         }
 
         // Calculate dynamicYOffset based on the count of damage numbers already displayed
-        float dynamicYOffset = yOffsetText * damageNumberCounts[damageInfo.AttackId];
+        float dynamicYOffset = baseOffsetY * damageNumberCounts[damageInfo.AttackId];
         GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
         GameObject text = Instantiate(
             textPrefab,
