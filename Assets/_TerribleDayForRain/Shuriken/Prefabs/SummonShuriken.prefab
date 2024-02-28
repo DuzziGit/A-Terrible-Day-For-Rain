@@ -735,8 +735,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pulseTimer: 2
-  detectionRadius: 5
-  offsetY: 2
+  detectionRadius: 2
+  offsetY: 1.45
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
