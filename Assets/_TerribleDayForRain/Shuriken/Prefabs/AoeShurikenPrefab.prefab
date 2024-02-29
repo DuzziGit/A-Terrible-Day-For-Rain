@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 698103066}
   - component: {fileID: 698103068}
   - component: {fileID: 698103067}
-  - component: {fileID: 1221052924}
   m_Layer: 13
   m_Name: GameObject
   m_TagString: Untagged
@@ -107,21 +106,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &1221052924
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698103065}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 9e746fcdda3eb474abf52badd78c1e1d, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &1998731461782448251
 GameObject:
   m_ObjectHideFlags: 0
