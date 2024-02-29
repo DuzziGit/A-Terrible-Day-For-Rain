@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DamageNumController : MonoBehaviour
 {
-    private readonly float moveSpeed = 0.004f;
+    private readonly float moveSpeed = 0.04f;
     [SerializeField] private float fadeSpeed = 2f;
     private readonly float startFadeHeight = 0.010f;
 
@@ -21,7 +21,7 @@ public class DamageNumController : MonoBehaviour
     private void Update()
     {
         // Move upward
-        transform.position += new Vector3(0, moveSpeed, 0);
+        transform.position += new Vector3(0, moveSpeed * Time.deltaTime, 0);
 
         if (tmpComponent != null)
         {
@@ -33,6 +33,7 @@ public class DamageNumController : MonoBehaviour
                 // Fade out
                 Color currentColor = tmpComponent.color;
                 float alphaDecrease = fadeSpeed * Time.deltaTime;
+
                 currentColor.a -= alphaDecrease;
                 tmpComponent.color = currentColor;
             }
