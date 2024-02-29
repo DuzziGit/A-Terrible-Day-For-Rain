@@ -30,9 +30,9 @@ public class HitManager : MonoBehaviour
         return Guid.NewGuid().ToString();
     }
 
-    public void ApplyDelayedHits(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId, Vector2 hitPosition, Transform enemyTransform)
+    public void ApplyDelayedHits(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId, Vector2 hitPosition, Transform enemyTransform, float KnockbackStr)
     {
-        StartCoroutine(DelayedHitsCoroutine(enemy, totalHits, baseMinDamage, baseMaxDamage, attackId, hitPosition, enemyTransform));
+        StartCoroutine(DelayedHitsCoroutine(enemy, totalHits, baseMinDamage, baseMaxDamage, attackId, hitPosition, enemyTransform, KnockbackStr));
     }
 
     private int CalculateDamageForLevel(int baseMinDamage, int baseMaxDamage)
@@ -43,7 +43,7 @@ public class HitManager : MonoBehaviour
 
         return UnityEngine.Random.Range(minDamageAtLevel, maxDamageAtLevel + 1);
     }
-    private IEnumerator DelayedHitsCoroutine(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId, Vector2 hitPosition, Transform enemyTransform)
+    private IEnumerator DelayedHitsCoroutine(Collider2D enemy, int totalHits, int baseMinDamage, int baseMaxDamage, string attackId, Vector2 hitPosition, Transform enemyTransform, float KnockbackStr)
     {
         int hitsApplied = 0;
         while (hitsApplied < totalHits)
@@ -61,7 +61,7 @@ public class HitManager : MonoBehaviour
                 // Calculate hit direction
                 Vector2 hitDirection = (hitPosition - (Vector2)enemyTransform.position).normalized;
 
-                enemy.GetComponent<EnemyCon>().TakeDamage(damage, isCrit, attackId, hitDirection);
+                enemy.GetComponent<EnemyCon>().TakeDamage(damage, isCrit, attackId, hitDirection, KnockbackStr);
                 hitsApplied++;
                 //                Debug.Log(attackId + " Hit enemy for " + damage);
                 yield return new WaitForSeconds(hitCooldown);

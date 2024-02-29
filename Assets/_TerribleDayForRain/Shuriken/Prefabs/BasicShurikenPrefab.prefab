@@ -226,5 +226,6 @@ MonoBehaviour:
   totalHits: 1
   targetingToleranceAngle: 5
   UniqueAttackId: 
+  knockbackStr: 1
   minDamage: 100
   maxDamage: 1000

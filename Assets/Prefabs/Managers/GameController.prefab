@@ -94,7 +94,7 @@ MonoBehaviour:
   blackSquare: {fileID: 0}
   gameControlsUi: {fileID: 3452426485557688752}
   cinemachineCam: {fileID: 0}
-  totalMaxEnemies: 30
+  totalMaxEnemies: 25
   playerMovement: {fileID: 0}
   Player: {fileID: 0}
   canSpawn: 1

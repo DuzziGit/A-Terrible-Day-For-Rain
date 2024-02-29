@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162918343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1091,7 +1091,7 @@ Transform:
   m_GameObject: {fileID: 9011964926031391150}
   m_LocalRotation: {x: 0, y: 0, z: -0.0001833212, w: 1}
   m_LocalPosition: {x: -1.059, y: -0.378, z: 2}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9011964925702152520}
@@ -1179,8 +1179,8 @@ MonoBehaviour:
   skillTwoLevel: 1
   skillThreeLevel: 1
   ultSkillLevel: 1
-  moveSpeed: 7
-  jumpForce: 18
+  moveSpeed: 3.5
+  jumpForce: 9
   moveDirection: 0
   playerIsNearPortal: 0
   isAirborne: 0
@@ -1206,15 +1206,12 @@ MonoBehaviour:
   maxHealth: 1000
   audioSource: {fileID: 0}
   animator: {fileID: 9011964926031391143}
-  playerCollider: {fileID: 9011964926031391148}
-  gizmoNumberOfRays: 5
-  gizmoRayColor: {r: 0, g: 0, b: 1, a: 1}
   feetPos: {fileID: 118234434}
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 2048
-  MovementSkillForce: 15
-  MovementSkillForceLeft: -15
+  MovementSkillForce: 7.5
+  MovementSkillForceLeft: -7.5
   LevelUpShuriken: {fileID: 3972795832953981774, guid: 52f50aa3600c72d40af373c1cb06a460, type: 3}
   JumpShuriken: {fileID: 8515462028405087519, guid: ffaef97c6b5a9574fa9d86079d932363, type: 3}
   FixedJumpAttackPos: {fileID: 1155637823}
@@ -1225,12 +1222,13 @@ MonoBehaviour:
   attackPos: {fileID: 1509660145}
   attackPosAirborne: {fileID: 5515096621285819317}
   horizontalMove: 0
-  runSpeed: 40
+  runSpeed: 1
   SwipeOne: {fileID: 127688076}
   SwipeTwo: {fileID: 1509660146}
   MovementSkillTwo: {fileID: 2626708564543138125}
   yOffsetSummon: -2
   skillDuration: 0.2
+  LevelUpAttackTransform: {fileID: 162918344}
 --- !u!50 &9011964926031391147
 Rigidbody2D:
   serializedVersion: 4
@@ -1246,7 +1244,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 6
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: 5bb17b82384d5b442b9aba0f8deaffb6, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -1634,7 +1632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1557325587667070312, guid: f68f8a4a02d79d048a70d1f9cf7d4424, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 11.799988
+      value: 11.75
       objectReference: {fileID: 0}
     - target: {fileID: 1977123228195795836, guid: f68f8a4a02d79d048a70d1f9cf7d4424, type: 3}
       propertyPath: m_AnchorMax.x

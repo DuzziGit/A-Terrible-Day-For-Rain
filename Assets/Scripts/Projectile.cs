@@ -24,8 +24,12 @@ public class Projectile : MonoBehaviour
     protected Transform closestEnemy;
     protected Rigidbody2D rb;
     public string UniqueAttackId;
+    [SerializeField] private float knockbackStr;
 
-
+    protected float KnockbackStr
+    {
+        get { return knockbackStr; }
+    }
 
     protected int TotalHits
     {
@@ -122,7 +126,7 @@ public class Projectile : MonoBehaviour
             Vector2 hitPosition = transform.position; // Position of the projectile at the time of collision
             Transform enemyTransform = collision.transform;
 
-            HitManager.Instance.ApplyDelayedHits(collision, TotalHits, MinDamage, MaxDamage, UniqueAttackId, hitPosition, enemyTransform);
+            HitManager.Instance.ApplyDelayedHits(collision, TotalHits, MinDamage, MaxDamage, UniqueAttackId, hitPosition, enemyTransform, KnockbackStr);
             hitCount++;
         }
     }

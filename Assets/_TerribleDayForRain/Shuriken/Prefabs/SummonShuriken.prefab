@@ -747,6 +747,7 @@ MonoBehaviour:
   lifetime: 60
   UniqueAttackID: 
   maxDamage: 1000
+  knockbackStr: 2
 --- !u!4 &7654510597099904627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5090360310216604998, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}

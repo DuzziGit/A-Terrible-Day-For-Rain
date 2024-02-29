@@ -52,9 +52,9 @@ public class EnemyCon : Enemy
         }
     }
 
-    public void TakeDamage(int damage, bool isCrit, string attackId, Vector2 hitDirection)
+    public void TakeDamage(int damage, bool isCrit, string attackId, Vector2 hitDirection, float KnockbackStr)
     {
-        Knockback(hitDirection);
+        Knockback(hitDirection, KnockbackStr);
         health = Mathf.Max(0, health - damage);
         if (health <= 0)
         {
@@ -143,7 +143,7 @@ public class EnemyCon : Enemy
         // Increment the count for this attack ID
         damageNumberCounts[damageInfo.AttackId]++;
     }
-    private void Knockback(Vector2 hitDirection)
+    private void Knockback(Vector2 hitDirection, float KnockbackStr)
     {
         if (Time.time - lastHitTime < hitAnimationCooldown)
         {

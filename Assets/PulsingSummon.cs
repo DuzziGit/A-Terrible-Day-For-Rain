@@ -29,6 +29,13 @@ public class PulsingSummon : MonoBehaviour
         get { return maxDamage; }
         set { maxDamage = value; }
     }
+    [SerializeField] private float knockbackStr;
+
+    protected float KnockbackStr
+    {
+        get { return knockbackStr; }
+    }
+
     private int hitCount = 0;
     private Dictionary<Collider2D, int> hitEnemies = new Dictionary<Collider2D, int>();
 
@@ -61,7 +68,7 @@ public class PulsingSummon : MonoBehaviour
                     Vector2 hitPosition = transform.position; // Position of the projectile at the time of collision
                     Transform enemyTransform = result.transform;
 
-                    HitManager.Instance.ApplyDelayedHits(result, TotalHits, MinDamage, MaxDamage, UniqueAttackID, hitPosition, enemyTransform);
+                    HitManager.Instance.ApplyDelayedHits(result, TotalHits, MinDamage, MaxDamage, UniqueAttackID, hitPosition, enemyTransform, knockbackStr);
                     hitCount++;
                     hitEnemies[result] = 1; // Track this enemy as hit
 
