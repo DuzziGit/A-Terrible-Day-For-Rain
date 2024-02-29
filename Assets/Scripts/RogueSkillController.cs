@@ -161,7 +161,7 @@ public class RogueSkillController : PlayerMovement
     public void MovementSkill()
     {
         MovementSkillTwo.SetBool("MovementSkillUsed", true);
-
+        gameObject.layer = LayerMask.NameToLayer("PlayerFallThrough");
         // Determine the force direction based on facing direction
         float forceDirection = facingRight ? 1.0f : -1.0f;
 
@@ -202,8 +202,10 @@ public class RogueSkillController : PlayerMovement
 
     private IEnumerator ResetMovementSkillAnimation()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.35f);
         MovementSkillTwo.SetBool("MovementSkillUsed", false);
+        gameObject.layer = LayerMask.NameToLayer("Player");
+
     }
 
     public void ApplyCooldownTracker()

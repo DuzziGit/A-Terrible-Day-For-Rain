@@ -23,8 +23,8 @@ public class EnemyCon : Enemy
     private const int baseEnemyHealth = 10000;
     private const float healthGrowthRate = 1.1f; // This can be adjusted
 
-    private float baseOffsetY = 0.2f;
-    private float incrementalOffsetY = 0.3f;
+    [SerializeField] private float baseOffsetY = 0.2f;
+    [SerializeField] private float incrementalOffsetY = 0.3f;
 
     private const float damageDisplayDelay = 0.1f;
     private const float resetTriggerDelay = 0.2f;
