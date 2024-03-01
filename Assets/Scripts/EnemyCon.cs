@@ -8,18 +8,14 @@ public class EnemyCon : Enemy
 {
 
     public int enemyDamage;
-    public TMP_Text damageDisplay;
-    [SerializeField] private float KnockbackStr;
     public TMP_Text enemyLevel;
     public GameObject TextParentPrefab;
-    public new bool isTouchingPlayer = false;
     private HealthBar healthBar;
     private int maxHealth;
     [SerializeField] private GameObject textContainerPrefab;
     [SerializeField] private GameObject DamageNumText;
     [SerializeField] private GameObject DamageNumTextCrit;
     private float lastNormalizedTime;
-    private GameObject damageCanvas;// Track the canvas instance
 
     public bool isDisplayingDamage = false;// Flag to track if damage is currently being displayed
     private const int baseEnemyHealth = 10000;
@@ -27,9 +23,6 @@ public class EnemyCon : Enemy
 
     [SerializeField] private float baseOffsetY = 0.2f;
     [SerializeField] private float incrementalOffsetY = 0.3f;
-
-    private const float damageDisplayDelay = 0.3f;
-    private const float resetTriggerDelay = 0.2f;
     private List<(int Damage, bool IsCrit, string AttackId)> damageTaken = new List<(int Damage, bool IsCrit, string AttackId)>();
     private Dictionary<string, GameObject> damageTextCanvases = new Dictionary<string, GameObject>();
 
@@ -58,10 +51,6 @@ public class EnemyCon : Enemy
     {
         Knockback(hitDirection, KnockbackStr);
         health = Mathf.Max(0, health - damage);
-        if (health <= 0 && !isDying)
-        {
-            StartCoroutine(Die());
-        }
         if (healthBar != null)
         {
             healthBar.SetHealth(health);
@@ -149,6 +138,7 @@ public class EnemyCon : Enemy
         // Determine knockback direction based on hitDirection rather than the enemy's current velocity
         Vector2 knockbackDirection = hitDirection.x < 0 ? Vector2.right : Vector2.left;
         bool originallyMovingRight = movingRight;
+
         PlayHitAnimation();
 
         // Apply knockback
@@ -178,7 +168,7 @@ public class EnemyCon : Enemy
     {
         if (health <= 0 && !isDying)
         {
-            StartCoroutine(Die());
+            Die();
             return;
         }
         // Update the timestamp of the last hit

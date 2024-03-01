@@ -15,9 +15,9 @@ public class Enemy : MonoBehaviour
     public int expValue;
     public ExperienceController expObject;
 
-    public static bool isAggroed = false;
-    public static bool isPatroling = true;
-    public static bool isTouchingPlayer = false;
+    public bool isAggroed = false;
+    public bool isPatroling = true;
+    public bool isTouchingPlayer = false;
     protected bool movingRight = true;
 
     public float agroRange;
@@ -65,23 +65,10 @@ public class Enemy : MonoBehaviour
         {
             isTouchingPlayer = false;
         }
-        if (health <= 0)
+        if (health <= 0 && !isDying)
         {
-            if (GetComponent<EnemyCon>().isDisplayingDamage)
-            {
-                speed = 0;
-                rb.velocity = Vector2.zero;
-                rb.gravityScale = 0;
-                GetComponentInChildren<Canvas>().enabled = false;
-                gameObject.layer = LayerMask.NameToLayer("Invincible");
+            Die();
 
-            }
-            else if (GetComponent<EnemyCon>().isDisplayingDamage == false && !isDying)
-            {
-
-                isDying = true; // Prevent further calls
-                StartCoroutine(Die());
-            }
         }
     }
 
@@ -192,9 +179,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    protected IEnumerator Die()
+    protected void Die()
     {
+        StopAllCoroutines();
+        animator.Play("Death");
         animator.SetTrigger("Dead");
+        animator.speed = 1;
+        isDying = true;
+        rb.isKinematic = true;
+        bc.enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("Invincible");
         LootBag lootBag = GetComponent<LootBag>();
         Loot droppedItem = lootBag.GetDroppedItem();
         if (droppedItem != null && droppedItem.itemPrefab != null)
@@ -203,13 +197,17 @@ public class Enemy : MonoBehaviour
             Debug.Log("Item Dropped: " + droppedItem.lootName);
         }
         GetComponentInChildren<Canvas>().enabled = false;
-        yield return new WaitForSeconds(0.8f);
-        Destroy(gameObject);
         MySpawner.OnEnemyDestroyed();
         if (GameController.instance.playerMovement != null)
         {
             GameController.instance.playerMovement.GainExperience(expValue);
         }
 
+
+    }
+
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 }
