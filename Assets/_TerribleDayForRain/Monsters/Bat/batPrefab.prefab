@@ -263,13 +263,14 @@ MonoBehaviour:
   damageDisplay: {fileID: 2509596546504336050, guid: e87ea331d8b01ba4483fe23883f5ed55, type: 3}
   KnockbackStr: 5
   enemyLevel: {fileID: 297983036868777606}
-  CanvasDamageNum: {fileID: 6962523565112630718, guid: b2afdfba80b192f4ca0280bb2237ae21, type: 3}
+  TextParentPrefab: {fileID: 8564278345997927619, guid: 259290622650acb459f4456e14b0a9d5, type: 3}
   isTouchingPlayer: 0
-  DamageNumText: {fileID: 2100312243281989656, guid: feae4dca98525114ab3342e2dcba6d3c, type: 3}
-  DamageNumTextCrit: {fileID: 2100312243281989656, guid: 235d7025c55e65c40b38e7a204f29ef6, type: 3}
+  textContainerPrefab: {fileID: 7982018248507008372, guid: a458592e3fc283d45b9109e8dd4dca2e, type: 3}
+  DamageNumText: {fileID: 8213331105594005438, guid: d9941431549497f489e71133f11d5e3c, type: 3}
+  DamageNumTextCrit: {fileID: 8213331105594005438, guid: ab4e57ecfa64ee248b2ba5af4c972cf3, type: 3}
   isDisplayingDamage: 0
-  baseOffsetY: 0.45
-  incrementalOffsetY: 0.3
+  baseOffsetY: 0.5
+  incrementalOffsetY: 0.25
 --- !u!114 &1826110122
 MonoBehaviour:
   m_ObjectHideFlags: 0

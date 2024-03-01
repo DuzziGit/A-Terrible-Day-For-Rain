@@ -11,14 +11,16 @@ public class EnemyCon : Enemy
     public TMP_Text damageDisplay;
     [SerializeField] private float KnockbackStr;
     public TMP_Text enemyLevel;
-    public GameObject CanvasDamageNum;
+    public GameObject TextParentPrefab;
     public new bool isTouchingPlayer = false;
     private HealthBar healthBar;
     private int maxHealth;
+    [SerializeField] private GameObject textContainerPrefab;
     [SerializeField] private GameObject DamageNumText;
     [SerializeField] private GameObject DamageNumTextCrit;
     private float lastNormalizedTime;
     private GameObject damageCanvas;// Track the canvas instance
+
     public bool isDisplayingDamage = false;// Flag to track if damage is currently being displayed
     private const int baseEnemyHealth = 10000;
     private const float healthGrowthRate = 1.1f; // This can be adjusted
@@ -26,7 +28,7 @@ public class EnemyCon : Enemy
     [SerializeField] private float baseOffsetY = 0.2f;
     [SerializeField] private float incrementalOffsetY = 0.3f;
 
-    private const float damageDisplayDelay = 0.1f;
+    private const float damageDisplayDelay = 0.3f;
     private const float resetTriggerDelay = 0.2f;
     private List<(int Damage, bool IsCrit, string AttackId)> damageTaken = new List<(int Damage, bool IsCrit, string AttackId)>();
     private Dictionary<string, GameObject> damageTextCanvases = new Dictionary<string, GameObject>();
@@ -65,17 +67,18 @@ public class EnemyCon : Enemy
             healthBar.SetHealth(health);
         }
 
-        // Instantiate canvas for damage numbers if not already done for this attack
+        // Instantiate TextParent for damage numbers if not already done for this attack
         if (!damageTextCanvases.ContainsKey(attackId))
         {
-            GameObject canvas = Instantiate(CanvasDamageNum, transform.position + new Vector3(0, baseOffsetY, 0), Quaternion.identity);
-            damageTextCanvases[attackId] = canvas;
+            GameObject textContainer = Instantiate(textContainerPrefab, transform.position, Quaternion.identity);
+            GameObject textParent = Instantiate(TextParentPrefab, textContainer.transform.position + new Vector3(0, baseOffsetY, 0), Quaternion.identity, textContainer.transform);
+            damageTextCanvases[attackId] = textParent;
         }
 
-        // Add damage to be processed
         damageTaken.Add((damage, isCrit, attackId));
-        StartCoroutine(ProcessDamage(attackId));
+        ProcessDamage(attackId);
     }
+
     private void HandleDeath()
     {
         // Ensure that any ongoing processes are stopped or completed
@@ -87,12 +90,11 @@ public class EnemyCon : Enemy
     }
 
     // ProcessDamage is called whenever damage is taken, even if a display is ongoing.
-    private IEnumerator ProcessDamage(string attackId)
+    private void ProcessDamage(string attackId)
     {
         isDisplayingDamage = true;
-        GameObject canvas = damageTextCanvases[attackId];
+        GameObject textParent = damageTextCanvases[attackId];
 
-        // Ensure there's an entry for this attackId in the damageNumberCounts dictionary
         if (!damageNumberCounts.ContainsKey(attackId))
         {
             damageNumberCounts[attackId] = 0;
@@ -101,21 +103,14 @@ public class EnemyCon : Enemy
         var damagesForAttack = damageTaken.FindAll(d => d.AttackId == attackId);
         foreach (var damageInfo in damagesForAttack)
         {
-            // Calculate dynamicYOffset based on the count of damage numbers already displayed
-            // Use baseOffsetY for the first damage number, and add incrementalOffsetY for subsequent numbers
             float dynamicYOffset = damageNumberCounts[attackId] == 0 ? baseOffsetY : baseOffsetY + incrementalOffsetY * damageNumberCounts[attackId];
-
             GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
-            GameObject textObject = Instantiate(textPrefab, canvas.transform.position + new Vector3(0, dynamicYOffset, 0), Quaternion.identity, canvas.transform);
+            GameObject textObject = Instantiate(textPrefab, textParent.transform.position + new Vector3(0, dynamicYOffset, 0), Quaternion.identity, textParent.transform);
             TMP_Text textComponent = textObject.GetComponent<TMP_Text>();
             textComponent.text = damageInfo.Damage.ToString();
 
-            // Increment the count for this attack ID
             damageNumberCounts[attackId]++;
-
-            // Remove damageInfo from the list after displaying
             damageTaken.Remove(damageInfo);
-            yield return new WaitForSeconds(damageDisplayDelay); // Delay before showing next damage number
         }
         isDisplayingDamage = false;
     }
