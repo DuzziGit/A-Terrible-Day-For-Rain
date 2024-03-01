@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lootList:
   - {fileID: 11400000, guid: 392792806eddffe4e810d813b3c75eba, type: 2}
+  - {fileID: 11400000, guid: a984b8e70c2349744be6c0ecc98f0d06, type: 2}
 --- !u!70 &694875898
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Mathematics;
 public class Enemy : MonoBehaviour
 {
     [HideInInspector]
@@ -31,6 +32,8 @@ public class Enemy : MonoBehaviour
     public EnemySpawner MySpawner;
     protected bool canFlip = true;
     protected float flipCooldown = 0.2f;
+    protected bool isDying = false;
+
     private void Start()
     {
 
@@ -73,11 +76,11 @@ public class Enemy : MonoBehaviour
                 gameObject.layer = LayerMask.NameToLayer("Invincible");
 
             }
-            else if (GetComponent<EnemyCon>().isDisplayingDamage == false)
+            else if (GetComponent<EnemyCon>().isDisplayingDamage == false && !isDying)
             {
 
+                isDying = true; // Prevent further calls
                 StartCoroutine(Die());
-
             }
         }
     }
@@ -191,8 +194,15 @@ public class Enemy : MonoBehaviour
 
     protected IEnumerator Die()
     {
-        GetComponentInChildren<Canvas>().enabled = false;
         animator.SetTrigger("Dead");
+        LootBag lootBag = GetComponent<LootBag>();
+        Loot droppedItem = lootBag.GetDroppedItem();
+        if (droppedItem != null && droppedItem.itemPrefab != null)
+        {
+            Instantiate(droppedItem.itemPrefab, transform.position, Quaternion.identity); // Spawn at monster's position
+            Debug.Log("Item Dropped: " + droppedItem.lootName);
+        }
+        GetComponentInChildren<Canvas>().enabled = false;
         yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);
         MySpawner.OnEnemyDestroyed();
@@ -200,5 +210,6 @@ public class Enemy : MonoBehaviour
         {
             GameController.instance.playerMovement.GainExperience(expValue);
         }
+
     }
 }

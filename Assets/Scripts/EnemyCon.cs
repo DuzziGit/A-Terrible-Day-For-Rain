@@ -56,7 +56,7 @@ public class EnemyCon : Enemy
     {
         Knockback(hitDirection, KnockbackStr);
         health = Mathf.Max(0, health - damage);
-        if (health <= 0)
+        if (health <= 0 && !isDying)
         {
             StartCoroutine(Die());
         }
@@ -181,7 +181,7 @@ public class EnemyCon : Enemy
 
     private void PlayHitAnimation()
     {
-        if (health <= 0)
+        if (health <= 0 && !isDying)
         {
             StartCoroutine(Die());
             return;

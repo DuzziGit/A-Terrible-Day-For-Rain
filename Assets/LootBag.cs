@@ -6,7 +6,7 @@ public class LootBag : MonoBehaviour
 
     public List<Loot> lootList = new();
 
-    private Loot GetDroppedItem()
+    public Loot GetDroppedItem()
     {
         int randomNumber = Random.Range(1, 101);
         List<Loot> possibleItems = new();
