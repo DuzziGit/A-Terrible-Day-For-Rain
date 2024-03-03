@@ -9,20 +9,12 @@ using UnityEngine.InputSystem;
 public class RogueSkillController : PlayerMovement
 {
     public float MovementSkillForce;
-    public float MovementSkillForceLeft;
     public GameObject LevelUpShuriken;
-    [SerializeField] private GameObject JumpShuriken;
-    [SerializeField] private GameObject FixedJumpAttackPos;
     public GameObject basicAttackPrefab;
     public GameObject projectile2;
-    public GameObject ProjectileUltimate;
     [SerializeField] private GameObject SummonShuriken;
     public Transform attackPos;
     public Transform attackPosAirborne;
-
-    public float horizontalMove = 0f;
-    public float runSpeed = 40f;
-
     private readonly Image imageCooldownS1;
     private readonly TMP_Text textCooldownS1;
     private readonly Image imageCooldownS2;
@@ -68,7 +60,6 @@ public class RogueSkillController : PlayerMovement
     [SerializeField] private float yOffsetSummon;
     [SerializeField] private float skillDuration;
     [SerializeField] private Transform LevelUpAttackTransform;
-
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -83,11 +74,7 @@ public class RogueSkillController : PlayerMovement
 
     public void PerformMoveSkill(InputAction.CallbackContext context)
     {
-        if (Time.time > nextFireTimeMovement && isAirborne)
-        {
-            GetMovementSkillInput();
-        }
-        else { return; }
+
     }
     private void Start()
     {
@@ -113,7 +100,14 @@ public class RogueSkillController : PlayerMovement
         rend = GetComponent<Renderer>();
         c = rend.material.color;
     }
-
+    protected new void FixedUpdate()
+    {
+        base.FixedUpdate();
+        GetFirstSkillInput();
+        GetSecondSkillInput();
+        GetThirdSkillInput();
+        GetUltimateSkillInput();
+    }
     private void Update()
     {
 
@@ -122,9 +116,8 @@ public class RogueSkillController : PlayerMovement
         levelUI.text = level.ToString();
         maxHealth = level * 100;
         maxExp = level * 500;
-
         experienceBar.SetExperience(currentExp);
-        cooldownTimeSkill3Upgraded = cooldownTimeSkill3 - GetComponent<PlayerMovement>().skillThreeLevel;
+        cooldownTimeSkill3Upgraded = cooldownTimeSkill3 - skillThreeLevel;
         // skillLevel1Text.text = skillOneLevel.ToString();
         //  skillLevel2Text.text = skillTwoLevel.ToString();
         //  skillLevel3Text.text = skillThreeLevel.ToString();
@@ -134,15 +127,16 @@ public class RogueSkillController : PlayerMovement
         if (GameController.instance.playerCanMove)
         {
             //Get player inputs
-            getPlayerInput();
+            if (!isExecutingSkill)
+            {
+                setPlayerDirection();
+            }
             playerInteractInput();
+            getPlayerInput();
+            GetMovementSkillInput();
 
             //  horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-            GetFirstSkillInput();
-            GetSecondSkillInput();
-            GetThirdSkillInput();
-            GetUltimateSkillInput();
             LevelUp();
 
             //Animate
@@ -155,6 +149,8 @@ public class RogueSkillController : PlayerMovement
             }
         }
     }
+
+
 
     public override void LevelUp()
     {
@@ -170,14 +166,31 @@ public class RogueSkillController : PlayerMovement
     private void GetMovementSkillInput()
     {
 
-        MovementSkill();
-        nextFireTimeMovement = Time.time + cooldownTimeMovement;
-        //    textCooldownSM.gameObject.SetActive(true);
-        cooldownTimerSM = cooldownTimeMovement;
+        if (Time.time > nextFireTimeMovement && isAirborne & MovementSkillInput.action.triggered)
+        {
+            MovementSkill();
+            nextFireTimeMovement = Time.time + cooldownTimeMovement;
+            //    textCooldownSM.gameObject.SetActive(true);
+            cooldownTimerSM = cooldownTimeMovement;
+        }
+
 
     }
 
+    private void SwitchMovePositionBasedOnMouse(bool isSkillActive)
+    {
+        if (!isSkillActive) return;
 
+        float mousePositionInWorld = MousePosition.action.ReadValue<Vector2>().x;
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePositionInWorld, 0, 0));
+        bool shouldFlip = (mouseWorldPosition.x < transform.position.x && facingRight) || (mouseWorldPosition.x > transform.position.x && !facingRight);
+
+        if (shouldFlip)
+        {
+            FlipCharacter();
+
+        }
+    }
     public void MovementSkill()
     {
         MovementSkillTwo.SetBool("MovementSkillUsed", true);
@@ -216,7 +229,6 @@ public class RogueSkillController : PlayerMovement
         // Apply vertical force separately to ensure it's consistent
         Vector2 verticalForce = new(0, jumpForce);
         rb.AddForce(verticalForce, ForceMode2D.Impulse);
-        Instantiate(JumpShuriken, FixedJumpAttackPos.transform.position, FixedJumpAttackPos.transform.rotation);
         _ = StartCoroutine(ResetMovementSkillAnimation());
     }
 
@@ -258,41 +270,29 @@ public class RogueSkillController : PlayerMovement
     }
 
     // First Skill
-    public void GetFirstSkillInput()
+    private void GetFirstSkillInput()
     {
-        if (Time.time > nextFireTimeSkill1 && Input.GetKey(KeyCode.A))
+        if (Time.time > nextFireTimeSkill1 && BasicSkillInput.action.IsPressed())
         {
+            GameController.instance.playerCanMove = false; // Lock movement if starting skill stationary
             isExecutingSkill = true;
-            if (!isAirborne && rb.velocity.y == 0)
-            {
-                rb.velocity = Vector2.zero; // Stop any current movement
-                moveDirection = 0;
-                GameController.instance.playerCanMove = false; // Disable movement input
-            }
-            else
-            {
-                GameController.instance.playerCanMove = false; // Disable movement input
+            SwitchMovePositionBasedOnMouse(true);
 
+            if (!isAirborne)
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
             }
-
             StartCoroutine(FirstSkill());
             nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
             //    textCooldownS1.gameObject.SetActive(true);
             cooldownTimerS1 = cooldownTimeSkill1;
             SwipeOne.SetTrigger("Attack");
+
+
         }
     }
     private IEnumerator FirstSkill()
     {
-
-        isExecutingSkill = true;
-        bool wasMoving = moveDirection != 0;
-
-        if (!isAirborne && !wasMoving && rb.velocity.y == 0)
-        {
-            GameController.instance.playerCanMove = false; // Lock movement if starting skill stationary
-            rb.velocity = Vector2.zero; // Ensure character is stationary
-        }
         // If the player is airborne, don't modify their horizontal velocity,
         // allowing them to continue moving with their current momentum.
 
@@ -305,10 +305,9 @@ public class RogueSkillController : PlayerMovement
 
         // Wait for a short duration before continuing
         yield return new WaitForSeconds(skillDuration); // Wait for skill to complete
-
+                                                        //   moveDirection = TempMoveDirection;
         isExecutingSkill = false;
         GameController.instance.playerCanMove = true;
-
         // If character was moving before skill, start deceleration
 
     }
@@ -318,7 +317,7 @@ public class RogueSkillController : PlayerMovement
 
     public void GetSecondSkillInput()
     {
-        if (Time.time > nextFireTimeSkill2 && Input.GetKey(KeyCode.S))
+        if (Time.time > nextFireTimeSkill2 && AoeSkillInput.action.IsPressed())
         {
             animator.SetTrigger("isAttacking");
             _ = StartCoroutine(secondSkill());
@@ -337,7 +336,7 @@ public class RogueSkillController : PlayerMovement
     // Third Skill
     public void GetThirdSkillInput()
     {
-        if (Time.time > nextFireTimeSkill3 && Input.GetKeyDown(KeyCode.D))
+        if (Time.time > nextFireTimeSkill3 && SummonSkillInput.action.IsPressed() && !isAirborne)
         {
             _ = StartCoroutine(ThirdSkillEnum());
             nextFireTimeSkill3 = Time.time + cooldownTimeSkill3Upgraded;
@@ -348,12 +347,15 @@ public class RogueSkillController : PlayerMovement
 
     private IEnumerator ThirdSkillEnum()
     {
+        rb.velocity = Vector2.zero;
+        GameController.instance.playerCanMove = false;
+        yield return new WaitForSeconds(1f);
         GameObject SummonSkillParent = new("SummonSkill");
         SummonSkillParent.transform.position = gameObject.transform.position + new Vector3(0, yOffsetSummon, 0);
         _ = Instantiate(SummonShuriken, SummonSkillParent.transform.position, SummonSkillParent.transform.rotation, SummonSkillParent.transform);
-        Physics2D.IgnoreLayerCollision(7, 11, true);
-        yield return new WaitForSeconds(2.5f);
-        Physics2D.IgnoreLayerCollision(7, 11, false);
+
+        GameController.instance.playerCanMove = true;
+
     }
 
     // Ultimate Skill

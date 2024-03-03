@@ -38,7 +38,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Jump"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""53627821-d7ea-4b03-a34b-8753b810ae18"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -47,12 +47,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Basic Skill"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""9a6d1cbd-a590-4d8c-aa2f-4fa5b6bc4313"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""AoeSkill"",
@@ -252,7 +252,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""03b0b8f0-dbe9-4867-bc7d-dcc7f1e48553"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""MultiTap"",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MovementSkill"",
@@ -271,6 +271,209 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Gameplay1"",
+            ""id"": ""9ffb8c92-99aa-4219-af12-bbe67146f187"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""0ba3412f-7544-4e26-bdc0-0dcdd3434ee1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""733db692-47cb-4ec4-bde2-568bbff8459b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Basic Skill"",
+                    ""type"": ""Value"",
+                    ""id"": ""3ecfe447-5572-4893-8539-ece0b23b9573"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""AoeSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""835361ad-4a2d-466d-a908-18964d96115d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SummonSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""aeada396-6eda-4ec5-91f2-00e334178d75"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MovementSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""66552947-fdf6-468a-bf01-66fb07b7ef9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""95b732ec-b8b0-4fdd-b138-fcfdfd436d25"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""203ab78b-9a48-414c-b54f-136804994f3d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bad0b842-8369-4248-84d1-72ac7f827b6f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Basic Skill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acf1a527-8e57-4c48-b8a6-5bbd921adfa7"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SummonSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""55f0dcf5-4593-4a54-a715-addacbaa980d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""2334c9f0-b557-45ef-a810-0592e2e89879"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b9186cfc-2714-4765-b834-4aa588951842"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""cae3c3fb-57bf-4a0b-a0e3-4171ffac7e55"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""5669ef85-883a-4f1b-99ec-ff3196bc6c3c"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8f82274-679a-4bb6-8700-5cfb422afb86"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovementSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85be3a06-9074-4fed-960d-7af56aa6d818"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MovementSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4adc7b73-fcc1-4840-b51c-25e641430c8c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AoeSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6534aa9-f065-420a-88a1-a4db8f15bdf5"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -283,6 +486,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Gameplay_AoeSkill = m_Gameplay.FindAction("AoeSkill", throwIfNotFound: true);
         m_Gameplay_SummonSkill = m_Gameplay.FindAction("SummonSkill", throwIfNotFound: true);
         m_Gameplay_MovementSkill = m_Gameplay.FindAction("MovementSkill", throwIfNotFound: true);
+        // Gameplay1
+        m_Gameplay1 = asset.FindActionMap("Gameplay1", throwIfNotFound: true);
+        m_Gameplay1_Move = m_Gameplay1.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay1_Jump = m_Gameplay1.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay1_BasicSkill = m_Gameplay1.FindAction("Basic Skill", throwIfNotFound: true);
+        m_Gameplay1_AoeSkill = m_Gameplay1.FindAction("AoeSkill", throwIfNotFound: true);
+        m_Gameplay1_SummonSkill = m_Gameplay1.FindAction("SummonSkill", throwIfNotFound: true);
+        m_Gameplay1_MovementSkill = m_Gameplay1.FindAction("MovementSkill", throwIfNotFound: true);
+        m_Gameplay1_MousePosition = m_Gameplay1.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -426,6 +638,100 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // Gameplay1
+    private readonly InputActionMap m_Gameplay1;
+    private List<IGameplay1Actions> m_Gameplay1ActionsCallbackInterfaces = new List<IGameplay1Actions>();
+    private readonly InputAction m_Gameplay1_Move;
+    private readonly InputAction m_Gameplay1_Jump;
+    private readonly InputAction m_Gameplay1_BasicSkill;
+    private readonly InputAction m_Gameplay1_AoeSkill;
+    private readonly InputAction m_Gameplay1_SummonSkill;
+    private readonly InputAction m_Gameplay1_MovementSkill;
+    private readonly InputAction m_Gameplay1_MousePosition;
+    public struct Gameplay1Actions
+    {
+        private @Controller m_Wrapper;
+        public Gameplay1Actions(@Controller wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Gameplay1_Move;
+        public InputAction @Jump => m_Wrapper.m_Gameplay1_Jump;
+        public InputAction @BasicSkill => m_Wrapper.m_Gameplay1_BasicSkill;
+        public InputAction @AoeSkill => m_Wrapper.m_Gameplay1_AoeSkill;
+        public InputAction @SummonSkill => m_Wrapper.m_Gameplay1_SummonSkill;
+        public InputAction @MovementSkill => m_Wrapper.m_Gameplay1_MovementSkill;
+        public InputAction @MousePosition => m_Wrapper.m_Gameplay1_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_Gameplay1; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Gameplay1Actions set) { return set.Get(); }
+        public void AddCallbacks(IGameplay1Actions instance)
+        {
+            if (instance == null || m_Wrapper.m_Gameplay1ActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Gameplay1ActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @BasicSkill.started += instance.OnBasicSkill;
+            @BasicSkill.performed += instance.OnBasicSkill;
+            @BasicSkill.canceled += instance.OnBasicSkill;
+            @AoeSkill.started += instance.OnAoeSkill;
+            @AoeSkill.performed += instance.OnAoeSkill;
+            @AoeSkill.canceled += instance.OnAoeSkill;
+            @SummonSkill.started += instance.OnSummonSkill;
+            @SummonSkill.performed += instance.OnSummonSkill;
+            @SummonSkill.canceled += instance.OnSummonSkill;
+            @MovementSkill.started += instance.OnMovementSkill;
+            @MovementSkill.performed += instance.OnMovementSkill;
+            @MovementSkill.canceled += instance.OnMovementSkill;
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+        }
+
+        private void UnregisterCallbacks(IGameplay1Actions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @BasicSkill.started -= instance.OnBasicSkill;
+            @BasicSkill.performed -= instance.OnBasicSkill;
+            @BasicSkill.canceled -= instance.OnBasicSkill;
+            @AoeSkill.started -= instance.OnAoeSkill;
+            @AoeSkill.performed -= instance.OnAoeSkill;
+            @AoeSkill.canceled -= instance.OnAoeSkill;
+            @SummonSkill.started -= instance.OnSummonSkill;
+            @SummonSkill.performed -= instance.OnSummonSkill;
+            @SummonSkill.canceled -= instance.OnSummonSkill;
+            @MovementSkill.started -= instance.OnMovementSkill;
+            @MovementSkill.performed -= instance.OnMovementSkill;
+            @MovementSkill.canceled -= instance.OnMovementSkill;
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+        }
+
+        public void RemoveCallbacks(IGameplay1Actions instance)
+        {
+            if (m_Wrapper.m_Gameplay1ActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameplay1Actions instance)
+        {
+            foreach (var item in m_Wrapper.m_Gameplay1ActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_Gameplay1ActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public Gameplay1Actions @Gameplay1 => new Gameplay1Actions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -434,5 +740,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnAoeSkill(InputAction.CallbackContext context);
         void OnSummonSkill(InputAction.CallbackContext context);
         void OnMovementSkill(InputAction.CallbackContext context);
+    }
+    public interface IGameplay1Actions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnBasicSkill(InputAction.CallbackContext context);
+        void OnAoeSkill(InputAction.CallbackContext context);
+        void OnSummonSkill(InputAction.CallbackContext context);
+        void OnMovementSkill(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

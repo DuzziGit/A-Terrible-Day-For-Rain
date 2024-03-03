@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask platformLayerMask;
     private bool isTouchingPlatform = false;
 
-    [SerializeField] protected InputActionReference MoveInput, JumpInput, BasicSkillInput, AoeSkillInput, SummonSkillInput, MovementSkillInput;
+    [SerializeField] protected InputActionReference MoveInput, JumpInput, BasicSkillInput, AoeSkillInput, SummonSkillInput, MovementSkillInput, MousePosition;
     protected float VertDirection = 0;
 
     private bool isSitting;
@@ -107,10 +107,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJumpPerformed(InputAction.CallbackContext context)
     {
-        if (!isAirborne && !isFallingThrough && !isExecutingSkill && !isSitting)
+
+        // Check for jump through platform
+        if (VertDirection < 0 && isTouchingPlatform && isSitting)
         {
-            Jump();
+            StartCoroutine(FallThrough());
         }
+
     }
     private void Awake()
     {
@@ -159,21 +162,34 @@ public class PlayerMovement : MonoBehaviour
             getPlayerInput();
             playerInteractInput();
             animate();
+            setPlayerDirection();
+
         }
 
 
+
+
     }
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         if (GameController.instance.playerCanMove && !isExecutingSkill)
         {
 
             moveCharacter();
+            JumpCheck();
         }
 
     }
+    protected void JumpCheck()
+    {
+        if (!isAirborne && !isFallingThrough && !isExecutingSkill && !isSitting && JumpInput.action.IsPressed())
+        {
+            Jump();
+            MovementSkillInput.action.Disable();
+            MovementSkillInput.action.Enable();
 
-
+        }
+    }
 
     private void PlayerDeath()
     {
@@ -181,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<Transform>().position = new Vector3(-2, -1, 0);
     }
 
-    private void FlipCharacter()
+    protected void FlipCharacter()
     {
         // Flip the character's facing direction without changing the momentum
         facingRight = !facingRight;
@@ -196,7 +212,8 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector2.zero;
             return; // Skip processing input if movement is disabled
         }
-        moveDirection = MoveInput.action.ReadValue<Vector2>().x;
+
+
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
         VertDirection = MoveInput.action.ReadValue<Vector2>().y;
         // Force the player to stop when 'K' is pressed and only if the player is grounded
@@ -213,17 +230,17 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isHoldingDown", false);
             isSitting = false;
         }
-
-        // Check for jump through platform
-        if (VertDirection < 0 && Input.GetButtonDown("Jump") && isTouchingPlatform)
-        {
-            StartCoroutine(FallThrough());
-        }
-        // You can still flip the character without affecting the momentum.
         if ((moveDirection > 0 && !facingRight) || (moveDirection < 0 && facingRight))
         {
             FlipCharacter();
         }
+    }
+
+    protected void setPlayerDirection()
+    {
+        if (isExecutingSkill) return;
+        moveDirection = MoveInput.action.ReadValue<Vector2>().x;
+
     }
 
     bool IsGrounded()

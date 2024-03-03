@@ -22476,7 +22476,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: Gameplay1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1001 &1987092897
@@ -22505,23 +22505,27 @@ PrefabInstance:
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: JumpInput
       value: 
-      objectReference: {fileID: -6041712735087562416, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+      objectReference: {fileID: 8228250964517920683, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: MoveInput
       value: 
-      objectReference: {fileID: -5956425394795199212, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+      objectReference: {fileID: -2631810443607245350, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: AoeSkillInput
       value: 
-      objectReference: {fileID: -3479095095268788135, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+      objectReference: {fileID: 8550075972274594711, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: MousePosition
+      value: 
+      objectReference: {fileID: -1640461855116964628, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: BasicSkillInput
       value: 
-      objectReference: {fileID: 5768856136092536987, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+      objectReference: {fileID: -3373423683045235122, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: SummonSkillInput
       value: 
-      objectReference: {fileID: 3735344112796452033, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+      objectReference: {fileID: 3101760576862424325, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: optionsMenuCanvas
       value: 
@@ -22529,7 +22533,7 @@ PrefabInstance:
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: MovementSkillInput
       value: 
-      objectReference: {fileID: -1022495722684671461, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+      objectReference: {fileID: -3211061687226010859, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391142, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_RootOrder
       value: 2
