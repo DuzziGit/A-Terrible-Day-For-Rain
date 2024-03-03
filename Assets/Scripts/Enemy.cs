@@ -189,13 +189,7 @@ public class Enemy : MonoBehaviour
         rb.isKinematic = true;
         bc.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Invincible");
-        LootBag lootBag = GetComponent<LootBag>();
-        Loot droppedItem = lootBag.GetDroppedItem();
-        if (droppedItem != null && droppedItem.itemPrefab != null)
-        {
-            Instantiate(droppedItem.itemPrefab, transform.position, Quaternion.identity); // Spawn at monster's position
-            Debug.Log("Item Dropped: " + droppedItem.lootName);
-        }
+        GetComponent<LootBag>().InstantiateItem(transform.position + new Vector3(0, 1, 0));
         GetComponentInChildren<Canvas>().enabled = false;
         MySpawner.OnEnemyDestroyed();
         if (GameController.instance.playerMovement != null)

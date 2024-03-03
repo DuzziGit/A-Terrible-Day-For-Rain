@@ -5,7 +5,7 @@ public class LootBag : MonoBehaviour
 {
 
     public List<Loot> lootList = new();
-
+    public GameObject droppedItemPrefab;
     public Loot GetDroppedItem()
     {
         int randomNumber = Random.Range(1, 101);
@@ -29,4 +29,17 @@ public class LootBag : MonoBehaviour
             return null; // Or you can return a default Loot item or throw an exception
         }
     }
+    public void InstantiateItem(Vector3 spawnPosition)
+    {
+
+        Loot droppedItem = GetDroppedItem();
+        if (droppedItem != null)
+        {
+
+            GameObject lootGameObject = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);
+            lootGameObject.GetComponentInChildren<SpriteRenderer>().sprite = droppedItem.lootSprite;
+        }
+
+    }
+
 }

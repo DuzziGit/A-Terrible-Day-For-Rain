@@ -6,5 +6,6 @@ public class Loot : ScriptableObject
     public Sprite lootSprite;
     public string lootName;
     public int dropChance;
-    public GameObject itemPrefab; // Reference to the loot prefab
+
+
 }

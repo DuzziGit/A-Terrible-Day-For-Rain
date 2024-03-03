@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: 2007566158}
   - component: {fileID: 440425466}
   - component: {fileID: 1216610146}
-  - component: {fileID: 4628917298890330334}
   - component: {fileID: 1995216451}
   - component: {fileID: 694875898}
   - component: {fileID: 5223553207923353184}
@@ -221,6 +220,9 @@ MonoBehaviour:
   wallDetection: {fileID: 6614486318673616303}
   expValue: 10
   expObject: {fileID: 9142249779626228197, guid: 3c3aeb62efc64234090a7e4c39704732, type: 3}
+  isAggroed: 0
+  isPatroling: 1
+  isTouchingPlayer: 0
   agroRange: 0.3
   startTimeBetweenDmg: 2
   enemySprite: {fileID: 4597381505260269735}
@@ -229,11 +231,8 @@ MonoBehaviour:
   animator: {fileID: 4597381505260269730}
   MySpawner: {fileID: 0}
   enemyDamage: 0
-  damageDisplay: {fileID: 2509596546504336050, guid: e87ea331d8b01ba4483fe23883f5ed55, type: 3}
-  KnockbackStr: 5
   enemyLevel: {fileID: 8817371393528469041}
   TextParentPrefab: {fileID: 8564278345997927619, guid: 259290622650acb459f4456e14b0a9d5, type: 3}
-  isTouchingPlayer: 0
   textContainerPrefab: {fileID: 7982018248507008372, guid: a458592e3fc283d45b9109e8dd4dca2e, type: 3}
   DamageNumText: {fileID: 8213331105594005438, guid: d9941431549497f489e71133f11d5e3c, type: 3}
   DamageNumTextCrit: {fileID: 8213331105594005438, guid: ab4e57ecfa64ee248b2ba5af4c972cf3, type: 3}
@@ -253,19 +252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 777742916294569351, guid: f5e06a62650582d4e88ff76c0e1d54e2, type: 3}
---- !u!114 &4628917298890330334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4597381505260269731}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9474929a77dc2a849821dd0f1a7b020f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lootList: []
 --- !u!114 &1995216451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +267,7 @@ MonoBehaviour:
   lootList:
   - {fileID: 11400000, guid: 392792806eddffe4e810d813b3c75eba, type: 2}
   - {fileID: 11400000, guid: a984b8e70c2349744be6c0ecc98f0d06, type: 2}
+  droppedItemPrefab: {fileID: 279078521537463199, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
 --- !u!70 &694875898
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
