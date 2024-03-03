@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Stats")]
@@ -89,6 +89,29 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask platformLayerMask;
     private bool isTouchingPlatform = false;
 
+    [SerializeField] protected InputActionReference MoveInput, JumpInput, BasicSkillInput, AoeSkillInput, SummonSkillInput, MovementSkillInput;
+    protected float VertDirection = 0;
+
+    private bool isSitting;
+
+    protected virtual void OnEnable()
+    {
+        JumpInput.action.performed += OnJumpPerformed;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    protected virtual void OnDisable()
+    {
+        JumpInput.action.performed -= OnJumpPerformed;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void OnJumpPerformed(InputAction.CallbackContext context)
+    {
+        if (!isAirborne && !isFallingThrough && !isExecutingSkill && !isSitting)
+        {
+            Jump();
+        }
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -148,11 +171,9 @@ public class PlayerMovement : MonoBehaviour
             moveCharacter();
         }
 
-        if (shouldJump && !isExecutingSkill)
-        {
-            Jump();
-        }
     }
+
+
 
     private void PlayerDeath()
     {
@@ -167,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(0f, 180f, 0f);
     }
 
-    public void getPlayerInput()
+    protected void getPlayerInput()
     {
         if (!GameController.instance.playerCanMove && !isExecutingSkill)
         {
@@ -175,33 +196,26 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = Vector2.zero;
             return; // Skip processing input if movement is disabled
         }
-        moveDirection = Input.GetAxis("Horizontal");
+        moveDirection = MoveInput.action.ReadValue<Vector2>().x;
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
-
+        VertDirection = MoveInput.action.ReadValue<Vector2>().y;
         // Force the player to stop when 'K' is pressed and only if the player is grounded
-        if (Input.GetKey(KeyCode.K) && isGrounded && !isFallingThrough && rb.velocity.y == 0)
+        if (VertDirection < 0 && isGrounded && !isFallingThrough && rb.velocity.y == 0)
         {
             animator.SetBool("isHoldingDown", true);
             // Stop the player by setting velocity to zero
             rb.velocity = Vector2.zero;
             moveDirection = 0; // Ensure moveDirection is set to 0 to stop movement logic
+            isSitting = true;
         }
         else
         {
             animator.SetBool("isHoldingDown", false);
-
-            // Resume movement by allowing moveDirection to dictate player velocity in FixedUpdate
-            if (!isAirborne)
-            {
-                if (Input.GetButtonDown("Jump") && !isFallingThrough)
-                {
-                    shouldJump = true; // Set flag to true to handle in FixedUpdate
-                }
-            }
+            isSitting = false;
         }
 
         // Check for jump through platform
-        if (Input.GetKey(KeyCode.K) && Input.GetButtonDown("Jump") && isTouchingPlatform)
+        if (VertDirection < 0 && Input.GetButtonDown("Jump") && isTouchingPlatform)
         {
             StartCoroutine(FallThrough());
         }
@@ -210,8 +224,6 @@ public class PlayerMovement : MonoBehaviour
         {
             FlipCharacter();
         }
-
-
     }
 
     bool IsGrounded()
@@ -257,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
     }
     public void playerInteractInput()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (VertDirection > 0)
         {
             EnterPortal();
             //  OpenShopKeeperUI();
@@ -319,11 +331,11 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("isAirborne", false);
             animator.SetFloat("Speed", Mathf.Abs(moveDirection));
 
-            if ((Input.GetKey(KeyCode.L) || Input.GetKey(KeyCode.RightArrow)) && !isFallingThrough)
+            if (facingRight && !isFallingThrough)
             {
                 jumpDirection = 1;
             }
-            else if ((Input.GetKey(KeyCode.J) || Input.GetKey(KeyCode.LeftArrow)) && !isFallingThrough)
+            else if (!facingRight && !isFallingThrough)
             {
                 jumpDirection = -1;
             }
@@ -370,10 +382,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

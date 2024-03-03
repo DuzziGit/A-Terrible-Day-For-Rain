@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using Unity.Mathematics;
-using Unity.VisualScripting;
+using UnityEngine.InputSystem;
+
 public class RogueSkillController : PlayerMovement
 {
     public float MovementSkillForce;
@@ -67,6 +68,27 @@ public class RogueSkillController : PlayerMovement
     [SerializeField] private float yOffsetSummon;
     [SerializeField] private float skillDuration;
     [SerializeField] private Transform LevelUpAttackTransform;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        MovementSkillInput.action.performed += PerformMoveSkill;
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        MovementSkillInput.action.performed -= PerformMoveSkill;
+
+    }
+
+    public void PerformMoveSkill(InputAction.CallbackContext context)
+    {
+        if (Time.time > nextFireTimeMovement && isAirborne)
+        {
+            GetMovementSkillInput();
+        }
+        else { return; }
+    }
     private void Start()
     {
         HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -117,7 +139,6 @@ public class RogueSkillController : PlayerMovement
 
             //  horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-            GetMovementSkillInput();
             GetFirstSkillInput();
             GetSecondSkillInput();
             GetThirdSkillInput();
@@ -148,15 +169,14 @@ public class RogueSkillController : PlayerMovement
     // Movement Skill
     private void GetMovementSkillInput()
     {
-        if (Time.time > nextFireTimeMovement && Input.GetKeyDown(KeyCode.LeftControl) && isAirborne)
-        {
-            MovementSkill();
-            nextFireTimeMovement = Time.time + cooldownTimeMovement;
-            //    textCooldownSM.gameObject.SetActive(true);
-            cooldownTimerSM = cooldownTimeMovement;
 
-        }
+        MovementSkill();
+        nextFireTimeMovement = Time.time + cooldownTimeMovement;
+        //    textCooldownSM.gameObject.SetActive(true);
+        cooldownTimerSM = cooldownTimeMovement;
+
     }
+
 
     public void MovementSkill()
     {
