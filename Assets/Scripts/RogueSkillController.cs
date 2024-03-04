@@ -319,6 +319,9 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkill2 && AoeSkillInput.action.IsPressed())
         {
+            GameController.instance.playerCanMove = false; // Lock movement if starting skill stationary
+            isExecutingSkill = true;
+            SwitchMovePositionBasedOnMouse(true);
             animator.SetTrigger("isAttacking");
             _ = StartCoroutine(secondSkill());
             nextFireTimeSkill2 = Time.time + cooldownTimeSkill2;
@@ -331,6 +334,8 @@ public class RogueSkillController : PlayerMovement
     {
         yield return new WaitForSeconds(0.20f);
         _ = Instantiate(projectile2, attackPos.position, attackPos.rotation);
+        GameController.instance.playerCanMove = true; // Lock movement if starting skill stationary
+        isExecutingSkill = false;
     }
 
     // Third Skill
