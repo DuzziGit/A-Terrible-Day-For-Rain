@@ -31,15 +31,17 @@ public class LootBag : MonoBehaviour
     }
     public void InstantiateItem(Vector3 spawnPosition)
     {
-
         Loot droppedItem = GetDroppedItem();
         if (droppedItem != null)
         {
-
             GameObject lootGameObject = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);
-            lootGameObject.GetComponentInChildren<SpriteRenderer>().sprite = droppedItem.lootSprite;
+            // This assumes that droppedItem can be cast to WeaponLoot, ensure your logic accounts for different loot types
+            DisplayItemStats displayItemStats = lootGameObject.GetComponent<DisplayItemStats>();
+            if (displayItemStats != null && droppedItem is WeaponLoot weaponLoot)
+            {
+                displayItemStats.UpdateStats(weaponLoot);
+            }
         }
 
     }
-
 }
