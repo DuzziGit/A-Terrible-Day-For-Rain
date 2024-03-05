@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DestroyThis : MonoBehaviour
 {
+    private GameObject parent;
     private void Awake()
     {
-        InvokeRepeating("DestroyAfterAnimation", 1, 2);
+        InvokeRepeating("DestroyAfterAnimation", 2, 2);
+        parent = gameObject.transform.parent.gameObject;
+
     }
 
     public void DestroyAfterAnimation()
@@ -15,7 +18,6 @@ public class DestroyThis : MonoBehaviour
         if (transform.childCount == 0)
         {
             // If it has a parent, destroy the parent
-            GameObject parent = gameObject.transform.parent.gameObject;
             if (parent != null)
             {
                 Destroy(parent);

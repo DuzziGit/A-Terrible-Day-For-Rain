@@ -45,7 +45,14 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        FindPlayer();
     }
+    public GameObject FindPlayer()
+    {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        return Player;
+    }
+
     public void RegisterSpawner(EnemySpawner spawner)
     {
         if (!enemySpawners.Contains(spawner))

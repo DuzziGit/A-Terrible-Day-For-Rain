@@ -159,7 +159,6 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = IsGrounded();
         if (GameController.instance.playerCanMove)
         {
-            getPlayerInput();
             playerInteractInput();
             animate();
             setPlayerDirection();
@@ -174,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameController.instance.playerCanMove && !isExecutingSkill)
         {
-
+            getPlayerInput();
             moveCharacter();
             JumpCheck();
         }
@@ -356,6 +355,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpDirection = -1;
             }
+            if (rb.velocity.x == 0)
+            {
+                jumpDirection = 0;
+            }
 
             if (isJumping)
             {
@@ -424,11 +427,19 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             animator.SetTrigger("isLanded");
             if (isFallingThrough) isFallingThrough = false;
-
-
         }
 
-
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            Debug.Log("Collision detected enter player");
+            // Assuming the item has a DisplayItemStats component attached
+            DisplayItemStats itemStats = collision.gameObject.GetComponent<DisplayItemStats>();
+            if (itemStats != null)
+            {
+                // Enable the item preview
+                itemStats.ItemPreview.SetActive(true);
+            }
+        }
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -449,6 +460,17 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag is "World" or "Platform")
         {
             isGrounded = false;
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            // Assuming the item has a DisplayItemStats component attached
+            DisplayItemStats itemStats = collision.gameObject.GetComponent<DisplayItemStats>();
+            if (itemStats != null)
+            {
+                // Enable the item preview
+                itemStats.ItemPreview.SetActive(false);
+            }
         }
     }
 

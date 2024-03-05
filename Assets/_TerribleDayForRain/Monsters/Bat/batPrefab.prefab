@@ -313,8 +313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootList:
-  - {fileID: 11400000, guid: 392792806eddffe4e810d813b3c75eba, type: 2}
-  - {fileID: 11400000, guid: a984b8e70c2349744be6c0ecc98f0d06, type: 2}
+  - {fileID: 11400000, guid: 69074dfee21d6f847a304765cee9f9af, type: 2}
+  - {fileID: 11400000, guid: 1b0eef6e03a7cad4396ca3acdd4bd21f, type: 2}
   droppedItemPrefab: {fileID: 279078521537463199, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
 --- !u!114 &3064877574233100646
 MonoBehaviour:

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4ad39c28f27624991737ccfd584384, type: 3}
   m_Name: Shuriken1
   m_EditorClassIdentifier: 
-  lootSprite: {fileID: 0}
-  lootName: 
-  dropChance: 0
-  AttackDamage: 0
-  CriticalRate: 0
-  AttackSpeed: 0
+  lootSprite: {fileID: 21300000, guid: ccdb17006c2a8b2408048774a5ba7837, type: 3}
+  lootName: Throwing Star
+  dropChance: 1
+  AttackDamage: 25
+  CriticalRate: 25
+  CriticalDamage: 25
+  AttackSpeed: 4

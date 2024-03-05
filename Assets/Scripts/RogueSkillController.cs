@@ -30,7 +30,7 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimeMovement = 1;
     private float nextFireTimeMovement = 0;
 
-    private float cooldownTimeSkill1 = 0.3f;
+    [SerializeField] private float cooldownTimeSkill1 = 0.3f;
     private float nextFireTimeSkill1 = 0;
 
     private float cooldownTimeSkill2 = 2;
@@ -358,7 +358,6 @@ public class RogueSkillController : PlayerMovement
         GameObject SummonSkillParent = new("SummonSkill");
         SummonSkillParent.transform.position = gameObject.transform.position + new Vector3(0, yOffsetSummon, 0);
         _ = Instantiate(SummonShuriken, SummonSkillParent.transform.position, SummonSkillParent.transform.rotation, SummonSkillParent.transform);
-
         GameController.instance.playerCanMove = true;
 
     }
@@ -366,13 +365,13 @@ public class RogueSkillController : PlayerMovement
     // Ultimate Skill
     public void GetUltimateSkillInput()
     {
-        if (Time.time > nextFireTimeSkillUlt && Input.GetKeyDown(KeyCode.F))
-        {
-            _ = StartCoroutine(UltimateSkillEnum());
-            nextFireTimeSkillUlt = Time.time + cooldownTimeSkillUlt;
-            //   textCooldownSU.gameObject.SetActive(true);
-            cooldownTimerSU = cooldownTimeSkillUlt;
-        }
+        // if (Time.time > nextFireTimeSkillUlt && Input.GetKeyDown(KeyCode.F))
+        // {
+        //     _ = StartCoroutine(UltimateSkillEnum());
+        //     nextFireTimeSkillUlt = Time.time + cooldownTimeSkillUlt;
+        //     //   textCooldownSU.gameObject.SetActive(true);
+        //     cooldownTimerSU = cooldownTimeSkillUlt;
+        // }
     }
 
     private IEnumerator UltimateSkillEnum()
