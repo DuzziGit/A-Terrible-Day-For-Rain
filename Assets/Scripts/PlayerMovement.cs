@@ -523,6 +523,8 @@ public class PlayerMovement : MonoBehaviour
         // Perform the action you want after holding the interact button for 2 seconds
         // For example, interacting with the item in a special way
         Debug.Log($"Long press interact with {collision.gameObject.name}");
+        Destroy(collision.gameObject);
+        shouldLevelUp = true;
     }
 }
 
