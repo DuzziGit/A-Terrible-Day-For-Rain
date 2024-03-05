@@ -1103,24 +1103,29 @@ MonoBehaviour:
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  movementActions:
+    Move: {fileID: -2631810443607245350, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+    Jump: {fileID: 8228250964517920683, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+    Interact: {fileID: -7960643511549657140, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+  combatActions:
+    BasicSkill: {fileID: -3373423683045235122, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+    AoeSkill: {fileID: 8550075972274594711, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+    SummonSkill: {fileID: 3101760576862424325, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+    MovementSkill: {fileID: -3211061687226010859, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
+    MousePosition: {fileID: -1640461855116964628, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
   MovementSkillForce: 7.5
-  MovementSkillForceLeft: -7.5
   LevelUpShuriken: {fileID: 3972795832953981774, guid: 52f50aa3600c72d40af373c1cb06a460, type: 3}
-  JumpShuriken: {fileID: 8515462028405087519, guid: ffaef97c6b5a9574fa9d86079d932363, type: 3}
-  FixedJumpAttackPos: {fileID: 1155637823}
   basicAttackPrefab: {fileID: 8515462028405087519, guid: 2ece65e6eb472cd4898cfcd8f3472c6a, type: 3}
   projectile2: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
-  ProjectileUltimate: {fileID: 6638761271213070857, guid: df6803cdadbff91408b308986a5eab4e, type: 3}
   SummonShuriken: {fileID: 3972795832953981774, guid: c08d0543dd046424cb04ef8761df4e27, type: 3}
   attackPos: {fileID: 1509660145}
   attackPosAirborne: {fileID: 5515096621285819317}
-  horizontalMove: 0
-  runSpeed: 1
+  cooldownTimeSkill1: 0.3
   SwipeOne: {fileID: 127688076}
   SwipeTwo: {fileID: 1509660146}
   MovementSkillTwo: {fileID: 2626708564543138125}
   yOffsetSummon: -2
-  skillDuration: 0.2
+  skillDuration: 0.4
   LevelUpAttackTransform: {fileID: 162918344}
 --- !u!50 &9011964926031391147
 Rigidbody2D:
@@ -1156,7 +1161,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.024687588, y: -0.49683893}
+  m_Offset: {x: -0.005935073, y: -0.49342936}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1167,7 +1172,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5486026, y: 0.01309824}
+  m_Size: {x: 0.16332364, y: 0.026736379}
   m_EdgeRadius: 0
 --- !u!95 &9011964926031391143
 Animator:

@@ -3,6 +3,28 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+
+
+[System.Serializable]
+public struct PlayerMovementActions
+{
+    public InputActionReference Move;
+    public InputActionReference Jump;
+    public InputActionReference Interact; // You can easily add new actions here.
+                                          // Add more movement-related actions as needed.
+}
+
+[System.Serializable]
+public struct PlayerCombatActions
+{
+    public InputActionReference BasicSkill;
+    public InputActionReference AoeSkill;
+    public InputActionReference SummonSkill;
+    public InputActionReference MovementSkill;
+
+    public InputActionReference MousePosition;
+    // Add more combat-related actions as needed.
+}
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Stats")]
@@ -35,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
     public bool playerIsNearPortal = false;
     [HideInInspector]
     public bool isAirborne = false;
-    [HideInInspector]
-    public bool isPressingInteract = false;
+    private float interactStartTime = 0f; // Start time of the interact button press
+    private bool isInteractButtonHeld = false; // Whether the interact button is currently being held
     [HideInInspector]
     public bool isWalking = false;
     [HideInInspector]
@@ -89,19 +111,20 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask platformLayerMask;
     private bool isTouchingPlatform = false;
 
-    [SerializeField] protected InputActionReference MoveInput, JumpInput, BasicSkillInput, AoeSkillInput, SummonSkillInput, MovementSkillInput, MousePosition;
     protected float VertDirection = 0;
 
     private bool isSitting;
-
+    [Header("Input Actions")]
+    [SerializeField] protected PlayerMovementActions movementActions;
+    [SerializeField] protected PlayerCombatActions combatActions;
     protected virtual void OnEnable()
     {
-        JumpInput.action.performed += OnJumpPerformed;
+        movementActions.Jump.action.performed += OnJumpPerformed;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     protected virtual void OnDisable()
     {
-        JumpInput.action.performed -= OnJumpPerformed;
+        movementActions.Jump.action.performed -= OnJumpPerformed;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -122,7 +145,6 @@ public class PlayerMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
     }
-
     private void Start()
     {
         //    playerLevelTextText = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<TMP_Text>();
@@ -159,16 +181,17 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = IsGrounded();
         if (GameController.instance.playerCanMove)
         {
-            playerInteractInput();
             animate();
             setPlayerDirection();
 
         }
-
-
-
-
+        if (isInteractButtonHeld && !movementActions.Interact.action.IsPressed())
+        {
+            ResetInteractTimer();
+        }
     }
+
+
     protected void FixedUpdate()
     {
         if (GameController.instance.playerCanMove && !isExecutingSkill)
@@ -181,11 +204,11 @@ public class PlayerMovement : MonoBehaviour
     }
     protected void JumpCheck()
     {
-        if (!isAirborne && !isFallingThrough && !isExecutingSkill && !isSitting && JumpInput.action.IsPressed())
+        if (!isAirborne && !isFallingThrough && !isExecutingSkill && !isSitting && movementActions.Jump.action.IsPressed())
         {
             Jump();
-            MovementSkillInput.action.Disable();
-            MovementSkillInput.action.Enable();
+            combatActions.MovementSkill.action.Disable();
+            combatActions.MovementSkill.action.Enable();
 
         }
     }
@@ -214,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
-        VertDirection = MoveInput.action.ReadValue<Vector2>().y;
+        VertDirection = movementActions.Move.action.ReadValue<Vector2>().y;
         // Force the player to stop when 'K' is pressed and only if the player is grounded
         if (VertDirection < 0 && isGrounded && !isFallingThrough && rb.velocity.y == 0)
         {
@@ -238,7 +261,7 @@ public class PlayerMovement : MonoBehaviour
     protected void setPlayerDirection()
     {
         if (isExecutingSkill) return;
-        moveDirection = MoveInput.action.ReadValue<Vector2>().x;
+        moveDirection = movementActions.Move.action.ReadValue<Vector2>().x;
 
     }
 
@@ -283,15 +306,7 @@ public class PlayerMovement : MonoBehaviour
         gameObject.layer = originalLayer;
 
     }
-    public void playerInteractInput()
-    {
-        if (VertDirection > 0)
-        {
-            EnterPortal();
-            //  OpenShopKeeperUI();
-        }
-        isPressingInteract = true;
-    }
+
 
 
     public virtual void LevelUp()
@@ -474,20 +489,41 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // void OnDrawGizmos()
-    // {
-    //     float characterWidth = cc.bounds.size.x;
-    //     float characterHeight = cc.bounds.size.y;
-    //     Vector2 rayStartPoint = new Vector2(transform.position.x - characterWidth / 2, transform.position.y - characterHeight / 2);
-    //     float distanceBetweenRays = characterWidth / (gizmoNumberOfRays - 1);
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
+        {
+            if (movementActions.Interact.action.IsPressed())
+            {
+                if (!isInteractButtonHeld)
+                {
+                    // Start the timer when the button is first pressed
+                    interactStartTime = Time.time;
+                    isInteractButtonHeld = true;
+                }
+                else if (Time.time - interactStartTime >= 2f)
+                {
+                    // The button has been held for at least 2 seconds
+                    HandleLongPressInteract(collision);
+                    // Optionally reset the timer to avoid multiple triggers
+                    ResetInteractTimer();
+                }
+            }
+        }
 
-    //     Gizmos.color = gizmoRayColor;
+    }
 
-    //     for (int i = 0; i < gizmoNumberOfRays; i++)
-    //     {
-    //         Vector2 rayStart = rayStartPoint + Vector2.right * distanceBetweenRays * i;
-    //         Gizmos.DrawLine(rayStart, rayStart + Vector2.down * gizmoRayLength);
-    //     }
-    // }
-
+    private void ResetInteractTimer()
+    {
+        isInteractButtonHeld = false;
+        interactStartTime = 0f;
+    }
+    private void HandleLongPressInteract(Collider2D collision)
+    {
+        // Perform the action you want after holding the interact button for 2 seconds
+        // For example, interacting with the item in a special way
+        Debug.Log($"Long press interact with {collision.gameObject.name}");
+    }
 }
+
+

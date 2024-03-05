@@ -37,19 +37,5 @@ public class DisplayItemStats : MonoBehaviour
         CriticalRateText.text = CriticalRate.ToString();
         TitleText.text = Title;
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
 
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Debug.Log("Collision detected exit");
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            Debug.Log("Collision detected exit player");
-            // Disable the item preview
-            ItemPreview.SetActive(false);
-        }
-    }
 }

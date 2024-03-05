@@ -63,19 +63,13 @@ public class RogueSkillController : PlayerMovement
     protected override void OnEnable()
     {
         base.OnEnable();
-        MovementSkillInput.action.performed += PerformMoveSkill;
     }
     protected override void OnDisable()
     {
         base.OnDisable();
-        MovementSkillInput.action.performed -= PerformMoveSkill;
-
     }
 
-    public void PerformMoveSkill(InputAction.CallbackContext context)
-    {
 
-    }
     private void Start()
     {
         HealthBar healthBar = FindObjectOfType<HealthBar>();
@@ -131,7 +125,6 @@ public class RogueSkillController : PlayerMovement
             {
                 setPlayerDirection();
             }
-            playerInteractInput();
             getPlayerInput();
             GetMovementSkillInput();
 
@@ -166,7 +159,7 @@ public class RogueSkillController : PlayerMovement
     private void GetMovementSkillInput()
     {
 
-        if (Time.time > nextFireTimeMovement && isAirborne & MovementSkillInput.action.triggered)
+        if (Time.time > nextFireTimeMovement && isAirborne & combatActions.MovementSkill.action.triggered)
         {
             MovementSkill();
             nextFireTimeMovement = Time.time + cooldownTimeMovement;
@@ -181,7 +174,7 @@ public class RogueSkillController : PlayerMovement
     {
         if (!isSkillActive) return;
 
-        float mousePositionInWorld = MousePosition.action.ReadValue<Vector2>().x;
+        float mousePositionInWorld = combatActions.MousePosition.action.ReadValue<Vector2>().x;
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePositionInWorld, 0, 0));
         bool shouldFlip = (mouseWorldPosition.x < transform.position.x && facingRight) || (mouseWorldPosition.x > transform.position.x && !facingRight);
 
@@ -272,7 +265,7 @@ public class RogueSkillController : PlayerMovement
     // First Skill
     private void GetFirstSkillInput()
     {
-        if (Time.time > nextFireTimeSkill1 && BasicSkillInput.action.IsPressed())
+        if (Time.time > nextFireTimeSkill1 && combatActions.BasicSkill.action.IsPressed())
         {
             GameController.instance.playerCanMove = false; // Lock movement if starting skill stationary
             isExecutingSkill = true;
@@ -317,7 +310,7 @@ public class RogueSkillController : PlayerMovement
 
     public void GetSecondSkillInput()
     {
-        if (Time.time > nextFireTimeSkill2 && AoeSkillInput.action.IsPressed())
+        if (Time.time > nextFireTimeSkill2 && combatActions.AoeSkill.action.IsPressed())
         {
             GameController.instance.playerCanMove = false; // Lock movement if starting skill stationary
             isExecutingSkill = true;
@@ -341,7 +334,7 @@ public class RogueSkillController : PlayerMovement
     // Third Skill
     public void GetThirdSkillInput()
     {
-        if (Time.time > nextFireTimeSkill3 && SummonSkillInput.action.IsPressed() && !isAirborne)
+        if (Time.time > nextFireTimeSkill3 && combatActions.SummonSkill.action.IsPressed() && !isAirborne)
         {
             _ = StartCoroutine(ThirdSkillEnum());
             nextFireTimeSkill3 = Time.time + cooldownTimeSkill3Upgraded;

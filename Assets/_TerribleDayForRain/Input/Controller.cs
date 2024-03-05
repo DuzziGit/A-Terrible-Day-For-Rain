@@ -338,6 +338,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ff18c75-a549-481d-a203-09e98bb0518a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -472,6 +481,17 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b904462e-7cb8-4292-9c0a-107d7ec2cc00"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -495,6 +515,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Gameplay1_SummonSkill = m_Gameplay1.FindAction("SummonSkill", throwIfNotFound: true);
         m_Gameplay1_MovementSkill = m_Gameplay1.FindAction("MovementSkill", throwIfNotFound: true);
         m_Gameplay1_MousePosition = m_Gameplay1.FindAction("MousePosition", throwIfNotFound: true);
+        m_Gameplay1_Interact = m_Gameplay1.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -649,6 +670,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay1_SummonSkill;
     private readonly InputAction m_Gameplay1_MovementSkill;
     private readonly InputAction m_Gameplay1_MousePosition;
+    private readonly InputAction m_Gameplay1_Interact;
     public struct Gameplay1Actions
     {
         private @Controller m_Wrapper;
@@ -660,6 +682,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @SummonSkill => m_Wrapper.m_Gameplay1_SummonSkill;
         public InputAction @MovementSkill => m_Wrapper.m_Gameplay1_MovementSkill;
         public InputAction @MousePosition => m_Wrapper.m_Gameplay1_MousePosition;
+        public InputAction @Interact => m_Wrapper.m_Gameplay1_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -690,6 +713,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IGameplay1Actions instance)
@@ -715,6 +741,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IGameplay1Actions instance)
@@ -750,5 +779,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnSummonSkill(InputAction.CallbackContext context);
         void OnMovementSkill(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
