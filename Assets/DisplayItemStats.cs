@@ -19,7 +19,7 @@ public class DisplayItemStats : MonoBehaviour
         CriticalDamage = loot.CriticalDamage;
         Title = loot.lootName;
         PreviewImage = loot.lootSprite;
-        LevelReq = loot.LevelReq;
+        //LevelReq = loot.LevelReq;
 
         // You can extend this method to include any other properties that need to be set
     }
