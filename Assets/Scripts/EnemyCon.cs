@@ -57,12 +57,7 @@ public class EnemyCon : Enemy
         }
 
         // Instantiate TextParent for damage numbers if not already done for this attack
-        if (!damageTextCanvases.ContainsKey(attackId))
-        {
-            GameObject textContainer = Instantiate(textContainerPrefab, transform.position, Quaternion.identity);
-            GameObject textParent = Instantiate(TextParentPrefab, textContainer.transform.position + new Vector3(0, baseOffsetY, 0), Quaternion.identity, textContainer.transform);
-            damageTextCanvases[attackId] = textParent;
-        }
+
 
         damageTaken.Add((damage, isCrit, attackId));
         ProcessDamage(attackId);
@@ -82,12 +77,23 @@ public class EnemyCon : Enemy
     private void ProcessDamage(string attackId)
     {
         isDisplayingDamage = true;
-        GameObject textParent = damageTextCanvases[attackId];
-
-        if (!damageNumberCounts.ContainsKey(attackId))
+        GameObject textParent;
+        // Check if the attackId is already a key in the dictionary
+        if (!damageTextCanvases.ContainsKey(attackId) || damageTextCanvases[attackId] == null)
         {
+            // Instantiate textContainer and textParent if not present or null
+            GameObject textContainer = Instantiate(textContainerPrefab, transform.position, Quaternion.identity);
+            textParent = Instantiate(TextParentPrefab, textContainer.transform.position + new Vector3(0, baseOffsetY, 0), Quaternion.identity, textContainer.transform);
+            damageTextCanvases[attackId] = textParent; // Add or update the dictionary entry
             damageNumberCounts[attackId] = 0;
+
         }
+        else
+        {
+            // If the key exists and is not null, retrieve the textParent from the dictionary
+            textParent = damageTextCanvases[attackId];
+        }
+
 
         var damagesForAttack = damageTaken.FindAll(d => d.AttackId == attackId);
         foreach (var damageInfo in damagesForAttack)

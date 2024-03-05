@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 8213331105594005426}
   - component: {fileID: 8213331105594005437}
   - component: {fileID: 8213331105594005436}
-  - component: {fileID: 4273894339976377807}
+  - component: {fileID: 1613594453217173021}
   m_Layer: 14
   m_Name: NormalDamage
   m_TagString: Untagged
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -302,7 +302,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4273894339976377807
+--- !u!114 &1613594453217173021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,6 +311,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8213331105594005438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa2d5368af982c14499ffab923ce12b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 373145dd893b15d4e9ba188758d10676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -186,7 +186,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &7562556280584138820
 MonoBehaviour:
@@ -212,6 +212,6 @@ MonoBehaviour:
   totalHits: 4
   targetingToleranceAngle: 0
   UniqueAttackId: 
-  knockbackStr: 10
+  knockbackStr: 5
   minDamage: 400
   maxDamage: 1000

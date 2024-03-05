@@ -269,7 +269,7 @@ MonoBehaviour:
   DamageNumText: {fileID: 8213331105594005438, guid: d9941431549497f489e71133f11d5e3c, type: 3}
   DamageNumTextCrit: {fileID: 8213331105594005438, guid: ab4e57ecfa64ee248b2ba5af4c972cf3, type: 3}
   isDisplayingDamage: 0
-  baseOffsetY: 0.5
+  baseOffsetY: 0.2
   incrementalOffsetY: 0.25
 --- !u!114 &1826110122
 MonoBehaviour:

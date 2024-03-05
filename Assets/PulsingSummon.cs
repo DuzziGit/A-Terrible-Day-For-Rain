@@ -41,8 +41,9 @@ public class PulsingSummon : MonoBehaviour
 
     private void Awake()
     {
-        UniqueAttackID = HitManager.GenerateSkillActivationGuid();
+        InvokeRepeating("GenerateId", 0, pulseTimer - 0.1f);
     }
+
     void Start()
     {
         StartCoroutine(PulseDamage());
