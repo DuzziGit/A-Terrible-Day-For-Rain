@@ -385,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 279078521537463199, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215073521157952543, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
       propertyPath: m_RootOrder
@@ -22643,77 +22643,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: JumpInput
-      value: 
-      objectReference: {fileID: 8228250964517920683, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: MoveInput
-      value: 
-      objectReference: {fileID: -2631810443607245350, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: AoeSkillInput
-      value: 
-      objectReference: {fileID: 8550075972274594711, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: MousePosition
-      value: 
-      objectReference: {fileID: -1640461855116964628, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: skillDuration
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: BasicSkillInput
-      value: 
-      objectReference: {fileID: -3373423683045235122, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: SummonSkillInput
-      value: 
-      objectReference: {fileID: 3101760576862424325, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: optionsMenuCanvas
       value: 
       objectReference: {fileID: 1206142985}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: MovementSkillInput
-      value: 
-      objectReference: {fileID: -3211061687226010859, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: cooldownTimeSkill1
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: movementActions.Jump
-      value: 
-      objectReference: {fileID: 8228250964517920683, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: movementActions.Move
-      value: 
-      objectReference: {fileID: -2631810443607245350, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: combatActions.AoeSkill
-      value: 
-      objectReference: {fileID: 8550075972274594711, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: combatActions.BasicSkill
-      value: 
-      objectReference: {fileID: -3373423683045235122, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: movementActions.Interact
-      value: 
-      objectReference: {fileID: -7960643511549657140, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: combatActions.SummonSkill
-      value: 
-      objectReference: {fileID: 3101760576862424325, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: combatActions.MousePosition
-      value: 
-      objectReference: {fileID: -1640461855116964628, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: combatActions.MovementSkill
-      value: 
-      objectReference: {fileID: -3211061687226010859, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391142, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -22760,19 +22692,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391148, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_Size.x
-      value: 0.16332364
-      objectReference: {fileID: 0}
-    - target: {fileID: 9011964926031391148, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: m_Size.y
-      value: 0.026736379
+      value: 0.58556485
       objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391148, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_Offset.x
-      value: -0.005935073
-      objectReference: {fileID: 0}
-    - target: {fileID: 9011964926031391148, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.49342936
+      value: -0.02149117
       objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391150, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_Name
