@@ -73,9 +73,6 @@ TagManager:
   - name: background
     uniqueID: 4283532813
     locked: 0
-  - name: World
-    uniqueID: 1476089383
-    locked: 0
   - name: Platforms
     uniqueID: 3274025939
     locked: 0
@@ -87,4 +84,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1918493919
+    locked: 0
+  - name: World
+    uniqueID: 1476089383
     locked: 0
