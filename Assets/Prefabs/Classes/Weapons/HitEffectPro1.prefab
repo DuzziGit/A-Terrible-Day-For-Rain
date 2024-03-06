@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6350072096014396542}
   - component: {fileID: 8828319825448257598}
   - component: {fileID: 5407744141687519212}
+  - component: {fileID: 7231116255008440297}
   m_Layer: 0
   m_Name: HitEffectPro1
   m_TagString: Untagged
@@ -93,16 +94,28 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -326993057
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7231116255008440297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777742916294569351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373145dd893b15d4e9ba188758d10676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

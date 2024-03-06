@@ -82,9 +82,9 @@ TagManager:
   - name: Player
     uniqueID: 294652779
     locked: 0
-  - name: UI
-    uniqueID: 1918493919
-    locked: 0
   - name: World
     uniqueID: 1476089383
+    locked: 0
+  - name: UI
+    uniqueID: 1918493919
     locked: 0

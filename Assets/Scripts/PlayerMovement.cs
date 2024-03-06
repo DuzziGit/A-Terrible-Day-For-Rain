@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
     public bool facingRight = true;
     protected bool isJumping = false;
     public bool isGrounded = false;
-    protected bool shouldLevelUp = false;
+    [SerializeField] protected bool shouldLevelUp = false;
     protected bool shouldJump = false; // Flag to indicate jump input
 
     public float gizmoRayLength = 0.1f;
