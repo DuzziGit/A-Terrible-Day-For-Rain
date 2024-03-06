@@ -12844,6 +12844,14 @@ PrefabInstance:
       propertyPath: m_TileAssetArray.Array.data[0].m_Data
       value: 
       objectReference: {fileID: 1320817866}
+    - target: {fileID: 379458705414913902, guid: ca29f660a57690549ad42dbc55c770b3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 379458705414913902, guid: ca29f660a57690549ad42dbc55c770b3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1476089383
+      objectReference: {fileID: 0}
     - target: {fileID: 5469291209748113729, guid: ca29f660a57690549ad42dbc55c770b3, type: 3}
       propertyPath: m_RootOrder
       value: 1
