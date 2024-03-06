@@ -1,8 +1,0 @@
-Welcome to the tutorial world, this is the first of two tutorial levels.
-The purpose of this world is to show you how to move around in the world with the character that you have chosen.
-The controls are fairly simple. You will move around using the arrow keys and space bar to jump.
-When you are on a platform if you click down you will fall down through the platform.
-If you are running low on health, press E to use a health potion.
-The final thing you will need to know is when around a rope if you hold the up arrow you will start climbing up it.
-Feel free to explore the level and learn the controls at your own pace.
-Once you feel comfortable with the controls, you can use the portal on the top right.
