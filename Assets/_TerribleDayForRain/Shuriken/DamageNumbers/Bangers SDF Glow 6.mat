@@ -58,7 +58,7 @@ Material:
     - _ColorMask: 15
     - _CullMode: 0
     - _Diffuse: 0.734
-    - _FaceDilate: 1
+    - _FaceDilate: 0.478
     - _FaceShininess: 0
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
@@ -72,15 +72,15 @@ Material:
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineShininess: 0
-    - _OutlineSoftness: 0.436
+    - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
     - _OutlineWidth: 1
     - _PerspectiveFilter: 0.285
     - _Reflectivity: 11.6
-    - _ScaleRatioA: 0.34651837
-    - _ScaleRatioB: 0
-    - _ScaleRatioC: 0
+    - _ScaleRatioA: 0.5458366
+    - _ScaleRatioB: 0.30409095
+    - _ScaleRatioC: 0.24115062
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -113,5 +113,5 @@ Material:
     - _ReflectOutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecularColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
-    - _UnderlayColor: {r: 0.8705506, g: 0.8705506, b: 0.8705506, a: 1}
+    - _UnderlayColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
