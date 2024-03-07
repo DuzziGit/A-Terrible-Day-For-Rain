@@ -19,7 +19,12 @@ public class HitEffectPool : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject effect = Instantiate(hitEffectPrefab, Vector3.zero, Quaternion.identity, ContainerManager.Instance.ImpactContainer);
+            GameObject effect = Instantiate(
+                hitEffectPrefab,
+                Vector3.zero,
+                Quaternion.identity,
+                ContainerManager.Instance.ImpactContainer
+            );
             effect.SetActive(false);
             effectsPool.Enqueue(effect);
         }
@@ -36,7 +41,12 @@ public class HitEffectPool : MonoBehaviour
         else
         {
             // Optional: Instantiate new ones if pool is empty, can be avoided
-            GameObject effect = Instantiate(hitEffectPrefab, Vector3.zero, Quaternion.identity, ContainerManager.Instance.ImpactContainer);
+            GameObject effect = Instantiate(
+                hitEffectPrefab,
+                Vector3.zero,
+                Quaternion.identity,
+                ContainerManager.Instance.ImpactContainer
+            );
             return effect;
         }
     }

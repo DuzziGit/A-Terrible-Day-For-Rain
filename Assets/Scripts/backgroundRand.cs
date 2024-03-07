@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 public class backgroundRand : MonoBehaviour
 {
     public Image myImage; // The Image component on the current GameObject

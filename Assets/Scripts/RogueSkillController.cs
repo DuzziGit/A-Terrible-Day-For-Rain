@@ -1,10 +1,10 @@
 using System.Collections;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 using Cinemachine;
+using TMPro;
 using Unity.Mathematics;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class RogueSkillController : PlayerMovement
 {
@@ -12,7 +12,9 @@ public class RogueSkillController : PlayerMovement
     public GameObject LevelUpShuriken;
     public GameObject basicAttackPrefab;
     public GameObject projectile2;
-    [SerializeField] private GameObject SummonShuriken;
+
+    [SerializeField]
+    private GameObject SummonShuriken;
     public Transform attackPos;
     public Transform attackPosAirborne;
     private readonly Image imageCooldownS1;
@@ -30,7 +32,8 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimeMovement = 1;
     private float nextFireTimeMovement = 0;
 
-    [SerializeField] private float cooldownTimeSkill1 = 0.3f;
+    [SerializeField]
+    private float cooldownTimeSkill1 = 0.3f;
     private float nextFireTimeSkill1 = 0;
 
     private float cooldownTimeSkill2 = 2;
@@ -55,20 +58,28 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimerS3 = 0.0f;
     private float cooldownTimerSM = 0.0f;
     private float cooldownTimerSU = 0.0f;
+
     // private readonly float cooldownTimer = 0.0f;
     private CinemachineImpulseSource impulseSource;
-    [SerializeField] private float yOffsetSummon;
-    [SerializeField] private float skillDuration;
-    [SerializeField] private Transform LevelUpAttackTransform;
+
+    [SerializeField]
+    private float yOffsetSummon;
+
+    [SerializeField]
+    private float skillDuration;
+
+    [SerializeField]
+    private Transform LevelUpAttackTransform;
+
     protected override void OnEnable()
     {
         base.OnEnable();
     }
+
     protected override void OnDisable()
     {
         base.OnDisable();
     }
-
 
     private void Start()
     {
@@ -94,6 +105,7 @@ public class RogueSkillController : PlayerMovement
         rend = GetComponent<Renderer>();
         c = rend.material.color;
     }
+
     protected new void FixedUpdate()
     {
         base.FixedUpdate();
@@ -102,9 +114,9 @@ public class RogueSkillController : PlayerMovement
         GetThirdSkillInput();
         GetUltimateSkillInput();
     }
+
     private void Update()
     {
-
         experienceBar.setMaxExp(maxExp);
 
         levelUI.text = level.ToString();
@@ -143,8 +155,6 @@ public class RogueSkillController : PlayerMovement
         }
     }
 
-
-
     public override void LevelUp()
     {
         if (level < 60 && shouldLevelUp)
@@ -155,35 +165,41 @@ public class RogueSkillController : PlayerMovement
             shouldLevelUp = false;
         }
     }
+
     // Movement Skill
     private void GetMovementSkillInput()
     {
-
-        if (Time.time > nextFireTimeMovement && isAirborne & combatActions.MovementSkill.action.triggered)
+        if (
+            Time.time > nextFireTimeMovement
+            && isAirborne & combatActions.MovementSkill.action.triggered
+        )
         {
             MovementSkill();
             nextFireTimeMovement = Time.time + cooldownTimeMovement;
             //    textCooldownSM.gameObject.SetActive(true);
             cooldownTimerSM = cooldownTimeMovement;
         }
-
-
     }
 
     private void SwitchMovePositionBasedOnMouse(bool isSkillActive)
     {
-        if (!isSkillActive) return;
+        if (!isSkillActive)
+            return;
 
         float mousePositionInWorld = combatActions.MousePosition.action.ReadValue<Vector2>().x;
-        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePositionInWorld, 0, 0));
-        bool shouldFlip = (mouseWorldPosition.x < transform.position.x && facingRight) || (mouseWorldPosition.x > transform.position.x && !facingRight);
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(
+            new Vector3(mousePositionInWorld, 0, 0)
+        );
+        bool shouldFlip =
+            (mouseWorldPosition.x < transform.position.x && facingRight)
+            || (mouseWorldPosition.x > transform.position.x && !facingRight);
 
         if (shouldFlip)
         {
             FlipCharacter();
-
         }
     }
+
     public void MovementSkill()
     {
         MovementSkillTwo.SetBool("MovementSkillUsed", true);
@@ -213,9 +229,9 @@ public class RogueSkillController : PlayerMovement
             nextFireTimeMovement = Time.time + cooldownTimeMovement;
             //    textCooldownSM.gameObject.SetActive(true);
             cooldownTimerSM = cooldownTimeMovement;
-
         }
     }
+
     public void MovementSkillUpwards()
     {
         rb.velocity = new Vector2(0, 0);
@@ -230,7 +246,6 @@ public class RogueSkillController : PlayerMovement
         yield return new WaitForSeconds(0.35f);
         MovementSkillTwo.SetBool("MovementSkillUsed", false);
         gameObject.layer = LayerMask.NameToLayer("Player");
-
     }
 
     public void ApplyCooldownTracker()
@@ -243,12 +258,22 @@ public class RogueSkillController : PlayerMovement
 
         UpdateCooldownTimer(textCooldownS1, imageCooldownS1, cooldownTimerS1, cooldownTimeSkill1);
         UpdateCooldownTimer(textCooldownS2, imageCooldownS2, cooldownTimerS2, cooldownTimeSkill2);
-        UpdateCooldownTimer(textCooldownS3, imageCooldownS3, cooldownTimerS3, cooldownTimeSkill3Upgraded);
+        UpdateCooldownTimer(
+            textCooldownS3,
+            imageCooldownS3,
+            cooldownTimerS3,
+            cooldownTimeSkill3Upgraded
+        );
         UpdateCooldownTimer(textCooldownSU, imageCooldownSU, cooldownTimerSU, cooldownTimeSkillUlt);
         UpdateCooldownTimer(textCooldownSM, imageCooldownSM, cooldownTimerSM, cooldownTimeMovement);
     }
 
-    private void UpdateCooldownTimer(TMP_Text textCooldown, Image imageCooldown, float cooldownTimer, float cooldownTime)
+    private void UpdateCooldownTimer(
+        TMP_Text textCooldown,
+        Image imageCooldown,
+        float cooldownTimer,
+        float cooldownTime
+    )
     {
         if (cooldownTimer < 0.0f)
         {
@@ -280,10 +305,9 @@ public class RogueSkillController : PlayerMovement
             //    textCooldownS1.gameObject.SetActive(true);
             cooldownTimerS1 = cooldownTimeSkill1;
             SwipeOne.SetTrigger("Attack");
-
-
         }
     }
+
     private IEnumerator FirstSkill()
     {
         // If the player is airborne, don't modify their horizontal velocity,
@@ -291,22 +315,25 @@ public class RogueSkillController : PlayerMovement
 
         // Determine the fixed position for the attack based on whether the player is airborne or not
         Vector3 fixedAttackPosition = !isAirborne ? attackPos.position : attackPosAirborne.position;
-        Quaternion fixedAttackRotation = !isAirborne ? attackPos.rotation : attackPosAirborne.rotation;
+        Quaternion fixedAttackRotation = !isAirborne
+            ? attackPos.rotation
+            : attackPosAirborne.rotation;
 
         // Instantiate the attack prefab at the calculated position and rotation
-        Instantiate(basicAttackPrefab, fixedAttackPosition, fixedAttackRotation, ContainerManager.Instance.ProjectileContainer);
+        Instantiate(
+            basicAttackPrefab,
+            fixedAttackPosition,
+            fixedAttackRotation,
+            ContainerManager.Instance.ProjectileContainer
+        );
 
         // Wait for a short duration before continuing
         yield return new WaitForSeconds(skillDuration); // Wait for skill to complete
-                                                        //   moveDirection = TempMoveDirection;
+        //   moveDirection = TempMoveDirection;
         isExecutingSkill = false;
         GameManager.Instance.playerCanMove = true;
         // If character was moving before skill, start deceleration
-
     }
-
-
-
 
     public void GetSecondSkillInput()
     {
@@ -326,7 +353,12 @@ public class RogueSkillController : PlayerMovement
     private IEnumerator secondSkill()
     {
         yield return new WaitForSeconds(0.20f);
-        _ = Instantiate(projectile2, attackPos.position, attackPos.rotation, ContainerManager.Instance.ProjectileContainer);
+        _ = Instantiate(
+            projectile2,
+            attackPos.position,
+            attackPos.rotation,
+            ContainerManager.Instance.ProjectileContainer
+        );
         GameManager.Instance.playerCanMove = true; // Lock movement if starting skill stationary
         isExecutingSkill = false;
     }
@@ -334,7 +366,11 @@ public class RogueSkillController : PlayerMovement
     // Third Skill
     public void GetThirdSkillInput()
     {
-        if (Time.time > nextFireTimeSkill3 && combatActions.SummonSkill.action.IsPressed() && !isAirborne)
+        if (
+            Time.time > nextFireTimeSkill3
+            && combatActions.SummonSkill.action.IsPressed()
+            && !isAirborne
+        )
         {
             _ = StartCoroutine(ThirdSkillEnum());
             nextFireTimeSkill3 = Time.time + cooldownTimeSkill3Upgraded;
@@ -349,10 +385,15 @@ public class RogueSkillController : PlayerMovement
         GameManager.Instance.playerCanMove = false;
         yield return new WaitForSeconds(1f);
         GameObject SummonSkillParent = new("SummonSkill");
-        SummonSkillParent.transform.position = gameObject.transform.position + new Vector3(0, yOffsetSummon, 0);
-        _ = Instantiate(SummonShuriken, SummonSkillParent.transform.position, SummonSkillParent.transform.rotation, SummonSkillParent.transform);
+        SummonSkillParent.transform.position =
+            gameObject.transform.position + new Vector3(0, yOffsetSummon, 0);
+        _ = Instantiate(
+            SummonShuriken,
+            SummonSkillParent.transform.position,
+            SummonSkillParent.transform.rotation,
+            SummonSkillParent.transform
+        );
         GameManager.Instance.playerCanMove = true;
-
     }
 
     // Ultimate Skill
@@ -369,7 +410,12 @@ public class RogueSkillController : PlayerMovement
 
     private IEnumerator UltimateSkillEnum()
     {
-        _ = Instantiate(LevelUpShuriken, LevelUpAttackTransform.position, Quaternion.identity, gameObject.transform);
+        _ = Instantiate(
+            LevelUpShuriken,
+            LevelUpAttackTransform.position,
+            Quaternion.identity,
+            gameObject.transform
+        );
         yield return new WaitForSeconds(0.15f);
     }
 }

@@ -14,13 +14,9 @@ public class DamageText : MonoBehaviour
         //  Debug.Log("Text Component: " + textComponent);
     }
 
-
-
-
     public IEnumerator ShowAndDestroy()
     {
         yield return new WaitForSeconds(displayTime);
-
     }
 
     // Set the damage number on the TMP_Text component

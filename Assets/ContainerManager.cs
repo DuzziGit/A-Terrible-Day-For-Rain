@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class ContainerManager : MonoBehaviour
 {
-
     public static ContainerManager Instance;
     public Transform enemiesContainer;
     public Transform DamageNumContainer;
     public Transform ProjectileContainer;
     public Transform ImpactContainer;
-
-
 
     private void Awake()
     {
@@ -30,6 +27,7 @@ public class ContainerManager : MonoBehaviour
         InitializeEnemiesContainer();
         InitializeImpactContainer();
     }
+
     private void InitializeEnemiesContainer()
     {
         // Check if the container already exists (useful in case of scene reloads)
@@ -43,10 +41,14 @@ public class ContainerManager : MonoBehaviour
             // Create a new GameObject to act as the container for all enemies
             GameObject container = new GameObject("EnemiesContainer");
             enemiesContainer = container.transform;
-            enemiesContainer.position = new Vector3(enemiesContainer.position.x, enemiesContainer.position.y, -5);
-
+            enemiesContainer.position = new Vector3(
+                enemiesContainer.position.x,
+                enemiesContainer.position.y,
+                -5
+            );
         }
     }
+
     private void InitializeTextContainersContainer()
     {
         GameObject textContainersContainer = GameObject.Find("TextContainers");
@@ -57,6 +59,7 @@ public class ContainerManager : MonoBehaviour
         }
         DamageNumContainer = textContainersContainer.transform;
     }
+
     private void InitializeProjectileContainer()
     {
         // Look for an existing ProjectileContainer GameObject in the scene

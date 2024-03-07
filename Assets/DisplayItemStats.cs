@@ -37,5 +37,4 @@ public class DisplayItemStats : MonoBehaviour
         CriticalRateText.text = CriticalRate.ToString();
         TitleText.text = Title;
     }
-
 }

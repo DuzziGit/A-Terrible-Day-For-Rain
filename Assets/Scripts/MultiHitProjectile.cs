@@ -1,11 +1,5 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
-public class MultiHitProjectile : Projectile
-{
-
-
-
-
-}
+public class MultiHitProjectile : Projectile { }

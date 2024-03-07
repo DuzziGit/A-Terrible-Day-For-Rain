@@ -51,7 +51,7 @@ public class Portal : MonoBehaviour
             rogue.transform.position = teleportPosition;
         }
 
-        // Then, load the new scene. Once the new scene is loaded, 
+        // Then, load the new scene. Once the new scene is loaded,
         // the OnSceneLoaded event will automatically trigger the fade-in.
         Debug.Log("Attempting to load scene.");
         SceneManager.LoadScene(sceneIndex);

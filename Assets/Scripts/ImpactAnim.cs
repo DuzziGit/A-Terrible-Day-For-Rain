@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class ImpactAnim : MonoBehaviour
 {
@@ -18,7 +18,9 @@ public class ImpactAnim : MonoBehaviour
                 return;
             }
 
-            Vector2 impactPoint = enemySprite.bounds.ClosestPoint(projectileSprite.transform.position);
+            Vector2 impactPoint = enemySprite.bounds.ClosestPoint(
+                projectileSprite.transform.position
+            );
             Quaternion impactRotation = Quaternion.identity;
 
             // Get a hit effect from the pool instead of instantiating a new one

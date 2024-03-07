@@ -51,7 +51,10 @@ public class RopeMovement : MonoBehaviour
             {
                 playerRb.gravityScale = 0f;
                 playerRb.velocity = new Vector2(0f, climbInput * climbSpeed);
-                playerRb.position = new Vector2(currentRope.transform.position.x, playerRb.position.y);
+                playerRb.position = new Vector2(
+                    currentRope.transform.position.x,
+                    playerRb.position.y
+                );
             }
             else
             {
@@ -67,6 +70,7 @@ public class RopeMovement : MonoBehaviour
             }
         }
     }
+
     private void Jump(float launchDirection)
     {
         playerRb.velocity = new Vector2(playerRb.velocity.x, exitBoostForce);
@@ -75,6 +79,7 @@ public class RopeMovement : MonoBehaviour
         isOnLadder = false;
         currentRope = null;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Rope"))
@@ -83,7 +88,10 @@ public class RopeMovement : MonoBehaviour
             {
                 isOnLadder = true;
                 currentRope = collision.gameObject;
-                playerRb.position = new Vector2(currentRope.transform.position.x, playerRb.position.y);
+                playerRb.position = new Vector2(
+                    currentRope.transform.position.x,
+                    playerRb.position.y
+                );
                 if (jumpRequested)
                 {
                     jumpRequested = false;

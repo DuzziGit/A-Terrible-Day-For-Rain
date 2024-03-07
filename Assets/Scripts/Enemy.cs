@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using Unity.Mathematics;
+using UnityEngine;
+
 public class Enemy : MonoBehaviour
 {
     [HideInInspector]
@@ -33,17 +34,14 @@ public class Enemy : MonoBehaviour
     protected float flipCooldown = 0.2f;
     protected bool isDying = false;
 
-    private void Start()
-    {
+    private void Start() { }
 
-    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<CapsuleCollider2D>();
         enemySprite = GetComponent<SpriteRenderer>();
         gameObject.layer = LayerMask.NameToLayer("Enemy");
-
     }
 
     private void Update()
@@ -68,42 +66,58 @@ public class Enemy : MonoBehaviour
         if (health <= 0 && !isDying)
         {
             Die();
-
         }
     }
 
     public void HoverPlayerX()
     {
         //    _ = Physics2D.Raycast(transform.position, Vector2.down, distance, LayerMask.GetMask("World"));
-        _ = Physics2D.Raycast(transform.position, Vector2.right, distance, LayerMask.GetMask("World"));
+        _ = Physics2D.Raycast(
+            transform.position,
+            Vector2.right,
+            distance,
+            LayerMask.GetMask("World")
+        );
         Vector2 castDirection = movingRight ? Vector2.right : Vector2.left;
-        RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, castDirection, distance, LayerMask.GetMask("EnemyOnlyWall"));
-
+        RaycastHit2D enemyWall = Physics2D.Raycast(
+            wallDetection.position,
+            castDirection,
+            distance,
+            LayerMask.GetMask("EnemyOnlyWall")
+        );
 
         if (transform.position.x - GameManager.Instance.Player.transform.position.x < 0.2f)
         {
             rb.velocity = new Vector3(0, 0, 0);
         }
-        else if (transform.position.x > GameManager.Instance.Player.transform.position.x && enemyWall.collider == false)
+        else if (
+            transform.position.x > GameManager.Instance.Player.transform.position.x
+            && enemyWall.collider == false
+        )
         {
             rb.velocity = new Vector3(-speed, rb.velocity.y, 0);
             enemySprite.flipX = true;
             movingRight = false;
         }
-        else if (transform.position.x < GameManager.Instance.Player.transform.position.x && enemyWall.collider == false)
+        else if (
+            transform.position.x < GameManager.Instance.Player.transform.position.x
+            && enemyWall.collider == false
+        )
         {
             rb.velocity = new Vector3(speed, rb.velocity.y, 0);
             enemySprite.flipX = false;
             movingRight = true;
         }
-
     }
 
     private void FixedUpdate()
     {
         if (health > 0)
         {
-            float distanceToPlayer = Vector2.Distance(transform.position, GameManager.Instance.Player.transform.position);
+            float distanceToPlayer = Vector2.Distance(
+                transform.position,
+                GameManager.Instance.Player.transform.position
+            );
 
             if (distanceToPlayer < agroRange)
             {
@@ -138,31 +152,39 @@ public class Enemy : MonoBehaviour
 
     private void Patrol()
     {
-        if (!canFlip) return;
+        if (!canFlip)
+            return;
 
         Vector2 direction = movingRight ? Vector2.right : Vector2.left;
-        RaycastHit2D wallHit = Physics2D.Raycast(transform.localPosition, direction, 2, LayerMask.GetMask("EnemyOnlyWall", "Platform", "World"));
+        RaycastHit2D wallHit = Physics2D.Raycast(
+            transform.localPosition,
+            direction,
+            2,
+            LayerMask.GetMask("EnemyOnlyWall", "Platform", "World")
+        );
         if (wallHit.collider != null)
         {
             FlipDirection();
         }
     }
 
-
     private void FlipDirection()
     {
-        if (!canFlip) return;
+        if (!canFlip)
+            return;
         movingRight = !movingRight;
         rb.velocity = new Vector3(movingRight ? speed : -speed, rb.velocity.y, 0);
         enemySprite.flipX = !movingRight;
         StartCoroutine(FlipCooldownRoutine());
     }
+
     private IEnumerator FlipCooldownRoutine()
     {
         canFlip = false;
         yield return new WaitForSeconds(flipCooldown);
         canFlip = true;
     }
+
     private void OnCollisionEnter2D(Collision2D collision) // Corrected argument type
     {
         if (collision.collider.CompareTag("Player"))
@@ -196,8 +218,6 @@ public class Enemy : MonoBehaviour
         {
             GameManager.Instance.playerMovement.GainExperience(expValue);
         }
-
-
     }
 
     public void DestroyEnemy()

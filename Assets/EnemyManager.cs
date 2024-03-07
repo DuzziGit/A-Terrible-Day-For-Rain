@@ -7,8 +7,12 @@ public class EnemyManager : MonoBehaviour
     [Header("Spawn Settings")]
     public bool canSpawn = true;
     public int totalMaxEnemies = 30;
-    [SerializeField] private float spawnTimer = 8f; // Timer for spawning enemies every 8 seconds
-    [SerializeField] private float timeSinceLastSpawn = 0f; // Time since last spawn
+
+    [SerializeField]
+    private float spawnTimer = 8f; // Timer for spawning enemies every 8 seconds
+
+    [SerializeField]
+    private float timeSinceLastSpawn = 0f; // Time since last spawn
     private List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
     public static EnemyManager Instance;
 
@@ -16,6 +20,7 @@ public class EnemyManager : MonoBehaviour
     {
         EnemySpawner.currentEnemiesSpawned += SpawnWave;
     }
+
     private void Awake()
     {
         if (Instance == null)
@@ -29,7 +34,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         timeSinceLastSpawn += Time.deltaTime;
@@ -41,10 +45,6 @@ public class EnemyManager : MonoBehaviour
             timeSinceLastSpawn = 0f; // Reset the timer
         }
     }
-
-
-
-
 
     private void SpawnEnemies()
     {
@@ -86,7 +86,6 @@ public class EnemyManager : MonoBehaviour
             foreach (EnemySpawner spawner in enemySpawners)
             {
                 spawner.SetMaxEnemies(maxPerSpawner);
-
             }
         }
     }
@@ -98,7 +97,6 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator SpawnTimer()
     {
-
         yield return new WaitForSeconds(8f);
         canSpawn = true;
     }
@@ -114,6 +112,7 @@ public class EnemyManager : MonoBehaviour
         }
         return true; // All spawners have 0 enemies
     }
+
     private void OnDisable()
     {
         EnemySpawner.currentEnemiesSpawned += SpawnWave;

@@ -1,22 +1,43 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private int HitCap = 3;
-    [SerializeField] private bool DestroyAfterHitCap = false;
+    [SerializeField]
+    private int HitCap = 3;
+
+    [SerializeField]
+    private bool DestroyAfterHitCap = false;
     private int hitCount;
     private Dictionary<Collider2D, int> hitEnemies = new Dictionary<Collider2D, int>();
-    [SerializeField] protected float speed = 20;
-    [SerializeField] protected float lifeTime = 0.6f;
-    [SerializeField] protected float detectionRange = 3;
-    [SerializeField] protected float maxDistance = 13;
-    [SerializeField] private bool AutolockOn = false;
-    [SerializeField] private bool ShouldMove = false;
-    [SerializeField] private bool GenerateAttackId = true;
-    [SerializeField] private int totalHits;
-    [SerializeField] protected float targetingToleranceAngle = 5f;
+
+    [SerializeField]
+    protected float speed = 20;
+
+    [SerializeField]
+    protected float lifeTime = 0.6f;
+
+    [SerializeField]
+    protected float detectionRange = 3;
+
+    [SerializeField]
+    protected float maxDistance = 13;
+
+    [SerializeField]
+    private bool AutolockOn = false;
+
+    [SerializeField]
+    private bool ShouldMove = false;
+
+    [SerializeField]
+    private bool GenerateAttackId = true;
+
+    [SerializeField]
+    private int totalHits;
+
+    [SerializeField]
+    protected float targetingToleranceAngle = 5f;
     protected LayerMask enemyLayer = 1 << 6;
     protected bool hasDamaged = false;
     protected Vector3 initialPosition;
@@ -24,7 +45,9 @@ public class Projectile : MonoBehaviour
     protected Transform closestEnemy;
     protected Rigidbody2D rb;
     public string UniqueAttackId;
-    [SerializeField] private float knockbackStr;
+
+    [SerializeField]
+    private float knockbackStr;
 
     protected float KnockbackStr
     {
@@ -35,18 +58,23 @@ public class Projectile : MonoBehaviour
     {
         get { return totalHits; }
     }
-    [SerializeField] private int minDamage;
+
+    [SerializeField]
+    private int minDamage;
     protected int MinDamage
     {
         get { return minDamage; }
         set { minDamage = value; }
     }
-    [SerializeField] private int maxDamage;
+
+    [SerializeField]
+    private int maxDamage;
     protected int MaxDamage
     {
         get { return maxDamage; }
         set { maxDamage = value; }
     }
+
     protected void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,12 +91,17 @@ public class Projectile : MonoBehaviour
             UniqueAttackId = HitManager.GenerateSkillActivationGuid();
         }
     }
+
     protected void Update()
     {
         if (AutolockOn)
         {
             // Check if an enemy is within detection range
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRange, enemyLayer);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(
+                transform.position,
+                detectionRange,
+                enemyLayer
+            );
 
             if (colliders.Length > 0)
             {
@@ -77,14 +110,23 @@ public class Projectile : MonoBehaviour
 
                 foreach (Collider2D collider in colliders)
                 {
-                    float directionToEnemy = Vector2.Dot(transform.right, (collider.transform.position - transform.position).normalized);
+                    float directionToEnemy = Vector2.Dot(
+                        transform.right,
+                        (collider.transform.position - transform.position).normalized
+                    );
                     if (directionToEnemy < 0)
                     {
                         continue;
                     }
 
-                    float distance = Vector2.Distance(transform.position, collider.transform.position);
-                    float angleToEnemy = Vector2.Angle(transform.right, collider.transform.position - transform.position);
+                    float distance = Vector2.Distance(
+                        transform.position,
+                        collider.transform.position
+                    );
+                    float angleToEnemy = Vector2.Angle(
+                        transform.right,
+                        collider.transform.position - transform.position
+                    );
 
                     if (distance < closestDistance && angleToEnemy <= targetingToleranceAngle)
                     {
@@ -107,7 +149,6 @@ public class Projectile : MonoBehaviour
         {
             DestroyProjectile();
         }
-
     }
 
     private void FixedUpdate()
@@ -115,21 +156,34 @@ public class Projectile : MonoBehaviour
         if (ShouldMove)
         {
             rb.velocity = direction * speed * Time.fixedDeltaTime;
-
         }
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && !hitEnemies.ContainsKey(collision) && hitCount < HitCap)
+        if (
+            collision.CompareTag("Enemy")
+            && !hitEnemies.ContainsKey(collision)
+            && hitCount < HitCap
+        )
         {
             Vector2 hitPosition = transform.position; // Position of the projectile at the time of collision
             Transform enemyTransform = collision.transform;
 
-            HitManager.Instance.ApplyDelayedHits(collision, TotalHits, MinDamage, MaxDamage, UniqueAttackId, hitPosition, enemyTransform, KnockbackStr);
+            HitManager.Instance.ApplyDelayedHits(
+                collision,
+                TotalHits,
+                MinDamage,
+                MaxDamage,
+                UniqueAttackId,
+                hitPosition,
+                enemyTransform,
+                KnockbackStr
+            );
             hitCount++;
         }
     }
+
     protected void DestroyProjectile()
     {
         Destroy(gameObject);

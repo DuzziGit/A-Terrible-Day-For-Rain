@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class BasicAttack : MonoBehaviour
 {
-    [SerializeField] private GameObject shuriken;
+    [SerializeField]
+    private GameObject shuriken;
+
     // Start is called before the first frame update
     [SerializeField]
     private Vector3[] offsets = new Vector3[]
-           {
+    {
         new Vector3(0, 0.2f, 0), // Top shuriken
-        new Vector3(0, 0, 0),    // Middle shuriken
+        new Vector3(0, 0, 0), // Middle shuriken
         new Vector3(0, -0.2f, 0) // Bottom shuriken
-           };
-    [SerializeField] private float lifetime = 2f;
-    [SerializeField] private float throwForce = 1f;
+    };
+
+    [SerializeField]
+    private float lifetime = 2f;
+
+    [SerializeField]
+    private float throwForce = 1f;
+
     [SerializeField]
     private float[] throwAngles; // Angles for each shuriken
     private string uniqueAttackId;
@@ -29,6 +36,7 @@ public class BasicAttack : MonoBehaviour
         StartCoroutine(TripleThrow());
         Invoke("DestroyPrefab", lifetime);
     }
+
     private IEnumerator TripleThrow()
     {
         bool isFacingRight = GameManager.Instance.playerMovement.facingRight;
@@ -45,7 +53,12 @@ public class BasicAttack : MonoBehaviour
                 offsetsDirection = -offsetsDirection;
             }
 
-            GameObject shurikenInstance = Instantiate(shuriken, transform.position + offsetsDirection, transform.rotation, gameObject.transform);
+            GameObject shurikenInstance = Instantiate(
+                shuriken,
+                transform.position + offsetsDirection,
+                transform.rotation,
+                gameObject.transform
+            );
             shurikenInstance.GetComponent<Projectile>().UniqueAttackId = UniqueAttackId;
 
             // Calculate the base throw direction with the adjusted angle
@@ -55,12 +68,17 @@ public class BasicAttack : MonoBehaviour
             if (shurikenMovement != null)
             {
                 // Pass transform.position as the start position
-                shurikenMovement.SetMovement(baseThrowDirection.normalized, throwForce, transform.position);
+                shurikenMovement.SetMovement(
+                    baseThrowDirection.normalized,
+                    throwForce,
+                    transform.position
+                );
             }
             yield return new WaitForFixedUpdate();
             yield return new WaitForFixedUpdate();
         }
     }
+
     private void DestroyPrefab()
     {
         Destroy(gameObject);

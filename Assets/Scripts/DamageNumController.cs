@@ -4,7 +4,9 @@ using UnityEngine;
 public class DamageNumController : MonoBehaviour
 {
     private readonly float moveSpeed = 0.04f;
-    [SerializeField] private float fadeSpeed = 2f;
+
+    [SerializeField]
+    private float fadeSpeed = 2f;
     private readonly float startFadeHeight = 0.010f;
 
     private TMP_Text tmpComponent;
@@ -18,6 +20,7 @@ public class DamageNumController : MonoBehaviour
             originalColor = tmpComponent.color;
         }
     }
+
     private void Update()
     {
         // Move upward
@@ -25,7 +28,6 @@ public class DamageNumController : MonoBehaviour
 
         if (tmpComponent != null)
         {
-
             // Debug.Log(transform.position.y);
             // Start fading out after moving some distance
             if (transform.position.y >= startFadeHeight)
@@ -45,6 +47,7 @@ public class DamageNumController : MonoBehaviour
             }
         }
     }
+
     // Reset the color when setting new damage number
     public void SetDamageNum(int damage)
     {
@@ -52,6 +55,5 @@ public class DamageNumController : MonoBehaviour
 
         tmpComponent.text = damage.ToString();
         //   Debug.Log("The damage should be displayed as " + damage);
-
     }
 }

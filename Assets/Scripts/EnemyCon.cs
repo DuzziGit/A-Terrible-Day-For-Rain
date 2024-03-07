@@ -6,25 +6,35 @@ using UnityEngine.UIElements;
 
 public class EnemyCon : Enemy
 {
-
     public int enemyDamage;
     public TMP_Text enemyLevel;
     public GameObject TextParentPrefab;
     private HealthBar healthBar;
     private int maxHealth;
-    [SerializeField] private GameObject textContainerPrefab;
-    [SerializeField] private GameObject DamageNumText;
-    [SerializeField] private GameObject DamageNumTextCrit;
+
+    [SerializeField]
+    private GameObject textContainerPrefab;
+
+    [SerializeField]
+    private GameObject DamageNumText;
+
+    [SerializeField]
+    private GameObject DamageNumTextCrit;
     private float lastNormalizedTime;
 
-    public bool isDisplayingDamage = false;// Flag to track if damage is currently being displayed
+    public bool isDisplayingDamage = false; // Flag to track if damage is currently being displayed
     private const int baseEnemyHealth = 10000;
     private const float healthGrowthRate = 1.1f; // This can be adjusted
 
-    [SerializeField] private float baseOffsetY = 0.2f;
-    [SerializeField] private float incrementalOffsetY = 0.3f;
-    private List<(int Damage, bool IsCrit, string AttackId)> damageTaken = new List<(int Damage, bool IsCrit, string AttackId)>();
-    private Dictionary<string, GameObject> damageTextCanvases = new Dictionary<string, GameObject>();
+    [SerializeField]
+    private float baseOffsetY = 0.2f;
+
+    [SerializeField]
+    private float incrementalOffsetY = 0.3f;
+    private List<(int Damage, bool IsCrit, string AttackId)> damageTaken =
+        new List<(int Damage, bool IsCrit, string AttackId)>();
+    private Dictionary<string, GameObject> damageTextCanvases =
+        new Dictionary<string, GameObject>();
 
     private bool isInHitAnimation = false; // Flag to indicate if the hit animation is currently playing
     private float lastHitTime = -1f; // Timestamp of the last hit
@@ -48,7 +58,13 @@ public class EnemyCon : Enemy
         }
     }
 
-    public void TakeDamage(int damage, bool isCrit, string attackId, Vector2 hitDirection, float KnockbackStr)
+    public void TakeDamage(
+        int damage,
+        bool isCrit,
+        string attackId,
+        Vector2 hitDirection,
+        float KnockbackStr
+    )
     {
         Knockback(hitDirection, KnockbackStr);
         health = Mathf.Max(0, health - damage);
@@ -71,7 +87,6 @@ public class EnemyCon : Enemy
         {
             StopAllCoroutines();
         }
-
     }
 
     // ProcessDamage is called whenever damage is taken, even if a display is ongoing.
@@ -83,11 +98,20 @@ public class EnemyCon : Enemy
         if (!damageTextCanvases.ContainsKey(attackId) || damageTextCanvases[attackId] == null)
         {
             // Instantiate textContainer and textParent if not present or null
-            GameObject textContainer = Instantiate(textContainerPrefab, transform.position, Quaternion.identity, ContainerManager.Instance.DamageNumContainer);
-            textParent = Instantiate(TextParentPrefab, textContainer.transform.position + new Vector3(0, baseOffsetY, 0), Quaternion.identity, textContainer.transform);
+            GameObject textContainer = Instantiate(
+                textContainerPrefab,
+                transform.position,
+                Quaternion.identity,
+                ContainerManager.Instance.DamageNumContainer
+            );
+            textParent = Instantiate(
+                TextParentPrefab,
+                textContainer.transform.position + new Vector3(0, baseOffsetY, 0),
+                Quaternion.identity,
+                textContainer.transform
+            );
             damageTextCanvases[attackId] = textParent; // Add or update the dictionary entry
             damageNumberCounts[attackId] = 0;
-
         }
         else
         {
@@ -95,13 +119,20 @@ public class EnemyCon : Enemy
             textParent = damageTextCanvases[attackId];
         }
 
-
         var damagesForAttack = damageTaken.FindAll(d => d.AttackId == attackId);
         foreach (var damageInfo in damagesForAttack)
         {
-            float dynamicYOffset = damageNumberCounts[attackId] == 0 ? baseOffsetY : baseOffsetY + incrementalOffsetY * damageNumberCounts[attackId];
+            float dynamicYOffset =
+                damageNumberCounts[attackId] == 0
+                    ? baseOffsetY
+                    : baseOffsetY + incrementalOffsetY * damageNumberCounts[attackId];
             GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
-            GameObject textObject = Instantiate(textPrefab, textParent.transform.position + new Vector3(0, dynamicYOffset, 0), Quaternion.identity, textParent.transform);
+            GameObject textObject = Instantiate(
+                textPrefab,
+                textParent.transform.position + new Vector3(0, dynamicYOffset, 0),
+                Quaternion.identity,
+                textParent.transform
+            );
             TMP_Text textComponent = textObject.GetComponent<TMP_Text>();
             textComponent.text = damageInfo.Damage.ToString();
 
@@ -110,6 +141,7 @@ public class EnemyCon : Enemy
         }
         isDisplayingDamage = false;
     }
+
     private void Knockback(Vector2 hitDirection, float KnockbackStr)
     {
         if (Time.time - lastHitTime < hitAnimationCooldown)
@@ -129,7 +161,6 @@ public class EnemyCon : Enemy
         rb.AddForce(knockbackDirection * KnockbackStr, ForceMode2D.Impulse);
         StartCoroutine(ResetEnemyMovementAfterKnockback(originallyMovingRight));
         initialPosition = transform.position + new Vector3(0, 0.25f, 0);
-
     }
 
     private IEnumerator ResetEnemyMovementAfterKnockback(bool originallyMovingRight)
@@ -173,7 +204,6 @@ public class EnemyCon : Enemy
         // Play the Hit animation at the exact same frame as the Move animation
         animator.Play("Hit", 0, lastNormalizedTime);
 
-
         // Schedule to return to the Move animation at the same frame in the next frame
         StartCoroutine(ResetToMoveAnimation());
     }
@@ -199,6 +229,4 @@ public class EnemyCon : Enemy
             animator.Play("Move", 0, lastNormalizedTime);
         }
     }
-
 }
-

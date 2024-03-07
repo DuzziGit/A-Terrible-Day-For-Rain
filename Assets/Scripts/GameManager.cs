@@ -1,11 +1,11 @@
-using Cinemachine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
 
     public bool playerCanMove = true;
 
-
     private void Awake()
     {
         if (Instance == null)
@@ -27,7 +26,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             SceneManager.sceneLoaded += OnSceneLoaded;
-
         }
         else if (Instance != this)
         {
@@ -37,27 +35,28 @@ public class GameManager : MonoBehaviour
         FindPlayer();
     }
 
-
     public GameObject FindPlayer()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         return Player;
     }
 
-
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        blackSquare.color = new Color(blackSquare.color.r, blackSquare.color.g, blackSquare.color.b, 1f);
+        blackSquare.color = new Color(
+            blackSquare.color.r,
+            blackSquare.color.g,
+            blackSquare.color.b,
+            1f
+        );
         _ = StartCoroutine(DelayedFade());
-
     }
+
     private IEnumerator DelayedFade()
     {
         yield return new WaitForSeconds(0.9f); // Wait to make it a total of 1 second with the HandleSceneSetup delay
         _ = StartCoroutine(FadeBlackInSquare());
     }
-
 
     public IEnumerator FadeBlackInSquare(float fadeSpeed = 0.5f)
     {

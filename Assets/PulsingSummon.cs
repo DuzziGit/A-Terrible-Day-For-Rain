@@ -1,18 +1,35 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PulsingSummon : MonoBehaviour
 {
-    [SerializeField] private float pulseTimer = 2f;
-    [SerializeField] private float detectionRadius = 5f;
-    [SerializeField] private float offsetY;
-    [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private int hitCap = 3;
-    [SerializeField] private bool destroyAfterHitCap = false;
-    [SerializeField] private int totalHits;
-    [SerializeField] private int minDamage;
-    [SerializeField] private float lifetime;
+    [SerializeField]
+    private float pulseTimer = 2f;
+
+    [SerializeField]
+    private float detectionRadius = 5f;
+
+    [SerializeField]
+    private float offsetY;
+
+    [SerializeField]
+    private LayerMask enemyLayer;
+
+    [SerializeField]
+    private int hitCap = 3;
+
+    [SerializeField]
+    private bool destroyAfterHitCap = false;
+
+    [SerializeField]
+    private int totalHits;
+
+    [SerializeField]
+    private int minDamage;
+
+    [SerializeField]
+    private float lifetime;
     public string UniqueAttackID;
     protected int TotalHits
     {
@@ -23,13 +40,17 @@ public class PulsingSummon : MonoBehaviour
         get { return minDamage; }
         set { minDamage = value; }
     }
-    [SerializeField] private int maxDamage;
+
+    [SerializeField]
+    private int maxDamage;
     protected int MaxDamage
     {
         get { return maxDamage; }
         set { maxDamage = value; }
     }
-    [SerializeField] private float knockbackStr;
+
+    [SerializeField]
+    private float knockbackStr;
 
     protected float KnockbackStr
     {
@@ -48,20 +69,22 @@ public class PulsingSummon : MonoBehaviour
     {
         StartCoroutine(PulseDamage());
         Invoke("Destroy", lifetime);
-
     }
 
     private void Update()
     {
         transform.localPosition = Vector3.zero;
-
     }
 
     public IEnumerator PulseDamage()
     {
         while (hitCount < hitCap || !destroyAfterHitCap)
         {
-            Collider2D[] results = Physics2D.OverlapCircleAll(transform.position + new Vector3(0, offsetY, 0), detectionRadius, enemyLayer);
+            Collider2D[] results = Physics2D.OverlapCircleAll(
+                transform.position + new Vector3(0, offsetY, 0),
+                detectionRadius,
+                enemyLayer
+            );
             foreach (var result in results)
             {
                 if (!hitEnemies.ContainsKey(result))
@@ -69,7 +92,16 @@ public class PulsingSummon : MonoBehaviour
                     Vector2 hitPosition = transform.position; // Position of the projectile at the time of collision
                     Transform enemyTransform = result.transform;
 
-                    HitManager.Instance.ApplyDelayedHits(result, TotalHits, MinDamage, MaxDamage, UniqueAttackID, hitPosition, enemyTransform, knockbackStr);
+                    HitManager.Instance.ApplyDelayedHits(
+                        result,
+                        TotalHits,
+                        MinDamage,
+                        MaxDamage,
+                        UniqueAttackID,
+                        hitPosition,
+                        enemyTransform,
+                        knockbackStr
+                    );
                     hitCount++;
                     hitEnemies[result] = 1; // Track this enemy as hit
 
@@ -84,10 +116,12 @@ public class PulsingSummon : MonoBehaviour
             hitEnemies.Clear();
         }
     }
+
     void Destroy()
     {
         Destroy(gameObject);
     }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+
 public class Slime : Enemy
 {
     public AudioSource audiosource;
@@ -8,9 +9,7 @@ public class Slime : Enemy
 
     public int EnemyDamage;
 
-
     public TextMeshPro damageDisplay;
-
 
     public TextMesh enemyLevel;
 
@@ -22,7 +21,6 @@ public class Slime : Enemy
         enemyLevel.text = "lvl . " + level;
         EnemyDamage = level * 2;
     }
-
 
     public void TakeDamage(int damage)
     {
@@ -38,7 +36,5 @@ public class Slime : Enemy
         damageDisplay.text = "" + damage;
         yield return new WaitForSeconds(0.5f);
         damageDisplay.text = "";
-
-
     }
 }

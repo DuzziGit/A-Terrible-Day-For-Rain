@@ -1,16 +1,23 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class EnemySpawner : MonoBehaviour
 {
     public Transform[] spawnPoints;
     public GameObject[] enemyPrefabs;
     private int maxEnemies;
     public int currentEnemies; // Not static, so it's specific to this instance
-    [SerializeField] private float padding = 1.0f; // Adjustable padding distance
+
+    [SerializeField]
+    private float padding = 1.0f; // Adjustable padding distance
     private int lastSpawnIndex = -1; // Track the last spawn point used
-    [SerializeField] private int minLevel; // Minimum enemy level for this map
-    [SerializeField] private int maxLevel; // Maximum enemy level for this map
+
+    [SerializeField]
+    private int minLevel; // Minimum enemy level for this map
+
+    [SerializeField]
+    private int maxLevel; // Maximum enemy level for this map
     public delegate void CurrentEnemiesSpawned();
     public static CurrentEnemiesSpawned currentEnemiesSpawned;
 
@@ -46,10 +53,17 @@ public class EnemySpawner : MonoBehaviour
         {
             lastSpawnIndex = (lastSpawnIndex + 1) % spawnPoints.Length;
             Transform spawnPoint = spawnPoints[lastSpawnIndex];
-            Vector3 paddedPosition = spawnPoint.position + new Vector3(Random.Range(-padding, padding), Random.Range(-padding, padding), 0);
+            Vector3 paddedPosition =
+                spawnPoint.position
+                + new Vector3(Random.Range(-padding, padding), Random.Range(-padding, padding), 0);
 
             // Spawn enemy
-            GameObject enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], paddedPosition, Quaternion.identity, ContainerManager.Instance.enemiesContainer);
+            GameObject enemyInstance = Instantiate(
+                enemyPrefabs[Random.Range(0, enemyPrefabs.Length)],
+                paddedPosition,
+                Quaternion.identity,
+                ContainerManager.Instance.enemiesContainer
+            );
             Enemy enemyComponent = enemyInstance.GetComponent<Enemy>();
 
             if (enemyComponent != null)
