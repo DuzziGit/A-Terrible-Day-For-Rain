@@ -118,7 +118,7 @@ public class RogueSkillController : PlayerMovement
         //  skillUltText.text = ultSkillLevel.ToString();
         //  HealthDisplayText.text = $"{currentHealth} / {maxHealth}";
         //  coinCount.text = coins.ToString();
-        if (GameController.instance.playerCanMove)
+        if (GameManager.instance.playerCanMove)
         {
             //Get player inputs
             if (!isExecutingSkill)
@@ -267,7 +267,7 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkill1 && combatActions.BasicSkill.action.IsPressed())
         {
-            GameController.instance.playerCanMove = false; // Lock movement if starting skill stationary
+            GameManager.instance.playerCanMove = false; // Lock movement if starting skill stationary
             isExecutingSkill = true;
             SwitchMovePositionBasedOnMouse(true);
 
@@ -300,7 +300,7 @@ public class RogueSkillController : PlayerMovement
         yield return new WaitForSeconds(skillDuration); // Wait for skill to complete
                                                         //   moveDirection = TempMoveDirection;
         isExecutingSkill = false;
-        GameController.instance.playerCanMove = true;
+        GameManager.instance.playerCanMove = true;
         // If character was moving before skill, start deceleration
 
     }
@@ -312,7 +312,7 @@ public class RogueSkillController : PlayerMovement
     {
         if (Time.time > nextFireTimeSkill2 && combatActions.AoeSkill.action.IsPressed())
         {
-            GameController.instance.playerCanMove = false; // Lock movement if starting skill stationary
+            GameManager.instance.playerCanMove = false; // Lock movement if starting skill stationary
             isExecutingSkill = true;
             SwitchMovePositionBasedOnMouse(true);
             animator.SetTrigger("isAttacking");
@@ -327,7 +327,7 @@ public class RogueSkillController : PlayerMovement
     {
         yield return new WaitForSeconds(0.20f);
         _ = Instantiate(projectile2, attackPos.position, attackPos.rotation);
-        GameController.instance.playerCanMove = true; // Lock movement if starting skill stationary
+        GameManager.instance.playerCanMove = true; // Lock movement if starting skill stationary
         isExecutingSkill = false;
     }
 
@@ -346,12 +346,12 @@ public class RogueSkillController : PlayerMovement
     private IEnumerator ThirdSkillEnum()
     {
         rb.velocity = Vector2.zero;
-        GameController.instance.playerCanMove = false;
+        GameManager.instance.playerCanMove = false;
         yield return new WaitForSeconds(1f);
         GameObject SummonSkillParent = new("SummonSkill");
         SummonSkillParent.transform.position = gameObject.transform.position + new Vector3(0, yOffsetSummon, 0);
         _ = Instantiate(SummonShuriken, SummonSkillParent.transform.position, SummonSkillParent.transform.rotation, SummonSkillParent.transform);
-        GameController.instance.playerCanMove = true;
+        GameManager.instance.playerCanMove = true;
 
     }
 

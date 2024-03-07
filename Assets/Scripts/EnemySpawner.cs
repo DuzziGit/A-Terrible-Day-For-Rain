@@ -16,18 +16,18 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator Start()
     {
-        while (GameController.instance == null)
+        while (GameManager.instance == null)
         {
             yield return null; // Wait until GameController.instance is not null
         }
-        GameController.instance.RegisterSpawner(this);
+        GameManager.instance.RegisterSpawner(this);
     }
 
     private void OnDestroy()
     {
-        if (GameController.instance != null) // Check if GameController instance exists
+        if (GameManager.instance != null) // Check if GameController instance exists
         {
-            GameController.instance.UnregisterSpawner(this);
+            GameManager.instance.UnregisterSpawner(this);
         }
     }
 
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        int playerLevel = GameController.instance.playerMovement.level;
+        int playerLevel = GameManager.instance.playerMovement.level;
         // Ensure enemy level scales with player level but stays within minLevel and maxLevel
         int enemyLevel = Mathf.Clamp(playerLevel + Random.Range(-2, 3), minLevel, maxLevel);
 

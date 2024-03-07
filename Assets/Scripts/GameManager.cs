@@ -7,14 +7,14 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
-public class GameController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public Image blackSquare;
 
     public GameObject gameControlsUi;
     public CinemachineVirtualCamera cinemachineCam;
 
-    public static GameController instance;
+    public static GameManager instance;
     public int totalMaxEnemies = 30;
     private List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
     public PlayerMovement playerMovement;
