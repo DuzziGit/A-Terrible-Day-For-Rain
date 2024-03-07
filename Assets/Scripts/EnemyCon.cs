@@ -83,7 +83,7 @@ public class EnemyCon : Enemy
         if (!damageTextCanvases.ContainsKey(attackId) || damageTextCanvases[attackId] == null)
         {
             // Instantiate textContainer and textParent if not present or null
-            GameObject textContainer = Instantiate(textContainerPrefab, transform.position, Quaternion.identity, GameController.instance.Container);
+            GameObject textContainer = Instantiate(textContainerPrefab, transform.position, Quaternion.identity, ContainerManager.Instance.DamageNumContainer);
             textParent = Instantiate(TextParentPrefab, textContainer.transform.position + new Vector3(0, baseOffsetY, 0), Quaternion.identity, textContainer.transform);
             damageTextCanvases[attackId] = textParent; // Add or update the dictionary entry
             damageNumberCounts[attackId] = 0;

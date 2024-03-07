@@ -31,7 +31,7 @@ public class BasicAttack : MonoBehaviour
     }
     private IEnumerator TripleThrow()
     {
-        bool isFacingRight = GameManager.instance.playerMovement.facingRight;
+        bool isFacingRight = GameManager.Instance.playerMovement.facingRight;
         for (int i = 0; i < offsets.Length; i++)
         {
             var offsetsDirection = offsets[i];

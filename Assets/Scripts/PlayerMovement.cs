@@ -179,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         isGrounded = IsGrounded();
-        if (GameManager.instance.playerCanMove)
+        if (GameManager.Instance.playerCanMove)
         {
             animate();
             setPlayerDirection();
@@ -194,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        if (GameManager.instance.playerCanMove && !isExecutingSkill)
+        if (GameManager.Instance.playerCanMove && !isExecutingSkill)
         {
             getPlayerInput();
             moveCharacter();
@@ -228,7 +228,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected void getPlayerInput()
     {
-        if (!GameManager.instance.playerCanMove && !isExecutingSkill)
+        if (!GameManager.Instance.playerCanMove && !isExecutingSkill)
         {
             moveDirection = 0; // Reset movement direction to ensure no movement occurs
             rb.velocity = Vector2.zero;

@@ -16,18 +16,18 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator Start()
     {
-        while (GameManager.instance == null)
+        while (GameManager.Instance == null)
         {
             yield return null; // Wait until GameController.instance is not null
         }
-        GameManager.instance.RegisterSpawner(this);
+        GameManager.Instance.RegisterSpawner(this);
     }
 
     private void OnDestroy()
     {
-        if (GameManager.instance != null) // Check if GameController instance exists
+        if (GameManager.Instance != null) // Check if GameController instance exists
         {
-            GameManager.instance.UnregisterSpawner(this);
+            GameManager.Instance.UnregisterSpawner(this);
         }
     }
 
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        int playerLevel = GameManager.instance.playerMovement.level;
+        int playerLevel = GameManager.Instance.playerMovement.level;
         // Ensure enemy level scales with player level but stays within minLevel and maxLevel
         int enemyLevel = Mathf.Clamp(playerLevel + Random.Range(-2, 3), minLevel, maxLevel);
 
@@ -49,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
             Vector3 paddedPosition = spawnPoint.position + new Vector3(Random.Range(-padding, padding), Random.Range(-padding, padding), 0);
 
             // Spawn enemy
-            GameObject enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], paddedPosition, Quaternion.identity, GameController.instance.enemiesContainer);
+            GameObject enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], paddedPosition, Quaternion.identity, ContainerManager.Instance.enemiesContainer);
             Enemy enemyComponent = enemyInstance.GetComponent<Enemy>();
 
             if (enemyComponent != null)

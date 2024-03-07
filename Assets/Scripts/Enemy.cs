@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
     {
         if (health > 0)
         {
-            float distanceToPlayer = Vector2.Distance(transform.position, GameManager.instance.Player.transform.position);
+            float distanceToPlayer = Vector2.Distance(transform.position, GameManager.Instance.Player.transform.position);
 
             if (distanceToPlayer < agroRange)
             {
@@ -191,9 +191,9 @@ public class Enemy : MonoBehaviour
         GetComponent<LootBag>().InstantiateItem(transform.position + new Vector3(0, 1, 0));
         GetComponentInChildren<Canvas>().enabled = false;
         MySpawner.OnEnemyDestroyed();
-        if (GameManager.instance.playerMovement != null)
+        if (GameManager.Instance.playerMovement != null)
         {
-            GameManager.instance.playerMovement.GainExperience(expValue);
+            GameManager.Instance.playerMovement.GainExperience(expValue);
         }
 
 
