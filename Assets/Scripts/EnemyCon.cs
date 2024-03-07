@@ -110,30 +110,6 @@ public class EnemyCon : Enemy
         }
         isDisplayingDamage = false;
     }
-    private void DamageDisplay(GameObject canvas, (int Damage, bool IsCrit, string AttackId) damageInfo, Vector3 initialPosition)
-    {
-        // Check if the attack ID already has a count, if not initialize to 0
-        if (!damageNumberCounts.ContainsKey(damageInfo.AttackId))
-        {
-            damageNumberCounts[damageInfo.AttackId] = 0;
-        }
-
-        // Calculate dynamicYOffset based on the count of damage numbers already displayed
-        float dynamicYOffset = baseOffsetY * damageNumberCounts[damageInfo.AttackId];
-        GameObject textPrefab = damageInfo.IsCrit ? DamageNumTextCrit : DamageNumText;
-        GameObject text = Instantiate(
-            textPrefab,
-            new Vector3(initialPosition.x, initialPosition.y + dynamicYOffset, initialPosition.z),
-            Quaternion.identity,
-            canvas.transform
-        );
-
-        DamageNumController controller = text.GetComponent<DamageNumController>();
-        controller.SetDamageNum(damageInfo.Damage);
-
-        // Increment the count for this attack ID
-        damageNumberCounts[damageInfo.AttackId]++;
-    }
     private void Knockback(Vector2 hitDirection, float KnockbackStr)
     {
         if (Time.time - lastHitTime < hitAnimationCooldown)

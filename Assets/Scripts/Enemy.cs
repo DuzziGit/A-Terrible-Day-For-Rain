@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     public Transform wallDetection;
 
     public int expValue;
-    public ExperienceController expObject;
 
     public bool isAggroed = false;
     public bool isPatroling = true;
@@ -103,7 +102,7 @@ public class Enemy : MonoBehaviour
     {
         if (health > 0)
         {
-            float distanceToPlayer = Vector2.Distance(transform.position, GameController.instance.Player.transform.position);
+            float distanceToPlayer = Vector2.Distance(transform.position, GameManager.instance.Player.transform.position);
 
             if (distanceToPlayer < agroRange)
             {
@@ -192,9 +191,9 @@ public class Enemy : MonoBehaviour
         GetComponent<LootBag>().InstantiateItem(transform.position + new Vector3(0, 1, 0));
         GetComponentInChildren<Canvas>().enabled = false;
         MySpawner.OnEnemyDestroyed();
-        if (GameController.instance.playerMovement != null)
+        if (GameManager.instance.playerMovement != null)
         {
-            GameController.instance.playerMovement.GainExperience(expValue);
+            GameManager.instance.playerMovement.GainExperience(expValue);
         }
 
 
