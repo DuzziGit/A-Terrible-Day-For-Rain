@@ -16,18 +16,18 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator Start()
     {
-        while (GameManager.Instance == null)
+        while (EnemyManager.Instance == null)
         {
-            yield return null; // Wait until GameController.instance is not null
+            yield return null;
         }
-        GameManager.Instance.RegisterSpawner(this);
+        EnemyManager.Instance.RegisterSpawner(this);
     }
 
     private void OnDestroy()
     {
-        if (GameManager.Instance != null) // Check if GameController instance exists
+        if (EnemyManager.Instance != null)
         {
-            GameManager.Instance.UnregisterSpawner(this);
+            EnemyManager.Instance.UnregisterSpawner(this);
         }
     }
 
@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
         if (currentEnemies == 0 && currentEnemiesSpawned != null)
         {
             currentEnemiesSpawned.Invoke();
-            Debug.Log("enemiesCleared");
+            //            Debug.Log("enemiesCleared");
         }
     }
 }

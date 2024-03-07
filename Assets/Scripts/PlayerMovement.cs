@@ -1,9 +1,8 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public struct PlayerMovementActions
@@ -11,7 +10,7 @@ public struct PlayerMovementActions
     public InputActionReference Move;
     public InputActionReference Jump;
     public InputActionReference Interact; // You can easily add new actions here.
-                                          // Add more movement-related actions as needed.
+    // Add more movement-related actions as needed.
 }
 
 [System.Serializable]
@@ -25,67 +24,89 @@ public struct PlayerCombatActions
     public InputActionReference MousePosition;
     // Add more combat-related actions as needed.
 }
+
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Stats")]
     [HideInInspector]
     public int level;
+
     [HideInInspector]
     public int expValue;
+
     [HideInInspector]
     public int currentExp;
+
     [HideInInspector]
     public int maxExp;
+
     [HideInInspector]
     public int skillOneLevel = 1;
+
     [HideInInspector]
     public int skillTwoLevel = 1;
+
     [HideInInspector]
     public int skillThreeLevel = 1;
+
     [HideInInspector]
     public int ultSkillLevel = 1;
+
     [Header("Movement Settings")]
     public float moveSpeed;
     public float jumpForce;
+
     [HideInInspector]
     public float moveDirection;
     private int jumpDirection = 0;
 
-
     [Header("Player State")]
     [HideInInspector]
     public bool playerIsNearPortal = false;
+
     [HideInInspector]
     public bool isAirborne = false;
     private float interactStartTime = 0f; // Start time of the interact button press
     private bool isInteractButtonHeld = false; // Whether the interact button is currently being held
+
     [HideInInspector]
     public bool isWalking = false;
+
     [HideInInspector]
     public bool playerHasDied = false;
+
     [HideInInspector]
     public int DamageRecieved = 0;
+
     [HideInInspector]
     public bool CanMove = false;
+
     [HideInInspector]
     public bool startup = true;
 
     [Header("References")]
     protected Rigidbody2D rb;
-    [SerializeField] protected CapsuleCollider2D cc;
-    [SerializeField] protected TMP_Text playerLevelTextText;
-    [SerializeField] protected TMP_Text levelUI;
+
+    [SerializeField]
+    protected CapsuleCollider2D cc;
+
+    [SerializeField]
+    protected TMP_Text playerLevelTextText;
+
+    [SerializeField]
+    protected TMP_Text levelUI;
     public Animator leveledUpAnimator;
     public HealthBar healthBar;
     public ExperienceBar experienceBar;
-    public GameObject optionsMenuCanvas;
 
     [Header("Player State")]
     [HideInInspector]
     public bool facingRight = true;
     protected bool isJumping = false;
     public bool isGrounded = false;
-    [SerializeField] protected bool shouldLevelUp = false;
+
+    [SerializeField]
+    protected bool shouldLevelUp = false;
     protected bool shouldJump = false; // Flag to indicate jump input
 
     public float gizmoRayLength = 0.1f;
@@ -93,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Portal Settings")]
     [HideInInspector]
     public int expToBeGained;
+
     [HideInInspector]
     public string destination = "";
     private Vector3 portalDestinationPosition;
@@ -104,24 +126,34 @@ public class PlayerMovement : MonoBehaviour
     private const int jumpSpeed = 5;
 
     public AudioSource audioSource;
-    [SerializeField] protected Animator animator;
+
+    [SerializeField]
+    protected Animator animator;
     private bool isFallingThrough = false;
     protected bool isExecutingSkill = false;
-    [SerializeField] private Transform feetPos;
+
+    [SerializeField]
+    private Transform feetPos;
     public LayerMask platformLayerMask;
     private bool isTouchingPlatform = false;
 
     protected float VertDirection = 0;
 
     private bool isSitting;
+
     [Header("Input Actions")]
-    [SerializeField] protected PlayerMovementActions movementActions;
-    [SerializeField] protected PlayerCombatActions combatActions;
+    [SerializeField]
+    protected PlayerMovementActions movementActions;
+
+    [SerializeField]
+    protected PlayerCombatActions combatActions;
+
     protected virtual void OnEnable()
     {
         movementActions.Jump.action.performed += OnJumpPerformed;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
     protected virtual void OnDisable()
     {
         movementActions.Jump.action.performed -= OnJumpPerformed;
@@ -130,14 +162,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJumpPerformed(InputAction.CallbackContext context)
     {
-
         // Check for jump through platform
         if (VertDirection < 0 && isTouchingPlatform && isSitting)
         {
             StartCoroutine(FallThrough());
         }
-
     }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -145,13 +176,14 @@ public class PlayerMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
     }
+
     private void Start()
     {
         //    playerLevelTextText = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<TMP_Text>();
         experienceBar.setMaxExp(maxExp);
         GainExperience(0);
-
     }
+
     public void GainExperience(int gainedExp)
     {
         currentExp += gainedExp;
@@ -162,6 +194,7 @@ public class PlayerMovement : MonoBehaviour
             currentExp -= maxExp;
         }
     }
+
     public void UpdateHealth(int mod)
     {
         currentHealth += mod;
@@ -176,6 +209,7 @@ public class PlayerMovement : MonoBehaviour
             PlayerDeath();
         }
     }
+
     private void Update()
     {
         isGrounded = IsGrounded();
@@ -183,14 +217,12 @@ public class PlayerMovement : MonoBehaviour
         {
             animate();
             setPlayerDirection();
-
         }
         if (isInteractButtonHeld && !movementActions.Interact.action.IsPressed())
         {
             ResetInteractTimer();
         }
     }
-
 
     protected void FixedUpdate()
     {
@@ -200,16 +232,21 @@ public class PlayerMovement : MonoBehaviour
             moveCharacter();
             JumpCheck();
         }
-
     }
+
     protected void JumpCheck()
     {
-        if (!isAirborne && !isFallingThrough && !isExecutingSkill && !isSitting && movementActions.Jump.action.IsPressed())
+        if (
+            !isAirborne
+            && !isFallingThrough
+            && !isExecutingSkill
+            && !isSitting
+            && movementActions.Jump.action.IsPressed()
+        )
         {
             Jump();
             combatActions.MovementSkill.action.Disable();
             combatActions.MovementSkill.action.Enable();
-
         }
     }
 
@@ -235,7 +272,6 @@ public class PlayerMovement : MonoBehaviour
             return; // Skip processing input if movement is disabled
         }
 
-
         animator.SetFloat("VerticalSpeed", rb.velocity.y);
         VertDirection = movementActions.Move.action.ReadValue<Vector2>().y;
         // Force the player to stop when 'K' is pressed and only if the player is grounded
@@ -260,9 +296,9 @@ public class PlayerMovement : MonoBehaviour
 
     protected void setPlayerDirection()
     {
-        if (isExecutingSkill) return;
+        if (isExecutingSkill)
+            return;
         moveDirection = movementActions.Move.action.ReadValue<Vector2>().x;
-
     }
 
     bool IsGrounded()
@@ -273,7 +309,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Cast a ray straight down from the feet position
-        RaycastHit2D hit = Physics2D.Raycast(feetPos.position, Vector2.down, gizmoRayLength, platformLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(
+            feetPos.position,
+            Vector2.down,
+            gizmoRayLength,
+            platformLayerMask
+        );
 
         // Visualize the raycast in the editor
         Debug.DrawRay(feetPos.position, Vector2.down * gizmoRayLength, Color.green);
@@ -286,9 +327,11 @@ public class PlayerMovement : MonoBehaviour
 
         return false;
     }
+
     private IEnumerator FallThrough()
     {
-        if (isFallingThrough) yield break;
+        if (isFallingThrough)
+            yield break;
         isFallingThrough = true;
         animator.SetTrigger("isFallingDown");
         // Lock the player's X velocity to 0
@@ -304,10 +347,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Change back to the original layer
         gameObject.layer = originalLayer;
-
     }
-
-
 
     public virtual void LevelUp()
     {
@@ -317,7 +357,6 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Level Up! Player Level is now: " + level);
             shouldLevelUp = false;
             leveledUpAnimator.SetTrigger("LeveledUp");
-
         }
     }
 
@@ -389,9 +428,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
     private void Jump()
     {
-
         // Check if there's horizontal input to determine the jump direction
         float horizontalVelocity = jumpDirection * jumpSpeed;
 
@@ -417,7 +456,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (playerHasDied)
@@ -441,7 +479,8 @@ public class PlayerMovement : MonoBehaviour
             isAirborne = false;
             isGrounded = true;
             animator.SetTrigger("isLanded");
-            if (isFallingThrough) isFallingThrough = false;
+            if (isFallingThrough)
+                isFallingThrough = false;
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
@@ -456,6 +495,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Platform"))
@@ -463,6 +503,7 @@ public class PlayerMovement : MonoBehaviour
             isTouchingPlatform = true;
         }
     }
+
     private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Platform"))
@@ -470,6 +511,7 @@ public class PlayerMovement : MonoBehaviour
             isTouchingPlatform = false;
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag is "World" or "Platform")
@@ -510,7 +552,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void ResetInteractTimer()
@@ -518,6 +559,7 @@ public class PlayerMovement : MonoBehaviour
         isInteractButtonHeld = false;
         interactStartTime = 0f;
     }
+
     private void HandleLongPressInteract(Collider2D collision)
     {
         // Perform the action you want after holding the interact button for 2 seconds
@@ -527,5 +569,3 @@ public class PlayerMovement : MonoBehaviour
         shouldLevelUp = true;
     }
 }
-
-

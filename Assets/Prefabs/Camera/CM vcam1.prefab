@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 957941649752926422}
   - component: {fileID: 957941649752926423}
   - component: {fileID: 957941649752926421}
-  - component: {fileID: 1490136677}
   - component: {fileID: 1490136679}
   m_Layer: 0
   m_Name: CM vcam1
@@ -89,18 +88,6 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 0}
   m_Damping: 0
   m_MaxWindowSize: -1
---- !u!114 &1490136677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957941649752926416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac515527c4e73b846b0812f86dc9f652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1490136679
 MonoBehaviour:
   m_ObjectHideFlags: 0
