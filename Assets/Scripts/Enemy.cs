@@ -13,7 +13,6 @@ public class Enemy : MonoBehaviour
     public Transform wallDetection;
 
     public int expValue;
-    public ExperienceController expObject;
 
     public bool isAggroed = false;
     public bool isPatroling = true;
