@@ -294,7 +294,7 @@ public class RogueSkillController : PlayerMovement
         Quaternion fixedAttackRotation = !isAirborne ? attackPos.rotation : attackPosAirborne.rotation;
 
         // Instantiate the attack prefab at the calculated position and rotation
-        Instantiate(basicAttackPrefab, fixedAttackPosition, fixedAttackRotation);
+        Instantiate(basicAttackPrefab, fixedAttackPosition, fixedAttackRotation, GameController.instance.ProjectileContainer);
 
         // Wait for a short duration before continuing
         yield return new WaitForSeconds(skillDuration); // Wait for skill to complete
@@ -326,7 +326,7 @@ public class RogueSkillController : PlayerMovement
     private IEnumerator secondSkill()
     {
         yield return new WaitForSeconds(0.20f);
-        _ = Instantiate(projectile2, attackPos.position, attackPos.rotation);
+        _ = Instantiate(projectile2, attackPos.position, attackPos.rotation, GameController.instance.ProjectileContainer);
         GameController.instance.playerCanMove = true; // Lock movement if starting skill stationary
         isExecutingSkill = false;
     }

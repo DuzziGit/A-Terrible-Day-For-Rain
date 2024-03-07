@@ -49,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
             Vector3 paddedPosition = spawnPoint.position + new Vector3(Random.Range(-padding, padding), Random.Range(-padding, padding), 0);
 
             // Spawn enemy
-            GameObject enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], paddedPosition, Quaternion.identity);
+            GameObject enemyInstance = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], paddedPosition, Quaternion.identity, GameController.instance.enemiesContainer);
             Enemy enemyComponent = enemyInstance.GetComponent<Enemy>();
 
             if (enemyComponent != null)

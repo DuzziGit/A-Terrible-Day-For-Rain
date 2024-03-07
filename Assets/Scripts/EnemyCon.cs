@@ -31,6 +31,7 @@ public class EnemyCon : Enemy
     private float hitAnimationCooldown = 0.5f; // Cooldown duration in seconds
     private Vector3 initialPosition;
     private Dictionary<string, int> damageNumberCounts = new Dictionary<string, int>();
+    private Transform Container;
 
     private void Start()
     {
@@ -82,7 +83,7 @@ public class EnemyCon : Enemy
         if (!damageTextCanvases.ContainsKey(attackId) || damageTextCanvases[attackId] == null)
         {
             // Instantiate textContainer and textParent if not present or null
-            GameObject textContainer = Instantiate(textContainerPrefab, transform.position, Quaternion.identity);
+            GameObject textContainer = Instantiate(textContainerPrefab, transform.position, Quaternion.identity, GameController.instance.Container);
             textParent = Instantiate(TextParentPrefab, textContainer.transform.position + new Vector3(0, baseOffsetY, 0), Quaternion.identity, textContainer.transform);
             damageTextCanvases[attackId] = textParent; // Add or update the dictionary entry
             damageNumberCounts[attackId] = 0;

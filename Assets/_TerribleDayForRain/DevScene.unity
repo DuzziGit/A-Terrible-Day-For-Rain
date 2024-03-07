@@ -506,6 +506,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aadc4be56a216a4cac78afb84177b4d, type: 3}
+--- !u!1 &56925419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 56925421}
+  - component: {fileID: 56925420}
+  m_Layer: 0
+  m_Name: HitEffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &56925420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56925419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb06b020ac567c045a546267f5ccaa4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffectPrefab: {fileID: 777742916294569351, guid: f5e06a62650582d4e88ff76c0e1d54e2, type: 3}
+  poolSize: 20
+--- !u!4 &56925421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56925419}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.735754, y: 4.5024996, z: 2.2428243}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &102703195
 GameObject:
   m_ObjectHideFlags: 0
@@ -7367,30 +7413,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1012905355084971125, guid: a35852532dd8394408272bef945fdc67, type: 3}
-      propertyPath: padding
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1012905355084971125, guid: a35852532dd8394408272bef945fdc67, type: 3}
-      propertyPath: maxLevel
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1012905355084971125, guid: a35852532dd8394408272bef945fdc67, type: 3}
-      propertyPath: minLevel
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1012905355084971125, guid: a35852532dd8394408272bef945fdc67, type: 3}
-      propertyPath: maxEnemies
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1012905355084971125, guid: a35852532dd8394408272bef945fdc67, type: 3}
-      propertyPath: enemyPrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1012905355084971125, guid: a35852532dd8394408272bef945fdc67, type: 3}
-      propertyPath: enemyPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 4597381505260269731, guid: 5ab3661e1170df84881f42202bd5b83b, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a35852532dd8394408272bef945fdc67, type: 3}
 --- !u!4 &781225191 stripped
