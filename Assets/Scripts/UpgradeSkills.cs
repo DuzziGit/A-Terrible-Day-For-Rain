@@ -21,9 +21,9 @@ public class UpgradeSkills : MonoBehaviour
     }
     public void upgradeSkillOne()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().skillOneLevel < 15)
+        if (GameManager.Instance.playerMovement.skillOneLevel < 15)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().skillOneLevel++;
+            GameManager.Instance.playerMovement.skillOneLevel++;
         }
         else
         {
@@ -34,10 +34,10 @@ public class UpgradeSkills : MonoBehaviour
     }
     public void upgradeSkillTwo()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().skillTwoLevel < 15)
+        if (GameManager.Instance.playerMovement.skillTwoLevel < 15)
         {
 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().skillTwoLevel++;
+            GameManager.Instance.playerMovement.skillTwoLevel++;
         }
         else
         {
@@ -49,10 +49,10 @@ public class UpgradeSkills : MonoBehaviour
     }
     public void upgradeSkillThree()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().skillThreeLevel < 15)
+        if (GameManager.Instance.playerMovement.skillThreeLevel < 15)
         {
 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().skillThreeLevel++;
+            GameManager.Instance.playerMovement.skillThreeLevel++;
         }
         else
         {
@@ -63,10 +63,10 @@ public class UpgradeSkills : MonoBehaviour
     }
     public void upgradeSkillUlt()
     {
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().ultSkillLevel < 15)
+        if (GameManager.Instance.playerMovement.ultSkillLevel < 15)
         {
 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().ultSkillLevel++;
+            GameManager.Instance.playerMovement.ultSkillLevel++;
         }
         else
         {

@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
         bc = GetComponent<CapsuleCollider2D>();
         enemySprite = GetComponent<SpriteRenderer>();
         gameObject.layer = LayerMask.NameToLayer("Enemy");
+
     }
 
     private void Update()
@@ -51,7 +52,7 @@ public class Enemy : MonoBehaviour
         {
             if (timeBetweenDmg <= 0)
             {
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().UpdateHealth(-damage);
+                GameManager.Instance.playerMovement.UpdateHealth(-damage);
                 timeBetweenDmg = startTimeBetweenDmg;
             }
             else
@@ -60,7 +61,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().currentHealth <= 0)
+        if (GameManager.Instance.playerMovement.currentHealth <= 0)
         {
             isTouchingPlayer = false;
         }
@@ -79,17 +80,17 @@ public class Enemy : MonoBehaviour
         RaycastHit2D enemyWall = Physics2D.Raycast(wallDetection.position, castDirection, distance, LayerMask.GetMask("EnemyOnlyWall"));
 
 
-        if (transform.position.x - GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position.x < 0.2f)
+        if (transform.position.x - GameManager.Instance.Player.transform.position.x < 0.2f)
         {
             rb.velocity = new Vector3(0, 0, 0);
         }
-        else if (transform.position.x > GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position.x && enemyWall.collider == false)
+        else if (transform.position.x > GameManager.Instance.Player.transform.position.x && enemyWall.collider == false)
         {
             rb.velocity = new Vector3(-speed, rb.velocity.y, 0);
             enemySprite.flipX = true;
             movingRight = false;
         }
-        else if (transform.position.x < GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>().position.x && enemyWall.collider == false)
+        else if (transform.position.x < GameManager.Instance.Player.transform.position.x && enemyWall.collider == false)
         {
             rb.velocity = new Vector3(speed, rb.velocity.y, 0);
             enemySprite.flipX = false;
