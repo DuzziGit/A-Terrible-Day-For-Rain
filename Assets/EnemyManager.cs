@@ -5,15 +5,15 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    public bool canSpawn = true;
-    public int totalMaxEnemies = 30;
+    public bool CanSpawn = true;
+    public int TotalMaxEnemies = 30;
 
     [SerializeField]
-    private float spawnTimer = 8f; // Timer for spawning enemies every 8 seconds
+    private float _spawnTimer = 8f; // Timer for spawning enemies every 8 seconds
 
     [SerializeField]
-    private float timeSinceLastSpawn = 0f; // Time since last spawn
-    private List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
+    private float _timeSinceLastSpawn = 0f; // Time since last spawn
+    private List<EnemySpawner> _enemySpawners = new List<EnemySpawner>();
     public static EnemyManager Instance;
 
     void OnEnable()
@@ -36,42 +36,42 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        timeSinceLastSpawn += Time.deltaTime;
+        _timeSinceLastSpawn += Time.deltaTime;
 
         // Check if it's time to spawn due to timer or all enemies are dead
-        if (timeSinceLastSpawn >= spawnTimer || AllEnemiesDead())
+        if (_timeSinceLastSpawn >= _spawnTimer || AllEnemiesDead())
         {
             SpawnEnemies();
-            timeSinceLastSpawn = 0f; // Reset the timer
+            _timeSinceLastSpawn = 0f; // Reset the timer
         }
     }
 
     private void SpawnEnemies()
     {
-        if (canSpawn)
+        if (CanSpawn)
         {
-            foreach (EnemySpawner spawner in enemySpawners)
+            foreach (EnemySpawner spawner in _enemySpawners)
             {
                 spawner.SpawnEnemy();
             }
             Debug.Log("Enemies spawned");
-            canSpawn = false;
+            CanSpawn = false;
             StartCoroutine(SpawnTimer());
         }
     }
 
     public void RegisterSpawner(EnemySpawner spawner)
     {
-        if (!enemySpawners.Contains(spawner))
+        if (!_enemySpawners.Contains(spawner))
         {
-            enemySpawners.Add(spawner);
+            _enemySpawners.Add(spawner);
             UpdateSpawnerLimits();
         }
     }
 
     public void UnregisterSpawner(EnemySpawner spawner)
     {
-        if (enemySpawners.Remove(spawner))
+        if (_enemySpawners.Remove(spawner))
         {
             UpdateSpawnerLimits();
         }
@@ -79,11 +79,11 @@ public class EnemyManager : MonoBehaviour
 
     private void UpdateSpawnerLimits()
     {
-        int spawnersCount = enemySpawners.Count;
+        int spawnersCount = _enemySpawners.Count;
         if (spawnersCount > 0)
         {
-            int maxPerSpawner = totalMaxEnemies / spawnersCount;
-            foreach (EnemySpawner spawner in enemySpawners)
+            int maxPerSpawner = TotalMaxEnemies / spawnersCount;
+            foreach (EnemySpawner spawner in _enemySpawners)
             {
                 spawner.SetMaxEnemies(maxPerSpawner);
             }
@@ -92,18 +92,18 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnWave()
     {
-        canSpawn = true;
+        CanSpawn = true;
     }
 
     private IEnumerator SpawnTimer()
     {
         yield return new WaitForSeconds(8f);
-        canSpawn = true;
+        CanSpawn = true;
     }
 
     private bool AllEnemiesDead()
     {
-        foreach (EnemySpawner spawner in enemySpawners)
+        foreach (EnemySpawner spawner in _enemySpawners)
         {
             if (spawner.currentEnemies > 0)
             {

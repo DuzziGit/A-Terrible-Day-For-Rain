@@ -290,36 +290,34 @@ public class RogueSkillController : PlayerMovement
     // First Skill
     private void GetFirstSkillInput()
     {
+        // Check if it's time to fire again and the skill action is pressed
         if (Time.time > nextFireTimeSkill1 && combatActions.BasicSkill.action.IsPressed())
         {
-            GameManager.Instance.playerCanMove = false; // Lock movement if starting skill stationary
-            isExecutingSkill = true;
-            SwitchMovePositionBasedOnMouse(true);
-
-            if (!isAirborne)
+            if (!isExecutingSkill)
             {
-                rb.velocity = new Vector2(0, rb.velocity.y);
+                GameManager.Instance.playerCanMove = false; // Lock movement when starting skill
+                isExecutingSkill = true;
+                SwitchMovePositionBasedOnMouse(true);
+
+                if (!isAirborne)
+                {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                }
+                StartCoroutine(FirstSkill());
+                nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
+                cooldownTimerS1 = cooldownTimeSkill1;
+                SwipeOne.SetTrigger("Attack");
             }
-            StartCoroutine(FirstSkill());
-            nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
-            //    textCooldownS1.gameObject.SetActive(true);
-            cooldownTimerS1 = cooldownTimeSkill1;
-            SwipeOne.SetTrigger("Attack");
         }
     }
 
     private IEnumerator FirstSkill()
     {
-        // If the player is airborne, don't modify their horizontal velocity,
-        // allowing them to continue moving with their current momentum.
-
-        // Determine the fixed position for the attack based on whether the player is airborne or not
         Vector3 fixedAttackPosition = !isAirborne ? attackPos.position : attackPosAirborne.position;
         Quaternion fixedAttackRotation = !isAirborne
             ? attackPos.rotation
             : attackPosAirborne.rotation;
 
-        // Instantiate the attack prefab at the calculated position and rotation
         Instantiate(
             basicAttackPrefab,
             fixedAttackPosition,
@@ -327,12 +325,10 @@ public class RogueSkillController : PlayerMovement
             ContainerManager.Instance.ProjectileContainer
         );
 
-        // Wait for a short duration before continuing
-        yield return new WaitForSeconds(skillDuration); // Wait for skill to complete
-        //   moveDirection = TempMoveDirection;
+        yield return new WaitForSeconds(skillDuration); // Ensure player is immobilized for the duration of the skill
+
         isExecutingSkill = false;
-        GameManager.Instance.playerCanMove = true;
-        // If character was moving before skill, start deceleration
+        GameManager.Instance.playerCanMove = true; // Re-enable movement after skill completes
     }
 
     public void GetSecondSkillInput()

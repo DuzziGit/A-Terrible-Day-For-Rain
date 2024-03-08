@@ -399,7 +399,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             animator.SetBool("isAirborne", false);
-            animator.SetFloat("Speed", Mathf.Abs(moveDirection));
+            animator.SetFloat("Speed", rb.velocity.x);
 
             if (facingRight && !isFallingThrough)
             {
