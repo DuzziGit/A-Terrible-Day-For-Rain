@@ -147,6 +147,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     protected PlayerCombatActions combatActions;
+    private Coroutine longPressCoroutine = null;
+    private Collider2D currentItemCollider = null;
 
     protected virtual void OnEnable()
     {
@@ -221,6 +223,19 @@ public class PlayerMovement : MonoBehaviour
         if (isInteractButtonHeld && !movementActions.Interact.action.IsPressed())
         {
             ResetInteractTimer();
+        }
+        if (movementActions.Interact.action.IsPressed() && !isInteractButtonHeld)
+        {
+            isInteractButtonHeld = true;
+        }
+        else if (!movementActions.Interact.action.IsPressed() && isInteractButtonHeld)
+        {
+            isInteractButtonHeld = false;
+            if (longPressCoroutine != null)
+            {
+                StopCoroutine(longPressCoroutine);
+                ResetLongPressState();
+            }
         }
     }
 
@@ -513,6 +528,7 @@ public class PlayerMovement : MonoBehaviour
                 // Enable the item preview
                 itemStats.ItemPreview.SetActive(true);
             }
+            StartLongPressDetection(collision);
         }
     }
 
@@ -549,27 +565,16 @@ public class PlayerMovement : MonoBehaviour
                 itemStats.ItemPreview.SetActive(false);
             }
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
+        if (
+            collision.gameObject.layer == LayerMask.NameToLayer("Item")
+            && currentItemCollider == collision
+        )
         {
-            if (movementActions.Interact.action.IsPressed())
+            // If the player exits the trigger zone, cancel the long press detection.
+            if (longPressCoroutine != null)
             {
-                if (!isInteractButtonHeld)
-                {
-                    // Start the timer when the button is first pressed
-                    interactStartTime = Time.time;
-                    isInteractButtonHeld = true;
-                }
-                else if (Time.time - interactStartTime >= 2f)
-                {
-                    // The button has been held for at least 2 seconds
-                    HandleLongPressInteract(collision);
-                    // Optionally reset the timer to avoid multiple triggers
-                    ResetInteractTimer();
-                }
+                StopCoroutine(longPressCoroutine);
+                ResetLongPressState();
             }
         }
     }
@@ -580,12 +585,37 @@ public class PlayerMovement : MonoBehaviour
         interactStartTime = 0f;
     }
 
-    private void HandleLongPressInteract(Collider2D collision)
+    private void StartLongPressDetection(Collider2D collision)
     {
-        // Perform the action you want after holding the interact button for 2 seconds
-        // For example, interacting with the item in a special way
-        Debug.Log($"Long press interact with {collision.gameObject.name}");
-        Destroy(collision.gameObject);
-        shouldLevelUp = true;
+        if (longPressCoroutine == null)
+        {
+            currentItemCollider = collision;
+            longPressCoroutine = StartCoroutine(HandleLongPressRoutine(collision));
+        }
+    }
+
+    private IEnumerator HandleLongPressRoutine(Collider2D collision)
+    {
+        // Wait for the designated long press duration.
+        yield return new WaitForSeconds(2f);
+
+        // After waiting, check if the interact button is still being pressed.
+        if (isInteractButtonHeld && currentItemCollider == collision)
+        {
+            Debug.Log($"Long press interact with {collision.gameObject.name}");
+            // Perform the desired interaction.
+            Destroy(collision.gameObject);
+            shouldLevelUp = true;
+        }
+
+        // Reset the long press detection state.
+        ResetLongPressState();
+    }
+
+    private void ResetLongPressState()
+    {
+        longPressCoroutine = null;
+        currentItemCollider = null;
+        isInteractButtonHeld = false;
     }
 }
