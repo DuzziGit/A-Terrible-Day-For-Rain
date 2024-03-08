@@ -71,6 +71,20 @@ public class RogueSkillController : PlayerMovement
     [SerializeField]
     private Transform LevelUpAttackTransform;
 
+    private float tempSpeed;
+
+    [SerializeField]
+    private float ForceAirborne;
+
+    [SerializeField]
+    private float ForceBackward;
+
+    [SerializeField]
+    private float speedWhileThrowing;
+
+    [SerializeField]
+    private float FloatTime;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -104,6 +118,7 @@ public class RogueSkillController : PlayerMovement
 
         rend = GetComponent<Renderer>();
         c = rend.material.color;
+        tempSpeed = moveSpeed;
     }
 
     protected new void FixedUpdate()
@@ -115,8 +130,9 @@ public class RogueSkillController : PlayerMovement
         GetUltimateSkillInput();
     }
 
-    private void Update()
+    protected void Update()
     {
+        base.Update();
         experienceBar.setMaxExp(maxExp);
 
         levelUI.text = level.ToString();
@@ -133,10 +149,7 @@ public class RogueSkillController : PlayerMovement
         if (GameManager.Instance.playerCanMove)
         {
             //Get player inputs
-            if (!isExecutingSkill)
-            {
-                setPlayerDirection();
-            }
+            setPlayerDirection();
             getPlayerInput();
             GetMovementSkillInput();
 
@@ -295,13 +308,13 @@ public class RogueSkillController : PlayerMovement
         {
             if (!isExecutingSkill)
             {
-                GameManager.Instance.playerCanMove = false; // Lock movement when starting skill
+                // GameManager.Instance.playerCanMove = false; // Lock movement when starting skill
                 isExecutingSkill = true;
                 SwitchMovePositionBasedOnMouse(true);
-
+                setPlayerDirection();
                 if (!isAirborne)
                 {
-                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    moveSpeed = speedWhileThrowing;
                 }
                 StartCoroutine(FirstSkill());
                 nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
@@ -328,7 +341,8 @@ public class RogueSkillController : PlayerMovement
         yield return new WaitForSeconds(skillDuration); // Ensure player is immobilized for the duration of the skill
 
         isExecutingSkill = false;
-        GameManager.Instance.playerCanMove = true; // Re-enable movement after skill completes
+        moveSpeed = tempSpeed;
+        //    GameManager.Instance.playerCanMove = true; // Re-enable movement after skill completes
     }
 
     public void GetSecondSkillInput()
@@ -338,11 +352,24 @@ public class RogueSkillController : PlayerMovement
             GameManager.Instance.playerCanMove = false; // Lock movement if starting skill stationary
             isExecutingSkill = true;
             SwitchMovePositionBasedOnMouse(true);
+            setPlayerDirection();
             animator.SetTrigger("isAttacking");
             _ = StartCoroutine(secondSkill());
             nextFireTimeSkill2 = Time.time + cooldownTimeSkill2;
-            //   textCooldownS2.gameObject.SetActive(true);
             cooldownTimerS2 = cooldownTimeSkill2;
+
+            Vector2 forceDirection = facingRight ? Vector2.left : Vector2.right;
+
+            if (!isAirborne)
+            {
+                // Apply force backward on the ground
+                rb.AddForce(forceDirection * ForceBackward, ForceMode2D.Impulse);
+            }
+            else
+            {
+                // Freeze Y velocity while airborne and apply force backward
+                StartCoroutine(FreezeYVelocityDuringForce(forceDirection * ForceAirborne));
+            }
         }
     }
 
@@ -357,6 +384,20 @@ public class RogueSkillController : PlayerMovement
         );
         GameManager.Instance.playerCanMove = true; // Lock movement if starting skill stationary
         isExecutingSkill = false;
+        moveSpeed = tempSpeed;
+    }
+
+    private IEnumerator FreezeYVelocityDuringForce(Vector2 force)
+    {
+        // Store the current Y velocity
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        // Apply the force with Y velocity set to 0
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(force, ForceMode2D.Impulse);
+        // Wait for a short duration while the force is applied
+        yield return new WaitForSeconds(FloatTime); // Adjust the duration based on the desired effect
+        rb.gravityScale = originalGravity;
     }
 
     // Third Skill

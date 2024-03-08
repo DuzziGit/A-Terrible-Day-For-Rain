@@ -210,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected void Update()
     {
         isGrounded = IsGrounded();
         if (GameManager.Instance.playerCanMove)
@@ -226,12 +226,34 @@ public class PlayerMovement : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        if (GameManager.Instance.playerCanMove && !isExecutingSkill)
+        if (GameManager.Instance.playerCanMove)
         {
             getPlayerInput();
             moveCharacter();
             JumpCheck();
         }
+        UpdateAnimatorWithMovement();
+    }
+
+    protected void UpdateAnimatorWithMovement()
+    {
+        // if (isExecutingSkill) // Assuming `isExecutingSkill` is true when attacking
+        // {
+        //     animator.SetFloat("Speed", 0); // Stop updating speed based on movement when attacking
+        // }
+        // else
+        // {
+        float actualSpeed = Mathf.Abs(rb.velocity.x);
+        // Only update the animator's speed if the character is actually moving
+        if (actualSpeed > 0.1f) // Adjust threshold as needed to detect movement
+        {
+            animator.SetFloat("Speed", actualSpeed);
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0);
+        }
+        //  }
     }
 
     protected void JumpCheck()
@@ -239,7 +261,6 @@ public class PlayerMovement : MonoBehaviour
         if (
             !isAirborne
             && !isFallingThrough
-            && !isExecutingSkill
             && !isSitting
             && movementActions.Jump.action.IsPressed()
         )
@@ -265,7 +286,7 @@ public class PlayerMovement : MonoBehaviour
 
     protected void getPlayerInput()
     {
-        if (!GameManager.Instance.playerCanMove && !isExecutingSkill)
+        if (!GameManager.Instance.playerCanMove)
         {
             moveDirection = 0; // Reset movement direction to ensure no movement occurs
             rb.velocity = Vector2.zero;
@@ -296,8 +317,8 @@ public class PlayerMovement : MonoBehaviour
 
     protected void setPlayerDirection()
     {
-        if (isExecutingSkill)
-            return;
+        // if (isExecutingSkill)
+        //     return;
         moveDirection = movementActions.Move.action.ReadValue<Vector2>().x;
     }
 
@@ -399,7 +420,6 @@ public class PlayerMovement : MonoBehaviour
             }
 
             animator.SetBool("isAirborne", false);
-            animator.SetFloat("Speed", rb.velocity.x);
 
             if (facingRight && !isFallingThrough)
             {

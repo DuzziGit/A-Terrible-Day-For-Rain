@@ -5726,6 +5726,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 518281411}
+  - component: {fileID: 518281412}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -5748,6 +5749,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &518281412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518281410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d232f535d53fe94496f1478a275ca3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanSpawn: 1
+  TotalMaxEnemies: 30
+  _spawnTimer: 8
+  _timeSinceLastSpawn: 0
 --- !u!1 &560367692
 GameObject:
   m_ObjectHideFlags: 0
@@ -17396,8 +17413,48 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: maxExp
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: FloatTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: currentExp
+      value: 404
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: ForceForward
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: ForceAirborne
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: ForceBackward
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: skillDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: optionsMenuCanvas
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: cooldownTimeSkill1
+      value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: speedWhileThrowing
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9011964926031391142, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_RootOrder
@@ -17454,6 +17511,7 @@ PrefabInstance:
     - {fileID: 1155637826, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
     - {fileID: 2883532336580205856, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
     - {fileID: 1509660147, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+    - {fileID: 1399559154, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
 --- !u!1 &2012348760
 GameObject:
@@ -17821,7 +17879,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: orthographic size
-      value: 3.57
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4545000804298050682, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}

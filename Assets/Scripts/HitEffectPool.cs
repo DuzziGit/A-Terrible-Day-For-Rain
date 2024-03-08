@@ -12,6 +12,10 @@ public class HitEffectPool : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
         InitializePool();
     }
 
