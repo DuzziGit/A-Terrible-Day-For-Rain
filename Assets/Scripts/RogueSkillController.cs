@@ -436,13 +436,13 @@ public class RogueSkillController : PlayerMovement
     // Ultimate Skill
     public void GetUltimateSkillInput()
     {
-        if (Time.time > nextFireTimeSkillUlt && Input.GetKeyDown(KeyCode.F))
-        {
-            _ = StartCoroutine(UltimateSkillEnum());
-            nextFireTimeSkillUlt = Time.time + cooldownTimeSkillUlt;
-            //   textCooldownSU.gameObject.SetActive(true);
-            cooldownTimerSU = cooldownTimeSkillUlt;
-        }
+        // if (Time.time > nextFireTimeSkillUlt && Input.GetKeyDown(KeyCode.F))
+        // {
+        //     _ = StartCoroutine(UltimateSkillEnum());
+        //     nextFireTimeSkillUlt = Time.time + cooldownTimeSkillUlt;
+        //     //   textCooldownSU.gameObject.SetActive(true);
+        //     cooldownTimerSU = cooldownTimeSkillUlt;
+        // }
     }
 
     private IEnumerator UltimateSkillEnum()
