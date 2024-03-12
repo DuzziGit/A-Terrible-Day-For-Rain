@@ -55,6 +55,15 @@ private void InitializeWeapon(WeaponLoot baseWeapon, Rarity rarity, int characte
     CriticalDamage *= levelMultiplier;
     AttackDamage *= levelMultiplier;
     // Optionally adjust AttackSpeed with levelMultiplier if needed
+   // Check for caps and round off if the stats are higher than the base cap
+    if (CriticalRate > baseWeapon.baseCriticalRate.y)
+    {
+        CriticalRate = Mathf.Floor(baseWeapon.baseCriticalRate.y);
+    }
+    if (CriticalDamage > baseWeapon.baseCriticalDamage.y)
+    {
+        CriticalDamage = Mathf.Floor(baseWeapon.baseCriticalDamage.y);
+    }
 
     // Set a title for the weapon
     Title = $"{rarity} Tier Weapon";
