@@ -11546,6 +11546,10 @@ PrefabInstance:
       propertyPath: m_TileAssetArray.Array.data[0].m_Data
       value: 
       objectReference: {fileID: 1320817866}
+    - target: {fileID: 1635998684, guid: ca29f660a57690549ad42dbc55c770b3, type: 3}
+      propertyPath: m_ColliderMask.m_Bits
+      value: 305599
+      objectReference: {fileID: 0}
     - target: {fileID: 379458705414913902, guid: ca29f660a57690549ad42dbc55c770b3, type: 3}
       propertyPath: m_SortingLayer
       value: 5
@@ -11723,12 +11727,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6cc9332fd5c5045bb03cff203c1dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLootTier: 0
-  Tiers: 000000000100000002000000
+  currentLootTier: 1
+  Tiers: 00000000010000000200000002000000
   Weights:
-  - 0.625
+  - 0.425
   - 0.25
   - 0.125
+  - 0.225
   baseWeaponsPerTier:
   - {fileID: 11400000, guid: 5e4a89d5514abfa4b8cd65a9fae32014, type: 2}
   - {fileID: 11400000, guid: 782fcbd5c43ed7f4aa74c034c6250397, type: 2}
@@ -17973,7 +17978,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: orthographic size
-      value: 6
+      value: 3.57
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: m_NormalizedViewPortRect.x

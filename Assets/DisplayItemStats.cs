@@ -28,5 +28,6 @@ public void UpdateStats(WeaponInstance instance)
     CriticalRateText.text = instance.CriticalRate.ToString("F1");
     TitleText.text = instance.Title;
 }
+
 }
 

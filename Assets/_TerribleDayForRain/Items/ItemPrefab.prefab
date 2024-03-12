@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 6649630422126349977}
   - component: {fileID: 389225049554111552}
   - component: {fileID: 4895628917042090633}
+  - component: {fileID: 528135803}
   m_Layer: 7
   m_Name: ItemPrefab
   m_TagString: Items
@@ -370,7 +371,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.003656149, y: 0.24552798}
+  m_Offset: {x: -0.00072288513, y: 0.001789093}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -381,7 +382,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9239926, y: 1.2121882}
+  m_Size: {x: 0.6133537, y: 0.4678421}
   m_EdgeRadius: 0
 --- !u!114 &4895628917042090633
 MonoBehaviour:
@@ -408,6 +409,19 @@ MonoBehaviour:
   CriticalRateText: {fileID: 6286204041653096967}
   TitleText: {fileID: 4172651511855399805}
   ItemPreview: {fileID: 3471760929523888357}
+--- !u!114 &528135803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279078521537463199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a28c754f8ccd9c4ba081ae4733078f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launchForce: 1
 --- !u!1 &540320158401086892
 GameObject:
   m_ObjectHideFlags: 0
