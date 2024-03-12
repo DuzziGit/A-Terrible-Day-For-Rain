@@ -11728,7 +11728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLootTier: 1
-  Tiers: 00000000010000000200000002000000
+  Tiers: 00000000010000000200000003000000
   Weights:
   - 0.425
   - 0.25
