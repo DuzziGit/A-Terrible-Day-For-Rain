@@ -16,17 +16,16 @@ public class DisplayItemStats : MonoBehaviour
     public TMP_Text CriticalDamageText;
     public TMP_Text CriticalRateText;
     public TMP_Text TitleText;
-    public GameObject ItemPreview; // Make sure this is assigned in the inspector to your preview prefab or GameObject
-
+    public GameObject ItemPreview; 
     // Method to update stats
 public void UpdateStats(WeaponInstance instance)
 {
     // Update the UI elements using the instance properties
     // Round to whole number using "N0" format (Number with 0 decimal places)
-    AttackDamageText.text = instance.AttackDamage.ToString("F1");
+    AttackDamageText.text = instance.AttackDamage.ToString("N0");
     AttackSpeedText.text = instance.AttackSpeed.ToString("F2"); //
     CriticalDamageText.text = instance.CriticalDamage.ToString("F1");
-    CriticalRateText.text = instance.CriticalRate.ToString("N0");
+    CriticalRateText.text = instance.CriticalRate.ToString("F1");
     TitleText.text = instance.Title;
 }
 }

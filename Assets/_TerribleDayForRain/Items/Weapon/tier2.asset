@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: tier2
   m_EditorClassIdentifier: 
   lootSprite: {fileID: 21300000, guid: 9d99ca239f796374d9682316f7d16633, type: 3}
-  lootName: Shuriken
-  dropChance: 40
+  lootName: 
+  dropChance: 10
   baseAttackSpeed: {x: 0.2, y: 0.5}
   baseCriticalRate: {x: 30, y: 40}
   baseCriticalDamage: {x: 45, y: 60}
