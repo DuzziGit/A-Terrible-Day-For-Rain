@@ -45,7 +45,7 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimeSkill3Upgraded;
 
     private float cooldownTimeSkillUlt = 2;
-    private float nextFireTimeSkillUlt = 0;
+    //private float nextFireTimeSkillUlt = 0;
 
     public Animator SwipeOne;
     public Animator SwipeTwo;
@@ -130,7 +130,7 @@ public class RogueSkillController : PlayerMovement
         GetUltimateSkillInput();
     }
 
-    protected void Update()
+    protected new void Update()
     {
         base.Update();
         experienceBar.setMaxExp(maxExp);

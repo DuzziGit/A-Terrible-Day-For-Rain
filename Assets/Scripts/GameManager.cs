@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public PlayerMovement playerMovement;
     public GameObject Player;
-
     public bool playerCanMove = true;
 
     private void Awake()
@@ -118,7 +117,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Make sure to unregister the OnSceneLoaded method when this object is destroyed.
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

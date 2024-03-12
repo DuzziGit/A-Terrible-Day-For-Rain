@@ -211,7 +211,7 @@ public class Enemy : MonoBehaviour
         rb.isKinematic = true;
         bc.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Invincible");
-        GetComponent<LootBag>().InstantiateItem(transform.position + new Vector3(0, 1, 0));
+    LootManager.Instance.HandleLootDrop(transform.position + new Vector3(0, 1, 0));
         GetComponentInChildren<Canvas>().enabled = false;
         MySpawner.OnEnemyDestroyed();
         if (GameManager.Instance.playerMovement != null)

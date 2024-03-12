@@ -11723,6 +11723,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6cc9332fd5c5045bb03cff203c1dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLootTier: 0
+  Tiers: 000000000100000002000000
+  Weights:
+  - 0.625
+  - 0.25
+  - 0.125
+  baseWeaponsPerTier:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  lootList:
+  - {fileID: 11400000, guid: 5e4a89d5514abfa4b8cd65a9fae32014, type: 2}
+  - {fileID: 11400000, guid: 5e4a89d5514abfa4b8cd65a9fae32014, type: 2}
+  droppedItemPrefab: {fileID: 279078521537463199, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
 --- !u!4 &1273110846
 Transform:
   m_ObjectHideFlags: 0

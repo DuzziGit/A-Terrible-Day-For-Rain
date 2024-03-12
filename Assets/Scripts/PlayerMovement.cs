@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector]
     public bool isAirborne = false;
-    private float interactStartTime = 0f; // Start time of the interact button press
+   // private float interactStartTime = 0f; // Start time of the interact button press
     private bool isInteractButtonHeld = false; // Whether the interact button is currently being held
 
     [HideInInspector]
@@ -582,7 +582,7 @@ public class PlayerMovement : MonoBehaviour
     private void ResetInteractTimer()
     {
         isInteractButtonHeld = false;
-        interactStartTime = 0f;
+        //interactStartTime = 0f;
     }
 
     private void StartLongPressDetection(Collider2D collision)
