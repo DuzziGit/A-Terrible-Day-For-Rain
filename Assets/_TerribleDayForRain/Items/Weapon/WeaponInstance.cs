@@ -23,51 +23,56 @@ public class WeaponInstance
         InitializeWeapon(baseWeapon, rarity, characterLevel);
     }
 
-private void InitializeWeapon(WeaponLoot baseWeapon, Rarity rarity, int characterLevel)
-{
-    int rarityIndex = (int)rarity;
-
-    // Determine the minimum values allowed based on rarity.
-    // This ensures that lower rarities cannot have higher values than higher rarities.
-    Vector2 critRateRange = new Vector2(
-        baseWeapon.baseCriticalRate.x * (1 + rarityMultipliers[rarityIndex]),
-        baseWeapon.baseCriticalRate.y * rarityMultipliers[rarityIndex]
-    );
-    CriticalRate = Random.Range(critRateRange.x, critRateRange.y);
-
-    Vector2 critDamageRange = new Vector2(
-        baseWeapon.baseCriticalDamage.x * (1 + rarityMultipliers[rarityIndex]),
-        baseWeapon.baseCriticalDamage.y * rarityMultipliers[rarityIndex]
-    );
-    CriticalDamage = Random.Range(critDamageRange.x, critDamageRange.y);
-
-    Vector2 attackDamageRange = new Vector2(
-        baseWeapon.baseAttackDamage.x * (1 + rarityMultipliers[rarityIndex]),
-        baseWeapon.baseAttackDamage.y * rarityMultipliers[rarityIndex]
-    );
-    AttackDamage = Random.Range(attackDamageRange.x, attackDamageRange.y);
-
-    AttackSpeed = CalculateAttackSpeed(attackSpeedRanges[rarityIndex]);
-
-    // Apply a universal level multiplier to all stats
-    float levelMultiplier = 1.0f + (characterLevel * 0.01f);
-    CriticalRate *= levelMultiplier;
-    CriticalDamage *= levelMultiplier;
-    AttackDamage *= levelMultiplier;
-    // Optionally adjust AttackSpeed with levelMultiplier if needed
-   // Check for caps and round off if the stats are higher than the base cap
-    if (CriticalRate > baseWeapon.baseCriticalRate.y)
+    private void InitializeWeapon(WeaponLoot baseWeapon, Rarity rarity, int characterLevel)
     {
-        CriticalRate = Mathf.Floor(baseWeapon.baseCriticalRate.y);
-    }
-    if (CriticalDamage > baseWeapon.baseCriticalDamage.y)
-    {
-        CriticalDamage = Mathf.Floor(baseWeapon.baseCriticalDamage.y);
-    }
+        float critRateMin = baseWeapon.baseCriticalRate.x;
+        float critDamageMin = baseWeapon.baseCriticalDamage.x;
+        float attackDamageMin = baseWeapon.baseAttackDamage.x;
 
-    // Set a title for the weapon
-    Title = $"{rarity} Tier Weapon";
-}
+        int rarityIndex = (int)rarity;
+        if (rarityIndex != 0)
+        {
+            critRateMin =
+                (baseWeapon.baseCriticalRate.x * rarityMultipliers[rarityIndex - 1])
+                + baseWeapon.baseCriticalRate.x;
+
+                  critDamageMin =
+                (baseWeapon.baseCriticalDamage.x * rarityMultipliers[rarityIndex - 1])
+                + baseWeapon.baseCriticalDamage.x;
+
+                  attackDamageMin =
+                (baseWeapon.baseAttackDamage.x * rarityMultipliers[rarityIndex - 1])
+                + baseWeapon.baseAttackDamage.x;
+        }
+        float critRateCap =
+            (baseWeapon.baseCriticalRate.x * rarityMultipliers[rarityIndex])
+            + baseWeapon.baseCriticalRate.x;
+        CriticalRate = Random.Range(critRateMin, critRateCap);
+
+        // CriticalDamage
+        float critDamageCap =
+            (baseWeapon.baseCriticalDamage.x * rarityMultipliers[rarityIndex])
+            + baseWeapon.baseCriticalDamage.x;
+
+        CriticalDamage = Random.Range(critDamageMin, critDamageCap);
+
+        // AttackDamage
+        float attackDamageCap =
+            (baseWeapon.baseAttackDamage.x * rarityMultipliers[rarityIndex])
+            + baseWeapon.baseAttackDamage.x;
+
+        AttackDamage = Random.Range( attackDamageMin, attackDamageCap);
+
+        AttackSpeed = CalculateAttackSpeed(attackSpeedRanges[rarityIndex]);
+
+        // // Apply a universal level multiplier to all stats
+        // float levelMultiplier = 1.0f + (characterLevel * 0.01f);
+        // CriticalRate *= levelMultiplier;
+        // CriticalDamage *= levelMultiplier;
+        // AttackDamage *= levelMultiplier;
+        // Set a title for the weapon
+        Title = $"{rarity} Tier Weapon";
+    }
 
     private float CalculateAttackSpeed(Vector2 speedRange)
     {

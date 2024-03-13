@@ -21,7 +21,7 @@ public class LootManager : MonoBehaviour
     [SerializeField]
     private float[] dropRatesPerTier = new float[3] { 0.2f, 0.15f, 0.2f, };
     public GameObject droppedItemPrefab;
-
+private WeaponLoot weaponLootData;
     private void Awake()
     {
         if (Instance == null)
@@ -50,7 +50,7 @@ public class LootManager : MonoBehaviour
         {
             GenerateLoot(); // Sets _rarity based on weighted probability
             Rarity rarity = (Rarity)_rarity; // Cast the generated rarity to Rarity enum
-            WeaponLoot weaponLootData = baseWeaponsPerTier[currentLootTier];
+            weaponLootData = baseWeaponsPerTier[currentLootTier];
             int characterLevel = GameManager.Instance.playerMovement.level;
 
             InstantiateItem(spawnPosition, weaponLootData, currentLootTier, rarity, characterLevel);
