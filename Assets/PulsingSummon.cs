@@ -35,19 +35,9 @@ public class PulsingSummon : MonoBehaviour
     {
         get { return totalHits; }
     }
-    protected int MinDamage
-    {
-        get { return minDamage; }
-        set { minDamage = value; }
-    }
-
     [SerializeField]
-    private int maxDamage;
-    protected int MaxDamage
-    {
-        get { return maxDamage; }
-        set { maxDamage = value; }
-    }
+    private int skillModifier;
+    public int SkillModifier => skillModifier;
 
     [SerializeField]
     private float knockbackStr;
@@ -95,8 +85,7 @@ public class PulsingSummon : MonoBehaviour
                     HitManager.Instance.ApplyDelayedHits(
                         result,
                         TotalHits,
-                        MinDamage,
-                        MaxDamage,
+                        SkillModifier,
                         UniqueAttackID,
                         hitPosition,
                         enemyTransform,

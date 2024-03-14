@@ -213,5 +213,4 @@ MonoBehaviour:
   targetingToleranceAngle: 0
   UniqueAttackId: 
   knockbackStr: 5
-  minDamage: 400
-  maxDamage: 1000
+  skillModifier: 130

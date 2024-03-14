@@ -17527,6 +17527,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9011964926031391150, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
   m_PrefabInstance: {fileID: 1987092897}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2076571039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076571031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55265c7b43a4a046921ec8a5f1b9265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 1
+  criticalRate: 1
+  criticalDamage: 1
+  attackDamage: 600
 --- !u!1001 &2094630411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17851,6 +17867,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3452426484602399571, guid: 23c3c680ecf5caa448776fbe9e392fed, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 2076571039}
     - target: {fileID: 3452426484602399571, guid: 23c3c680ecf5caa448776fbe9e392fed, type: 3}
       propertyPath: PlayerLevel
       value: 

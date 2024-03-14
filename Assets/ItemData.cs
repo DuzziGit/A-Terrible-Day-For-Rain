@@ -31,4 +31,9 @@ public class ItemData : MonoBehaviour
     {
         GetComponent<DisplayItemStats>().UpdateStats(instance);
     }
+
+
+    public void SetPlayerData(){
+        GameManager.Instance.Player.GetComponent<PlayerData>().SetData(attackSpeed: AttackSpeed, criticalRate:CriticalRate,criticalDamage:CriticalDamage,attackDamage:AttackDamage);
+    }
 }

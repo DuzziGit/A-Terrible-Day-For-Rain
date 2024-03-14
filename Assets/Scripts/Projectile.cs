@@ -60,21 +60,8 @@ public class Projectile : MonoBehaviour
     }
 
     [SerializeField]
-    private int minDamage;
-    protected int MinDamage
-    {
-        get { return minDamage; }
-        set { minDamage = value; }
-    }
-
-    [SerializeField]
-    private int maxDamage;
-    protected int MaxDamage
-    {
-        get { return maxDamage; }
-        set { maxDamage = value; }
-    }
-
+    private int skillModifier;
+    protected int SkillModifier => skillModifier;
     protected void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -173,8 +160,7 @@ public class Projectile : MonoBehaviour
             HitManager.Instance.ApplyDelayedHits(
                 collision,
                 TotalHits,
-                MinDamage,
-                MaxDamage,
+                SkillModifier,
                 UniqueAttackId,
                 hitPosition,
                 enemyTransform,

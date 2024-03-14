@@ -15,6 +15,9 @@ public class HitManager : MonoBehaviour
     private PlayerMovement PlayerLevel;
 
     [SerializeField]
+    private PlayerData playerData;
+
+    [SerializeField]
     private float damageGrowthRate;
 
     [SerializeField]
@@ -24,7 +27,7 @@ public class HitManager : MonoBehaviour
     private int critChance;
 
     [SerializeField]
-    private float hitCooldown;
+    private float TimeToWait;
 
     private void Awake()
     {
@@ -46,8 +49,7 @@ public class HitManager : MonoBehaviour
     public void ApplyDelayedHits(
         Collider2D enemy,
         int totalHits,
-        int baseMinDamage,
-        int baseMaxDamage,
+        int skillModifier,
         string attackId,
         Vector2 hitPosition,
         Transform enemyTransform,
@@ -58,8 +60,7 @@ public class HitManager : MonoBehaviour
             DelayedHitsCoroutine(
                 enemy,
                 totalHits,
-                baseMinDamage,
-                baseMaxDamage,
+                skillModifier,
                 attackId,
                 hitPosition,
                 enemyTransform,
@@ -68,24 +69,28 @@ public class HitManager : MonoBehaviour
         );
     }
 
-    private int CalculateDamageForLevel(int baseMinDamage, int baseMaxDamage)
+    public int CalculateDamage(float weaponDamage, int skillModifierPercent)
     {
-        int plevel = PlayerLevel.level;
-        int minDamageAtLevel = Mathf.FloorToInt(
-            baseMinDamage * Mathf.Pow(damageGrowthRate, (plevel - 1))
-        );
-        int maxDamageAtLevel = Mathf.FloorToInt(
-            baseMaxDamage * Mathf.Pow(damageGrowthRate, (plevel - 1))
-        );
+        // Define a multiplier for the damage range. For example, a 20% variance gives a range from 80% to 120% of the weapon damage.
+        float variance = 0.2f;
 
-        return UnityEngine.Random.Range(minDamageAtLevel, maxDamageAtLevel + 1);
+        // Calculate min and max damage using the variance
+        int minDamage = (int)Math.Round(weaponDamage * (1 - variance));
+        int maxDamage = (int)Math.Round(weaponDamage * (1 + variance));
+
+        // Apply the skill modifier to both min and max to adjust the range
+        // The skillModifierPercent is expected to be a whole number (e.g., 150 for 150%).
+        minDamage = Mathf.FloorToInt((int)Math.Round(minDamage * (skillModifierPercent / 100.0)));
+        maxDamage = Mathf.FloorToInt((int)Math.Round(maxDamage * (skillModifierPercent / 100.0)));
+
+        // Generate a random damage value within the range
+        return UnityEngine.Random.Range(minDamage, maxDamage + 1);
     }
 
     private IEnumerator DelayedHitsCoroutine(
         Collider2D enemy,
         int totalHits,
-        int baseMinDamage,
-        int baseMaxDamage,
+        int skillModifier,
         string attackId,
         Vector2 hitPosition,
         Transform enemyTransform,
@@ -98,8 +103,8 @@ public class HitManager : MonoBehaviour
             if (enemy != null)
             {
                 // Calculate damage and critical hit status here
-                int damage = CalculateDamageForLevel(baseMinDamage, baseMaxDamage);
-                bool isCrit = UnityEngine.Random.value < (critChance / 100f);
+                int damage = CalculateDamage(playerData.AttackDamage, skillModifier);
+                bool isCrit = UnityEngine.Random.value < (playerData.CriticalRate / 100f);
                 if (isCrit)
                 {
                     damage *= critMultiplier;
@@ -113,7 +118,7 @@ public class HitManager : MonoBehaviour
                     .TakeDamage(damage, isCrit, attackId, hitDirection, KnockbackStr);
                 hitsApplied++;
                 //                Debug.Log(attackId + " Hit enemy for " + damage);
-                yield return new WaitForSeconds(hitCooldown);
+                yield return new WaitForSeconds(TimeToWait);
             }
             else
             {

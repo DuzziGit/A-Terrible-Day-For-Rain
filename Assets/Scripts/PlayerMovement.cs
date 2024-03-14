@@ -604,8 +604,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log($"Long press interact with {collision.gameObject.name}");
             // Perform the desired interaction.
+            collision.gameObject.GetComponent<ItemData>().SetPlayerData();
+            Debug.Log($"Player Data is set");
             Destroy(collision.gameObject);
-            shouldLevelUp = true;
+           // shouldLevelUp = true;
+
         }
 
         // Reset the long press detection state.
