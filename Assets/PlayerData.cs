@@ -44,5 +44,6 @@ public class PlayerData : MonoBehaviour
         {
             this.attackDamage = attackDamage.Value;
         }
+        GameManager.Instance.Player.GetComponent<RogueSkillController>().setAttackSpeed(this.AttackSpeed);
     }
 }

@@ -9,8 +9,8 @@ public struct PlayerMovementActions
 {
     public InputActionReference Move;
     public InputActionReference Jump;
-    public InputActionReference Interact; // You can easily add new actions here.
-    // Add more movement-related actions as needed.
+    public InputActionReference Interact;
+    public InputActionReference Destroy;
 }
 
 [System.Serializable]
@@ -154,12 +154,16 @@ public class PlayerMovement : MonoBehaviour
     {
         movementActions.Jump.action.performed += OnJumpPerformed;
         SceneManager.sceneLoaded += OnSceneLoaded;
+            movementActions.Destroy.action.performed += HandleDestroyAction;
+
     }
 
     protected virtual void OnDisable()
     {
         movementActions.Jump.action.performed -= OnJumpPerformed;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+            movementActions.Destroy.action.performed -= HandleDestroyAction;
+
     }
 
     public void OnJumpPerformed(InputAction.CallbackContext context)
@@ -170,7 +174,13 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(FallThrough());
         }
     }
-
+private void HandleDestroyAction(InputAction.CallbackContext context)
+{
+    if (currentItemCollider != null) // Ensure we're currently in contact with an item
+    {
+        TryDestroyItem(currentItemCollider);
+    }
+}
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -522,6 +532,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Collision detected enter player");
             // Assuming the item has a DisplayItemStats component attached
+                    currentItemCollider = collision; // Update the current item collider reference
+
             DisplayItemStats itemStats = collision.gameObject.GetComponent<DisplayItemStats>();
             if (itemStats != null)
             {
@@ -529,6 +541,7 @@ public class PlayerMovement : MonoBehaviour
                 itemStats.ItemPreview.SetActive(true);
             }
             StartLongPressDetection(collision);
+        currentItemCollider = collision; // Update the reference to the current item
         }
     }
 
@@ -576,6 +589,8 @@ public class PlayerMovement : MonoBehaviour
                 StopCoroutine(longPressCoroutine);
                 ResetLongPressState();
             }
+        currentItemCollider = null; // Clear the reference
+
         }
     }
 
@@ -584,7 +599,14 @@ public class PlayerMovement : MonoBehaviour
         isInteractButtonHeld = false;
         //interactStartTime = 0f;
     }
-
+ private void TryDestroyItem(Collider2D collision)
+{
+    if (collision != null && collision.gameObject != null)
+    {
+        Debug.Log($"Destroying {collision.gameObject.name}");
+        Destroy(collision.gameObject);
+    }
+}
     private void StartLongPressDetection(Collider2D collision)
     {
         if (longPressCoroutine == null)

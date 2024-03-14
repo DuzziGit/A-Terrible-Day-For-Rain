@@ -32,8 +32,7 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimeMovement = 1;
     private float nextFireTimeMovement = 0;
 
-    [SerializeField]
-    private float cooldownTimeSkill1 = 0.3f;
+    private float AttackSpeed = 1f;
     private float nextFireTimeSkill1 = 0;
 
     private float cooldownTimeSkill2 = 2;
@@ -178,7 +177,9 @@ public class RogueSkillController : PlayerMovement
             shouldLevelUp = false;
         }
     }
-
+    public void setAttackSpeed(float attackSpeed){
+        AttackSpeed = attackSpeed;
+    }
     // Movement Skill
     private void GetMovementSkillInput()
     {
@@ -269,7 +270,7 @@ public class RogueSkillController : PlayerMovement
         cooldownTimerSM -= Time.deltaTime;
         cooldownTimerSU -= Time.deltaTime;
 
-        UpdateCooldownTimer(textCooldownS1, imageCooldownS1, cooldownTimerS1, cooldownTimeSkill1);
+        UpdateCooldownTimer(textCooldownS1, imageCooldownS1, cooldownTimerS1, AttackSpeed);
         UpdateCooldownTimer(textCooldownS2, imageCooldownS2, cooldownTimerS2, cooldownTimeSkill2);
         UpdateCooldownTimer(
             textCooldownS3,
@@ -317,8 +318,8 @@ public class RogueSkillController : PlayerMovement
                     moveSpeed = speedWhileThrowing;
                 }
                 StartCoroutine(FirstSkill());
-                nextFireTimeSkill1 = Time.time + cooldownTimeSkill1;
-                cooldownTimerS1 = cooldownTimeSkill1;
+                nextFireTimeSkill1 = Time.time + AttackSpeed;
+                cooldownTimerS1 = AttackSpeed;
                 SwipeOne.SetTrigger("Attack");
             }
         }

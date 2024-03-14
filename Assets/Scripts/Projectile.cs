@@ -62,6 +62,7 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private int skillModifier;
     protected int SkillModifier => skillModifier;
+
     protected void Awake()
     {
         rb = GetComponent<Rigidbody2D>();

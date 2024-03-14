@@ -11727,21 +11727,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6cc9332fd5c5045bb03cff203c1dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLootTier: 1
+  currentLootTier: 0
   Tiers: 00000000010000000200000003000000
   Weights:
-  - 0.425
+  - 0.6
   - 0.25
-  - 0.125
   - 0.225
+  - 0.1
+  - 0.05
   baseWeaponsPerTier:
   - {fileID: 11400000, guid: 5e4a89d5514abfa4b8cd65a9fae32014, type: 2}
   - {fileID: 11400000, guid: 782fcbd5c43ed7f4aa74c034c6250397, type: 2}
   - {fileID: 11400000, guid: 665f6d4035117384d9819b9f3463a8f0, type: 2}
   dropRatesPerTier:
-  - 1
-  - 0.15
-  - 0.2
+  - 0.05
+  - 0.05
+  - 0.05
   droppedItemPrefab: {fileID: 279078521537463199, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
 --- !u!4 &1273110846
 Transform:
@@ -17435,6 +17436,10 @@ PrefabInstance:
       propertyPath: SwipeTwo
       value: 
       objectReference: {fileID: 1509660146, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: movementActions.Destroy
+      value: 
+      objectReference: {fileID: -2681136112611230008, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391142, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_RootOrder
       value: 0

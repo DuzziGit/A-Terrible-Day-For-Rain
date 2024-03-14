@@ -347,6 +347,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Destroy"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5a70dc1-d3e1-4aa7-8eda-7dd07fa411a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -492,6 +501,17 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f82f7c22-1ab0-454f-8e91-4d65aa7046fb"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Destroy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -516,6 +536,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Gameplay1_MovementSkill = m_Gameplay1.FindAction("MovementSkill", throwIfNotFound: true);
         m_Gameplay1_MousePosition = m_Gameplay1.FindAction("MousePosition", throwIfNotFound: true);
         m_Gameplay1_Interact = m_Gameplay1.FindAction("Interact", throwIfNotFound: true);
+        m_Gameplay1_Destroy = m_Gameplay1.FindAction("Destroy", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -671,6 +692,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay1_MovementSkill;
     private readonly InputAction m_Gameplay1_MousePosition;
     private readonly InputAction m_Gameplay1_Interact;
+    private readonly InputAction m_Gameplay1_Destroy;
     public struct Gameplay1Actions
     {
         private @Controller m_Wrapper;
@@ -683,6 +705,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         public InputAction @MovementSkill => m_Wrapper.m_Gameplay1_MovementSkill;
         public InputAction @MousePosition => m_Wrapper.m_Gameplay1_MousePosition;
         public InputAction @Interact => m_Wrapper.m_Gameplay1_Interact;
+        public InputAction @Destroy => m_Wrapper.m_Gameplay1_Destroy;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -716,6 +739,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Destroy.started += instance.OnDestroy;
+            @Destroy.performed += instance.OnDestroy;
+            @Destroy.canceled += instance.OnDestroy;
         }
 
         private void UnregisterCallbacks(IGameplay1Actions instance)
@@ -744,6 +770,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Destroy.started -= instance.OnDestroy;
+            @Destroy.performed -= instance.OnDestroy;
+            @Destroy.canceled -= instance.OnDestroy;
         }
 
         public void RemoveCallbacks(IGameplay1Actions instance)
@@ -780,5 +809,6 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         void OnMovementSkill(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnDestroy(InputAction.CallbackContext context);
     }
 }
