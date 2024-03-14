@@ -21,7 +21,8 @@ public class LootManager : MonoBehaviour
     [SerializeField]
     private float[] dropRatesPerTier = new float[3] { 0.2f, 0.15f, 0.2f, };
     public GameObject droppedItemPrefab;
-private WeaponLoot weaponLootData;
+    private WeaponLoot weaponLootData;
+
     private void Awake()
     {
         if (Instance == null)
@@ -41,7 +42,7 @@ private WeaponLoot weaponLootData;
         _rarity = RarityGenerator.WeightedProb(Tiers, Weights);
     }
 
- public void HandleLootDrop(Vector3 spawnPosition)
+    public void HandleLootDrop(Vector3 spawnPosition)
     {
         float dropRate = dropRatesPerTier[currentLootTier];
         bool shouldDrop = Random.value < dropRate;
@@ -60,27 +61,26 @@ private WeaponLoot weaponLootData;
     public void InstantiateItem(
         Vector3 spawnPosition,
         WeaponLoot weaponLootData,
-        int tierIndex, 
-        Rarity rarity, 
-        int characterLevel 
+        int tierIndex,
+        Rarity rarity,
+        int characterLevel
     )
     {
-
         // Instantiate the dropped item in the game world
-        GameObject droppedItem = Instantiate(
-            droppedItemPrefab,
-            spawnPosition,
-            Quaternion.identity
-        );
+        GameObject droppedItem = Instantiate(droppedItemPrefab, spawnPosition, Quaternion.identity);
 
-        DisplayItemStats displayComponent = droppedItem.GetComponent<DisplayItemStats>();
-        if (displayComponent != null)
+        ItemData dataComponent = droppedItem.GetComponent<ItemData>();
+        if (dataComponent != null)
         {
-       WeaponInstance weaponInstance = new WeaponInstance(weaponLootData, rarity, characterLevel);
-
+            WeaponInstance weaponInstance = new WeaponInstance(
+                weaponLootData,
+                rarity,
+                characterLevel
+            );
 
             // Update the display with the stats from the new weapon instance
-            displayComponent.UpdateStats(weaponInstance);
+            dataComponent.SetData(weaponInstance);
+            dataComponent.UpdateDisplay(weaponInstance);
         }
         else
         {

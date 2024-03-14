@@ -3,13 +3,6 @@ using UnityEngine;
 
 public class DisplayItemStats : MonoBehaviour
 {
-    public float AttackDamage;
-    public float AttackSpeed;
-    public float CriticalDamage;
-    public float CriticalRate;
-    public string Title;
-    public Sprite PreviewImage;
-    public int LevelReq;
 
     public TMP_Text AttackDamageText;
     public TMP_Text AttackSpeedText;
