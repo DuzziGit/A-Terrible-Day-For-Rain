@@ -16,6 +16,6 @@ MonoBehaviour:
   lootName: 
   dropChance: 10
   baseAttackSpeed: {x: 0.9, y: 0.75}
-  baseCriticalRate: {x: 10, y: 20}
+  baseCriticalRate: {x: 20, y: 30}
   baseCriticalDamage: {x: 15, y: 30}
   baseAttackDamage: {x: 8000, y: 10000}

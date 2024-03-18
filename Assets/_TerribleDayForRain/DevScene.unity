@@ -250,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 279078521537463199, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215073521157952543, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
       propertyPath: m_RootOrder
@@ -18012,7 +18012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: orthographic size
-      value: 3.57
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
