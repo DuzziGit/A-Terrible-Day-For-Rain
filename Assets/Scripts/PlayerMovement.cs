@@ -1,4 +1,5 @@
 using System.Collections;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,9 +31,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Stats")]
     [HideInInspector]
     public int level;
-
-    [HideInInspector]
-    public int expValue;
 
     [HideInInspector]
     public int currentExp;
@@ -77,13 +75,7 @@ public class PlayerMovement : MonoBehaviour
     public bool playerHasDied = false;
 
     [HideInInspector]
-    public int DamageRecieved = 0;
-
-    [HideInInspector]
     public bool CanMove = false;
-
-    [HideInInspector]
-    public bool startup = true;
 
     [Header("References")]
     protected Rigidbody2D rb;
@@ -92,11 +84,7 @@ public class PlayerMovement : MonoBehaviour
     protected CapsuleCollider2D cc;
 
     [SerializeField]
-    protected TMP_Text playerLevelTextText;
-
-    [SerializeField]
     protected TMP_Text levelUI;
-    public Animator leveledUpAnimator;
     public PhealthBar healthBar;
     public ExperienceBar experienceBar;
 
@@ -105,17 +93,12 @@ public class PlayerMovement : MonoBehaviour
     public bool facingRight = true;
     protected bool isJumping = false;
     public bool isGrounded = false;
-
-    [SerializeField]
     protected bool shouldLevelUp = false;
     protected bool shouldJump = false; // Flag to indicate jump input
 
     public float gizmoRayLength = 0.1f;
 
     [Header("Portal Settings")]
-    [HideInInspector]
-    public int expToBeGained;
-
     [HideInInspector]
     public string destination = "";
     private Vector3 portalDestinationPosition;
@@ -125,8 +108,6 @@ public class PlayerMovement : MonoBehaviour
     public int currentHealth;
     public int maxHealth;
     private const int jumpSpeed = 5;
-
-    public AudioSource audioSource;
 
     [SerializeField]
     protected Animator animator;
@@ -139,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isTouchingPlatform = false;
 
     protected float VertDirection = 0;
+    public GameObject LevelUpShuriken;
 
     private bool isSitting;
 
@@ -150,6 +132,7 @@ public class PlayerMovement : MonoBehaviour
     protected PlayerCombatActions combatActions;
     private Coroutine longPressCoroutine = null;
     private Collider2D currentItemCollider = null;
+    private CinemachineImpulseSource impulseSource;
 
     protected virtual void OnEnable()
     {
@@ -186,14 +169,13 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
-        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         healthBar = GetComponentInChildren<PhealthBar>();
     }
 
     private void Start()
     {
-        //    playerLevelTextText = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<TMP_Text>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
         experienceBar.setMaxExp(maxExp);
         GainExperience(0);
         currentHealth = maxHealth;
@@ -406,9 +388,9 @@ public class PlayerMovement : MonoBehaviour
         if (level < 60 && shouldLevelUp)
         {
             IncreaseLevel();
-            Debug.Log("Level Up! Player Level is now: " + level);
+            _ = Instantiate(LevelUpShuriken, transform);
+            CameraShakeManager.instance.CameraShake(impulseSource, 1f);
             shouldLevelUp = false;
-            leveledUpAnimator.SetTrigger("LeveledUp");
         }
     }
 
@@ -419,13 +401,6 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Level Up! Player Level is now: " + level);
         maxExp = level * 23;
         currentHealth = maxHealth + 100;
-    }
-
-    private IEnumerator LevelUpDelay()
-    {
-        // playerLevelText.text = "Level Up!";
-        yield return new WaitForSeconds(2);
-        //  playerLevelText.text = "";
     }
 
     public void animate()
