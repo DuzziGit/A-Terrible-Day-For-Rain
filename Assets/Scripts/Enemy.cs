@@ -217,6 +217,7 @@ public class Enemy : MonoBehaviour
         if (GameManager.Instance.playerMovement != null)
         {
             GameManager.Instance.playerMovement.GainExperience(expValue);
+            GameManager.Instance.playerMovement.UpdateHealth(10);
         }
     }
 

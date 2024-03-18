@@ -66,7 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector]
     public bool isAirborne = false;
-   // private float interactStartTime = 0f; // Start time of the interact button press
+
+    // private float interactStartTime = 0f; // Start time of the interact button press
     private bool isInteractButtonHeld = false; // Whether the interact button is currently being held
 
     [HideInInspector]
@@ -96,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     protected TMP_Text levelUI;
     public Animator leveledUpAnimator;
-    public HealthBar healthBar;
+    public PhealthBar healthBar;
     public ExperienceBar experienceBar;
 
     [Header("Player State")]
@@ -154,16 +155,14 @@ public class PlayerMovement : MonoBehaviour
     {
         movementActions.Jump.action.performed += OnJumpPerformed;
         SceneManager.sceneLoaded += OnSceneLoaded;
-            movementActions.Destroy.action.performed += HandleDestroyAction;
-
+        movementActions.Destroy.action.performed += HandleDestroyAction;
     }
 
     protected virtual void OnDisable()
     {
         movementActions.Jump.action.performed -= OnJumpPerformed;
         SceneManager.sceneLoaded -= OnSceneLoaded;
-            movementActions.Destroy.action.performed -= HandleDestroyAction;
-
+        movementActions.Destroy.action.performed -= HandleDestroyAction;
     }
 
     public void OnJumpPerformed(InputAction.CallbackContext context)
@@ -174,19 +173,22 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(FallThrough());
         }
     }
-private void HandleDestroyAction(InputAction.CallbackContext context)
-{
-    if (currentItemCollider != null) // Ensure we're currently in contact with an item
+
+    private void HandleDestroyAction(InputAction.CallbackContext context)
     {
-        TryDestroyItem(currentItemCollider);
+        if (currentItemCollider != null) // Ensure we're currently in contact with an item
+        {
+            TryDestroyItem(currentItemCollider);
+        }
     }
-}
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        healthBar = GetComponentInChildren<PhealthBar>();
     }
 
     private void Start()
@@ -194,6 +196,7 @@ private void HandleDestroyAction(InputAction.CallbackContext context)
         //    playerLevelTextText = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<TMP_Text>();
         experienceBar.setMaxExp(maxExp);
         GainExperience(0);
+        currentHealth = maxHealth;
     }
 
     public void GainExperience(int gainedExp)
@@ -210,6 +213,7 @@ private void HandleDestroyAction(InputAction.CallbackContext context)
     public void UpdateHealth(int mod)
     {
         currentHealth += mod;
+        healthBar.SetHealth(currentHealth);
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
@@ -298,8 +302,10 @@ private void HandleDestroyAction(InputAction.CallbackContext context)
 
     private void PlayerDeath()
     {
-        GetComponent<Rigidbody2D>().gravityScale = 0.85f;
+        GetComponent<Rigidbody2D>().gravityScale = 3f;
         GetComponent<Transform>().position = new Vector3(-2, -1, 0);
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
     }
 
     protected void FlipCharacter()
@@ -532,7 +538,7 @@ private void HandleDestroyAction(InputAction.CallbackContext context)
         {
             Debug.Log("Collision detected enter player");
             // Assuming the item has a DisplayItemStats component attached
-                    currentItemCollider = collision; // Update the current item collider reference
+            currentItemCollider = collision; // Update the current item collider reference
 
             DisplayItemStats itemStats = collision.gameObject.GetComponent<DisplayItemStats>();
             if (itemStats != null)
@@ -541,7 +547,7 @@ private void HandleDestroyAction(InputAction.CallbackContext context)
                 itemStats.ItemPreview.SetActive(true);
             }
             StartLongPressDetection(collision);
-        currentItemCollider = collision; // Update the reference to the current item
+            currentItemCollider = collision; // Update the reference to the current item
         }
     }
 
@@ -589,8 +595,7 @@ private void HandleDestroyAction(InputAction.CallbackContext context)
                 StopCoroutine(longPressCoroutine);
                 ResetLongPressState();
             }
-        currentItemCollider = null; // Clear the reference
-
+            currentItemCollider = null; // Clear the reference
         }
     }
 
@@ -599,14 +604,16 @@ private void HandleDestroyAction(InputAction.CallbackContext context)
         isInteractButtonHeld = false;
         //interactStartTime = 0f;
     }
- private void TryDestroyItem(Collider2D collision)
-{
-    if (collision != null && collision.gameObject != null)
+
+    private void TryDestroyItem(Collider2D collision)
     {
-        Debug.Log($"Destroying {collision.gameObject.name}");
-        Destroy(collision.gameObject);
+        if (collision != null && collision.gameObject != null)
+        {
+            Debug.Log($"Destroying {collision.gameObject.name}");
+            Destroy(collision.gameObject);
+        }
     }
-}
+
     private void StartLongPressDetection(Collider2D collision)
     {
         if (longPressCoroutine == null)
@@ -629,8 +636,7 @@ private void HandleDestroyAction(InputAction.CallbackContext context)
             collision.gameObject.GetComponent<ItemData>().SetPlayerData();
             Debug.Log($"Player Data is set");
             Destroy(collision.gameObject);
-           // shouldLevelUp = true;
-
+            // shouldLevelUp = true;
         }
 
         // Reset the long press detection state.

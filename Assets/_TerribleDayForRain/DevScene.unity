@@ -17437,6 +17437,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1509660146, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
     - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: maxHealth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: currentHealth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: movementActions.Destroy
       value: 
       objectReference: {fileID: -2681136112611230008, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
@@ -17488,7 +17496,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rogue
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5354509578511605991, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
 --- !u!1 &2012348760
 GameObject:

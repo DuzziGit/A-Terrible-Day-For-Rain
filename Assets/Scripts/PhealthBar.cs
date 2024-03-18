@@ -11,7 +11,7 @@ public class PhealthBar : MonoBehaviour
         slider.maxValue = maxHealth;
         slider.minValue = 0; // Set the minimum value to 0
         slider.value = maxHealth;
-        healthBarCanvas.enabled = false; // Set the canvas to be initially hidden
+        //healthBarCanvas.enabled = false; // Set the canvas to be initially hidden
     }
 
     public void SetHealth(int currentHealth)
