@@ -11548,7 +11548,7 @@ PrefabInstance:
       objectReference: {fileID: 1320817866}
     - target: {fileID: 1635998684, guid: ca29f660a57690549ad42dbc55c770b3, type: 3}
       propertyPath: m_ColliderMask.m_Bits
-      value: 305599
+      value: 436671
       objectReference: {fileID: 0}
     - target: {fileID: 379458705414913902, guid: ca29f660a57690549ad42dbc55c770b3, type: 3}
       propertyPath: m_SortingLayer
@@ -17436,18 +17436,6 @@ PrefabInstance:
       propertyPath: SwipeTwo
       value: 
       objectReference: {fileID: 1509660146, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: maxHealth
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: currentHealth
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 9011964926031391140, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
-      propertyPath: movementActions.Destroy
-      value: 
-      objectReference: {fileID: -2681136112611230008, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     - target: {fileID: 9011964926031391142, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -17496,8 +17484,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rogue
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5354509578511605991, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
 --- !u!1 &2012348760
 GameObject:
@@ -17541,11 +17528,10 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9011964926031391150, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
   m_PrefabInstance: {fileID: 1987092897}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2076571039
+--- !u!114 &2076571039 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2076571039, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+  m_PrefabInstance: {fileID: 1987092897}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076571031}
   m_Enabled: 1
@@ -17553,10 +17539,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55265c7b43a4a046921ec8a5f1b9265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 1
-  criticalRate: 1
-  criticalDamage: 1
-  attackDamage: 600
 --- !u!1001 &2094630411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18012,7 +17994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: orthographic size
-      value: 6
+      value: 3.57
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: m_NormalizedViewPortRect.x

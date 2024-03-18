@@ -36,12 +36,15 @@ public class Enemy : MonoBehaviour
 
     private void Start() { }
 
+    HitInvulnerability hitInvulnerability;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         bc = GetComponent<CapsuleCollider2D>();
         enemySprite = GetComponent<SpriteRenderer>();
         gameObject.layer = LayerMask.NameToLayer("Enemy");
+        hitInvulnerability = GameManager.Instance.Player.GetComponent<HitInvulnerability>();
     }
 
     private void Update()
@@ -50,7 +53,8 @@ public class Enemy : MonoBehaviour
         {
             if (timeBetweenDmg <= 0)
             {
-                GameManager.Instance.playerMovement.UpdateHealth(-damage);
+                hitInvulnerability.TryTakeDamage(damage);
+
                 timeBetweenDmg = startTimeBetweenDmg;
             }
             else
@@ -185,17 +189,17 @@ public class Enemy : MonoBehaviour
         canFlip = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) // Corrected argument type
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
             isTouchingPlayer = true;
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
             isTouchingPlayer = false;
         }
@@ -211,7 +215,7 @@ public class Enemy : MonoBehaviour
         rb.isKinematic = true;
         bc.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Invincible");
-    LootManager.Instance.HandleLootDrop(transform.position + new Vector3(0, 1, 0));
+        LootManager.Instance.HandleLootDrop(transform.position + new Vector3(0, 1, 0));
         GetComponentInChildren<Canvas>().enabled = false;
         MySpawner.OnEnemyDestroyed();
         if (GameManager.Instance.playerMovement != null)

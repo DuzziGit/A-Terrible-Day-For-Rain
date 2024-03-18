@@ -536,7 +536,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
-            Debug.Log("Collision detected enter player");
+            //            Debug.Log("Collision detected enter player");
             // Assuming the item has a DisplayItemStats component attached
             currentItemCollider = collision; // Update the current item collider reference
 

@@ -51,7 +51,7 @@ TagManager:
   - DamageNumbers
   - ItemCollisionIgnore
   - EnemyCollisionPlayer
-  - 
+  - PlayerInvulnerable
   - Rope
   - 
   - 
