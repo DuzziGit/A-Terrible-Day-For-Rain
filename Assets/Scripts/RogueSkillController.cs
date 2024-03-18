@@ -1,5 +1,4 @@
 using System.Collections;
-using Cinemachine;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -9,7 +8,6 @@ using UnityEngine.UI;
 public class RogueSkillController : PlayerMovement
 {
     public float MovementSkillForce;
-    public GameObject LevelUpShuriken;
     public GameObject basicAttackPrefab;
     public GameObject projectile2;
 
@@ -27,8 +25,6 @@ public class RogueSkillController : PlayerMovement
     private readonly TMP_Text textCooldownSM;
     private readonly Image imageCooldownSU;
     private readonly TMP_Text textCooldownSU;
-
-    private bool isInvincible;
     private float cooldownTimeMovement = 1;
     private float nextFireTimeMovement = 0;
 
@@ -47,7 +43,6 @@ public class RogueSkillController : PlayerMovement
     //private float nextFireTimeSkillUlt = 0;
 
     public Animator SwipeOne;
-    public Animator SwipeTwo;
     public Animator MovementSkillTwo;
     private Renderer rend;
     private Color c;
@@ -59,7 +54,6 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimerSU = 0.0f;
 
     // private readonly float cooldownTimer = 0.0f;
-    private CinemachineImpulseSource impulseSource;
 
     [SerializeField]
     private float yOffsetSummon;
@@ -101,7 +95,6 @@ public class RogueSkillController : PlayerMovement
         {
             healthBar.SetMaxHealth(maxHealth);
         }
-        impulseSource = GetComponent<CinemachineImpulseSource>();
 
         //   textCooldownS1.gameObject.SetActive(false);
         //   imageCooldownS1.fillAmount = 0.0f;
@@ -167,16 +160,6 @@ public class RogueSkillController : PlayerMovement
         }
     }
 
-    public override void LevelUp()
-    {
-        if (level < 60 && shouldLevelUp)
-        {
-            IncreaseLevel();
-            _ = Instantiate(LevelUpShuriken, transform);
-            CameraShakeManager.instance.CameraShake(impulseSource);
-            shouldLevelUp = false;
-        }
-    }
     public void setAttackSpeed(float attackSpeed){
         AttackSpeed = attackSpeed;
     }
