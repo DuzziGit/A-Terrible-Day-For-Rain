@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8126373307492045061}
   m_Layer: 16
   m_Name: attackPos
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2596435, y: 0.09859872}
+  m_Offset: {x: -0.26461107, y: 0.06382513}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -87,7 +87,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0985984, y: 0.48728657}
+  m_Size: {x: 1.1085335, y: 0.8482685}
   m_EdgeRadius: 0
 --- !u!1 &3698228948234112045
 GameObject:
@@ -254,7 +254,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 5bb17b82384d5b442b9aba0f8deaffb6, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -288,7 +288,7 @@ MonoBehaviour:
   rb: {fileID: 7718911885572065984}
   animator: {fileID: 6392495728788100713}
   MySpawner: {fileID: 0}
-  enemyDamage: 0
+  enemyDamage: 10
   enemyLevel: {fileID: 297983036868777606}
   TextParentPrefab: {fileID: 8564278345997927619, guid: 259290622650acb459f4456e14b0a9d5, type: 3}
   textContainerPrefab: {fileID: 7982018248507008372, guid: a458592e3fc283d45b9109e8dd4dca2e, type: 3}
