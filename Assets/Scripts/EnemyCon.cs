@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class EnemyCon : Enemy
 {
-    public int enemyDamage;
     public TMP_Text enemyLevel;
     public GameObject TextParentPrefab;
     private HealthBar healthBar;
@@ -47,7 +46,7 @@ public class EnemyCon : Enemy
     {
         rb.velocity = new Vector3(speed, 0, 0);
         enemyLevel.text = level.ToString();
-        enemyDamage = level * 5;
+        damage = level * 5;
         animator = GetComponent<Animator>();
         healthBar = GetComponentInChildren<HealthBar>();
         maxHealth = Mathf.FloorToInt(baseEnemyHealth * Mathf.Pow(healthGrowthRate, (level - 1)));
