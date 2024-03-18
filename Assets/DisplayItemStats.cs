@@ -10,7 +10,8 @@ public class DisplayItemStats : MonoBehaviour
     public TMP_Text CriticalRateText;
     public TMP_Text TitleText;
     public GameObject ItemPreview; 
-    // Method to update stats
+    public Sprite BasicWeaponSprite;
+
 public void UpdateStats(WeaponInstance instance)
 {
     // Update the UI elements using the instance properties
@@ -20,6 +21,7 @@ public void UpdateStats(WeaponInstance instance)
     CriticalDamageText.text = instance.CriticalDamage.ToString("F1");
     CriticalRateText.text = instance.CriticalRate.ToString("F1");
     TitleText.text = instance.Title;
+    
 }
 
 }

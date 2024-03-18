@@ -50,7 +50,7 @@ TagManager:
   - Invincible
   - DamageNumbers
   - ItemCollisionIgnore
-  - 
+  - EnemyCollisionPlayer
   - 
   - Rope
   - 

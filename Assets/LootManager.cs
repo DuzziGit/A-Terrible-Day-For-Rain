@@ -19,7 +19,7 @@ public class LootManager : MonoBehaviour
     private WeaponLoot[] baseWeaponsPerTier;
 
     [SerializeField]
-    private float[] dropRatesPerTier = new float[3] { 0.2f, 0.15f, 0.2f, };
+    private float[] dropRatesPerTier = new float[3] { 0.04f, 0.15f, 0.2f, };
     public GameObject droppedItemPrefab;
     private WeaponLoot weaponLootData;
 

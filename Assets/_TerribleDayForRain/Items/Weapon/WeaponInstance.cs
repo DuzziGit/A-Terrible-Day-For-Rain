@@ -65,12 +65,12 @@ public class WeaponInstance
 
         AttackSpeed = CalculateAttackSpeed(attackSpeedRanges[rarityIndex]);
 
-        // // Apply a universal level multiplier to all stats
-        // float levelMultiplier = 1.0f + (characterLevel * 0.01f);
-        // CriticalRate *= levelMultiplier;
-        // CriticalDamage *= levelMultiplier;
-        // AttackDamage *= levelMultiplier;
-        // Set a title for the weapon
+    //     // // Apply a universal level multiplier to all stats
+    //     float levelMultiplier = 1.0f + (characterLevel * 0.01f);
+    //     CriticalRate *= levelMultiplier;
+    //     CriticalDamage *= levelMultiplier;
+    //     AttackDamage *= levelMultiplier;
+    //   //  Set a title for the weapon
         Title = $"{rarity} Tier Weapon";
     }
 
