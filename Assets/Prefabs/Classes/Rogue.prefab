@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 2076571041}
   - component: {fileID: 2076571039}
   - component: {fileID: 2076571046}
+  - component: {fileID: 2076571047}
   m_Layer: 8
   m_Name: Rogue
   m_TagString: Player
@@ -615,7 +616,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  expValue: 0
   currentExp: 404
   maxExp: 500
   skillOneLevel: 1
@@ -629,29 +629,23 @@ MonoBehaviour:
   isAirborne: 0
   isWalking: 0
   playerHasDied: 0
-  DamageRecieved: 0
   CanMove: 0
-  startup: 1
   cc: {fileID: 1789296900}
-  playerLevelTextText: {fileID: 0}
   levelUI: {fileID: 4281220201831810521}
-  leveledUpAnimator: {fileID: 0}
   healthBar: {fileID: 0}
   experienceBar: {fileID: 8313442754400016185}
   facingRight: 1
   isGrounded: 0
-  shouldLevelUp: 0
   gizmoRayLength: 0.2
-  expToBeGained: 0
   destination: 
   currentHealth: 200
   maxHealth: 200
-  audioSource: {fileID: 0}
   animator: {fileID: 9011964926031391143}
   feetPos: {fileID: 118234434}
   platformLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  LevelUpShuriken: {fileID: 3972795832953981774, guid: 52f50aa3600c72d40af373c1cb06a460, type: 3}
   movementActions:
     Move: {fileID: -2631810443607245350, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     Jump: {fileID: 8228250964517920683, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
@@ -664,14 +658,12 @@ MonoBehaviour:
     MovementSkill: {fileID: -3211061687226010859, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
     MousePosition: {fileID: -1640461855116964628, guid: 6f3531292780c6742ae1ebf53a6a569b, type: 3}
   MovementSkillForce: 7.5
-  LevelUpShuriken: {fileID: 3972795832953981774, guid: 52f50aa3600c72d40af373c1cb06a460, type: 3}
   basicAttackPrefab: {fileID: 8515462028405087519, guid: 2ece65e6eb472cd4898cfcd8f3472c6a, type: 3}
   projectile2: {fileID: 1998731461782448251, guid: 0d7c8834847d9ed40acf452a16bfbfcf, type: 3}
   SummonShuriken: {fileID: 3972795832953981774, guid: c08d0543dd046424cb04ef8761df4e27, type: 3}
   attackPos: {fileID: 1509660145}
   attackPosAirborne: {fileID: 5515096621285819317}
   SwipeOne: {fileID: 127688076}
-  SwipeTwo: {fileID: 0}
   MovementSkillTwo: {fileID: 2626708564543138125}
   yOffsetSummon: -2
   skillDuration: 0.5
@@ -846,6 +838,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InvulnerableTimer: 2
+  ShakeForce: 0.2
+  impulseSource: {fileID: 2076571047}
+--- !u!114 &2076571047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011964926031391150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0.2, y: 0, z: 0}
 --- !u!1001 &6801154960135622474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1189,7 +1236,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 2208432915911388506}
-  healthBarCanvas: {fileID: 2662509834088613016}
 --- !u!114 &2208432915911388506 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4667805571643646480, guid: f68f8a4a02d79d048a70d1f9cf7d4424, type: 3}
@@ -1204,11 +1250,6 @@ MonoBehaviour:
 --- !u!224 &2662509834088613013 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8832030493501492191, guid: f68f8a4a02d79d048a70d1f9cf7d4424, type: 3}
-  m_PrefabInstance: {fileID: 6801154960135622474}
-  m_PrefabAsset: {fileID: 0}
---- !u!223 &2662509834088613016 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 8832030493501492178, guid: f68f8a4a02d79d048a70d1f9cf7d4424, type: 3}
   m_PrefabInstance: {fileID: 6801154960135622474}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4281220201831810521 stripped

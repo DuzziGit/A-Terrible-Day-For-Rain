@@ -19,10 +19,4 @@ public class CameraShakeManager : MonoBehaviour
     {
         impulseSource.GenerateImpulseWithForce(ShakeForce);
     }
-      public void CameraShakeVec3(CinemachineImpulseSource impulseSource, Vector3 ShakeForce)
-    {
-        impulseSource.GenerateImpulse(ShakeForce);
-    }
-
-
 }

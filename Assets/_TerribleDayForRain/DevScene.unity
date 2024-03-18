@@ -17418,7 +17418,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2076571046, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: ShakeForce
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2076571046, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: ShakeForce.x
@@ -17603,7 +17603,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: 0, z: 0}
+  m_DefaultVelocity: {x: 0.2, y: 0, z: 0}
 --- !u!1001 &2094630411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18059,7 +18059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: orthographic size
-      value: 3.57
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4545000804298050695, guid: 246a06c79cbee2f4f81245d11a3bf984, type: 3}
       propertyPath: m_NormalizedViewPortRect.x

@@ -19,11 +19,7 @@ public class Enemy : MonoBehaviour
     public bool isPatroling = true;
     public bool isTouchingPlayer = false;
     protected bool movingRight = true;
-
     public float agroRange;
-
-    private float timeBetweenDmg;
-    public float startTimeBetweenDmg;
     public SpriteRenderer enemySprite;
     private readonly float moveSpeed;
     public CapsuleCollider2D bc;
@@ -51,16 +47,7 @@ public class Enemy : MonoBehaviour
     {
         if (isTouchingPlayer)
         {
-            if (timeBetweenDmg <= 0)
-            {
-                hitInvulnerability.TryTakeDamage(damage);
-
-                timeBetweenDmg = startTimeBetweenDmg;
-            }
-            else
-            {
-                timeBetweenDmg -= Time.deltaTime;
-            }
+            hitInvulnerability.TryTakeDamage(damage);
         }
 
         if (GameManager.Instance.playerMovement.currentHealth <= 0)
