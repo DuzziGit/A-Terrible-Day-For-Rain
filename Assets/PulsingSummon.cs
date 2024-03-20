@@ -35,6 +35,7 @@ public class PulsingSummon : MonoBehaviour
     {
         get { return totalHits; }
     }
+
     [SerializeField]
     private int skillModifier;
     public int SkillModifier => skillModifier;
@@ -49,11 +50,6 @@ public class PulsingSummon : MonoBehaviour
 
     private int hitCount = 0;
     private Dictionary<Collider2D, int> hitEnemies = new Dictionary<Collider2D, int>();
-
-    private void Awake()
-    {
-        InvokeRepeating("GenerateId", 0, pulseTimer - 0.1f);
-    }
 
     void Start()
     {
