@@ -17418,7 +17418,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2076571046, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: InvulnerableTimer
-      value: 1
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 1158781939804607502, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -17480,6 +17480,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9011964926031391145, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9340526a45cb59f4493d611a71411dcf, type: 2}
     - target: {fileID: 9011964926031391150, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: m_Name
       value: Rogue
@@ -17537,6 +17541,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c55265c7b43a4a046921ec8a5f1b9265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2076571055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076571031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ca17e104f97b74795eeb6db831b3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2094630411
