@@ -40,6 +40,7 @@ public class RogueSkillController : PlayerMovement
     private float cooldownTimeSkill3Upgraded;
 
     private float cooldownTimeSkillUlt = 2;
+
     //private float nextFireTimeSkillUlt = 0;
 
     public Animator SwipeOne;
@@ -145,10 +146,6 @@ public class RogueSkillController : PlayerMovement
             getPlayerInput();
             GetMovementSkillInput();
 
-            //  horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-            LevelUp();
-
             //Animate
             animate();
             ApplyCooldownTracker();
@@ -160,9 +157,11 @@ public class RogueSkillController : PlayerMovement
         }
     }
 
-    public void setAttackSpeed(float attackSpeed){
+    public void setAttackSpeed(float attackSpeed)
+    {
         AttackSpeed = attackSpeed;
     }
+
     // Movement Skill
     private void GetMovementSkillInput()
     {

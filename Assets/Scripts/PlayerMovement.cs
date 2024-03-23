@@ -93,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
     public bool facingRight = true;
     protected bool isJumping = false;
     public bool isGrounded = false;
-    protected bool shouldLevelUp = false;
     protected bool shouldJump = false; // Flag to indicate jump input
 
     public float gizmoRayLength = 0.1f;
@@ -187,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (currentExp >= maxExp)
         {
-            shouldLevelUp = true;
+            LevelUp();
             currentExp -= maxExp;
         }
     }
@@ -248,14 +247,8 @@ public class PlayerMovement : MonoBehaviour
 
     protected void UpdateAnimatorWithMovement()
     {
-        // if (isExecutingSkill) // Assuming `isExecutingSkill` is true when attacking
-        // {
-        //     animator.SetFloat("Speed", 0); // Stop updating speed based on movement when attacking
-        // }
-        // else
-        // {
+
         float actualSpeed = Mathf.Abs(rb.velocity.x);
-        // Only update the animator's speed if the character is actually moving
         if (actualSpeed > 0.1f) // Adjust threshold as needed to detect movement
         {
             animator.SetFloat("Speed", actualSpeed);
@@ -264,7 +257,6 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat("Speed", 0);
         }
-        //  }
     }
 
     protected void JumpCheck()
@@ -330,8 +322,6 @@ public class PlayerMovement : MonoBehaviour
 
     protected void setPlayerDirection()
     {
-        // if (isExecutingSkill)
-        //     return;
         moveDirection = movementActions.Move.action.ReadValue<Vector2>().x;
     }
 
@@ -383,15 +373,11 @@ public class PlayerMovement : MonoBehaviour
         gameObject.layer = originalLayer;
     }
 
-    public virtual void LevelUp()
+    public void LevelUp()
     {
-        if (level < 60 && shouldLevelUp)
-        {
             IncreaseLevel();
             _ = Instantiate(LevelUpShuriken, transform);
             CameraShakeManager.instance.CameraShake(impulseSource, 1f);
-            shouldLevelUp = false;
-        }
     }
 
     public void IncreaseLevel()
@@ -611,7 +597,6 @@ public class PlayerMovement : MonoBehaviour
             collision.gameObject.GetComponent<ItemData>().SetPlayerData();
             Debug.Log($"Player Data is set");
             Destroy(collision.gameObject);
-            // shouldLevelUp = true;
         }
 
         // Reset the long press detection state.
