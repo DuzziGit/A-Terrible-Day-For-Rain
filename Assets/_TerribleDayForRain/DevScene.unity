@@ -18357,7 +18357,6 @@ MonoBehaviour:
   Weights:
   - 0.6
   - 0.25
-  - 0.225
   - 0.1
   - 0.05
   baseWeaponsPerTier:
@@ -18365,9 +18364,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 782fcbd5c43ed7f4aa74c034c6250397, type: 2}
   - {fileID: 11400000, guid: 665f6d4035117384d9819b9f3463a8f0, type: 2}
   dropRatesPerTier:
-  - 0.05
-  - 0.05
-  - 0.05
+  - 0.015
+  - 0.015
+  - 0.015
   droppedItemPrefab: {fileID: 279078521537463199, guid: 7b66519eab38c2545b3871567c2478c3, type: 3}
 --- !u!4 &1273110846
 Transform:
@@ -88004,6 +88003,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2076571046, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
+      propertyPath: ShakeForce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2076571046, guid: 44a75046a7c498f4b9161dadd940e89f, type: 3}
       propertyPath: InvulnerableTimer
       value: 0.9
