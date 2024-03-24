@@ -247,7 +247,6 @@ public class PlayerMovement : MonoBehaviour
 
     protected void UpdateAnimatorWithMovement()
     {
-
         float actualSpeed = Mathf.Abs(rb.velocity.x);
         if (actualSpeed > 0.1f) // Adjust threshold as needed to detect movement
         {
@@ -347,6 +346,9 @@ public class PlayerMovement : MonoBehaviour
         if (hit.collider != null)
         {
             return true;
+            isFallingThrough = false;
+            animator.SetBool("isFallingDown", false);
+
         }
 
         return false;
@@ -357,7 +359,7 @@ public class PlayerMovement : MonoBehaviour
         if (isFallingThrough)
             yield break;
         isFallingThrough = true;
-        animator.SetTrigger("isFallingDown");
+        animator.SetBool("isFallingDown", true);
         // Lock the player's X velocity to 0
         Vector2 currentVelocity = rb.velocity;
         rb.velocity = new Vector2(0, currentVelocity.y);
@@ -375,9 +377,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void LevelUp()
     {
-            IncreaseLevel();
-            _ = Instantiate(LevelUpShuriken, transform);
-            CameraShakeManager.instance.CameraShake(impulseSource, 1f);
+        IncreaseLevel();
+        _ = Instantiate(LevelUpShuriken, transform);
+        CameraShakeManager.instance.CameraShake(impulseSource, 1f);
     }
 
     public void IncreaseLevel()
@@ -489,10 +491,9 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag is "World" or "Platform")
         {
             isAirborne = false;
-            isGrounded = true;
             animator.SetTrigger("isLanded");
-            if (isFallingThrough)
-                isFallingThrough = false;
+            isFallingThrough = false;
+            animator.SetBool("isFallingDown", false);
         }
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
@@ -530,11 +531,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag is "World" or "Platform")
-        {
-            isGrounded = false;
-        }
-
         if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
         {
             // Assuming the item has a DisplayItemStats component attached
